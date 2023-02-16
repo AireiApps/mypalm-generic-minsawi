@@ -536,7 +536,7 @@
   },
 
   "NOPRODUCTIONSTARTED": {
-    "noproductionstarted": "Pengeluaran belum bermula. Sila klik pada butang Mulakan Pengeluaran untuk memulakan pengeluaran kilang."
+    "noproductionstarted": "Pengeluaran kilang belum bermula. Untuk memulakan, sila klik butang 'Mulakan Pengeluaran'."
   },
 
   "DEPARTMENTS": {

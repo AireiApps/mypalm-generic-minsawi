@@ -63,6 +63,12 @@ if (userlist) {
       } else {
         newRoutes = routes_general;
       }
+    } else if (userlist.dept_id == 4) {
+      if (userlist.desigId == 2) {
+        newRoutes = routes_maintenance;
+      } else {
+        newRoutes = routes_general;
+      }
     } else {
       newRoutes = routes_general;
     }

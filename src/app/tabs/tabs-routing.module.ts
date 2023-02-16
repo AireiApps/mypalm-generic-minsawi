@@ -509,7 +509,9 @@ if (userlist) {
     if (userlist.dept_id == 2) {
       newRoutes = routes_lab;
     } else if (userlist.dept_id == 4) {
-      if (userlist.desigId == 7 || userlist.desigId == 8) {
+      if (userlist.desigId == 2) {
+        newRoutes = routes_engineering;
+      } else if (userlist.desigId == 7 || userlist.desigId == 8) {
         newRoutes = routes_sterilizerpress;
       } else {
         newRoutes = routes_production;

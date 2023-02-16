@@ -12,7 +12,7 @@
     "passworderror": "Password Required",
     "passworderrortoast": "Password is Mandatory",
     "copyrights": "© 2023 AIREI Sdn. Bhd. All rights reserved.",
-    "loginsuccessfully":"Successfully logged in!",
+    "loginsuccessfully":"Successfully Logged In!",
     "loginfailed":"Login Failed!",
     "invalidmillcode":"Invalid Mill Code",
     "millcodeauthontication":"Mill Code Authentication Failed",
@@ -518,7 +518,7 @@
   },
 
   "NOPRODUCTIONSTARTED": {
-    "noproductionstarted": "Production not yet started. Please click on Start Production button to start the mill production."
+    "noproductionstarted": "The mill production hasn't started yet. To begin, please click the 'Start Production' button."
   },
 
   "DEPARTMENTS": {

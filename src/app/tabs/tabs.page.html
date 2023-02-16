@@ -81,7 +81,8 @@
 
 <!-- Production -->
 <ion-tabs *ngIf="getTabCheck(4)">
-  <ion-tab-bar slot="bottom">
+  <!-- Expert Production Engineer -->
+  <ion-tab-bar slot="bottom" *ngIf="designationid!=2">
     <ion-tab-button tab="tabsupervisordashboard">
       <ion-icon name="grid-outline"></ion-icon>
       <ion-label>{{ 'TABSSUPERVISOR.dashboard' | translate}}</ion-label>
@@ -100,6 +101,29 @@
     <ion-tab-button tab="tab3">
       <ion-icon name="person-outline"></ion-icon>
       <ion-label>{{ 'TABSSUPERVISOR.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+  <!-- Production Engineer -->
+  <ion-tab-bar slot="bottom" *ngIf="designationid==2">
+    <ion-tab-button tab="tabmaintenancedashboard">
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.dashboard' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabmaintenancehome">
+      <ion-icon name="settings-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.monitoring' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabqrcodescanner">
+      <ion-icon name="qr-code-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.scanner' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.more' | translate}}</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

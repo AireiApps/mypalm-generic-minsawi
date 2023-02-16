@@ -324,6 +324,35 @@
     </ion-row>
   </div>
 
+  <!--Production Engineering (1006)-->
+  <div *ngIf="userdepartmentid==4 && userdesignation==2" #myElementRef>
+    <div class="reportstitleheader">
+      {{ 'MAINTENANCEHOME.productionmonitoring' | translate}}
+    </div>
+
+    <ion-row *ngFor="let item of engineerReportsArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
   <!-- Foreman (1006) -->
   <div *ngIf="userdepartmentid==7 && userdesignation==4" #myElementRef>
     <div class="reportstitleheader">
