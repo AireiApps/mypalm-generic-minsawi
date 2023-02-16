@@ -1,0 +1,29 @@
+<div style="background-image: url('../../assets/img/nonetworkconnection.png')">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label color="dark"
+          >{{ 'NETWORKERROR.noconnection' | translate}}
+        </ion-label>
+        <p class="subtitle">
+          <ion-text color="dark">
+            {{ 'NETWORKERROR.yourinternetconnection' | translate}}
+          </ion-text>
+        </p>
+        <p class="description">
+          <ion-text color="dark">
+            {{ 'NETWORKERROR.pleasetry' | translate}}
+          </ion-text>
+        </p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin-top">
+      <ion-col>
+        <ion-button shape="round" color="medium" (click)="retryButton()">
+          <ion-text> {{ 'NETWORKERROR.retry' | translate}} </ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

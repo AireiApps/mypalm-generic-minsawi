@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Preventive Maintenance</ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent"
+          >{{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper" #myElementRef>
+    <ion-grid>
+      <ion-row *ngFor="let item of categoryArr">
+        <ion-col size="1"></ion-col>
+        <ion-col size="10" *ngFor="let eachitem of item">
+          <div class="card" (click)="btn_Action(eachitem)">
+            <div class="item">
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+              <div class="txt-home">
+                <p style="font-size: 16px">
+                  <b>{{eachitem.title}}<br />{{eachitem.subtitle}}</b>
+                </p>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

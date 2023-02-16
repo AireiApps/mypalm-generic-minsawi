@@ -1,0 +1,105 @@
+<!-- Lab -->
+<ion-tabs *ngIf="getTabCheck(2)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tabmaintenancehome">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.home' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabqrcodescanner">
+      <ion-icon name="qr-code-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.scanner' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<!-- Maintenance -->
+<ion-tabs *ngIf="getTabCheck(7)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button
+      tab="tabmaintenancedashboard"
+      *ngIf="(designationid==2 || designationid==4)"
+    >
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.dashboard' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabmaintenancehome">
+      <ion-icon name="settings-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.monitoring' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabreport"
+      *ngIf="(designationid==5 || designationid==6)"
+    >
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.reports' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabqrcodescanner">
+      <ion-icon name="qr-code-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.scanner' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<!-- Manager -->
+<ion-tabs *ngIf="getTabCheck(25)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tabmaintenancedashboard">
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.dashboard' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabmaintenancehome">
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.reports' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabqrcodescanner">
+      <ion-icon name="qr-code-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.scanner' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<!-- Production -->
+<ion-tabs *ngIf="getTabCheck(4)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tabsupervisordashboard">
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label>{{ 'TABSSUPERVISOR.dashboard' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabsupervisorhome">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>{{ 'TABSSUPERVISOR.home' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabqrcodescanner">
+      <ion-icon name="qr-code-outline"></ion-icon>
+      <ion-label>{{ 'TABSSUPERVISOR.scanner' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>{{ 'TABSSUPERVISOR.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

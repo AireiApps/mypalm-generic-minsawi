@@ -1,0 +1,47 @@
+.home-box {
+    padding: 0px 10px 0px 10px;
+    margin-top: 10px;
+  }
+  
+  .profile-userpic {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .profile-userpic img {
+    float: none;
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+  }
+  
+  ion-item {
+    border-radius: 50px;
+    box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
+    --highlight-height: 0px;
+  
+    ion-input {
+      font-size: 14px;
+      --padding-top: 20px;
+      --padding-bottom: 15px;
+      --padding-start: 5px;
+    }
+  
+    a {
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+  }
+  
+  ion-button {
+    --background: #5bc0de;
+    margin-top: 25px;
+    height: 48px;
+    font-size: 14px;
+    text-transform: initial;
+    border-radius: 50px;
+    box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);
+    --box-shadow: none;
+  }
+  

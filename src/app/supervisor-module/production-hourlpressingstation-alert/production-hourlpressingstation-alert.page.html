@@ -1,0 +1,157 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-title color="light"
+      >{{ 'PRESSSTATIONPOPUP.lastupdatedrecord' | translate}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let value of pressstationArr; let i=index">
+    <div [ngClass]="{'firsthome' : i==0, 'home' : i>0}">
+      <div style="font-size: 15px; text-align: center; color: #ffffff">
+        <b>{{value.title}}</b>
+      </div>
+
+      <table style="width: 100%; height: 100%" class="table table-bordered">
+        <tr>
+          <th
+            scope="colgroup"
+            style="padding: 4px !important; text-align: left"
+          >
+            <span class="mdfont"
+              >{{ 'PRESSSTATIONPOPUP.lastupdatedon' | translate}}</span
+            >
+          </th>
+
+          <td>{{value.lastupdatedon}}</td>
+        </tr>
+        <tr>
+          <th
+            scope="colgroup"
+            style="padding: 4px !important; text-align: left"
+          >
+            <span class="mdfont"
+              >{{ 'PRESSSTATIONPOPUP.doneby' | translate}}</span
+            >
+          </th>
+
+          <td>{{value.doneby}}</td>
+        </tr>
+      </table>
+
+      <table style="width: 100%; height: 100%" class="table table-bordered">
+        <tr class="table_head">
+          <th
+            colspan="2"
+            style="
+              padding: 4px !important;
+              background-color: #ff9f0c;
+              color: #000000;
+            "
+          >
+            <span class="para"
+              >{{ 'PRESSSTATIONPOPUP.digestor' | translate}}</span
+            >
+          </th>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'PRESSSTATIONPOPUP.temperature' | translate}} (<sup>O</sup>C)
+          </td>
+          <td style="width: 50%">{{value.digestertemperature}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'PRESSSTATIONPOPUP.motor' | translate}}
+          </td>
+          <td style="width: 50%">{{value.digestermotor}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'PRESSSTATIONPOPUP.level' | translate}} (%)
+          </td>
+          <td style="width: 50%">{{value.diegesterlevel}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'PRESSSTATIONPOPUP.digestordrainage' | translate}}
+          </td>
+          <td style="width: 50%">{{value.digesterdrainage}}</td>
+        </tr>
+      </table>
+
+      <table style="width: 100%; height: 100%" class="table table-bordered">
+        <tr class="table_head">
+          <th
+            colspan="2"
+            style="
+              padding: 4px !important;
+              background-color: #ff9f0c;
+              color: #000000;
+            "
+          >
+            <span class="para">{{ 'PRESSSTATIONPOPUP.press' | translate}}</span>
+          </th>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'PRESSSTATIONPOPUP.motor' | translate}}
+          </td>
+          <td style="width: 50%">{{value.pressmotor}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'PRESSSTATIONPOPUP.presscakedrainage' | translate}}
+          </td>
+          <td style="width: 50%">{{value.presscakedrainage}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'PRESSSTATIONPOPUP.hydraulicpressure' | translate}}
+          </td>
+          <td style="width: 50%">{{value.presshydraulicpressure}}</td>
+        </tr>
+      </table>
+
+      <!-- <table style="width: 100%; height: 100%" class="table table-bordered">
+        <tr class="table_head">
+          <th
+            colspan="2"
+            style="
+              padding: 4px !important;
+              background-color: #ff9f0c;
+              color: #000000;
+            "
+          >
+            <span class="para"
+              >{{ 'PRESSSTATIONPOPUP.dilutiontemperature' | translate}}</span
+            >
+          </th>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'PRESSSTATIONPOPUP.temperature' | translate}}
+          </td>
+          <td style="width: 50%">{{value.dilutiontemperature}}</td>
+        </tr>
+      </table> -->
+
+      <hr *ngIf="(i+1)<pressstationArr.length" />
+    </div>
+  </div>
+
+  <div style="text-align: center">
+    <button type="submit" class="h6 btn btn-ok" (click)="cancel()">
+      {{ 'GENERALBUTTON.okay' | translate}}
+    </button>
+  </div>
+</ion-content>

@@ -1,0 +1,8 @@
+{
+  "name": "mypalm",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

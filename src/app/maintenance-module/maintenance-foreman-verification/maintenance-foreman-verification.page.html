@@ -1,0 +1,1006 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color modaltoolbar">
+    <ion-title mode="ios" color="light">{{title}}</ion-title>
+
+    <ion-buttons slot="start" *ngIf="stepFlag || viewFlag">
+      <ion-button
+        color="whitefav"
+        (click)="btn_back('PREVIEW')"
+        *ngIf="stepFlag"
+      >
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+
+      <ion-button color="whitefav" (click)="btn_back('STEP1')" *ngIf="viewFlag">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_close()">
+        <ion-icon color="light" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar class="stepstoolbar" *ngIf="!previewFlag">
+    <ion-row class="steps">
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP1')">
+        <span><b> 1 </b></span>
+      </ion-col>
+
+      <ion-col>
+        <hr />
+      </ion-col>
+
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP2')">
+        <span><b> 2 </b></span>
+      </ion-col>
+
+      <ion-col>
+        <hr />
+      </ion-col>
+
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP3')">
+        <span><b> 3 </b></span>
+      </ion-col>
+
+      <ion-col>
+        <hr />
+      </ion-col>
+
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP4')">
+        <span><b> 4 </b></span>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #pageTop>
+  <div class="content">
+    <form *ngIf="previewFlag">
+      <div id="notificationview" style="margin: 10px">
+        <ion-row class="form-row">
+          <ion-col size="2" style="text-align: center">
+            <img class="logoimg" src="../../../assets/img/logo.png" />
+          </ion-col>
+          <ion-col size="8">
+            <div class="usertext" style="text-align: center; font-size: 15px">
+              <b
+                >{{ 'MAINTENANCEACKNOWLEDGEMODAL.maintenance' | translate}}<br />{{
+                'MAINTENANCEACKNOWLEDGEMODAL.notificationform' | translate}}</b
+              >
+            </div>
+          </ion-col>
+          <ion-col size="2" style="text-align: center">
+            <img
+              class="statusimg"
+              *ngIf="view_statusid == '1'"
+              src="../../../assets/img/notificationcreated.png"
+            />
+
+            <img
+              class="statusimg"
+              *ngIf="view_statusid != '1' && view_statusid != '8'"
+              src="../../../assets/img/notificationinprogress.png"
+            />
+
+            <img
+              class="statusimg"
+              *ngIf="view_statusid == '8'"
+              src="../../../assets/img/notificationclosed.png"
+            />
+          </ion-col>
+        </ion-row>
+
+        <table style="width: 100%; height: 100%" class="table table-bordered">
+          <tr *ngIf="getnotificationnumber!=''">
+            <td width="50%">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.id' | translate}}
+            </td>
+            <td width="50%" class="data">{{getnotificationnumber}}</td>
+          </tr>
+
+          <tr *ngIf="getnotificationtype!=''">
+            <td width="50%">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.notificationtype' | translate}}
+            </td>
+            <td width="50%" class="data">{{getnotificationtype}}</td>
+          </tr>
+
+          <tr *ngIf="view_breakdown!=''">
+            <td width="50%">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.problem' | translate}}
+            </td>
+            <td width="50%" class="data">{{view_breakdown}}</td>
+          </tr>
+
+          <tr *ngIf="view_maintanence_type!=''">
+            <td width="50%">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.maintenancetype' | translate}}
+            </td>
+            <td width="50%" class="data">{{view_maintanence_type}}</td>
+          </tr>
+
+          <tr *ngIf="getreportedby!=''">
+            <td width="50%">
+              {{ 'MAINTENANCENOTIFICATIONVIEW.reportedby' | translate}}
+            </td>
+            <td width="50%" class="data">{{getreportedby}}</td>
+          </tr>
+
+          <tr *ngIf="getstatus!=''">
+            <td width="50%">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.status' | translate}}
+            </td>
+            <td
+              width="50%"
+              style="background-color: #e74c3c; color: #ffffff"
+              *ngIf="getstatusid=='1'"
+            >
+              <b>{{getstatus}}</b>
+            </td>
+
+            <td
+              width="50%"
+              style="background-color: #ffff00; color: #000000"
+              *ngIf="getstatusid!='1' && getstatusid!='8'"
+            >
+              <b>{{getstatus}}</b>
+            </td>
+
+            <td
+              width="50%"
+              style="background-color: #008000; color: #ffffff"
+              *ngIf="getstatusid=='8'"
+            >
+              <b>{{getstatus}}</b>
+            </td>
+          </tr>
+        </table>
+
+        <div>
+          <div class="titleheader">
+            <div class="col">
+              <div class="notificationtitle text-uppercase">
+                <b
+                  >{{
+                  'MAINTENANCEACKNOWLEDGEMODAL.maintenancenotificationdetails' |
+                  translate}}</b
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="notificationcard">
+            <ion-row class="notificationform-row">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.stationname' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getstationname}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="notificationform-row">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.machineryname' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getequipmentname}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row
+              class="notificationform-row"
+              *ngIf="getpartdefectvalue!=''"
+            >
+              <ion-col size="4.5">
+                <div class="h7 text-dark" *ngIf="module == 'CM'">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.partdefect' | translate}}
+                </div>
+                <div class="h7 text-dark" *ngIf="module == 'RePM'">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.partreplaced' | translate}}
+                </div>
+                <div class="h7 text-dark" *ngIf="module == ''">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.partname' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getpartdefectvalue}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="notificationform-row" *ngIf="getrunninghours!=''">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCENOTIFICATIONVIEW.currentrunninghours' |
+                  translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getrunninghours}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row
+              class="notificationform-row"
+              *ngIf="getcreateddatetime!=''"
+            >
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.dateandtime' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getcreateddatetime}}</div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <!-- Repair Activity -->
+        <div *ngIf="!repairactivitynorecordFlag">
+          <div class="titleheader">
+            <div class="col">
+              <div class="notificationtitle text-uppercase">
+                <b>{{ 'MAINTENANCEACKNOWLEDGEMODAL.activity' | translate}}</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="notificationcard">
+            <ion-row class="notificationform-row" *ngIf="getactivity!=''">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.smallactivity' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getactivity}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row
+              class="notificationform-row"
+              *ngIf="getpartreceiveddatetime!=''"
+            >
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.partreceived' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getpartreceiveddatetime}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row
+              class="notificationform-row"
+              *ngIf="getactivitycompletiondatetime!=''"
+            >
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.activitycompletion' |
+                  translate}}<br />{{ 'MAINTENANCEACKNOWLEDGEMODAL.dateandtime'
+                  | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">
+                  : {{getactivitycompletiondatetime}}
+                </div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="notificationform-row" *ngIf="getcarriedoutby!=''">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.carriedoutby' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getcarriedoutby}}</div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <!-- Job Authorization -->
+        <div *ngIf="!jobauthorizationnorecordFlag">
+          <div class="titleheader">
+            <div class="col">
+              <div class="notificationtitle text-uppercase">
+                <b
+                  >{{ 'MAINTENANCEACKNOWLEDGEMODAL.jobacknowledgement' |
+                  translate}}</b
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="notificationcard">
+            <ion-row class="notificationform-row" *ngIf="getauthorizedby!=''">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.acknowlegedby' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getauthorizedby}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row
+              class="notificationform-row"
+              *ngIf="getauthorizeddatetime!=''"
+            >
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.acknowledged' | translate}}<br />{{
+                  'MAINTENANCEACKNOWLEDGEMODAL.dateandtime' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getauthorizeddatetime}}</div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <ion-row style="margin-top: 10px">
+          <ion-col style="text-align: center !important" no-padding>
+            <button
+              type="submit"
+              class="btn btn-next"
+              (click)="btn_next('PREVIEW')"
+            >
+              <span class="icontext" style="color: #ffffff"
+                >{{ 'MAINTENANCEACKNOWLEDGEMODAL.next' | translate}}</span
+              >
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </form>
+
+    <form
+      [formGroup]="step1Form"
+      style="margin: 10px 10px 0px 10px"
+      *ngIf="stepFlag"
+    >
+      <!-- Maintenance Type -->
+      <div *ngIf="maintenancetypeFlag">
+        <ion-row class="form-row">
+          <ion-col size="5">
+            <div class="title">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.maintenancetype' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="6.5">
+            <ion-select
+              [interfaceOptions]="maintenancetypeOptions"
+              formControlName="select_maintenancetype"
+              multiple="false"
+              [okText]="'GENERALBUTTON.okay' | translate"
+              [cancelText]="'GENERALBUTTON.dismiss' | translate"
+              class="selectdropdown"
+              placeholder="{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}"
+              (ionChange)="maintenancetypehandleChange($event)"
+            >
+              <ion-select-option
+                value="{{parseString(value)}}"
+                *ngFor="let value of maintenancetypeArr; let i = index"
+                >{{ value.maintanence_type }}</ion-select-option
+              >
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
+        <div class="hl4line"></div>
+      </div>
+
+      <!-- Part Defect -->
+      <div *ngIf="partFlag">
+        <ion-row class="form-row">
+          <ion-col size="5">
+            <div class="title" *ngIf="module == 'CM'">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.partdefect' | translate}}
+            </div>
+            <div class="title" *ngIf="module == 'RoPM'">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.partname' | translate}}
+            </div>
+            <div class="title" *ngIf="module == 'RePM'">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.partreplaced' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="6.5">
+            <ion-button
+              class="optionbutton"
+              (click)="callmodalcontroller('PartDefect', '')"
+              >{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <div
+          class="title"
+          style="margin-top: 10px; color: #3cd2a5; text-align: left"
+          *ngIf="partvalue!='' || getpartdefectvalue!==''"
+        >
+          <b *ngIf="module == 'CM'"
+            >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selectedpartdefect' |
+            translate}}</b
+          >
+          <b *ngIf="module == 'RoPM'"
+            >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selectedpartname' | translate}}</b
+          >
+          <b *ngIf="module == 'RePM'"
+            >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selectedpartreceived' |
+            translate}}</b
+          >
+        </div>
+
+        <div
+          class="title"
+          style="text-align: center"
+          *ngIf="getpartdefectvalue!=''"
+        >
+          {{this.getpartdefectvalue}}
+        </div>
+
+        <div class="hl4line" *ngIf="partvalue==''"></div>
+
+        <div
+          class="title"
+          style="text-align: center"
+          *ngIf="partvalue!=''"
+          [innerHTML]="partvalue"
+        ></div>
+
+        <div *ngIf="partvalue!=''">
+          <div
+            style="font-size: 14px; color: #df4759; text-align: right"
+            (click)="clear('Part')"
+          >
+            <ion-icon
+              class="icon"
+              color="danger"
+              name="backspace-outline"
+            ></ion-icon>
+            <span class="icontext"
+              ><b>
+                {{ 'MAINTENANCEACKNOWLEDGEMODAL.clear' | translate}}</b
+              ></span
+            >
+          </div>
+        </div>
+
+        <div class="hl4line" *ngIf="partvalue!=''"></div>
+
+        <div *ngIf="otherFlag">
+          <div class="form-row" style="margin-top: 10px">
+            <div class="col">
+              <div style="font-size: 14px; color: #ffffff">
+                <b
+                  >{{ 'MAINTENANCEACKNOWLEDGEMODAL.partname' | translate}}
+                  <sup>*</sup></b
+                >
+              </div>
+            </div>
+          </div>
+
+          <ion-row class="form-row">
+            <ion-col>
+              <input
+                type="text"
+                class="form-control"
+                style="font-size: 14px"
+                formControlName="txt_partname"
+                placeholder="{{ 'MAINTENANCEACKNOWLEDGEMODAL.enterpartname' | translate}}"
+              />
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="form-row">
+            <ion-col>
+              <button
+                type="submit"
+                class="h7 btn btn-success"
+                style="margin-top: 5px"
+                (click)="btn_add('Part')"
+              >
+                {{ 'MAINTENANCEACKNOWLEDGEMODAL.add' | translate}}
+              </button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+
+      <!-- Damage Type -->
+      <div *ngIf="damageFlag">
+        <ion-row class="form-row">
+          <ion-col size="5">
+            <div class="title">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.damagetype' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="6.5">
+            <ion-button class="optionbutton" (click)="openDamageType()"
+              >{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <div class="hl4line" *ngIf="damagetypevalue==''"></div>
+
+        <div
+          class="title"
+          style="margin-top: 10px; color: #3cd2a5; text-align: left"
+          *ngIf="damagetypevalue!=''"
+        >
+          <b
+            >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selecteddamagetype' |
+            translate}}</b
+          >
+        </div>
+
+        <div
+          class="title"
+          style="text-align: center"
+          *ngIf="damagetypevalue!=''"
+          [innerHTML]="damagetypevalue"
+        ></div>
+
+        <div class="hl4line" *ngIf="damagetypevalue!=''"></div>
+
+        <ion-select
+          [interfaceOptions]="damagetypeOptions"
+          formControlName="select_damagetype"
+          multiple="true"
+          [okText]="'GENERALBUTTON.okay' | translate"
+          [cancelText]="'GENERALBUTTON.dismiss' | translate"
+          class="ionicselect"
+          (ionChange)="damagehandleChange($event)"
+          #damagetypeSelect
+        >
+          <ion-select-option
+            value="{{parseString(value)}}"
+            *ngFor="let value of damageArr; let i = index"
+            >{{ value.damage }}</ion-select-option
+          >
+        </ion-select>
+      </div>
+
+      <div *ngIf="breakdowncausesFlag">
+        <ion-row class="form-row">
+          <ion-col size="5">
+            <div class="title">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.breakdowncauses' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="6.5">
+            <ion-button class="optionbutton" (click)="openBreakdownCauses()"
+              >{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <div class="hl4line" *ngIf="breakdowncausesvalue==''"></div>
+
+        <div
+          class="title"
+          style="margin-top: 10px; color: #3cd2a5"
+          *ngIf="breakdowncausesvalue!=''"
+        >
+          <b
+            >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selectedbreakdowncauses' |
+            translate}}</b
+          >
+        </div>
+
+        <div
+          class="title"
+          style="text-align: center"
+          *ngIf="breakdowncausesvalue!=''"
+          [innerHTML]="breakdowncausesvalue"
+        ></div>
+
+        <div class="hl4line" *ngIf="breakdowncausesvalue!=''"></div>
+
+        <ion-select
+          [interfaceOptions]="breakdowncausesOptions"
+          formControlName="select_breakdowncauses"
+          multiple="true"
+          [okText]="'GENERALBUTTON.okay' | translate"
+          [cancelText]="'GENERALBUTTON.dismiss' | translate"
+          class="ionicselect"
+          (ionChange)="breakdowncauseshandleChange($event)"
+          #breakdowncausesSelect
+        >
+          <ion-select-option
+            value="{{parseString(value)}}"
+            *ngFor="let value of breakdowncausesArr; let i = index"
+            >{{ value.BreakdownCause }}</ion-select-option
+          >
+        </ion-select>
+      </div>
+
+      <ion-row style="margin-top: 10px">
+        <ion-col style="text-align: center !important" no-padding>
+          <button
+            type="submit"
+            class="btn btn-next"
+            (click)="btn_next('STEP1')"
+          >
+            <span class="icontext" style="color: #ffffff"
+              >{{ 'MAINTENANCEACKNOWLEDGEMODAL.next' | translate}}</span
+            >
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <form *ngIf="viewFlag">
+      <div id="notificationview" style="margin: 10px">
+        <ion-row class="form-row">
+          <ion-col size="2" style="text-align: center">
+            <img class="logoimg" src="../../../assets/img/logo.png" />
+          </ion-col>
+          <ion-col size="8">
+            <div class="usertext" style="text-align: center; font-size: 15px">
+              <b
+                >{{ 'MAINTENANCEACKNOWLEDGEMODAL.maintenance' | translate}}<br />{{
+                'MAINTENANCEACKNOWLEDGEMODAL.notificationform' | translate}}</b
+              >
+            </div>
+          </ion-col>
+          <ion-col size="2" style="text-align: center">
+            <img
+              class="statusimg"
+              *ngIf="view_statusid == '1'"
+              src="../../../assets/img/notificationcreated.png"
+            />
+
+            <img
+              class="statusimg"
+              *ngIf="view_statusid != '1' && view_statusid != '8'"
+              src="../../../assets/img/notificationinprogress.png"
+            />
+
+            <img
+              class="statusimg"
+              *ngIf="view_statusid == '8'"
+              src="../../../assets/img/notificationclosed.png"
+            />
+          </ion-col>
+        </ion-row>
+
+        <table style="width: 100%; height: 100%" class="table table-bordered">
+          <tr *ngIf="view_notificationnumber!=''">
+            <td width="50%">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.id' | translate}}
+            </td>
+            <td width="50%" class="data">{{view_notificationnumber}}</td>
+          </tr>
+
+          <tr *ngIf="view_notificationtype!=''">
+            <td width="50%">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.notificationtype' | translate}}
+            </td>
+            <td width="50%" class="data">{{view_notificationtype}}</td>
+          </tr>
+
+          <tr *ngIf="view_breakdown!=''">
+            <td width="50%">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.problem' | translate}}
+            </td>
+            <td width="50%" class="data">{{view_breakdown}}</td>
+          </tr>
+
+          <tr *ngIf="view_maintanence_type!=''">
+            <td width="50%">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.maintenancetype' | translate}}
+            </td>
+            <td width="50%" class="data">{{view_maintanence_type}}</td>
+          </tr>
+
+          <tr *ngIf="getreportedby!=''">
+            <td width="50%">
+              {{ 'MAINTENANCENOTIFICATIONVIEW.reportedby' | translate}}
+            </td>
+            <td width="50%" class="data">{{getreportedby}}</td>
+          </tr>
+
+          <tr *ngIf="view_status!=''">
+            <td width="50%">
+              {{ 'MAINTENANCEACKNOWLEDGEMODAL.status' | translate}}
+            </td>
+            <td
+              width="50%"
+              style="background-color: #e74c3c; color: #ffffff"
+              *ngIf="view_statusid=='1'"
+            >
+              <b>{{view_status}}</b>
+            </td>
+
+            <td
+              width="50%"
+              style="background-color: #ffff00; color: #000000"
+              *ngIf="view_statusid!='1' && view_statusid!='8'"
+            >
+              <b>{{view_status}}</b>
+            </td>
+
+            <td
+              width="50%"
+              style="background-color: #008000; color: #ffffff"
+              *ngIf="view_statusid=='8'"
+            >
+              <b>{{view_status}}</b>
+            </td>
+          </tr>
+        </table>
+
+        <div>
+          <div class="titleheader">
+            <div class="col">
+              <div class="notificationtitle text-uppercase">
+                <b
+                  >{{
+                  'MAINTENANCEACKNOWLEDGEMODAL.maintenancenotificationdetails' |
+                  translate}}</b
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="notificationcard">
+            <ion-row class="notificationform-row">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.stationname' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{view_stationname}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="notificationform-row">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.machineryname' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{view_equipmentname}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="notificationform-row" *ngIf="getrunninghours!=''">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCENOTIFICATIONVIEW.currentrunninghours' |
+                  translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getrunninghours}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="notificationform-row" *ngIf="view_part_defect!=''">
+              <ion-col size="4.5">
+                <div class="h7 text-dark" *ngIf="module == 'CM'">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.partdefect' | translate}}
+                </div>
+                <div class="h7 text-dark" *ngIf="module == 'RePM'">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.partreplaced' | translate}}
+                </div>
+                <div class="h7 text-dark" *ngIf="module == ''">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.partname' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{view_part_defect}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="notificationform-row" *ngIf="view_damage_type!=''">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.damage' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{view_damage_type}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row
+              class="notificationform-row"
+              *ngIf="view_breakdown_causes!=''"
+            >
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.breakdowncauses' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{view_breakdown_causes}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row
+              class="notificationform-row"
+              *ngIf="getcreateddatetime!=''"
+            >
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.dateandtime' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getcreateddatetime}}</div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <!-- Repair Activity -->
+        <div *ngIf="!repairactivitynorecordFlag">
+          <div class="titleheader">
+            <div class="col">
+              <div class="notificationtitle text-uppercase">
+                <b>{{ 'MAINTENANCEACKNOWLEDGEMODAL.activity' | translate}}</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="notificationcard">
+            <ion-row class="notificationform-row" *ngIf="getactivity!=''">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.smallactivity' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getactivity}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row
+              class="notificationform-row"
+              *ngIf="getpartreceiveddatetime!=''"
+            >
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.partreceived' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getpartreceiveddatetime}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row
+              class="notificationform-row"
+              *ngIf="getactivitycompletiondatetime!=''"
+            >
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.activitycompletion' |
+                  translate}}<br />{{ 'MAINTENANCEACKNOWLEDGEMODAL.dateandtime'
+                  | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">
+                  : {{getactivitycompletiondatetime}}
+                </div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="notificationform-row" *ngIf="getcarriedoutby!=''">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.carriedoutby' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getcarriedoutby}}</div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <!-- Job Authorization -->
+        <div *ngIf="!jobauthorizationnorecordFlag">
+          <div class="titleheader">
+            <div class="col">
+              <div class="notificationtitle text-uppercase">
+                <b
+                  >{{ 'MAINTENANCEACKNOWLEDGEMODAL.jobacknowledgement' |
+                  translate}}</b
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="notificationcard">
+            <ion-row class="notificationform-row" *ngIf="getauthorizedby!=''">
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.acknowlegedby' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getauthorizedby}}</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row
+              class="notificationform-row"
+              *ngIf="getauthorizeddatetime!=''"
+            >
+              <ion-col size="4.5">
+                <div class="h7 text-dark">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.acknowledged' | translate}}<br />{{
+                  'MAINTENANCEACKNOWLEDGEMODAL.dateandtime' | translate}}
+                </div>
+              </ion-col>
+              <ion-col size="7.5">
+                <div class="h7 blockdata">: {{getauthorizeddatetime}}</div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <div style="text-align: center">
+          <button
+            type="submit"
+            [disabled]="confirmDisable"
+            class="h6 btn btn-success"
+            (click)="showAuthorize()"
+            style="margin-top: 10px; margin-bottom: 10px"
+          >
+            {{ 'MAINTENANCEACKNOWLEDGEMODAL.verify' | translate}}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>

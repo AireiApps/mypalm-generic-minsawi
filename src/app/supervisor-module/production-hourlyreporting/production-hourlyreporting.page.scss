@@ -1,0 +1,153 @@
+.wrapper {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+}
+
+ion-grid {
+  width: 100%;
+}
+
+.home-box {
+  padding: 5px 5px 5px 5px;
+}
+
+.img-home {
+  margin: 0px 28px 0px 28px;
+  padding: 15px 30px 0px 30px;
+}
+
+.card-height {
+  height: 100%;
+  width: 100%;
+}
+
+.txt-home {
+  text-align: center;
+  margin-top: 10px;
+}
+
+// .card {
+//   /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+//   transition: 0.3s;
+//   border-radius: 10px;
+//   padding: 5px;*/
+
+//   border: 1px solid #ffffff71;
+//   background-color: #ffffff10;
+//   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+//   transition: 0.3s;
+//   border-radius: 10px;
+//   padding: 5px;
+// }
+.card {
+  border: 1px solid #ffffff71;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 10px;
+  flex-direction: row;
+  margin: 5px;
+}
+
+.bg-light-color {
+  --color: var(--ion-color-white);
+}
+
+div.item {
+  text-align: center;
+  padding: 0px 0px 0px 0px;
+}
+
+img {
+  width: 45px;
+  height: 45px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.lbl-head {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.lbl-desc {
+  padding-left: 5px;
+  padding-top: 5px;
+}
+
+.bg-yellow {
+  //background-color: #474747;
+  background-color: #000000;
+  padding: 10px;
+}
+
+.lbl-head {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.lbl-desc {
+  padding-left: 5px;
+  padding-bottom: 0px;
+}
+.lbl-direction-right {
+  width: 100%;
+  text-align: right;
+  padding: 5px;
+}
+
+.row-width-100 {
+  width: 100%;
+  margin: 10px;
+  text-align: right;
+}
+
+p {
+  color: #000000;
+}
+
+.row-reverse {
+  flex-direction: row-reverse;
+}
+
+.btn-color {
+  background-color: red;
+  border-color: red;
+}
+
+.btn-yellow-color {
+  background-color: green;
+  border-color: green;
+}
+.margin-bottom {
+  margin-bottom: 10px;
+}
+.h7 {
+  font-size: 12px;
+}
+
+.vertical-align-content {
+  display: flex !important;
+  align-content: center !important;
+  align-items: center !important;
+}
+
+.badgecolor {
+  position: absolute;
+  opacity: 0.9;
+  background: blue;
+  padding: 5px;
+  margin: 5px;
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+.support {
+  width: 100%;
+  img {
+    width: 100%;
+    height: 120px;
+  }
+}

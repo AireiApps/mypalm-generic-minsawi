@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color modaltoolbar">
+    <ion-title color="light">{{title}}</ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_close()">
+        <ion-icon color="light" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <form [formGroup]="step1Form" class="step1form">
+      <div *ngIf="breakdownFlag">
+        <ion-row
+          class="form-row"
+          *ngIf="getmachinename!=''"
+          style="margin-top: 15px"
+        >
+          <ion-col>
+            <div class="viewtitle">{{getmachinename}}</div>
+          </ion-col>
+        </ion-row>
+
+        <div>
+          <img
+            class="breakdownimg"
+            src="../../../assets/img/machineshutdownalert.png"
+          />
+        </div>
+
+        <ion-row class="form-row">
+          <ion-col size="4">
+            <div class="title">
+              <b>{{ 'SUPERVISORDASHBOARD.problem' | translate}} :</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="8">
+            <!-- <select
+              formControlName="select_breakdown"
+              class="selectdropdown"
+              (change)="onChangeBreakdown()"
+            >
+              <option value="" selected disabled hidden>Select</option>
+              <option
+                value="{{parseString(item)}}"
+                *ngFor="let item of breakdownArr"
+              >
+                {{ item.breakdownCoding }}
+              </option>
+            </select> -->
+
+            <ion-select
+              [interfaceOptions]="breakdownOptions"
+              formControlName="select_breakdown"
+              multiple="false"
+              [okText]="'GENERALBUTTON.okay' | translate"
+              [cancelText]="'GENERALBUTTON.dismiss' | translate"
+              class="selectdropdown"
+              placeholder="{{ 'SUPERVISORDASHBOARD.select' | translate}}"
+              (ionChange)="breakdownhandleChange($event)"
+            >
+              <ion-select-option
+                value="{{parseString(value)}}"
+                *ngFor="let value of breakdownArr; let i = index"
+                >{{ value.breakdownCoding }}</ion-select-option
+              >
+            </ion-select>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <ion-row style="margin-top: 15px">
+        <ion-col no-padding>
+          <button type="submit" class="btn btn-next" (click)="save()">
+            <span class="icontext"
+              >{{ 'SUPERVISORDASHBOARD.save' | translate}}</span
+            >
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <div *ngIf="maintenancetypeFlag">
+      <!-- <div class="title">
+        <b>Select Maintenance Type</b>
+      </div>
+
+      <ng-container *ngFor="let item of maintenancetypeArr; let i = index">
+        <ion-button
+          [ngClass]="item.selected == 0 ? 'optionbutton': 'optionactivebutton'"
+          shape="round"
+          (click)="btn_maintenancetype(item, i)"
+        >
+          <ion-label class="text-wrap">{{item.maintanence_type}}</ion-label>
+        </ion-button>
+      </ng-container> -->
+    </div>
+  </div>
+</ion-content>
+
+<!-- <ion-footer class="footer">
+  <ion-fab vertical="bottom" horizontal="start" *ngIf="!isDisabled">
+    <ion-fab-button color="danger" (click)="btn_back()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" (click)="btn_next()">
+    <ion-fab-button color="success">
+      <ion-icon
+        name="chevron-forward-outline"
+        *ngIf="!maintenancetypeFlag"
+      ></ion-icon>
+
+      <ion-icon name="save-outline" *ngIf="maintenancetypeFlag"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-footer> -->

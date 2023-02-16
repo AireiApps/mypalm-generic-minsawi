@@ -1,0 +1,335 @@
+{
+  "project_info": {
+    "project_number": "306681786638",
+    "firebase_url": "https://mms-airei.firebaseio.com",
+    "project_id": "mms-airei",
+    "storage_bucket": "mms-airei.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306681786638:android:894c5ea69c01550076275f",
+        "android_client_info": {
+          "package_name": "com.airei.agropalma.gps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzzBzCZbEhCi3sNiftrpDqalfTTb0nDyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306681786638-2ufjtk66m4gh0jaid7o63p2ql5k0fo2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.airei.milltracking.mypalm.sdplantation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306681786638:android:f656e98ed76edac176275f",
+        "android_client_info": {
+          "package_name": "com.airei.milltracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzzBzCZbEhCi3sNiftrpDqalfTTb0nDyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306681786638-2ufjtk66m4gh0jaid7o63p2ql5k0fo2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.airei.milltracking.mypalm.sdplantation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306681786638:android:b79a67f78f69818276275f",
+        "android_client_info": {
+          "package_name": "com.airei.milltracking.mypalm.lite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzzBzCZbEhCi3sNiftrpDqalfTTb0nDyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306681786638-2ufjtk66m4gh0jaid7o63p2ql5k0fo2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.airei.milltracking.mypalm.sdplantation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306681786638:android:0683e44a0396959976275f",
+        "android_client_info": {
+          "package_name": "com.airei.milltracking.mypalm.mikk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzzBzCZbEhCi3sNiftrpDqalfTTb0nDyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306681786638-2ufjtk66m4gh0jaid7o63p2ql5k0fo2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.airei.milltracking.mypalm.sdplantation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306681786638:android:c80941d4bb50305276275f",
+        "android_client_info": {
+          "package_name": "com.airei.milltracking.mypalm.sdplantation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzzBzCZbEhCi3sNiftrpDqalfTTb0nDyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306681786638-2ufjtk66m4gh0jaid7o63p2ql5k0fo2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.airei.milltracking.mypalm.sdplantation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306681786638:android:61976a6f1aa2bd0f76275f",
+        "android_client_info": {
+          "package_name": "com.airei.milltracking.mypalm.simedarby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzzBzCZbEhCi3sNiftrpDqalfTTb0nDyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306681786638-2ufjtk66m4gh0jaid7o63p2ql5k0fo2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.airei.milltracking.mypalm.sdplantation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306681786638:android:77e9ea19490e2e3476275f",
+        "android_client_info": {
+          "package_name": "com.airei.milltracking.mypalm.simedarbyplantation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzzBzCZbEhCi3sNiftrpDqalfTTb0nDyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306681786638-2ufjtk66m4gh0jaid7o63p2ql5k0fo2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.airei.milltracking.mypalm.sdplantation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306681786638:android:b0126329e959331776275f",
+        "android_client_info": {
+          "package_name": "com.airei.milltracking.mypalmioi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzzBzCZbEhCi3sNiftrpDqalfTTb0nDyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306681786638-2ufjtk66m4gh0jaid7o63p2ql5k0fo2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.airei.milltracking.mypalm.sdplantation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306681786638:android:982fd71967403d4276275f",
+        "android_client_info": {
+          "package_name": "com.airei.mspopremiumplatform"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzzBzCZbEhCi3sNiftrpDqalfTTb0nDyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306681786638-2ufjtk66m4gh0jaid7o63p2ql5k0fo2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.airei.milltracking.mypalm.sdplantation"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

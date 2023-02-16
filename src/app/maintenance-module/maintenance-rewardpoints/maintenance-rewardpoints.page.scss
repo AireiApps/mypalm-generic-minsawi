@@ -1,0 +1,38 @@
+/*ion-content {
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}*/
+
+ion-content {
+  --background: url("../../../assets/img/cracker.gif") 0 0/100% 100% no-repeat;
+}
+
+.content {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  align-items: center;
+  color: #ffffff;
+}
+
+.points {
+  font-size: 28px;
+  font-weight: bold;
+  align-items: center;
+  color: #ffffff;
+}
+
+.icon {
+  font-size: 20px;
+}

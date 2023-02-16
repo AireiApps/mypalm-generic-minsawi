@@ -1,0 +1,280 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color modaltoolbar">
+    <ion-title mode="ios" color="light">{{title}}</ion-title>
+
+    <ion-buttons slot="start" *ngIf="viewFlag">
+      <ion-button color="whitefav" (click)="btn_back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button class="bg-light-color" (click)="btn_close()">
+        <ion-icon color="light" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Commented on 27.01.2023 as said by Vignesh to show different for ropm and repm during assign
+  <ion-toolbar class="stepstoolbar">
+    <ion-row class="steps">
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP1')">
+        <span><b> 1 </b></span>
+      </ion-col>
+
+      <ion-col>
+        <hr />
+      </ion-col>
+
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP2')">
+        <span><b> 2 </b></span>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <form
+      [formGroup]="step1Form"
+      style="margin-top: 10px; padding-left: 10px"
+      *ngIf="stepFlag"
+    >
+      <ion-row class="form-row" *ngIf="getstationid!=''">
+        <ion-col size="4.5">
+          <div class="title">
+            {{ 'PREVENTIVEMAINTENANCEASSIGNMODAL.station' | translate}}
+          </div>
+        </ion-col>
+
+        <ion-col size="0.5" style="text-align: right">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+        <ion-col size="7" style="text-align: left">
+          <div class="viewtitle"><b>{{getstationname}}</b></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row" *ngIf="getmachineid!=''">
+        <ion-col size="4.5">
+          <div class="title">
+            {{ 'PREVENTIVEMAINTENANCEASSIGNMODAL.machine' | translate}}
+          </div>
+        </ion-col>
+
+        <ion-col size="0.5" style="text-align: right">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="7" style="text-align: left">
+          <div class="viewtitle"><b>{{getmachinename}}</b></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row" *ngIf="partdefectname!=''">
+        <ion-col size="4.5">
+          <div class="title">
+            {{ 'PREVENTIVEMAINTENANCEASSIGNMODAL.partreplaced' | translate}}
+          </div>
+        </ion-col>
+
+        <ion-col size="0.5" style="text-align: right">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="7" style="text-align: left">
+          <div class="viewtitle"><b>{{partdefectname}}</b></div>
+        </ion-col>
+      </ion-row>
+
+      <div *ngIf="activityFlag">
+        <ion-row class="form-row">
+          <ion-col size="4.5">
+            <div class="title">
+              {{ 'PREVENTIVEMAINTENANCEASSIGNMODAL.activity' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: right">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="7">
+            <div class="viewtitle" style="text-align: left">
+              <b>{{getactivityname}}</b>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <div class="hl4line" *ngIf="getactivityname!=''"></div>
+      </div>
+
+      <div *ngIf="assignedtoFlag">
+        <ion-row class="form-row">
+          <ion-col size="4.5">
+            <div class="title">
+              {{ 'PREVENTIVEMAINTENANCEASSIGNMODAL.assignto' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: right">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="7">
+            <ion-select
+              [interfaceOptions]="assignedtoOptions"
+              formControlName="select_assignedto"
+              multiple="false"
+              [okText]="'GENERALBUTTON.okay' | translate"
+              [cancelText]="'GENERALBUTTON.dismiss' | translate"
+              class="selectdropdown"
+              placeholder="{{ 'PREVENTIVEMAINTENANCEASSIGNMODAL.select' | translate}}"
+              (ionChange)="assignedtohandleChange($event)"
+              #assignedtoSelect
+            >
+              <ion-select-option
+                value="{{parseString(value)}}"
+                *ngFor="let value of assignedtoArr; let i = index"
+                >{{ value.name }}</ion-select-option
+              >
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
+        <div class="hl4line"></div>
+      </div>
+
+      <ion-row style="margin-top: 10px">
+        <ion-col style="text-align: center !important" no-padding>
+          <button
+            type="submit"
+            class="btn btn-next"
+            (click)="btn_next('STEP1')"
+          >
+            <span class="icontext" style="color: #ffffff"
+              >{{ 'GENERALBUTTON.savebutton' | translate}}</span
+            >
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <form *ngIf="viewFlag" style="padding-left: 10px">
+      <ion-row class="form-row" *ngIf="view_station!=''">
+        <ion-col size="4">
+          <div class="title">
+            {{ 'PREVENTIVEMAINTENANCEASSIGNMODAL.station' | translate}}
+          </div>
+        </ion-col>
+        <ion-col size="0.5" style="text-align: right">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+        <ion-col size="7" style="text-align: left">
+          <div class="viewtitle">
+            <b>{{view_station}}</b>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row" *ngIf="view_machine!=''">
+        <ion-col size="4">
+          <div class="title">
+            {{ 'PREVENTIVEMAINTENANCEASSIGNMODAL.machine' | translate}}
+          </div>
+        </ion-col>
+        <ion-col size="0.5" style="text-align: right">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+        <ion-col size="7" style="text-align: left">
+          <div class="viewtitle">
+            <b>{{view_machine}}</b>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row" *ngIf="view_partdefect!=''">
+        <ion-col size="4">
+          <div class="title">
+            {{ 'PREVENTIVEMAINTENANCEASSIGNMODAL.partreplaced' | translate}}
+          </div>
+        </ion-col>
+        <ion-col size="0.5" style="text-align: right">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+        <ion-col size="7" style="text-align: left">
+          <div class="viewtitle">
+            <b>{{view_partdefect}}</b>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row" *ngIf="view_activity!=''">
+        <ion-col size="4">
+          <div class="title">
+            {{ 'PREVENTIVEMAINTENANCEASSIGNMODAL.activity' | translate}}
+          </div>
+        </ion-col>
+        <ion-col size="0.5" style="text-align: right">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+        <ion-col size="7" style="text-align: left">
+          <div class="viewtitle">
+            <b>{{view_activity}}</b>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row" *ngIf="view_assignto!=''">
+        <ion-col size="4">
+          <div class="title">
+            {{ 'PREVENTIVEMAINTENANCEASSIGNMODAL.assignedto' | translate}}
+          </div>
+        </ion-col>
+        <ion-col size="0.5" style="text-align: right">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+        <ion-col size="7" style="text-align: left">
+          <div class="viewtitle">
+            <b>{{view_assignto}}</b>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="margin-top: 10px">
+        <ion-col style="text-align: center !important" no-padding>
+          <button
+            type="submit"
+            [disabled]="confirmDisable"
+            class="btn btn-next"
+            (click)="showalert()"
+          >
+            <span class="icontext" style="color: #ffffff"
+              >{{ 'GENERALBUTTON.confirmbutton' | translate}}</span
+            >
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>

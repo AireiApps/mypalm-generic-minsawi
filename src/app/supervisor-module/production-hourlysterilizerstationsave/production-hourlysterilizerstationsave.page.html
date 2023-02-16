@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-title style="text-align: center" color="light"
+      >{{sterilizerstationname}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="sterilizerstationForm">
+    <ion-row class="form-row">
+      <ion-col size="5">
+        <div class="h7 text-dark">{{ 'HOURLYSTERILIZATIONSAVE.inletpressure' | translate}} <sup>*</sup></div>
+      </ion-col>
+      <ion-col size="5">
+        <input
+          type="number"
+          class="h7 form-control"
+          formControlName="txt_inletpressure"
+          placeholder="{{ 'HOURLYSTERILIZATIONSAVE.inletpressure' | translate}}"
+        />
+      </ion-col>
+      <ion-col size="2">
+        <div class="h7 text-dark"><b>Bar</b></div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="form-row">
+      <ion-col size="5">
+        <div class="h7 text-dark">{{ 'HOURLYSTERILIZATIONSAVE.toppressure' | translate}} <sup>*</sup></div>
+      </ion-col>
+      <ion-col size="5">
+        <input
+          type="number"
+          class="h7 form-control"
+          formControlName="txt_toppressure"
+          placeholder="{{ 'HOURLYSTERILIZATIONSAVE.toppressure' | translate}}"
+        />
+      </ion-col>
+      <ion-col size="2">
+        <div class="h7 text-dark"><b>Bar</b></div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="form-row">
+      <ion-col size="5">
+        <div class="h7 text-dark">{{ 'HOURLYSTERILIZATIONSAVE.bottompressure' | translate}}<sup>*</sup></div>
+      </ion-col>
+      <ion-col size="5">
+        <input
+          type="number"
+          class="h7 form-control"
+          formControlName="txt_bottompressure"
+          placeholder="{{ 'HOURLYSTERILIZATIONSAVE.bottompressure' | translate}}"
+        />
+      </ion-col>
+      <ion-col size="2">
+        <div class="h7 text-dark"><b>Bar</b></div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 10px">
+      <ion-col style="text-align: right !important">
+        <button type="submit" class="btn btn-info" (click)="showalert()">
+          {{ 'GENERALBUTTON.savebutton' | translate}}
+        </button>
+      </ion-col>
+
+      <ion-col style="text-align: left !important">
+        <button type="submit" class="btn btn-danger" (click)="cancel()">
+          {{ 'GENERALBUTTON.cancelbutton' | translate}}
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

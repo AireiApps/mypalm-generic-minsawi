@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title color="light" [innerHTML]="mill_name"></ion-title>
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent"
+          >{{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="md">
+  <div *ngIf="userdesignation==7" #myElementRef>
+    <div class="reportstitleheader">{{ 'PRODUCTIONHOME.hourlyproductionreporting' | translate}}</div>
+
+    <ion-row *ngFor="let item of pressArr">
+      <ion-col size="3"></ion-col>
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_Action(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+      <ion-col size="3"></ion-col>
+    </ion-row>
+
+    <div class="reportstitleheader">{{ 'PRODUCTIONHOME.productionreports' | translate}}</div>
+
+    <ion-row *ngFor="let item of pressreportsArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div *ngIf="userdesignation==8 " #myElementRef>
+    <div class="reportstitleheader">{{ 'PRODUCTIONHOME.hourlyproductionreporting' | translate}}</div>
+
+    <ion-row *ngFor="let item of sterilizerArr">
+      <ion-col size="3"></ion-col>
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_Action(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+      <ion-col size="3"></ion-col>
+    </ion-row>
+
+    <div class="reportstitleheader">{{ 'PRODUCTIONHOME.productionreports' | translate}}</div>
+
+    <ion-row *ngFor="let item of sterilizerreportsArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

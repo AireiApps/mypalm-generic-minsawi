@@ -1,0 +1,418 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Replacement Preventive Maintenance</ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent"
+          >{{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar class="bg-search-color">
+    <ion-searchbar
+      placeholder="Search Records"
+      [(ngModel)]="filterTerm"
+      animated="true"
+      clearIcon="close"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <form [formGroup]="pvForm">
+      <div class="form-row" style="padding: 5px">
+        <div class="col">
+          <div class="h7 text-white"><b>From Date</b></div>
+          <!-- <ion-datetime
+            mode="ios"
+            class="h7 form-control"
+            formControlName="txt_fromdate"
+            display-format="DD-MM-YYYY"
+          >
+          </ion-datetime> -->
+
+          <input
+            type="text"
+            class="h7 form-control readonly"
+            formControlName="txt_fromdate"
+            placeholder="DD-MM-YYYY"
+            (click)="openDateTimePicker('FD')"
+            readonly
+          />
+        </div>
+        <div class="col">
+          <div class="h7 text-white"><b>To Date</b></div>
+          <!-- <ion-datetime
+            mode="ios"
+            class="h7 form-control"
+            formControlName="txt_todate"
+            display-format="DD-MM-YYYY"
+          >
+          </ion-datetime> -->
+
+          <input
+            type="text"
+            class="h7 form-control readonly"
+            formControlName="txt_todate"
+            placeholder="DD-MM-YYYY"
+            (click)="openDateTimePicker('TD')"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          class="h7 btn btn-general btn-sm margin-5px float-right"
+          (click)="getRecords()"
+        >
+          <!-- <ion-icon name="filter"></ion-icon> -->
+          Get Records
+        </button>
+      </div>
+
+      <hr />
+    </form>
+
+    <div class="home-box" *ngIf="designationid!=2">
+      <div
+        class="pvcard gedf-card margin-bottom"
+        *ngFor="let value of notificationlistArr | filter:filterTerm"
+      >
+        <!-- <div class="pvcard-header">
+          <div class="form-row">
+            <div class="col">
+              <div class="h7 text-dark" style="float: left">
+                ID: <b>{{value.notificationno}}</b>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="h7 text-dark" style="float: right">
+                Dt: <b>{{value.insDate}}</b>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div style="margin: 10px 5px 10px 5px">
+          <!-- <div class="h7 text-dark" *ngIf="value.type!=''">
+            <b>Type :</b> {{value.type}}
+          </div> -->
+          <div
+            class="text-dark"
+            *ngIf="value.stationname!=''"
+            style="font-size: 14px"
+          >
+            <b>{{value.notificationno}}</b>
+            <b> - {{value.insDate}}</b>
+          </div>
+          <div class="h7 text-dark" *ngIf="value.stationname!=''">
+            <b>Station :</b> {{value.stationname}}
+          </div>
+
+          <div class="h7 text-dark" *ngIf="value.equipment!=''">
+            <b>Machine :</b> {{value.equipmentname}}
+          </div>
+
+          <div class="h7 text-dark" *ngIf="value.maintenancetype!=''">
+            <b>Maintenance Type :</b> {{value.maintenancetype}}
+          </div>
+
+          <div class="h7 text-dark" *ngIf="value.partdefect!=''">
+            <b>Part Defect :</b> {{value.partdefect}}
+          </div>
+
+          <div class="h7 text-dark" *ngIf="value.problem!=''">
+            <b>Problem :</b> {{value.problem}}
+          </div>
+
+          <div class="h7 text-dark" *ngIf="value.reportBy!=''">
+            <b>Reported By :</b> {{value.reportBy}}
+          </div>
+
+          <div class="h7 text-dark" *ngIf="value.statusname!=''">
+            <b>Status : </b
+            ><app-oval-shape
+              statusname="{{ value.statusname }}"
+              statusid="{{ value.statusId }}"
+            ></app-oval-shape>
+          </div>
+        </div>
+
+        <!-- Maintenance Engineer - Start -->
+        <ion-row class="row-reverse" *ngIf="designationid == 2">
+          <button
+            type="button"
+            class="h7 btn btn-view btn-sm margin-5px"
+            (click)="btn_PVNotificationView(value)"
+          >
+            <ion-icon class="icon" name="eye-outline"></ion-icon>
+            <span class="icontext"> View</span>
+          </button>
+
+          <button
+            type="button"
+            class="h7 btn btn-general btn-sm margin-5px"
+            (click)="showAuthorize(value)"
+            *ngIf="value.statusId == '6' "
+          >
+            <ion-icon class="icon" name="checkbox-outline"></ion-icon>
+            <span class="icontext"> Authorize</span>
+          </button>
+
+          <button
+            type="button"
+            class="h7 btn btn-update btn-sm margin-5px"
+            (click)="btn_PVNotificationEdit(value)"
+            *ngIf="(value.statusId == '1' && value.toassigned==0)"
+          >
+            <ion-icon class="icon" name="create-outline"></ion-icon>
+            <span class="icontext"> Update</span>
+          </button>
+        </ion-row>
+        <!-- Maintenance Engineer - End -->
+
+        <!-- Other than Maintenance Engineer - Start -->
+        <ion-row class="row-reverse" *ngIf="designationid != 2">
+          <button
+            type="button"
+            class="h7 btn btn-view btn-sm margin-5px"
+            (click)="btn_PVNotificationView(value)"
+          >
+            <ion-icon class="icon" name="eye-outline"></ion-icon>
+            <span class="icontext"> View</span>
+          </button>
+
+          <button
+            type="button"
+            class="h7 btn btn-update btn-sm margin-5px"
+            (click)="btn_PVNotificationEdit(value)"
+            *ngIf="(value.statusId == '1' && value.toassigned==0)"
+          >
+            <ion-icon class="icon" name="create-outline"></ion-icon>
+            <span class="icontext"> Update</span>
+          </button>
+        </ion-row>
+        <!-- Other than Maintenance Engineer - End -->
+      </div>
+
+      <div class="norecords" *ngIf="norecordflag">No Records Found</div>
+    </div>
+
+    <!-- For Engineer -->
+    <div *ngIf="designationid==2">
+      <ion-segment
+        (ionChange)="segmentChanged($event)"
+        [(ngModel)]="tabs_segment"
+      >
+        <ion-segment-button value="Created">
+          <ion-badge class="badgecount badgeblink" *ngIf="createdrecords!=0"
+            >{{createdrecords}}</ion-badge
+          >
+
+          <ion-label text-wrap class="h7">Created</ion-label>
+        </ion-segment-button>
+
+        <ion-segment-button value="Acknowledgement">
+          <ion-badge class="badgecount badgeblink" *ngIf="acknowledgerecords!=0"
+            >{{acknowledgerecords}}</ion-badge
+          >
+
+          <ion-label text-wrap class="h7">Acknowledgement</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <div [ngSwitch]="tabs_segment">
+        <div class="home-box" *ngSwitchCase="'Created'">
+          <div *ngIf="!creatednorecordflag">
+            <ion-row
+              *ngFor="let value of creatednotificationlistArr | filter:filterTerm"
+            >
+              <ion-col style="padding: 0px">
+                <div class="pvcard gedf-card margin-bottom">
+                  <!-- <div class="pvcard-header">
+                      <div class="form-row">
+                      <div class="col">
+                        <div class="h7 text-dark" style="float: left">
+                          ID: <b>{{value.notificationno}}</b>
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="h7 text-dark" style="float: right">
+                          Dt: <b>{{value.insDate}}</b>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div style="margin: 10px 5px 10px 5px">
+                    <div
+                      class="text-dark"
+                      *ngIf="value.stationname!=''"
+                      style="font-size: 14px"
+                    >
+                      <b>{{value.notificationno}}</b>
+                      <b> - {{value.insDate}}</b>
+                    </div>
+                    <div class="h7 text-dark" *ngIf="value.stationname!=''">
+                      <b>Station :</b> {{value.stationname}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.equipment!=''">
+                      <b>Machine :</b> {{value.equipmentname}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.maintenancetype!=''">
+                      <b>Maintenance Type :</b> {{value.maintenancetype}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.partdefect!=''">
+                      <b>Part Defect :</b> {{value.partdefect}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.problem!=''">
+                      <b>Problem :</b> {{value.problem}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.reportBy!=''">
+                      <b>Reported By :</b> {{value.reportBy}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.statusname!=''">
+                      <b>Status : </b
+                      ><app-oval-shape
+                        statusname="{{ value.statusname }}"
+                        statusid="{{ value.statusId }}"
+                      ></app-oval-shape>
+                    </div>
+                  </div>
+
+                  <div class="h7 text-dark" *ngIf="value.remarks!=''">
+                    <b>Remarks :</b> {{value.remarks}}
+                  </div>
+
+                  <!-- Maintenance Engineer - Start -->
+                  <ion-row class="row-reverse" *ngIf="designationid == 2">
+                    <button
+                      type="button"
+                      class="h7 btn btn-view btn-sm margin-5px"
+                      (click)="btn_PVNotificationView(value)"
+                    >
+                      <ion-icon class="icon" name="eye-outline"></ion-icon>
+                      <span class="icontext"> View</span>
+                    </button>
+                  </ion-row>
+                  <!-- Maintenance Engineer - End -->
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+
+          <div class="norecords" *ngIf="creatednorecordflag">
+            No Records Found
+          </div>
+        </div>
+
+        <div class="home-box" *ngSwitchCase="'Acknowledgement'">
+          <div *ngIf="!acknowledgenorecordflag">
+            <ion-row
+              *ngFor="let value of acknowledgenotificationlistArr | filter:filterTerm"
+            >
+              <ion-col style="padding: 0px">
+                <div class="pvcard gedf-card margin-bottom">
+                  <!-- <div class="pvcard-header">
+                    <div class="form-row">
+                      <div class="col">
+                        <div class="h7 text-dark" style="float: left">
+                          ID: <b>{{value.notificationno}}</b>
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="h7 text-dark" style="float: right">
+                          Dt: <b>{{value.insDate}}</b>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div style="margin: 10px 5px 10px 5px">
+                    <div
+                      class="text-dark"
+                      *ngIf="value.stationname!=''"
+                      style="font-size: 14px"
+                    >
+                      <b>{{value.notificationno}}</b>
+                      <b> - {{value.insDate}}</b>
+                    </div>
+                    <div class="h7 text-dark" *ngIf="value.stationname!=''">
+                      <b>Station :</b> {{value.stationname}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.equipment!=''">
+                      <b>Machine :</b> {{value.equipmentname}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.maintenancetype!=''">
+                      <b>Maintenance Type :</b> {{value.maintenancetype}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.partdefect!=''">
+                      <b>Part Defect :</b> {{value.partdefect}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.problem!=''">
+                      <b>Problem :</b> {{value.problem}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.reportBy!=''">
+                      <b>Reported By :</b> {{value.reportBy}}
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.statusname!=''">
+                      <b>Status : </b
+                      ><app-oval-shape
+                        statusname="{{ value.statusname }}"
+                        statusid="{{ value.statusId }}"
+                      ></app-oval-shape>
+                    </div>
+
+                    <div class="h7 text-dark" *ngIf="value.remarks!=''">
+                      <b>Remarks :</b> {{value.remarks}}
+                    </div>
+                  </div>
+
+                  <!-- Maintenance Engineer - Start -->
+                  <ion-row class="row-reverse" *ngIf="designationid == 2">
+                    <button
+                      type="button"
+                      class="h7 btn btn-general btn-sm margin-5px"
+                      (click)="callmodalcontroller(value, 'ACKNOWLEDGE')"
+                      *ngIf="value.statusId == '6' "
+                    >
+                      <ion-icon class="icon" name="checkbox-outline"></ion-icon>
+                      <span class="icontext"> View & Acknowledge</span>
+                    </button>
+                  </ion-row>
+                  <!-- Maintenance Engineer - End -->
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+
+          <div class="norecords" *ngIf="acknowledgenorecordflag">
+            No Records Found
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

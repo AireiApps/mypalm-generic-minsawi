@@ -1,0 +1,166 @@
+.center_powerd {
+  text-align: center;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+/* Profile container */
+.profile {
+  margin: 20px 0;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 5px 0 5px 0;
+  /*background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;*/
+}
+
+.profile-userpic {
+  //margin-top: 5px;
+  text-align: center;
+}
+
+.profile-userpic img {
+  background-position: center center;
+  background-size: contain;
+  border-radius: 50%;
+  //border: 3px solid #c2c2c2;
+  box-shadow: 0 0 5px gray;
+  padding: 10px;
+  height: 150px;
+  width: 150px;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profile-usertitle-name {
+  //text-transform: uppercase;
+  //color: #1d2730;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.editprofile-title {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #75cafa;
+}
+
+.temperature-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.temperature-data {
+  color: #e53327;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-usertitle-job {
+  //text-transform: uppercase;
+  //color: #1d2730;
+  color: #ffffff;
+  font-size: 14px;
+  //font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profile-userbuttons .btn {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 15px;
+  margin-right: 5px;
+}
+
+.profile-userbuttons .btn:last-child {
+  margin-right: 0px;
+}
+
+.profile-usermenu {
+  margin-top: 30px;
+}
+
+.icon {
+  vertical-align: middle;
+}
+
+.logouticon {
+  vertical-align: middle;
+  color: #ff9f0c;
+  //color: red;
+}
+
+.icontext {
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+ion-icon {
+  font-size: 25px;
+}
+
+.logoutbutton {
+  font-size: 16px;
+  text-align: center;
+  //color: #f0ad4e;
+  color: #000000;
+  font-weight: 900;
+}
+
+.changepasswordbg {
+  border: 1px solid #ffffff;
+  padding: 10px;
+  margin-left: 35px;
+  margin-right: 35px;
+  border-radius: 5px;
+}
+
+.logoutbg {
+  border: 1px solid #ff9f0c;
+  padding: 10px;
+  margin-left: 35px;
+  margin-right: 35px;
+  border-radius: 5px;
+}
+
+ion-fab-button {
+  --background: #ff9f0c;
+  --background-activated: #1d2730;
+  --background-hover: #1d2730;
+  //--border-radius: 20px;
+  --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
+    0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --color: #ffffff;
+}
+
+ion-fab-button::part(native):hover::after {
+  background-color: #1d2730;
+}
+
+ion-fab-button::part(native):active::after {
+  background-color: #1d2730;
+}
+
+.hl4line {
+  border-top: 1px dashed #c2c2c2;
+  height: 0px !important;
+  margin: 20px 20px 0px 20px;
+}

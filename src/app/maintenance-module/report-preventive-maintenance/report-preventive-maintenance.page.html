@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Preventive Maintenance (PV) Report</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent"
+          >{{ count }}</ion-badge
+        >
+        <ion-icon name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home-box">
+    <form [formGroup]="notificationReportForm">
+      <div class="form-row">
+        <div class="col">
+          <div class="h7 text-dark"><b>From Date</b></div>
+          <ion-datetime
+            mode="ios"
+            class="h7 form-control"
+            formControlName="from_date"
+            display-format="DD-MM-YYYY"
+          ></ion-datetime>
+        </div>
+
+        <div class="col">
+          <div class="h7 text-dark"><b>To Date</b></div>
+          <ion-datetime
+            mode="ios"
+            class="h7 form-control"
+            formControlName="to_date"
+            display-format="DD-MM-YYYY"
+          ></ion-datetime>
+        </div>
+      </div>
+
+      <div style="margin-top: 10px">
+        <button
+          type="button"
+          class="h7 btn btn-general btn-sm float-right"
+          (click)="getNotification()"
+        >
+          <!-- <ion-icon name="filter"></ion-icon> -->
+          Get Record
+        </button>
+      </div>
+    </form>
+
+    <div style="margin-top: 50px">
+      <div
+        class="card gedf-card margin-bottom"
+        *ngFor="let value of notificationlistArr"
+      >
+        <div class="card-header">
+          <div class="form-row">
+            <div class="col">
+              <div class="h7 text-danger" style="float: left">
+                ID: <b>{{value.notificationno}}</b>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="h7 text-danger" style="float: right">
+                Dt: <b>{{value.insDate}}</b>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin: 10px 5px 10px 5px">
+          <div class="h7 text-dark" *ngIf="value.type!=''">
+            <b>Type :</b> {{value.type}}
+          </div>
+
+          <div class="h7 text-dark" *ngIf="value.stationname!=''">
+            <b>Station :</b> {{value.stationname}}
+          </div>
+          <div class="h7 text-dark" *ngIf="value.equipment!=''">
+            <b>Equipment :</b> {{value.equipment}}
+          </div>
+          <div class="h7 text-dark" *ngIf="value.problem!=''">
+            <b>Problem :</b> {{value.problem}}
+          </div>
+
+          <div class="h7 text-dark" *ngIf="value.statusname!=''">
+            <b>Status : </b
+            ><app-oval-shape
+              statusname="{{ value.statusname }}"
+              statusid="{{ value.statusId }}"
+            ></app-oval-shape>
+          </div>
+
+          <div class="h7 text-dark" *ngIf="value.remarks!=''">
+            <b>Remarks :</b> {{value.remarks}}
+          </div>
+        </div>
+        <ion-row class="row-reverse">
+          <button
+            type="button"
+            class="h7 btn btn-outline-success btn-sm margin-5px"
+            (click)="btn_NotificationView(value)"
+          >
+            <ion-icon class="icon" name="eye-outline"></ion-icon>
+            <span class="icontext"> View</span>
+          </button>
+        </ion-row>
+      </div>
+    </div>
+
+    <div class="norecords" *ngIf="enableflag==true">No Records Found</div>
+  </div>
+</ion-content>

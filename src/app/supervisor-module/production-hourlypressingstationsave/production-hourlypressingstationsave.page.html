@@ -1,0 +1,714 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-title
+      mode="ios"
+      *ngIf="!levelimageviewFlag && !drainageimageviewFlag && !temperatureimageviewFlag"
+      color="light"
+    >
+      <div class="toolbar-title">{{machinename}}</div></ion-title
+    >
+    <ion-title
+      mode="ios"
+      *ngIf="(levelimageviewFlag || drainageimageviewFlag || temperatureimageviewFlag)"
+      color="light"
+      ><div class="toolbar-title">
+        {{imagetype}} {{ 'HOURLYPRESSSTATIONSAVE.images' | translate}}
+      </div></ion-title
+    >
+
+    <ion-buttons
+      slot="start"
+      *ngIf="!viewFlag && !levelimageviewFlag && !drainageimageviewFlag && !temperatureimageviewFlag"
+    >
+      <ion-button color="whitefav" (click)="cancel()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons
+      slot="start"
+      *ngIf="viewFlag && !levelimageviewFlag && !drainageimageviewFlag && !temperatureimageviewFlag"
+    >
+      <ion-button color="whitefav" (click)="cancelconfirm()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons
+      slot="end"
+      *ngIf="!viewFlag && (levelimageviewFlag || drainageimageviewFlag || temperatureimageviewFlag)"
+    >
+      <ion-button color="whitefav" (click)="imageviewcancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #pageTop>
+  <!-- Input Data to get from user -->
+  <form
+    [formGroup]="pressstationForm"
+    *ngIf="!viewFlag && !levelimageviewFlag && !drainageimageviewFlag && !temperatureimageviewFlag"
+  >
+    <ion-row class="form-row">
+      <ion-col size="5">
+        <div class="h7 text-light">
+          {{ 'HOURLYPRESSSTATIONSAVE.observationtime' | translate}}
+          <sup> *</sup>
+        </div>
+      </ion-col>
+      <ion-col size="5">
+        <ion-datetime
+          mode="ios"
+          class="h7 form-control"
+          formControlName="txt_observationtime"
+          display-format="HH:mm"
+          readonly
+        ></ion-datetime>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+
+    <div class="hl4line"></div>
+
+    <div class="digestorcard">
+      <div class="title">{{digestortitle}}</div>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.temperature' | translate}} <sup> *</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <select
+            formControlName="select_temperature"
+            class="h7 form-control text-dark"
+          >
+            <option value="" selected disabled hidden>
+              {{ 'HOURLYPRESSSTATIONSAVE.select' | translate}}
+            </option>
+            <option
+              value="{{parseString(value)}}"
+              *ngFor="let value of temperatureArr"
+            >
+              {{ value.temperature }}
+            </option>
+          </select>
+        </ion-col>
+        <ion-col size="2">
+          <div class="h7 text-white">
+            <b><sup class="degree">O</sup>C</b>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.motor' | translate}} <sup>*</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <select
+            formControlName="select_digestormotoramps"
+            class="h7 form-control text-dark"
+          >
+            <option value="" selected disabled hidden>
+              {{ 'HOURLYPRESSSTATIONSAVE.select' | translate}}
+            </option>
+            <option
+              value="{{parseString(value)}}"
+              *ngFor="let value of digestorampsArr"
+            >
+              {{ value.digestoramps }}
+            </option>
+          </select>
+        </ion-col>
+        <ion-col size="2">
+          <div class="h7 text-white"><b>A</b></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.level' | translate}} <sup> *</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <select
+            formControlName="select_level"
+            class="h7 form-control text-dark"
+          >
+            <option value="" selected disabled hidden>
+              {{ 'HOURLYPRESSSTATIONSAVE.select' | translate}}
+            </option>
+            <option
+              value="{{parseString(value)}}"
+              *ngFor="let value of levelArr"
+            >
+              {{ value.percentage }}
+            </option>
+          </select>
+        </ion-col>
+        <ion-col size="2"></ion-col>
+      </ion-row>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.digestordrainage' | translate}}
+            <sup>*</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <select
+            formControlName="select_digestordrainoilflow"
+            class="h7 form-control text-dark"
+          >
+            <option value="" selected disabled hidden>
+              {{ 'HOURLYPRESSSTATIONSAVE.select' | translate}}
+            </option>
+            <option
+              value="{{parseString(value)}}"
+              *ngFor="let value of digestordrainoilflowArr"
+            >
+              {{ value.digestordrainpipevalue }}
+            </option>
+          </select>
+        </ion-col>
+        <ion-col size="2"></ion-col>
+      </ion-row>
+    </div>
+
+    <div class="hl4line"></div>
+
+    <div class="presscard">
+      <div class="title">{{presstitle}}</div>
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.motor' | translate}} <sup>*</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <select
+            formControlName="select_pressmotoramps"
+            class="h7 form-control text-dark"
+          >
+            <option value="" selected disabled hidden>
+              {{ 'HOURLYPRESSSTATIONSAVE.select' | translate}}
+            </option>
+            <option
+              value="{{parseString(value)}}"
+              *ngFor="let value of pressureampsArr"
+            >
+              {{ value.pressureamps }}
+            </option>
+          </select>
+        </ion-col>
+        <ion-col size="2">
+          <div class="h7 text-white"><b>A</b></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.presscakedrainage' | translate}}
+            <sup>*</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <select
+            formControlName="select_fiberflow"
+            class="h7 form-control text-dark"
+          >
+            <option value="" selected disabled hidden>
+              {{ 'HOURLYPRESSSTATIONSAVE.select' | translate}}
+            </option>
+            <option
+              value="{{parseString(value)}}"
+              *ngFor="let value of fiberflowArr"
+            >
+              {{ value.level }}
+            </option>
+          </select>
+        </ion-col>
+        <ion-col size="2"></ion-col>
+      </ion-row>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.hydraulicpressure' | translate}}
+            <sup> *</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <select
+            formControlName="select_hydraulicpressure"
+            class="h7 form-control text-dark"
+          >
+            <option value="" selected disabled hidden>
+              {{ 'HOURLYPRESSSTATIONSAVE.select' | translate}}
+            </option>
+            <option
+              value="{{parseString(value)}}"
+              *ngFor="let value of hydraulicpressureArr"
+            >
+              {{ value.pressure }}
+            </option>
+          </select>
+        </ion-col>
+        <ion-col size="2">
+          <div class="h7 text-white"><b>Bar</b></div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <!-- <div class="dilutiontemperaturecard">
+      <div class="title">
+        {{ 'HOURLYPRESSSTATIONSAVE.dilutiontemperature' | translate}}
+      </div>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-dark">
+            {{ 'HOURLYPRESSSTATIONSAVE.temperature' | translate}} <sup> *</sup>
+          </div>
+        </ion-col>
+
+        <ion-col size="5">
+          <input
+            type="number"
+            class="h7 form-control"
+            formControlName="txt_dilutiontemperature"
+            placeholder="{{ 'HOURLYPRESSSTATIONSAVE.temperature' | translate}}"
+        /></ion-col>
+
+        <ion-col size="2">
+          <div class="h7 text-dark">
+            <b><sup>O</sup>C</b>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div> -->
+
+    <div class="imagecard" *ngIf="levelimageuiflag">
+      <div class="title">
+        {{ 'HOURLYPRESSSTATIONSAVE.levelimages' | translate}}
+      </div>
+      <ion-row class="form-row">
+        <ion-col>
+          <input
+            type="text"
+            class="h7 form-control"
+            formControlName="txt_levelimageupload"
+            placeholder="{{ 'HOURLYPRESSSTATIONSAVE.uploadbuttonmessage' | translate}}"
+            readonly
+        /></ion-col>
+      </ion-row>
+
+      <ion-row style="margin-top: 10px">
+        <ion-col size="6" style="text-align: right !important">
+          <button
+            type="submit"
+            class="btn btn-general"
+            (click)="btn_view('Level')"
+          >
+            <ion-icon class="icon" name="eye-outline"></ion-icon>
+            <span class="icontext">
+              {{ 'GENERALBUTTON.viewbutton' | translate}}</span
+            >
+          </button>
+        </ion-col>
+
+        <ion-col size="6" style="text-align: left !important">
+          <button
+            type="submit"
+            class="btn btn-warning"
+            (click)="imageUpload('Level')"
+          >
+            <ion-icon class="icon" name="cloud-upload-outline"></ion-icon>
+            <span class="icontext">
+              {{ 'GENERALBUTTON.uploadbutton' | translate}}</span
+            >
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="imagecard" *ngIf="drainageimageuiflag">
+      <div class="title">
+        {{ 'HOURLYPRESSSTATIONSAVE.drainageimages' | translate}}
+      </div>
+      <ion-row class="form-row">
+        <ion-col>
+          <input
+            type="text"
+            class="h7 form-control"
+            formControlName="txt_drainageimageupload"
+            placeholder="{{ 'HOURLYPRESSSTATIONSAVE.uploadbuttonmessage' | translate}}"
+            readonly
+        /></ion-col>
+      </ion-row>
+
+      <ion-row style="margin-top: 10px">
+        <ion-col size="6" style="text-align: right !important">
+          <button
+            type="submit"
+            class="btn btn-general"
+            (click)="btn_view('Drainage')"
+          >
+            <ion-icon class="icon" name="eye-outline"></ion-icon>
+            <span class="icontext">
+              {{ 'GENERALBUTTON.viewbutton' | translate}}</span
+            >
+          </button>
+        </ion-col>
+
+        <ion-col size="6" style="text-align: left !important">
+          <button
+            type="submit"
+            class="btn btn-warning"
+            (click)="imageUpload('Drainage')"
+          >
+            <ion-icon class="icon" name="cloud-upload-outline"></ion-icon>
+            <span class="icontext">
+              {{ 'GENERALBUTTON.uploadbutton' | translate}}</span
+            >
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="imagecard" *ngIf="temperatureimageuiflag">
+      <div class="title">
+        {{ 'HOURLYPRESSSTATIONSAVE.temperatureimages' | translate}}
+      </div>
+      <ion-row class="form-row">
+        <ion-col>
+          <input
+            type="text"
+            class="h7 form-control"
+            formControlName="txt_temperatureimageupload"
+            placeholder="{{ 'HOURLYPRESSSTATIONSAVE.uploadbuttonmessage' | translate}}"
+            readonly
+        /></ion-col>
+      </ion-row>
+
+      <ion-row style="margin-top: 10px">
+        <ion-col size="6" style="text-align: right !important">
+          <button
+            type="submit"
+            class="btn btn-general"
+            (click)="btn_view('Temperature')"
+          >
+            <ion-icon class="icon" name="eye-outline"></ion-icon>
+            <span class="icontext">
+              {{ 'GENERALBUTTON.viewbutton' | translate}}</span
+            >
+          </button>
+        </ion-col>
+
+        <ion-col size="6" style="text-align: left !important">
+          <button
+            type="submit"
+            class="btn btn-warning"
+            (click)="imageUpload('Temperature')"
+          >
+            <ion-icon class="icon" name="cloud-upload-outline"></ion-icon>
+            <span class="icontext">
+              {{ 'GENERALBUTTON.uploadbutton' | translate}}</span
+            >
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <hr />
+
+    <ion-row style="margin-top: 10px">
+      <ion-col size="6" style="text-align: right !important">
+        <button type="submit" class="btn btn-save" (click)="confirm()">
+          {{ 'GENERALBUTTON.savebutton' | translate}}
+        </button>
+      </ion-col>
+
+      <ion-col size="6" style="text-align: left !important">
+        <button type="submit" class="btn btn-cancel" (click)="cancel()">
+          {{ 'GENERALBUTTON.cancelbutton' | translate}}
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <!-- To View Data before to Save -->
+  <div
+    class="home-box"
+    *ngIf="viewFlag && !levelimageviewFlag && !drainageimageviewFlag && !temperatureimageviewFlag"
+  >
+    <div class="h6 text-light" style="margin-left: 10px; margin-top: 10px">
+      {{ 'HOURLYPRESSSTATIONSAVE.alert' | translate}}
+    </div>
+
+    <ion-row class="form-row">
+      <ion-col size="5">
+        <div class="h7 text-light">
+          {{ 'HOURLYPRESSSTATIONSAVE.observationtime' | translate}}
+          <sup> *</sup>
+        </div>
+      </ion-col>
+      <ion-col size="5">
+        <input
+          type="text"
+          class="h7 form-control"
+          placeholder="{{ 'HOURLYPRESSSTATIONSAVE.observationtime' | translate}}"
+          value="{{view_observationtime}}"
+          readonly
+        />
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+
+    <div class="hl4line"></div>
+
+    <div class="digestorcard">
+      <div class="title">{{digestortitle}}</div>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.temperature' | translate}} <sup> *</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <input
+            type="text"
+            class="h7 form-control"
+            placeholder="{{ 'HOURLYPRESSSTATIONSAVE.temperature' | translate}}"
+            value="{{view_temperature}}"
+            readonly
+          />
+        </ion-col>
+        <ion-col size="2">
+          <div class="h7 text-white">
+            <b><sup class="degree">O</sup>C</b>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.motor' | translate}} <sup>*</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <input
+            type="text"
+            class="h7 form-control"
+            placeholder="{{ 'HOURLYPRESSSTATIONSAVE.motor' | translate}}"
+            value="{{view_digestormotoramps}}"
+            readonly
+          />
+        </ion-col>
+        <ion-col size="2">
+          <div class="h7 text-white"><b>A</b></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.level' | translate}} <sup> *</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <input
+            type="text"
+            class="h7 form-control"
+            placeholder="{{ 'HOURLYPRESSSTATIONSAVE.level' | translate}}"
+            value="{{view_level}}"
+            readonly
+          />
+        </ion-col>
+        <ion-col size="2"></ion-col>
+      </ion-row>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.digestordrainage' | translate}}
+            <sup>*</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <input
+            type="text"
+            class="h7 form-control"
+            placeholder="{{ 'HOURLYPRESSSTATIONSAVE.digestordrainage' | translate}}"
+            value="{{view_digestordrainoilflow}}"
+            readonly
+          />
+        </ion-col>
+        <ion-col size="2"></ion-col>
+      </ion-row>
+    </div>
+
+    <div class="hl4line"></div>
+
+    <div class="presscard">
+      <div class="title">{{presstitle}}</div>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.motor' | translate}} <sup>*</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <input
+            type="text"
+            class="h7 form-control"
+            placeholder="{{ 'HOURLYPRESSSTATIONSAVE.motor' | translate}}"
+            value="{{view_pressmotoramps}}"
+            readonly
+          />
+        </ion-col>
+        <ion-col size="2">
+          <div class="h7 text-white"><b>A</b></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.presscakedrainage' | translate}}
+            <sup>*</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <input
+            type="text"
+            class="h7 form-control"
+            placeholder="{{ 'HOURLYPRESSSTATIONSAVE.presscakedrainage' | translate}}"
+            value="{{view_fiberflow}}"
+            readonly
+          />
+        </ion-col>
+        <ion-col size="2"></ion-col>
+      </ion-row>
+
+      <ion-row class="form-row">
+        <ion-col size="5">
+          <div class="h7 text-white">
+            {{ 'HOURLYPRESSSTATIONSAVE.hydraulicpressure' | translate}}
+            <sup> *</sup>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <input
+            type="text"
+            class="h7 form-control"
+            placeholder="{{ 'HOURLYPRESSSTATIONSAVE.hydraulicpressure' | translate}}"
+            value="{{view_hydraulicpressure}}"
+            readonly
+          />
+        </ion-col>
+        <ion-col size="2">
+          <div class="h7 text-white"><b>Bar</b></div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <hr />
+
+    <ion-row style="margin-top: 10px">
+      <ion-col size="6" style="text-align: right !important">
+        <button
+          type="submit"
+          [disabled]="isDisabled"
+          class="btn btn-confirm"
+          (click)="showalert()"
+        >
+          {{ 'GENERALBUTTON.confirmbutton' | translate}}
+        </button>
+      </ion-col>
+
+      <ion-col size="6" style="text-align: left !important">
+        <button type="submit" class="btn btn-cancel" (click)="cancelconfirm()">
+          {{ 'GENERALBUTTON.cancelbutton' | translate}}
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!-- To View Images in Slider - Start-->
+  <!-- Level Images -->
+  <div class="content" *ngIf="!viewFlag && levelimageviewFlag">
+    <ion-slides
+      #sliders
+      (ionSlidesDidLoad)="slidesDidLoad(sliders)"
+      pager="true"
+      [options]="slideOpts"
+    >
+      <ion-slide *ngFor="let value of levelimagesArr">
+        <ion-card>
+          <img
+            style="width: 500px; height: 500px"
+            src="{{value}}"
+            alt=""
+            srcset=""
+          />
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <!-- Drainage Images -->
+  <div class="content" *ngIf="!viewFlag && drainageimageviewFlag">
+    <ion-slides
+      #sliders
+      (ionSlidesDidLoad)="slidesDidLoad(sliders)"
+      pager="true"
+      [options]="slideOpts"
+    >
+      <ion-slide *ngFor="let value of drainageimagesArr">
+        <ion-card>
+          <img
+            style="width: 500px; height: 500px"
+            src="{{value}}"
+            alt=""
+            srcset=""
+          />
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <!-- Temperature Images -->
+  <div class="content" *ngIf="!viewFlag && temperatureimageviewFlag">
+    <ion-slides
+      #sliders
+      (ionSlidesDidLoad)="slidesDidLoad(sliders)"
+      pager="true"
+      [options]="slideOpts"
+    >
+      <ion-slide *ngFor="let value of temperatureimagesArr">
+        <ion-card>
+          <img
+            style="width: 500px; height: 500px"
+            src="{{value}}"
+            alt=""
+            srcset=""
+          />
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- To View Images in Slider - End-->
+</ion-content>

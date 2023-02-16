@@ -1,0 +1,359 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="light">{{ 'PREVENTIVEMAINTENANCE.title' | translate}}</ion-title>
+
+    <!-- <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent"
+          >{{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <div class="firstsegment">
+      <ion-segment
+        (ionChange)="segmentChanged($event)"
+        [(ngModel)]="tabs_segment"
+        style="background-color: white"
+      >
+        <ion-segment-button value="Routine">
+          <ion-label text-wrap class="h7">{{ 'PREVENTIVEMAINTENANCE.routine' | translate}}</ion-label>
+        </ion-segment-button>
+
+        <ion-segment-button value="Replacement">
+          <ion-label text-wrap class="h7">{{ 'PREVENTIVEMAINTENANCE.replacement' | translate}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="tabs_segment">
+    <div *ngSwitchCase="'Routine'">
+      <form [formGroup]="routineForm">
+        <ion-row>
+          <ion-col size="1.6" style="align-self: center" no-padding>
+            <div class="h7 text-white"><b>{{ 'PREVENTIVEMAINTENANCE.fromdate' | translate}}</b></div>
+          </ion-col>
+
+          <ion-col size="3.45">
+            <input
+              type="text"
+              class="h7 form-control readonly"
+              formControlName="txt_fromdate"
+              placeholder="DD-MM-YYYY"
+              (click)="openRoutFromDateTimePicker()"
+              readonly
+            />
+          </ion-col>
+
+          <ion-col size="1" style="align-self: center" no-padding>
+            <div class="h7 text-white"><b>{{ 'PREVENTIVEMAINTENANCE.todate' | translate}}</b></div>
+          </ion-col>
+
+          <ion-col size="3.45">
+            <input
+              type="text"
+              class="h7 form-control readonly"
+              formControlName="txt_todate"
+              placeholder="DD-MM-YYYY"
+              (click)="openRoutToDateTimePicker()"
+              readonly
+            />
+          </ion-col>
+
+          <ion-col size="2.5">
+            <button
+              type="button"
+              class="h7 btn btn-general btn-sm float-right"
+              style="height: 31px; width: 100%"
+              (click)="getRoutineNotification()"
+            >
+            {{ 'GENERALBUTTON.getrecords' | translate}}
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <hr />
+      </form>
+
+      <div>
+        <ion-card
+          class="bg-card"
+          *ngFor="let value of routinenotificationlistArr"
+        >
+          <ion-card-content class="cardcontent">
+            <ion-row *ngIf="(value.notificationno!='' || value.insDate!='')">
+              <ion-col>
+                <p class="title-content">
+                  {{value.notificationno}} - {{value.insDate}}
+                </p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.stationname!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.station' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.stationname}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.equipment!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.machine' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.equipment}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.partdefect!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.partname' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.partdefect}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.problem!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.problem' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.problem}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.reportBy!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.reportedby' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.reportBy}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.statusname!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.status' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p
+                  class="statusdata"
+                  [style.color]="getStatusTextColor(value.statusId)"
+                >
+                  {{ value.statusname }}
+                </p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.reason!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.reason' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.reason}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.remarks!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.remarks' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.remarks}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="row-reverse">
+              <button
+                type="button"
+                class="h7 btn btn-view btn-sm margin-5px"
+                (click)="btn_PVNotificationView(value)"
+              >
+                <ion-icon class="icon" name="document-text-outline"></ion-icon>
+                <span class="icontext"> {{ 'PREVENTIVEMAINTENANCE.view' | translate}}</span>
+              </button>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
+        <div class="norecords" *ngIf="norecordroutineenableflag">
+          {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+        </div>
+
+        <div class="pleasewait" *ngIf="pleasewaitflag">
+          <div style="width: 100%; text-align: center">
+            <img
+              style="width: 80px; height: 80px"
+              src="../../../assets/img/loading.gif"
+            />
+          </div>
+          {{ 'NORECORDSFOUND.loading' | translate}}
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'Replacement'">
+      <form [formGroup]="replacementForm">
+        <ion-row style="margin-top: 10px">
+          <ion-col size="1.6" style="align-self: center" no-padding>
+            <div class="h7 text-white"><b>{{ 'PREVENTIVEMAINTENANCE.fromdate' | translate}}</b></div>
+          </ion-col>
+
+          <ion-col size="3.45">
+            <input
+              type="text"
+              class="h7 form-control readonly"
+              formControlName="txt_fromdate"
+              placeholder="DD-MM-YYYY"
+              (click)="openReplFromDateTimePicker()"
+              readonly
+            />
+          </ion-col>
+
+          <ion-col size="1" style="align-self: center" no-padding>
+            <div class="h7 text-white"><b>{{ 'PREVENTIVEMAINTENANCE.todate' | translate}}</b></div>
+          </ion-col>
+
+          <ion-col size="3.45">
+            <input
+              type="text"
+              class="h7 form-control readonly"
+              formControlName="txt_todate"
+              placeholder="DD-MM-YYYY"
+              (click)="openReplToDateTimePicker()"
+              readonly
+            />
+          </ion-col>
+
+          <ion-col size="2.5">
+            <button
+              type="button"
+              class="h7 btn btn-general btn-sm float-right"
+              style="height: 31px; width: 100%"
+              (click)="getReplacementNotification()"
+            >
+            {{ 'GENERALBUTTON.getrecords' | translate}}
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <hr />
+      </form>
+
+      <div>
+        <ion-card
+          class="bg-card"
+          *ngFor="let value of replacementnotificationlistArr"
+        >
+          <ion-card-content class="cardcontent">
+            <ion-row *ngIf="(value.notificationno!='' || value.insDate!='')">
+              <ion-col>
+                <p class="title-content">
+                  {{value.notificationno}} - {{value.insDate}}
+                </p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.stationname!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.station' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.stationname}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.equipment!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.machine' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.equipment}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.partdefect!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.partname' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.partdefect}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.problem!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.problem' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.problem}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.reportBy!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.reportedby' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.reportBy}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.statusname!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.status' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p
+                  class="statusdata"
+                  [style.color]="getStatusTextColor(value.statusId)"
+                >
+                  {{ value.statusname }}
+                </p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.reason!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.reason' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.reason}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.remarks!=''">
+              <ion-col size="4">{{ 'PREVENTIVEMAINTENANCE.remarks' | translate}}</ion-col>
+
+              <ion-col size="8">
+                <p class="data">{{value.remarks}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="row-reverse">
+              <button
+                type="button"
+                class="h7 btn btn-view btn-sm margin-5px"
+                (click)="btn_PVNotificationView(value)"
+              >
+                <ion-icon class="icon" name="document-text-outline"></ion-icon>
+                <span class="icontext"> {{ 'PREVENTIVEMAINTENANCE.view' | translate}}</span>
+              </button>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
+        <div class="norecords" *ngIf="norecordreplacementenableflag">
+          {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+        </div>
+
+        <div class="pleasewait" *ngIf="pleasewaitflag">
+          <div style="width: 100%; text-align: center">
+            <img
+              style="width: 80px; height: 80px"
+              src="../../../assets/img/loading.gif"
+            />
+          </div>
+          {{ 'NORECORDSFOUND.loading' | translate}}
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

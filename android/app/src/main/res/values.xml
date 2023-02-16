@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">56083869401-1i0snkm4i9t8hldt2jhs2bc589dnj1s5.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://mmsairei.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">56083869401</string>
+    <string name="google_api_key" translatable="false">AIzaSyDQwzbHEVVbTW6Nt7_cESLHybzlopcUTv0</string>
+    <string name="google_app_id" translatable="false">1:56083869401:android:e48607380429921b2118c8</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDQwzbHEVVbTW6Nt7_cESLHybzlopcUTv0</string>
+    <string name="google_storage_bucket" translatable="false">mmsairei.appspot.com</string>
+    <string name="project_id" translatable="false">mmsairei</string>
+</resources>

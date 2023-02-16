@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Production Report</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent"
+          >{{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="support">
+    <img
+      src="../../../assets/img/oilreport-removebg-preview.png"
+      style="height: 200px; width: 200px"
+    />
+  </div>
+  <!-- Engineering -->
+  <div>
+    <ion-grid>
+      <ion-row *ngFor="let item of engineeringArr">
+        <ion-col size="6" *ngFor="let eachitem of item">
+          <div class="card card-height" (click)="btn_Action(eachitem)">
+            <ion-col size="4" style="display: flex; align-items: center">
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+            </ion-col>
+            <ion-col size="8" style="display: flex; align-items: center">
+              <p style="font-size: 14px; margin-left: -10; margin-top: 15px">
+                <b>{{eachitem.title}}</b>
+              </p>
+            </ion-col>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-back-button color="whitefav"></ion-back-button>
+
+      <!-- <ion-button color="whitefav" (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+
+    <ion-title color="light">Maintenance Notification History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <ul>
+      <li
+        *ngFor="let value of historyList"
+        [style.backgroundColor]="getStatusColor(value.statusName)"
+        [style.borderColor]="getBorderColor(value.statusName)"
+      >
+        <div class="title">{{value.notificationNo}}</div>
+        <div class="text">Station : {{value.stationname}}</div>
+        <div class="text">Equipment : {{value.equipment}}</div>
+        <div class="status">Status: {{value.statusName}}</div>
+        <div class="date">Date: {{value.insDate}}</div>
+        <span
+          class="time"
+          [style.backgroundColor]="getStatusColor(value.statusName)"
+          [style]="'--timeline-color:' + getBorderColor(value.statusName)"
+        >
+          <span>{{value.insTime}}</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="norecords" *ngIf="enableflag==true">No Records Found</div>
+</ion-content>

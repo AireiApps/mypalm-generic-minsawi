@@ -1,0 +1,143 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">{{ 'REPORTCORRECTIVEMAINTENANCE.title' | translate}}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent"
+          >{{ count }}</ion-badge
+        >
+        <ion-icon name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home-box">
+    <form [formGroup]="notificationReportForm">
+      <div class="form-row">
+        <div class="col">
+          <div class="h7 text-dark"><b>{{ 'REPORTCORRECTIVEMAINTENANCE.fromdate' | translate}}</b></div>
+          <ion-datetime
+            mode="ios"
+            class="h7 form-control"
+            formControlName="from_date"
+            display-format="DD-MM-YYYY"
+          ></ion-datetime>
+        </div>
+
+        <div class="col">
+          <div class="h7 text-dark"><b>{{ 'REPORTCORRECTIVEMAINTENANCE.todate' | translate}</b></div>
+          <ion-datetime
+            mode="ios"
+            class="h7 form-control"
+            formControlName="to_date"
+            display-format="DD-MM-YYYY"
+          ></ion-datetime>
+        </div>
+      </div>
+
+      <div style="margin-top: 10px">
+        <button
+          type="button"
+          class="h7 btn btn-general btn-sm float-right"
+          (click)="getNotification()"
+        >
+          <!-- <ion-icon name="filter"></ion-icon> -->
+          {{ 'GENERALBUTTON.getrecords' | translate}}
+        </button>
+      </div>
+    </form>
+
+    <div style="margin-top: 45px">
+      <ion-card class="bg-card" *ngFor="let value of notificationlistArr">
+        <ion-card-content class="cardcontent">
+          <ion-row *ngIf="(value.notificationno!='' || value.insDate!='')">
+            <ion-col>
+              <p class="title-content">
+                {{value.notificationno}} - {{value.insDate}}
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.stationname!=''">
+            <ion-col size="5">{{ 'REPORTCORRECTIVEMAINTENANCE.station' | translate}}</ion-col>
+
+            <ion-col size="7">
+              <p class="data">{{value.stationname}}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.equipment!=''">
+            <ion-col size="5">{{ 'REPORTCORRECTIVEMAINTENANCE.machine' | translate}}</ion-col>
+
+            <ion-col size="7">
+              <p class="data">{{value.equipment}}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.partdefect!=''">
+            <ion-col size="5">{{ 'REPORTCORRECTIVEMAINTENANCE.partname' | translate}}</ion-col>
+
+            <ion-col size="7">
+              <p class="data">{{value.partdefect}}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.problem!=''">
+            <ion-col size="5">{{ 'REPORTCORRECTIVEMAINTENANCE.problem' | translate}}</ion-col>
+
+            <ion-col size="7">
+              <p class="data">{{value.problem}}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.reportBy!=''">
+            <ion-col size="5">{{ 'REPORTCORRECTIVEMAINTENANCE.reportedby' | translate}}</ion-col>
+
+            <ion-col size="7">
+              <p class="data">{{value.reportBy}}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.statusname!=''">
+            <ion-col size="5">{{ 'REPORTCORRECTIVEMAINTENANCE.status' | translate}}</ion-col>
+
+            <ion-col size="7">
+              <p
+                class="statusdata"
+                [style.color]="getStatusTextColor(value.statusId)"
+              >
+                {{ value.statusname }}
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.remarks!=''">
+            <ion-col size="5">{{ 'REPORTCORRECTIVEMAINTENANCE.remarks' | translate}}</ion-col>
+
+            <ion-col size="7">
+              <p class="data">{{value.remarks}}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="row-reverse">
+            <button
+              type="button"
+              class="h7 btn btn-outline-success btn-sm margin-5px"
+              (click)="btn_NotificationView(value)"
+            >
+              <ion-icon class="icon" name="document-text-outline"></ion-icon>
+              <span class="icontext"> {{ 'REPORTCORRECTIVEMAINTENANCE.view' | translate}}</span>
+            </button>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="norecords" *ngIf="enableflag==true">{{ 'NORECORDSFOUND.norecordsfound' | translate}}</div>
+  </div>
+</ion-content>

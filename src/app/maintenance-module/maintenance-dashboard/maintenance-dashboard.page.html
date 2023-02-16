@@ -1,0 +1,223 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title
+      color="light"
+      *ngIf="userdepartmentid!=25"
+      [innerHTML]="mill_name"
+    ></ion-title>
+    <ion-title color="light" *ngIf="userdepartmentid==25"
+      >{{ 'MAINTENANCEDASHBOARD.home' | translate}}</ion-title
+    >
+    <ion-buttons slot="primary">
+      <ion-button
+        class="bg-light-color"
+        (click)="callmodalcontroller('SCHEDULING')"
+      >
+        <ion-icon name="calendar-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent"
+          >{{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <!-- <ion-toolbar class="bg-search-color">
+    <ion-searchbar
+      placeholder="Search"
+      [(ngModel)]="filterTerm"
+      animated="true"
+      clearIcon="close"
+    ></ion-searchbar>
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content>
+  <div class="myCard">
+    <img class="backgroundimage" src="../../../assets/img/header_myPalm.png" />
+    <div class="myOverlay">
+      <div class="usermessagecard">
+        <ion-row>
+          <ion-col size="12">
+            <p style="font-size: 16px; font-weight: bold; margin: 0px">
+              {{ 'MAINTENANCEDASHBOARD.welcome' | translate}} {{userlist.name}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-box" #myElementRef>
+    <div *ngIf="!nomachinesfound">
+      <form [formGroup]="dashboardForm">
+        <div class="titleheader" *ngIf="productionflag!=''">
+          <div class="col">
+            <div class="title text-uppercase">
+              {{ 'MAINTENANCEDASHBOARD.millproductionstatus' | translate}}
+            </div>
+          </div>
+        </div>
+
+        <div class="checkcard" *ngIf="productionflag!=''">
+          <ion-row>
+            <ion-col style="display: grid; justify-content: center">
+              <div
+                class="productionstatustitleheader"
+                [style.backgroundColor]="getProductionStatusBackGroundColor(productionflag)"
+              >
+                <div class="productionstatustitle text-uppercase">
+                  {{txt_millproductionstatus}}
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col style="text-align: center" *ngIf="productionflag=='1'">
+              <p class="mdfont">
+                {{ 'MAINTENANCEDASHBOARD.millstartdatetime' | translate}}
+              </p>
+              <p
+                class="mdfont"
+                style="color: #008000"
+                *ngIf="millstartdatetime != ''"
+              >
+                {{millstartdatetime}}
+              </p>
+
+              <p
+                class="mdfont"
+                style="color: #008000"
+                *ngIf="millstartdatetime == ''"
+              >
+                -
+              </p>
+
+              <div>
+                <button
+                  type="button"
+                  class="h7 btn btn-refresh btn-sm float-right"
+                  (click)="refreshRecords()"
+                >
+                  {{ 'GENERALBUTTON.refresh' | translate}}
+                </button>
+              </div>
+            </ion-col>
+
+            <ion-col style="text-align: center" *ngIf="productionflag!='1'">
+              <p class="mdfont">
+                {{ 'MAINTENANCEDASHBOARD.millstopdatetime' | translate}}
+              </p>
+              <p
+                class="mdfont"
+                style="color: #cb4335"
+                *ngIf="millstopdatetime != ''"
+              >
+                {{millstopdatetime}}
+              </p>
+
+              <p
+                class="mdfont"
+                style="color: #cb4335"
+                *ngIf="millstopdatetime == ''"
+              >
+                -
+              </p>
+
+              <div>
+                <button
+                  type="button"
+                  class="h7 btn btn-refresh btn-sm float-right"
+                  (click)="refreshRecords()"
+                >
+                  {{ 'GENERALBUTTON.refresh' | translate}}
+                </button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+
+        <div style="padding: 0px 5px 0px 5px; margin-top: 10px">
+          <select
+            formControlName="select_station"
+            [ngClass]="{'selectdropdown' : (getplatform=='android'), 'iosselectdropdown' : (getplatform=='ios')}"
+            (change)="onChangeStation()"
+          >
+            <option value="" selected>
+              {{ 'MAINTENANCEDASHBOARD.searchbystation' | translate}}
+            </option>
+            <option
+              value="{{item.station_id}}"
+              *ngFor="let item of stationlistArr"
+            >
+              {{ item.station_name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Stations and Machines -->
+        <div *ngIf="uienable && !pleasewaitflag" style="margin-top: 10px">
+          <div *ngFor="let station of stationsArr | filter:filterTerm">
+            <div class="titleheader">
+              <div class="col">
+                <div class="title text-uppercase">{{station.stationname}}</div>
+              </div>
+            </div>
+
+            <div class="stationcard">
+              <ion-row *ngFor="let machines of station.machines">
+                <ion-col size="6" *ngFor="let eachitem of machines">
+                  <ion-card
+                    class="card card-height"
+                    (click)="callmodalcontroller(eachitem)"
+                  >
+                    <!-- <ion-badge class="badgecolor">100</ion-badge> -->
+                    <ion-row style="height: 100%">
+                      <ion-col class="imagecenter" size="3">
+                        <img src="{{eachitem.imageurl}}" alt="PROFILE" />
+                      </ion-col>
+
+                      <ion-col
+                        class="vertical-align-content"
+                        [style.background-color]="getBackGroundColor(eachitem.machinestatus)"
+                        [style.color]="getStatusTextColor(eachitem.machinestatus)"
+                        size="9"
+                      >
+                        <div class="h7">{{eachitem.machinename}}</div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+        <!-- End -->
+      </form>
+    </div>
+  </div>
+
+  <div class="norecords" *ngIf="nomachinesfound">
+    {{ 'NOMACHINESFOUND.nomachinesfound' | translate}}
+  </div>
+
+  <div class="pleasewait" *ngIf="pleasewaitflag">
+    <div style="width: 100%; text-align: center">
+      <img
+        style="width: 80px; height: 80px"
+        src="../../../assets/img/loading.gif"
+      />
+    </div>
+    {{ 'NORECORDSFOUND.loading' | translate}}
+  </div>
+</ion-content>

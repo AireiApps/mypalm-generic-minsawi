@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-title color="light"
+      >{{ 'STERILIZATIONSTATIONPOPUP.lastupdatedrecord' | translate}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+  <div class="home" *ngFor="let general of sterilizerstationArr">
+    <table style="width: 100%; height: 100%" class="table table-bordered">
+      <tr>
+        <th scope="colgroup" style="padding: 4px !important">
+          <span class="mdfont"
+            >{{ 'STERILIZATIONSTATIONPOPUP.lastupdatedon' | translate}}</span
+          >
+        </th>
+
+        <td>{{general.lastupdatedon}}</td>
+      </tr>
+      <tr>
+        <th scope="colgroup" style="padding: 4px !important">
+          <span class="mdfont"
+            >{{ 'STERILIZATIONSTATIONPOPUP.doneby' | translate}}</span
+          >
+        </th>
+
+        <td>{{general.rasiedby}}</td>
+      </tr>
+    </table>
+
+    <div>
+      <div style="font-size: 15px; text-align: center; color: #ffffff">
+        <b>{{general.sterilizer}}</b>
+      </div>
+
+      <table style="width: 100%; height: 100%" class="table table-bordered">
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'STERILIZATIONSTATIONPOPUP.cycle' | translate}}
+          </td>
+          <td style="width: 50%">{{general.cycleno}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'STERILIZATIONSTATIONPOPUP.fruittype' | translate}}
+          </td>
+          <td style="width: 50%">{{general.fruittype}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'STERILIZATIONSTATIONPOPUP.doorshuttime' | translate}}
+          </td>
+          <td style="width: 50%">{{general.door_shut_time}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'STERILIZATIONSTATIONPOPUP.dooropentime' | translate}}
+          </td>
+          <td style="width: 50%">{{general.door_open_time}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'STERILIZATIONSTATIONPOPUP.bpv' | translate}}
+          </td>
+          <td style="width: 50%">{{general.backpressurereceiver}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'STERILIZATIONSTATIONPOPUP.p1peak' | translate}}
+          </td>
+          <td style="width: 50%">{{general.p1}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'STERILIZATIONSTATIONPOPUP.p2peak' | translate}}
+          </td>
+          <td style="width: 50%">{{general.p2}}</td>
+        </tr>
+
+        <tr>
+          <td style="width: 50%; font-weight: bold; text-align: left">
+            {{ 'STERILIZATIONSTATIONPOPUP.p3peak' | translate}}
+          </td>
+          <td style="width: 50%">{{general.p3}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="text-align: center">
+      <button type="submit" class="h6 btn btn-ok" (click)="cancel()">
+        {{ 'GENERALBUTTON.okay' | translate}}
+      </button>
+    </div>
+  </div>
+</ion-content>

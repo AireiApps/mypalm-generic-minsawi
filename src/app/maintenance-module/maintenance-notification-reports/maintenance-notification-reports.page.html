@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">{{ 'REPORTS.maintenancereport' | translate}}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent"
+          >{{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Engineering -->
+  <div class="wrapper">
+    <ion-grid>
+      <ion-row *ngFor="let item of engineeringArr">
+        <div
+          class="card"
+          (click)="btn_Action(eachitem)"
+          *ngFor="let eachitem of item"
+        >
+          <ion-col size="3" style="display: flex; align-items: center">
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+          </ion-col>
+          <ion-col size="9" style="display: flex; align-items: center">
+            <p style="font-size: 14px; margin-left: -10; margin-top: 15px">
+              <b>{{eachitem.title}}</b>
+            </p>
+          </ion-col>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,1465 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title color="light" [innerHTML]="mill_name"></ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent">
+          {{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="md">
+  <div
+    class="myCard"
+    *ngIf="userdesignation==5 || userdesignation==6 || userdesignation==9"
+  >
+    <img class="backgroundimage" src="../../../assets/img/header_myPalm.png" />
+    <div class="myOverlay">
+      <div class="usermessagecard">
+        <ion-row>
+          <ion-col size="12">
+            <p
+              style="
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0px;
+                color: #ffffff;
+              "
+            >
+              {{ 'MAINTENANCEHOME.welcome' | translate}} {{userlist.name}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!-- <b>Welcome {{userlist.name}}</b> -->
+    </div>
+  </div>
+
+  <div class="support" *ngIf="userdesignation==4">
+    <img src="../../../assets/img/spacefill.png" />
+  </div>
+
+  <!-- Lab (1006) -->
+  <div *ngIf="userdepartmentid==2" #myElementRef>
+    <!-- <ion-grid>
+      <ion-row *ngFor="let item of lab1006Arr">
+        <div
+          class="card"
+          (click)="btn_Action(eachitem)"
+          *ngFor="let eachitem of item"
+        >
+          <ion-col size="3" style="display: flex; align-items: center">
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+          </ion-col>
+          <ion-col size="9" style="display: flex; align-items: center">
+            <p style="font-size: 14px; margin-left: -10; margin-top: 15px">
+              <b>{{eachitem.title}}</b>
+            </p>
+          </ion-col>
+        </div>
+      </ion-row>
+    </ion-grid> -->
+
+    <!-- <div class="title">
+      <ion-label text-wrap>New Oil Losses</ion-label>
+    </div> -->
+    <div class="reportstitleheader">
+      {{ 'MAINTENANCEHOME.newoillosses' | translate}}
+    </div>
+
+    <ion-row *ngFor="let item of labArr">
+      <ion-col sizze="3"></ion-col>
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+      <ion-col sizze="3"></ion-col>
+    </ion-row>
+
+    <!-- <div class="title">
+      <ion-label text-wrap>Reports</ion-label>
+    </div> -->
+    <div class="reportstitleheader">
+      {{ 'MAINTENANCEHOME.reports' | translate}}
+    </div>
+
+    <ion-row *ngFor="let item of labreportsArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!-- Manager (1006) -->
+  <div *ngIf="userdepartmentid==25" #myElementRef>
+    <!-- <ion-grid>
+      <ion-row *ngFor="let item of manager1006Arr">
+        <div
+          class="card"
+          (click)="btn_Action(eachitem)"
+          *ngFor="let eachitem of item"
+        >
+          <ion-col size="3" style="display: flex; align-items: center">
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+          </ion-col>
+          <ion-col size="9" style="display: flex; align-items: center">
+            <p style="font-size: 14px; margin-left: -10; margin-top: 15px">
+              <b>{{eachitem.title}}</b>
+            </p>
+          </ion-col>
+        </div>
+      </ion-row>
+    </ion-grid> -->
+
+    <!-- Production Reports -->
+    <div class="reportstitleheader">
+      {{ 'MAINTENANCEHOME.reports' | translate}}
+    </div>
+
+    <ion-row *ngFor="let item of managerproductionreportsArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Maintenance Reports -->
+    <div class="reportstitleheader">
+      {{ 'MAINTENANCEHOME.maintenancereports' | translate}}
+    </div>
+
+    <ion-row *ngFor="let item of managermaintenancereportsArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!-- Engineering (1006)-->
+  <div *ngIf="userdepartmentid==7 && userdesignation==2" #myElementRef>
+    <!-- <ion-grid>
+      <ion-row *ngFor="let item of engineering1006Arr">
+        <div
+          class="card"
+          (click)="btn_Action(eachitem)"
+          *ngFor="let eachitem of item"
+        >
+          <ion-col size="3" style="display: flex; align-items: center">
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+          </ion-col>
+          <ion-col size="9" style="display: flex; align-items: center">
+            <p style="font-size: 14px; margin-left: -10; margin-top: 15px">
+              <b>{{eachitem.title}}</b>
+            </p>
+          </ion-col>
+        </div>
+      </ion-row>
+    </ion-grid> -->
+
+    <!-- <div class="title">
+      <ion-label text-wrap>Maintenance Monitoring</ion-label>
+    </div> -->
+    <div class="reportstitleheader">
+      {{ 'MAINTENANCEHOME.maintenancemonitoring' | translate}}
+    </div>
+
+    <!-- <div class="card-background wrapper">
+      <ion-card *ngFor="let item of engineerArr">
+        <div (click)="btn_Action(eachitem)" *ngFor="let eachitem of item">
+          <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+          <ion-card-content>
+            <ion-card-title>
+              <b>{{eachitem.title}}</b>
+            </ion-card-title>
+          </ion-card-content>
+        </div>
+      </ion-card>
+    </div>
+
+    <hr /> -->
+    <ion-row *ngFor="let item of engineerArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- <div class="title">
+      <ion-label text-wrap>Production Monitoring</ion-label>
+    </div> -->
+    <div class="reportstitleheader">
+      {{ 'MAINTENANCEHOME.productionmonitoring' | translate}}
+    </div>
+
+    <!-- <ion-slides
+      #sliders
+      (ionSlidesDidLoad)="slidesDidLoad(sliders)"
+      [options]="slideOpts"
+    >
+      <ion-slide
+        (click)="btn_ReportAction(value)"
+        *ngFor="let value of engineerReportsArr"
+        class="report-card-background"
+      >
+        <ion-card>
+          <img src="{{value.imgpath}}" alt="PROFILE" />
+
+          <ion-card-content>
+            <ion-card-title>
+              <b>{{value.title}}</b>
+            </ion-card-title>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides> -->
+    <ion-row *ngFor="let item of engineerReportsArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!-- Foreman (1006) -->
+  <div *ngIf="userdepartmentid==7 && userdesignation==4" #myElementRef>
+    <div class="reportstitleheader">
+      {{ 'MAINTENANCEHOME.maintenancemonitoring' | translate}}
+    </div>
+
+    <ion-row *ngFor="let item of foremanArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- <div class="reportstitleheader">Production Monitoring</div>
+
+    <ion-row *ngFor="let item of foremanReportsArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row> -->
+  </div>
+
+  <!-- Fitter (1006) -->
+  <div *ngIf="userdepartmentid==7 && userdesignation==5" #myElementRef>
+    <form [formGroup]="maintenancehomeForm">
+      <div class="form-row" style="margin-top: 10px">
+        <div class="h7 text-white" style="text-align: center">
+          <b>{{ 'MAINTENANCEHOME.date' | translate}} </b>
+        </div>
+        <div class="col">
+          <!-- <ion-datetime
+            mode="ios"
+            class="h7 form-control"
+            formControlName="pickdate"
+            display-format="DD-MM-YYYY"
+          ></ion-datetime> -->
+
+          <input
+            type="text"
+            class="h7 form-control readonly"
+            formControlName="pickdate"
+            placeholder="DD-MM-YYYY"
+            (click)="openDateTimePicker('FD')"
+            readonly
+          />
+        </div>
+        <div>
+          <button
+            type="button"
+            class="h7 btn btn-general btn-sm margin-5px float-right"
+            (click)="getRecords()"
+          >
+            <!-- <ion-icon name="filter"></ion-icon> -->
+            {{ 'GENERALBUTTON.getrecords' | translate}}
+          </button>
+        </div>
+      </div>
+
+      <hr />
+    </form>
+
+    <ion-row style="background: none; height: 30px">
+      <ion-col style="text-align: center; align-self: center">
+        <span
+          class="notificationbadge badgeblink"
+          *ngIf="dcrecords && dcrecords != 0"
+          >{{dcrecords}}</span
+        >
+
+        <span class="zeronotificationbadge" *ngIf="dcrecords == 0">-</span>
+      </ion-col>
+
+      <ion-col style="text-align: center; align-self: center">
+        <span
+          class="notificationbadge badgeblink"
+          *ngIf="pvrecords && pvrecords != 0"
+          >{{pvrecords}}</span
+        >
+
+        <span class="zeronotificationbadge" *ngIf="pvrecords == 0">-</span>
+      </ion-col>
+
+      <ion-col style="text-align: center; align-self: center">
+        <span
+          class="notificationbadge badgeblink"
+          *ngIf="cmrecords && cmrecords != 0"
+          >{{cmrecords}}</span
+        >
+
+        <span class="zeronotificationbadge" *ngIf="cmrecords == 0">-</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-segment
+      (ionChange)="segmentChanged($event)"
+      [(ngModel)]="tabs_segment"
+    >
+      <ion-segment-button value="Routine Preventive Maintenance">
+        <!-- <ion-badge class="dcbadge" *ngIf="dcrecords && dcrecords != 0"
+          >{{dcrecords}}</ion-badge
+        > -->
+
+        <ion-label text-wrap class="h7"
+          >{{ 'MAINTENANCEHOME.routinepreventive' | translate}}</ion-label
+        >
+      </ion-segment-button>
+
+      <ion-segment-button value="Replacement Preventive Maintenance">
+        <!-- <ion-badge class="pvbadge" *ngIf="pvrecords && pvrecords != 0"
+          >{{pvrecords}}</ion-badge
+        > -->
+        <ion-label text-wrap class="h7"
+          >{{ 'MAINTENANCEHOME.replacmentpreventive' | translate}}</ion-label
+        >
+      </ion-segment-button>
+
+      <ion-segment-button value="Corrective Maintenance">
+        <!-- <ion-badge class="cmbadge" *ngIf="cmrecords && cmrecords != 0"
+          >{{cmrecords}}</ion-badge
+        > -->
+        <ion-label text-wrap class="h7"
+          >{{ 'MAINTENANCEHOME.correctivemaintenance' | translate}}</ion-label
+        >
+      </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="tabs_segment">
+      <div *ngSwitchCase="'Routine Preventive Maintenance'">
+        <!-- <ion-row style="align-items: center" *ngIf="totalrecords!=0">
+          <ion-col class="h7"><b>Total Results: {{totalrecords}}</b></ion-col>
+        </ion-row> -->
+
+        <div *ngIf="!dcenableflag">
+          <ion-card
+            class="bg-card"
+            *ngFor="let value of dclistArr"
+            [style.borderColor]="getStatusColor(value.type)"
+            [style.backgroundColor]="getBackgroundColor(value.type)"
+          >
+            <ion-card-content class="cardcontent">
+              <ion-row
+                *ngIf="(value.notificationno!='' || value.notificationdatetime!='')"
+              >
+                <ion-col>
+                  <p class="title-content">
+                    {{value.notificationno}} - {{value.notificationdatetime}}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.stationname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.station' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.stationname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.equipmentname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.machine' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.equipmentname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.partdefect!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.partname' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.partdefect}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.statusname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.status' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p
+                    class="statusdata"
+                    [style.color]="getStatusTextColor(value.statusId)"
+                  >
+                    {{ value.statusname }}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.reason!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.reason' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.reason}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.remarks!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.remarks' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.remarks}}</p>
+                </ion-col>
+              </ion-row>
+
+              <!-- Button - Start -->
+              <ion-row class="row-reverse">
+                <!-- Accept Material by User - Start -->
+                <!-- 3 - Awaiting Materials; 10 - Assigned -->
+                <button
+                  type="button"
+                  class="h7 btn btn-accept btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '3' || value.statusId == '10') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="copy-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'MAINTENANCEHOME.accept' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+
+                <!-- Update Job by User - Start -->
+                <!-- 1 - Created; 2 - In Progress; 4 - Material Received -->
+                <button
+                  type="button"
+                  class="h7 btn btn-update btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '1' || value.statusId == '2' || value.statusId == '4') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="create-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'GENERALBUTTON.updatebutton' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+              </ion-row>
+              <!-- Button - End -->
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div class="norecords" *ngIf="dcenableflag">
+          {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+        </div>
+
+        <div class="pleasewait" *ngIf="pleasewaitflag">
+          <div style="width: 100%; text-align: center">
+            <img
+              style="width: 80px; height: 80px"
+              src="../../../assets/img/loading.gif"
+            />
+          </div>
+          {{ 'NORECORDSFOUND.loading' | translate}}
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'Replacement Preventive Maintenance'">
+        <!-- <ion-row style="align-items: center" *ngIf="totalrecords!=0">
+          <ion-col class="h7"><b>Total Results: {{totalrecords}}</b></ion-col>
+        </ion-row> -->
+
+        <div *ngIf="!pvenableflag">
+          <ion-card
+            class="bg-card"
+            *ngFor="let value of pvlistArr"
+            [style.borderColor]="getStatusColor(value.type)"
+            [style.backgroundColor]="getBackgroundColor(value.type)"
+          >
+            <ion-card-content class="cardcontent">
+              <ion-row
+                *ngIf="(value.notificationno!='' || value.notificationdatetime!='')"
+              >
+                <ion-col>
+                  <p class="title-content">
+                    {{value.notificationno}} - {{value.notificationdatetime}}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.stationname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.station' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.stationname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.equipmentname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.machine' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.equipmentname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.partdefect!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.partname' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.partdefect}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.statusname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.status' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p
+                    class="statusdata"
+                    [style.color]="getStatusTextColor(value.statusId)"
+                  >
+                    {{ value.statusname }}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.reason!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.reason' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.reason}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.remarks!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.remarks' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.remarks}}</p>
+                </ion-col>
+              </ion-row>
+
+              <!-- Button - Start -->
+              <ion-row class="row-reverse">
+                <!-- Accept Material by User - Start -->
+                <!-- 3 - Awaiting Materials; 10 - Assigned -->
+                <button
+                  type="button"
+                  class="h7 btn btn-accept btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '3' || value.statusId == '10') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="copy-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'MAINTENANCEHOME.accept' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+
+                <!-- Update Job by User - Start -->
+                <!-- 1 - Created; 2 - In Progress; 4 - Material Received -->
+                <button
+                  type="button"
+                  class="h7 btn btn-update btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '1' || value.statusId == '2' || value.statusId == '4') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="create-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'GENERALBUTTON.updatebutton' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+              </ion-row>
+              <!-- Button - End -->
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div class="norecords" *ngIf="pvenableflag">
+          {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+        </div>
+
+        <div class="pleasewait" *ngIf="pleasewaitflag">
+          <div style="width: 100%; text-align: center">
+            <img
+              style="width: 80px; height: 80px"
+              src="../../../assets/img/loading.gif"
+            />
+          </div>
+          {{ 'NORECORDSFOUND.loading' | translate}}
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'Corrective Maintenance'">
+        <!-- <ion-row style="align-items: center" *ngIf="totalrecords!=0">
+          <ion-col class="h7"><b>Total Results: {{totalrecords}}</b></ion-col>
+        </ion-row> -->
+
+        <div *ngIf="!cmenableflag">
+          <ion-card
+            class="bg-card"
+            *ngFor="let value of cmlistArr"
+            [style.borderColor]="getStatusColor(value.type)"
+            [style.backgroundColor]="getBackgroundColor(value.type)"
+          >
+            <ion-card-content class="cardcontent">
+              <ion-row
+                *ngIf="(value.notificationno!='' || value.notificationdatetime!='')"
+              >
+                <ion-col>
+                  <p class="title-content">
+                    {{value.notificationno}} - {{value.notificationdatetime}}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.stationname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.station' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.stationname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.equipmentname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.machine' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.equipmentname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.partdefect!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.partname' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.partdefect}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.statusname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.status' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p
+                    class="statusdata"
+                    [style.color]="getStatusTextColor(value.statusId)"
+                  >
+                    {{ value.statusname }}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.reason!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.reason' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.reason}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.remarks!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.remarks' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.remarks}}</p>
+                </ion-col>
+              </ion-row>
+
+              <!-- Button - Start -->
+
+              <ion-row class="row-reverse">
+                <!-- Assign Job to User - Start -->
+                <button
+                  type="button"
+                  class="h7 btn btn-assign btn-sm margin-5px"
+                  (click)="btn_NotificationAssign(value)"
+                  *ngIf="(value.statusId == '1' || value.statusId == '2' || value.statusId == '3' || value.statusId == '9') && (value.toassigned==1)"
+                >
+                  <ion-icon class="icon" name="people-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'MAINTENANCEHOME.assign' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+
+                <!-- Update Job by User - Start -->
+                <!-- 1 - Created; 2 - In Progress; 4 - Material Received -->
+                <button
+                  type="button"
+                  class="h7 btn btn-update btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '1' || value.statusId == '2' || value.statusId == '4') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="create-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'GENERALBUTTON.updatebutton' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+
+                <!-- Accept Material by User - Start -->
+                <!-- 3 - Awaiting Materials; 10 - Assigned -->
+                <button
+                  type="button"
+                  class="h7 btn btn-accept btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '3' || value.statusId == '10') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="copy-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'MAINTENANCEHOME.accept' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+              </ion-row>
+
+              <!-- Button - End -->
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div class="norecords" *ngIf="cmenableflag">
+          {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+        </div>
+
+        <div class="pleasewait" *ngIf="pleasewaitflag">
+          <div style="width: 100%; text-align: center">
+            <img
+              style="width: 80px; height: 80px"
+              src="../../../assets/img/loading.gif"
+            />
+          </div>
+          {{ 'NORECORDSFOUND.loading' | translate}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chargeman (1006) -->
+  <div *ngIf="userdepartmentid==7 && userdesignation==6" #myElementRef>
+    <form [formGroup]="maintenancehomeForm">
+      <div class="form-row" style="margin-top: 10px">
+        <div class="h7 text-white" style="text-align: center">
+          <b>{{ 'MAINTENANCEHOME.date' | translate}} </b>
+        </div>
+        <div class="col">
+          <!-- <ion-datetime
+            mode="ios"
+            class="h7 form-control"
+            formControlName="pickdate"
+            display-format="DD-MM-YYYY"
+          ></ion-datetime> -->
+
+          <input
+            type="text"
+            class="h7 form-control readonly"
+            formControlName="pickdate"
+            placeholder="DD-MM-YYYY"
+            (click)="openDateTimePicker('FD')"
+            readonly
+          />
+        </div>
+        <div>
+          <button
+            type="button"
+            class="h7 btn btn-general btn-sm margin-5px float-right"
+            (click)="getRecords()"
+          >
+            <!-- <ion-icon name="filter"></ion-icon> -->
+            {{ 'GENERALBUTTON.getrecords' | translate}}
+          </button>
+        </div>
+      </div>
+
+      <hr />
+    </form>
+
+    <ion-row style="background: none; height: 30px">
+      <ion-col style="text-align: center; align-self: center">
+        <span
+          class="notificationbadge badgeblink"
+          *ngIf="dcrecords && dcrecords != 0"
+          >{{dcrecords}}</span
+        >
+
+        <span class="zeronotificationbadge" *ngIf="dcrecords == 0">-</span>
+      </ion-col>
+
+      <ion-col style="text-align: center; align-self: center">
+        <span
+          class="notificationbadge badgeblink"
+          *ngIf="pvrecords && pvrecords != 0"
+          >{{pvrecords}}</span
+        >
+
+        <span class="zeronotificationbadge" *ngIf="pvrecords == 0">-</span>
+      </ion-col>
+
+      <ion-col style="text-align: center; align-self: center">
+        <span
+          class="notificationbadge badgeblink"
+          *ngIf="cmrecords && cmrecords != 0"
+          >{{cmrecords}}</span
+        >
+
+        <span class="zeronotificationbadge" *ngIf="cmrecords == 0">-</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-segment
+      (ionChange)="segmentChanged($event)"
+      [(ngModel)]="tabs_segment"
+    >
+      <ion-segment-button value="Routine Preventive Maintenance">
+        <!-- <ion-badge class="dcbadge" *ngIf="dcrecords && dcrecords != 0"
+          >{{dcrecords}}</ion-badge
+        > -->
+
+        <ion-label text-wrap class="h7"
+          >{{ 'MAINTENANCEHOME.routinepreventive' | translate}}</ion-label
+        >
+      </ion-segment-button>
+
+      <ion-segment-button value="Replacement Preventive Maintenance">
+        <!-- <ion-badge class="pvbadge" *ngIf="pvrecords && pvrecords != 0"
+          >{{pvrecords}}</ion-badge
+        > -->
+        <ion-label text-wrap class="h7"
+          >{{ 'MAINTENANCEHOME.replacmentpreventive' | translate}}</ion-label
+        >
+      </ion-segment-button>
+
+      <ion-segment-button value="Corrective Maintenance">
+        <!-- <ion-badge class="cmbadge" *ngIf="cmrecords && cmrecords != 0"
+          >{{cmrecords}}</ion-badge
+        > -->
+        <ion-label text-wrap class="h7"
+          >{{ 'MAINTENANCEHOME.correctivemaintenance' | translate}}</ion-label
+        >
+      </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="tabs_segment">
+      <div *ngSwitchCase="'Routine Preventive Maintenance'">
+        <!-- <ion-row style="align-items: center" *ngIf="totalrecords!=0">
+          <ion-col class="h7"><b>Total Results: {{totalrecords}}</b></ion-col>
+        </ion-row> -->
+
+        <div *ngIf="!dcenableflag">
+          <ion-card
+            class="bg-card"
+            *ngFor="let value of dclistArr"
+            [style.borderColor]="getStatusColor(value.type)"
+            [style.backgroundColor]="getBackgroundColor(value.type)"
+          >
+            <ion-card-content class="cardcontent">
+              <ion-row
+                *ngIf="(value.notificationno!='' || value.notificationdatetime!='')"
+              >
+                <ion-col>
+                  <p class="title-content">
+                    {{value.notificationno}} - {{value.notificationdatetime}}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.stationname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.station' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.stationname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.equipmentname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.machine' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.equipmentname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.partdefect!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.partname' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.partdefect}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.statusname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.status' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p
+                    class="statusdata"
+                    [style.color]="getStatusTextColor(value.statusId)"
+                  >
+                    {{ value.statusname }}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.reason!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.reason' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.reason}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.remarks!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.remarks' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.remarks}}</p>
+                </ion-col>
+              </ion-row>
+
+              <!-- Button - Start -->
+              <ion-row class="row-reverse">
+                <!-- Accept Material by User - Start -->
+                <!-- 3 - Awaiting Materials; 10 - Assigned -->
+                <button
+                  type="button"
+                  class="h7 btn btn-accept btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '3' || value.statusId == '10') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="copy-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'MAINTENANCEHOME.accept' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+
+                <!-- Update Job by User - Start -->
+                <!-- 1 - Created; 2 - In Progress; 4 - Material Received -->
+                <button
+                  type="button"
+                  class="h7 btn btn-update btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '1' || value.statusId == '2' || value.statusId == '4') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="create-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'GENERALBUTTON.updatebutton' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+              </ion-row>
+              <!-- Button - End -->
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div class="norecords" *ngIf="dcenableflag">
+          {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+        </div>
+
+        <div class="pleasewait" *ngIf="pleasewaitflag">
+          <div style="width: 100%; text-align: center">
+            <img
+              style="width: 80px; height: 80px"
+              src="../../../assets/img/loading.gif"
+            />
+          </div>
+          {{ 'NORECORDSFOUND.loading' | translate}}
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'Replacement Preventive Maintenance'">
+        <!-- <ion-row style="align-items: center" *ngIf="totalrecords!=0">
+          <ion-col class="h7"><b>Total Results: {{totalrecords}}</b></ion-col>
+        </ion-row> -->
+
+        <div *ngIf="!pvenableflag">
+          <ion-card
+            class="bg-card"
+            *ngFor="let value of pvlistArr"
+            [style.borderColor]="getStatusColor(value.type)"
+            [style.backgroundColor]="getBackgroundColor(value.type)"
+          >
+            <ion-card-content class="cardcontent">
+              <ion-row
+                *ngIf="(value.notificationno!='' || value.notificationdatetime!='')"
+              >
+                <ion-col>
+                  <p class="title-content">
+                    {{value.notificationno}} - {{value.notificationdatetime}}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.stationname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.station' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.stationname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.equipmentname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.machine' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.equipmentname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.partdefect!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.partname' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.partdefect}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.statusname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.status' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p
+                    class="statusdata"
+                    [style.color]="getStatusTextColor(value.statusId)"
+                  >
+                    {{ value.statusname }}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.reason!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.reason' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.reason}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.remarks!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.remarks' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.remarks}}</p>
+                </ion-col>
+              </ion-row>
+
+              <!-- Button - Start -->
+              <ion-row class="row-reverse">
+                <!-- Accept Material by User - Start -->
+                <!-- 3 - Awaiting Materials; 10 - Assigned -->
+                <button
+                  type="button"
+                  class="h7 btn btn-accept btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '3' || value.statusId == '10') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="copy-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'MAINTENANCEHOME.accept' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+
+                <!-- Update Job by User - Start -->
+                <!-- 1 - Created; 2 - In Progress; 4 - Material Received -->
+                <button
+                  type="button"
+                  class="h7 btn btn-update btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '1' || value.statusId == '2' || value.statusId == '4') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="create-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'GENERALBUTTON.updatebutton' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+              </ion-row>
+              <!-- Button - End -->
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div class="norecords" *ngIf="pvenableflag">
+          {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+        </div>
+
+        <div class="pleasewait" *ngIf="pleasewaitflag">
+          <div style="width: 100%; text-align: center">
+            <img
+              style="width: 80px; height: 80px"
+              src="../../../assets/img/loading.gif"
+            />
+          </div>
+          {{ 'NORECORDSFOUND.loading' | translate}}
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'Corrective Maintenance'">
+        <!-- <ion-row style="align-items: center" *ngIf="totalrecords!=0">
+          <ion-col class="h7"><b>Total Results: {{totalrecords}}</b></ion-col>
+        </ion-row> -->
+
+        <div *ngIf="!cmenableflag">
+          <ion-card
+            class="bg-card"
+            *ngFor="let value of cmlistArr"
+            [style.borderColor]="getStatusColor(value.type)"
+            [style.backgroundColor]="getBackgroundColor(value.type)"
+          >
+            <ion-card-content class="cardcontent">
+              <ion-row
+                *ngIf="(value.notificationno!='' || value.notificationdatetime!='')"
+              >
+                <ion-col>
+                  <p class="title-content">
+                    {{value.notificationno}} - {{value.notificationdatetime}}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.stationname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.station' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.stationname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.equipmentname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.machine' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.equipmentname}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.partdefect!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.partname' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.partdefect}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.statusname!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.status' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p
+                    class="statusdata"
+                    [style.color]="getStatusTextColor(value.statusId)"
+                  >
+                    {{ value.statusname }}
+                  </p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.reason!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.reason' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.reason}}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="value.remarks!=''">
+                <ion-col size="4"
+                  >{{ 'MAINTENANCEHOME.remarks' | translate}}</ion-col
+                >
+
+                <ion-col size="8">
+                  <p class="data">{{value.remarks}}</p>
+                </ion-col>
+              </ion-row>
+
+              <!-- Button - Start -->
+
+              <ion-row class="row-reverse">
+                <!-- Assign Job to User - Start -->
+                <button
+                  type="button"
+                  class="h7 btn btn-assign btn-sm margin-5px"
+                  (click)="btn_NotificationAssign(value)"
+                  *ngIf="(value.statusId == '1' || value.statusId == '2' || value.statusId == '3' || value.statusId == '9') && (value.toassigned==1)"
+                >
+                  <ion-icon class="icon" name="people-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'MAINTENANCEHOME.assign' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+
+                <!-- Update Job by User - Start -->
+                <!-- 1 - Created; 2 - In Progress; 4 - Material Received -->
+                <button
+                  type="button"
+                  class="h7 btn btn-update btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '1' || value.statusId == '2' || value.statusId == '4') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="create-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'GENERALBUTTON.updatebutton' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+
+                <!-- Accept Material by User - Start -->
+                <!-- 3 - Awaiting Materials; 10 - Assigned -->
+                <button
+                  type="button"
+                  class="h7 btn btn-accept btn-sm margin-5px"
+                  (click)="btn_Edit(value)"
+                  *ngIf="(value.statusId == '3' || value.statusId == '10') && (value.toassigned==0)"
+                >
+                  <ion-icon class="icon" name="copy-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'MAINTENANCEHOME.accept' | translate}}</span
+                  >
+                </button>
+                <!-- End -->
+              </ion-row>
+
+              <!-- Button - End -->
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div class="norecords" *ngIf="cmenableflag">
+          {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+        </div>
+
+        <div class="pleasewait" *ngIf="pleasewaitflag">
+          <div style="width: 100%; text-align: center">
+            <img
+              style="width: 80px; height: 80px"
+              src="../../../assets/img/loading.gif"
+            />
+          </div>
+          {{ 'NORECORDSFOUND.loading' | translate}}
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

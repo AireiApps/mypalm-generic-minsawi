@@ -1,0 +1,180 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <!-- <ion-buttons slot="start">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons> -->
+
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title color="light" [innerHTML]="mill_name"></ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent"
+          >{{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!-- <ion-title color="light" *ngIf="userdepartmentid!=26">Reports</ion-title>
+    <ion-title color="light" *ngIf="userdepartmentid==26"
+      >Maintenance Report</ion-title
+    >
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent"
+          >{{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="md">
+  <div class="support">
+    <img src="../../../assets/img/spacefill.png" />
+  </div>
+  <!-- Lab -->
+  <div *ngIf="userdepartmentid==2 && userdesignation==9">
+    <ion-grid>
+      <ion-row *ngFor="let item of lab1006Arr">
+        <ion-col size="6" *ngFor="let eachitem of item">
+          <div class="card card-height" (click)="btn_Action(eachitem)">
+            <ion-col size="4" style="display: flex; align-items: center">
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+            </ion-col>
+            <ion-col size="8" style="display: flex; align-items: center">
+              <p style="font-size: 14px; margin-left: -10; margin-top: 15px">
+                <b>{{eachitem.title}}</b>
+              </p>
+            </ion-col>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- Manager -->
+  <div *ngIf="userdepartmentid==25">
+    <ion-grid>
+      <ion-row *ngFor="let item of manager1006Arr">
+        <ion-col size="6" *ngFor="let eachitem of item">
+          <div class="card card-height" (click)="btn_Action(eachitem)">
+            <ion-col size="4" style="display: flex; align-items: center">
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+            </ion-col>
+            <ion-col size="8" style="display: flex; align-items: center">
+              <p style="font-size: 14px; margin-left: -10; margin-top: 15px">
+                <b>{{eachitem.title}}</b>
+              </p>
+            </ion-col>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- Engineering -->
+  <div *ngIf="userdepartmentid==7 && userdesignation==2">
+    <ion-grid>
+      <ion-row *ngFor="let item of engineering1006Arr">
+        <ion-col size="6" *ngFor="let eachitem of item">
+          <div class="card card-height" (click)="btn_Action(eachitem)">
+            <ion-col size="4" style="display: flex; align-items: center">
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+            </ion-col>
+            <!-- <ion-col size="8" style="display: flex; align-items: center">
+              <p style="font-size: 14px">{{eachitem.title}}</p>
+            </ion-col> -->
+
+            <ion-col size="8" style="display: flex; align-items: center">
+              <p style="font-size: 14px; margin-left: -10; margin-top: 15px">
+                <b>{{eachitem.title}}</b>
+              </p>
+            </ion-col>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- Foreman -->
+  <div *ngIf="userdepartmentid==7 && userdesignation==4">
+    <ion-grid>
+      <ion-row *ngFor="let item of foreman1006Arr">
+        <ion-col size="6" *ngFor="let eachitem of item">
+          <div class="card card-height" (click)="btn_Action(eachitem)">
+            <ion-col size="4" style="display: flex; align-items: center">
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+            </ion-col>
+            <ion-col size="8" style="display: flex; align-items: center">
+              <p style="font-size: 14px; margin-left: -10; margin-top: 15px">
+                <b>{{eachitem.title}}</b>
+              </p>
+            </ion-col>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- Fitter -->
+  <div *ngIf="userdepartmentid==7 && userdesignation==5">
+    <div class="reportstitleheader">{{ 'MAINTENANCEREPORT.maintenancereports' | translate}}</div>
+
+    <ion-row *ngFor="let item of fitterArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_Action(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!-- Chargeman -->
+  <div *ngIf="userdepartmentid==7 && userdesignation==6">
+    <div class="reportstitleheader">{{ 'MAINTENANCEREPORT.maintenancereports' | translate}}</div>
+
+    <ion-row *ngFor="let item of fitterArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_Action(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-title color="light">{{ 'TIPPINGLOGSHEET.viewimage' | translate}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="whitefav" (click)="cancel()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <ion-slides
+      #sliders
+      (ionSlidesDidLoad)="slidesDidLoad(sliders)"
+      pager="true"
+      [options]="slideOpts"
+    >
+      <ion-slide *ngFor="let value of imagesArr">
+        <ion-card class="card">
+          <img src="{{value.image}}" alt="" srcset="" />
+          <div class="overlay">
+            <div class="card-title">{{ value.title }}</div>
+          </div>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>

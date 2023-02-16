@@ -1,0 +1,232 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color modaltoolbar">
+    <ion-title mode="ios" color="light">{{title}}</ion-title>
+
+    <ion-buttons slot="start" *ngIf="viewFlag">
+      <ion-button color="whitefav" (click)="btn_back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button class="bg-light-color" (click)="btn_close()">
+        <ion-icon color="light" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar class="stepstoolbar">
+    <ion-row class="steps">
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP1')">
+        <span><b> 1 </b></span>
+      </ion-col>
+
+      <ion-col>
+        <hr />
+      </ion-col>
+
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP2')">
+        <span><b> 2 </b></span>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <form
+      [formGroup]="step1Form"
+      style="margin: 10px 10px 0px 10px"
+      *ngIf="stepFlag"
+    >
+      <!-- Breakdown has been changed as Problem -->
+      <div *ngIf="breakdownFlag">
+        <ion-row class="form-row">
+          <ion-col size="4">
+            <div class="title">
+              <b>{{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.problem' | translate}}</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="7.5">
+            <ion-select
+              [interfaceOptions]="breakdownOptions"
+              formControlName="select_breakdown"
+              multiple="false"
+              [okText]="'GENERALBUTTON.okay' | translate"
+              [cancelText]="'GENERALBUTTON.dismiss' | translate"
+              class="selectdropdown"
+              placeholder="{{'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.select' | translate}}"
+              (ionChange)="breakdownhandleChange($event)"
+            >
+              <ion-select-option
+                value="{{parseString(value)}}"
+                *ngFor="let value of breakdownArr; let i = index"
+                >{{ value.breakdownCoding }}</ion-select-option
+              >
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
+        <div class="hl4line"></div>
+      </div>
+
+      <div *ngIf="activityFlag">
+        <ion-row class="form-row" style="margin-top: 10px">
+          <ion-col size="4">
+            <div class="title">
+              <b>{{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.activity' | translate}}</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="7.5">
+            <ion-button
+              class="optionbutton"
+              (click)="callmodalcontroller('Activity')"
+              >{{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.select' | translate}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <div class="hl4line" *ngIf="activityvalue==''"></div>
+
+        <div
+          class="title"
+          style="margin-top: 10px; color: #3cd2a5"
+          *ngIf="activityvalue!=''"
+        >
+          <b>{{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.selectedactivity' | translate}}</b>
+        </div>
+
+        <div
+          class="title"
+          style="text-align: center"
+          *ngIf="activityvalue!=''"
+          [innerHTML]="activityvalue"
+        ></div>
+
+        <div *ngIf="activityvalue!=''">
+          <div
+            style="font-size: 14px; color: #df4759; text-align: right"
+            (click)="clear('Activity')"
+          >
+            <ion-icon
+              class="icon"
+              color="danger"
+              name="backspace-outline"
+            ></ion-icon>
+            <span class="icontext"><b> {{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.clear' | translate}}</b></span>
+          </div>
+        </div>
+
+        <div class="hl4line" *ngIf="activityvalue!=''"></div>
+
+        <div *ngIf="otheractivityFlag">
+          <div class="form-row" style="margin-top: 10px">
+            <div class="col">
+              <div style="font-size: 14px; color: #ffffff">
+                <b>{{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.activityname' | translate}} <sup>*</sup></b>
+              </div>
+            </div>
+          </div>
+
+          <ion-row class="form-row">
+            <ion-col>
+              <input
+                type="text"
+                class="form-control"
+                style="font-size: 14px"
+                formControlName="txt_activityname"
+                placeholder="{{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.placeholder' | translate}}"
+              />
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="form-row">
+            <ion-col>
+              <button
+                type="submit"
+                class="h7 btn btn-success"
+                style="margin-top: 5px"
+                (click)="btn_add('Activity')"
+              >
+              {{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.add' | translate}}
+              </button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+
+      <ion-row style="margin-top: 10px">
+        <ion-col style="text-align: center !important" no-padding>
+          <button
+            type="submit"
+            class="btn btn-next"
+            (click)="btn_next('STEP1')"
+          >
+            <span class="icontext" style="color: #ffffff">{{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.save' | translate}}</span>
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <form *ngIf="viewFlag" style="margin: 10px 10px 0px 10px">
+      <ion-row class="form-row" *ngIf="view_breakdown!=''">
+        <ion-col size="4">
+          <div class="title">{{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.problem' | translate}}</div>
+        </ion-col>
+        <ion-col size="0.5" style="text-align: right">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+        <ion-col size="7.5" style="text-align: left">
+          <div class="viewtitle">
+            <b>{{view_breakdown}}</b>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-row" *ngIf="view_activity!=''">
+        <ion-col size="4">
+          <div class="title">{{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.activity' | translate}}</div>
+        </ion-col>
+        <ion-col size="0.5" style="text-align: right">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+        <ion-col size="7.5" style="text-align: left">
+          <div class="viewtitle">
+            <b>{{view_activity}}</b>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="margin-top: 10px">
+        <ion-col style="text-align: center !important" no-padding>
+          <button
+            type="submit"
+            [disabled]="confirmDisable"
+            class="btn btn-next"
+            (click)="showalert()"
+          >
+            <span class="icontext" style="color: #ffffff">{{ 'MAINTENANCEENGINEERINGNOTIFICATIONMODAL.confirm' | translate}}</span>
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>
