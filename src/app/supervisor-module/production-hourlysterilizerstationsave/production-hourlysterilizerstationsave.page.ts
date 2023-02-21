@@ -5,7 +5,6 @@ import { SupervisorService } from "src/app/services/supervisor-service/superviso
 import { ModalController, NavParams, AlertController } from "@ionic/angular";
 import { TranslateService } from "@ngx-translate/core";
 
-
 @Component({
   selector: "app-production-hourlysterilizerstationsave",
   templateUrl: "./production-hourlysterilizerstationsave.page.html",
@@ -42,9 +41,13 @@ export class ProductionHourlysterilizerstationsavePage implements OnInit {
 
   async showalert() {
     const alert = await this.alertController.create({
-      header: this.translate.instant("HOURLYSTERILIZATIONSTATIONSAVE.alertheader"),
+      header: this.translate.instant(
+        "HOURLYSTERILIZATIONSTATIONSAVE.alertheader"
+      ),
       cssClass: "alertmessage",
-      message: this.translate.instant("HOURLYSTERILIZATIONSTATIONSAVE.alertmessage"),
+      message: this.translate.instant(
+        "HOURLYSTERILIZATIONSTATIONSAVE.alertmessage"
+      ),
       buttons: [
         {
           text: this.translate.instant("GENERALBUTTON.cancelbutton"),
@@ -73,14 +76,16 @@ export class ProductionHourlysterilizerstationsavePage implements OnInit {
         bottompressure: this.sterilizerstationForm.value.txt_bottompressure,
       });
     } else {
-      this.commonservice.presentToast(this.translate.instant("GENERALBUTTON.pleasefilltheform"));
+      this.commonservice.presentToast(
+        this.translate.instant("GENERALBUTTON.pleasefilltheform")
+      );
     }
   }
 
   cancel() {
     this.modalController.dismiss({
       dismissed: true,
-      item: [],
+      item: "",
     });
   }
 

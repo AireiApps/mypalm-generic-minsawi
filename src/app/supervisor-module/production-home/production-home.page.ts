@@ -79,7 +79,7 @@ export class ProductionHomePage implements OnInit {
     [
       {
         title: this.translate.instant("PRODUCTIONHOME.pressingtitle"),
-        subtitle:this.translate.instant("PRODUCTIONHOME.pressingsubtitle"),
+        subtitle: this.translate.instant("PRODUCTIONHOME.pressingsubtitle"),
         name: "Pressing Station",
         path: "/production-hourlypressingstation",
         imgpath: "../../assets/img/press.png",
@@ -105,19 +105,6 @@ export class ProductionHomePage implements OnInit {
 
   reportsArr = [
     [
-      // {
-      //   title: "Corrective",
-      //   subtitle: "Maintenance",
-      //   path: "/report-production-maintenance-notification",
-      //   imgpath: "../../assets/img/bg_correctivemaintenance_report.png",
-      // },
-      // {
-      //   title: "Machineries Running Hours",
-      //   path: "/report-machineryrunninghour",
-      //   imgpath: "../../assets/img/bg_machinerrunninghours_report.png",
-      // }
-    ],
-    [
       {
         title: this.translate.instant("PRODUCTIONHOME.sterilizationtitle"),
         subtitle: this.translate.instant("PRODUCTIONHOME.subtitlestation"),
@@ -126,17 +113,17 @@ export class ProductionHomePage implements OnInit {
       },
       {
         title: this.translate.instant("PRODUCTIONHOME.pressingtitle"),
-        subtitle:this.translate.instant("PRODUCTIONHOME.pressingsubtitle"),
+        subtitle: this.translate.instant("PRODUCTIONHOME.pressingsubtitle"),
         path: "/report-pressstationhourlyperformance",
         imgpath: "../../assets/img/press_report.png",
       },
     ],
     [
       {
-        title: this.translate.instant("PRODUCTIONHOME.oiltitle"),
-        subtitle: this.translate.instant("PRODUCTIONHOME.oilsubtitle"),
-        path: "/lab-oillossesreport",
-        imgpath: "../../assets/img/oil_loss_report.png",
+        title: this.translate.instant("PRODUCTIONHOME.predictiontitle"),
+        subtitle: this.translate.instant("PRODUCTIONHOME.predictionsubtitle"),
+        path: "/dashboard-oilloss-predictionanalysis",
+        imgpath: "../../assets/img/prediction.png",
       },
       {
         title: this.translate.instant("PRODUCTIONHOME.correctivemaintenance"),
@@ -272,9 +259,7 @@ export class ProductionHomePage implements OnInit {
     let alert = await this.alertController.create({
       header: this.translate.instant("FORCEUPDATE.header"),
       backdropDismiss: false,
-      message:
-      this.translate.instant("FORCEUPDATE.message") +
-        app_version,
+      message: this.translate.instant("FORCEUPDATE.message") + app_version,
       buttons: [
         {
           text: this.translate.instant("GENERALBUTTON.updatebutton"),

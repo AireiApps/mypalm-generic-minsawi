@@ -59,7 +59,7 @@
           #usernameinput
           type="text"
           placeholder="{{ 'LOGIN.username' | translate}}"
-          [disabled]="isDisabled"
+          [attr.disabled]="isDisabled"
           formControlName="username"
           enterkeyhint="next"
           (keydown)="onKeydown($event, 'password')"
@@ -71,14 +71,17 @@
           #passwordinput
           type="password"
           placeholder="{{ 'LOGIN.password' | translate}}"
-          [disabled]="isDisabled"
+          [attr.disabled]="isDisabled"
           formControlName="password"
           enterkeyhint="done"
           (keydown)="onKeydown($event, 'done')"
         ></ion-input>
       </ion-item>
 
-      <ion-button expand="block" (click)="btn_login()" [disabled]="isDisabled"
+      <ion-button
+        expand="block"
+        (click)="btn_login()"
+        [attr.disabled]="isDisabled"
         >{{ 'LOGIN.buttonlogin' | translate}}</ion-button
       >
     </form>

@@ -450,6 +450,8 @@ export class MaintenanceDashboardPage implements OnInit {
         });
 
         modal.onDidDismiss().then((data) => {
+          this.dashboardForm.controls.select_station.setValue("");
+
           this.ionViewDidEnter();
         });
 

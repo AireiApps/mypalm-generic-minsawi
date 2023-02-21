@@ -40,7 +40,9 @@ export class MaintenanceEngineerNotificationModalPage implements OnInit {
 
   params;
 
-  title = this.translate.instant("CORRECTIVEMAINTENACE.correctivemaintenancenotification");
+  title = this.translate.instant(
+    "CORRECTIVEMAINTENACE.correctivemaintenancenotification"
+  );
   module = "";
 
   breakdownArr = [];
@@ -105,12 +107,21 @@ export class MaintenanceEngineerNotificationModalPage implements OnInit {
 
   // Ionic Select Header
   public breakdownOptions: any = {
-    header: this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.problem"),
+    header: this.translate.instant(
+      "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.problem"
+    ),
     cssClass: "singleselect",
   };
 
   public assignedtoOptions: any = {
-    header:  this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.fitterchargeman"),
+    header:
+      this.userlist.desigId == 4
+        ? this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.fitterlist"
+          )
+        : this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.wiremanlist"
+          ),
     cssClass: "multiselect",
   };
 
@@ -274,12 +285,20 @@ export class MaintenanceEngineerNotificationModalPage implements OnInit {
   btn_next(type) {
     if (type == "STEP1") {
       if (this.step1Form.value.select_breakdown == "") {
-        this.commonservice.presentToast(this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.problemmandatory"));
+        this.commonservice.presentToast(
+          this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.problemmandatory"
+          )
+        );
         return;
       }
 
       if (this.activityidArr.length <= 0) {
-        this.commonservice.presentToast(this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.activitymandatory"));
+        this.commonservice.presentToast(
+          this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.activitymandatory"
+          )
+        );
         return;
       }
 
@@ -295,7 +314,11 @@ export class MaintenanceEngineerNotificationModalPage implements OnInit {
   btn_add(type) {
     if (type == "Activity") {
       if (this.step1Form.value.txt_activityname == "") {
-        this.commonservice.presentToast(this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.activitynamemandatory"));
+        this.commonservice.presentToast(
+          this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.activitynamemandatory"
+          )
+        );
         return;
       }
 
@@ -369,7 +392,10 @@ export class MaintenanceEngineerNotificationModalPage implements OnInit {
               }
             } else {
               this.commonservice.presentToast(
-                this.activityvalue + this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.alreadyexist")
+                this.activityvalue +
+                  this.translate.instant(
+                    "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.alreadyexist"
+                  )
               );
             }
           }
@@ -425,28 +451,42 @@ export class MaintenanceEngineerNotificationModalPage implements OnInit {
 
   async showalert() {
     if (this.view_breakdown == "") {
-      this.commonservice.presentToast(this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.breakdownmandatory"));
+      this.commonservice.presentToast(
+        this.translate.instant(
+          "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.breakdownmandatory"
+        )
+      );
       return;
     }
 
     if (this.view_activity == "") {
-      this.commonservice.presentToast(this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.activitysmandatory"));
+      this.commonservice.presentToast(
+        this.translate.instant(
+          "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.activitysmandatory"
+        )
+      );
       return;
     }
 
     const alert = await this.alertController.create({
-      header: this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.header"),
+      header: this.translate.instant(
+        "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.header"
+      ),
       cssClass: "alertmessage",
-      message: this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.alertmessage"),
+      message: this.translate.instant(
+        "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.alertmessage"
+      ),
       buttons: [
         {
-          text:this.translate.instant("GENERALBUTTON.cancelbutton"),
+          text: this.translate.instant("GENERALBUTTON.cancelbutton"),
           role: "cancel",
           cssClass: "secondary",
           handler: (cancel) => {},
         },
         {
-          text: this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.sure"),
+          text: this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.sure"
+          ),
           handler: () => {
             this.save();
           },
@@ -510,7 +550,11 @@ export class MaintenanceEngineerNotificationModalPage implements OnInit {
       if (resultdata.httpcode == 200) {
         this.confirmDisable = false;
 
-        this.commonservice.presentToast(this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.success"));
+        this.commonservice.presentToast(
+          this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.success"
+          )
+        );
 
         this.btn_close();
 
@@ -524,7 +568,11 @@ export class MaintenanceEngineerNotificationModalPage implements OnInit {
       } else {
         this.confirmDisable = false;
 
-        this.commonservice.presentToast(this.translate.instant("MAINTENANCEENGINEERINGNOTIFICATIONMODAL.failed"));
+        this.commonservice.presentToast(
+          this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.failed"
+          )
+        );
       }
     });
   }
@@ -532,7 +580,7 @@ export class MaintenanceEngineerNotificationModalPage implements OnInit {
   btn_close() {
     this.modalController.dismiss({
       dismissed: true,
-      item: [],
+      item: "",
     });
   }
 

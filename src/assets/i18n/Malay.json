@@ -81,6 +81,12 @@
     "more": "Profil"
   },
 
+  "TABSGRADING": {
+    "home": "Laman Utama",   
+    "reports":"Laporan",
+    "more": "Profil"
+  },
+
   "SCHEDULING":{
     "title": "Penjadualan"
   },
@@ -475,6 +481,8 @@
     "selectedfitter":"Tukang Pasang/Pengurus Terpilih",
     "confirm":"Sahkan",
     "fitterchargeman":"Senarai Fitter/Chargeman",
+    "fitterlist":"Senarai Fitter",
+    "wiremanlist":"Senarai Wireman",
     "activitymandatory":"Pilihan \"Aktiviti\" adalah wajib",
     "alert":"Perhatian",
     "alertmessage":"Adakah anda pasti, anda mahu menetapkan Routine Preventive Maintenance ini?",
@@ -703,7 +711,8 @@
     "maintenancetype":"Jenis Maintenance",
     "partdefect":"Bahagian Kecacatan",
     "damagetype":"Jenis Kerosakan",
-    "authorizedby":"Dibenarkan Oleh"
+    "authorizedby":"Dibenarkan Oleh",
+    "remarks": "Kenyataan"
   },
   "PREVENTIVEMAINTENANCE":{
     "title":"Preventive Maintenance",
@@ -883,7 +892,9 @@
     "dismiss":"Menolak",
     "assignto":"Tugaskan Kepada",
     "selectedassignto":"Tugam terpilih ke",
-    "fitterchargeman":"Senarai Fitter & Chargeman",
+    "fitterchargeman":"Senarai Fitter/Chargeman",
+    "fitterlist":"Senarai Fitter",
+    "wiremanlist":"Senarai Wireman",
     "assignedtoselection":"Ditugaskan untuk pemilihan adalah wajib",
     "assigntomandatory":"Ditugaskan untuk wajib",
     "selectedfitter":"Tukang Pasang/Pengurus Terpilih",
@@ -918,7 +929,7 @@
   },
   "OILLOSSESSREPORT":{
     "oillosses":"Oil Loss",
-    "oillosselist":"Senarai Oil Loss",
+    "oillosselist":"Oil Loss",
     "oillossesedit":"Edit Oil Loss",
     "samplecollectiontime":"Masa pengumpulan sampel",
     "fromdate":"Dari",
@@ -1155,6 +1166,8 @@
     "station":"Stesen",
     "problem":"Masalah",
     "fitterchargeman":"Senarai Fitter/Chargeman",
+    "fitterlist":"Senarai Fitter",
+    "wiremanlist":"Senarai Wireman",
     "machine":"Mesin",
     "partreplaced":"Bahagian Diganti",
     "activity":"Aktiviti",
@@ -1170,6 +1183,39 @@
     "replacementsuccess":"Penyelenggaraan Pencegahan Penggantian Berjaya Ditugaskan",
     "replacementfailed":"Penyerahan Penyelenggaraan Pencegahan Penggantian Gagal"
   },
+
+  "GRADINGHOME": {
+    "welcome":"Selamat datang",
+    "newgrading":"Terima Muatan Baru",
+    "vehicle":"kenderaan",
+    "vehiclenumber":"Nombor Kenderaan",
+    "hardbunches":"Tandan Keras",
+    "underripebunches":"Di Bawah Tandan Matang",
+    "ripeness":"Kematangan",
+    "loosefruits":"Buah-buahan Longgar",
+    "lastfiverecords":"5 Rekod Terkini Terakhir",
+    "entervehiclenumber":"Masukkan Nombor Kenderaan",
+    "searchvehicle":"Kenderaan Cari",
+    "vehiclenumbermandatory":"Nombor Kenderaan adalah Wajib",
+    "receivedloadsuccessfully":"Menerima Muatan Berjaya",
+    "receivedloadfailed":"Gagal Menerima Beban"
+  },
+  "GRADINGREPORT":{
+    "gradingreport":"Laporan Penggredan",
+    "from":"Dari",
+    "to":"Ke",
+    "hardbunches":"Tandan Keras",
+    "underripebunches":"Di Bawah Tandan Matang",
+    "ripeness":"Kematangan",
+    "loosefruits":"Buah-buahan Longgar"
+  },
+  "SEARCHVEHICLE":{
+    "search":"Cari",
+    "searchvehicle":"Kenderaan Cari",
+    "nosearchrecords":"Tiada Kenderaan Ditemui",
+    "loadingmoredata":"Memuatkan lebih banyak data..."
+  },
+
   "NETWORKERROR":{
     "networkdisconnected":"Network Disconnected",
     "noconnection":"Tiada Sambungan",

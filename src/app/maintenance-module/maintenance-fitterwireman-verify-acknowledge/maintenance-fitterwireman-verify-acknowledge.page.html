@@ -1,0 +1,567 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color modaltoolbar">
+    <ion-title mode="ios" color="light">{{title}}</ion-title>
+
+    <ion-buttons slot="start" *ngIf="step2Flag || viewFlag">
+      <ion-button
+        color="whitefav"
+        (click)="btn_back('STEP1')"
+        *ngIf="step2Flag"
+      >
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+
+      <ion-button color="whitefav" (click)="btn_back('STEP2')" *ngIf="viewFlag">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_close()">
+        <ion-icon color="light" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar class="stepstoolbar" *ngIf="getstatusid == '2' && step2Flag">
+    <ion-row class="steps">
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP1')">
+        <span><b> 1 </b></span>
+      </ion-col>
+
+      <ion-col>
+        <hr />
+      </ion-col>
+
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP2')">
+        <span><b> 2 </b></span>
+      </ion-col>
+
+      <ion-col>
+        <hr />
+      </ion-col>
+
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP3')">
+        <span><b> 3 </b></span>
+      </ion-col>
+
+      <ion-col>
+        <hr />
+      </ion-col>
+
+      <ion-col class="circle" [style.backgroundColor]="getStatusColor('STEP4')">
+        <span><b> 4 </b></span>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngClass]="{'content':cssenable==0}">
+    <form [formGroup]="verifyacknowledgeForm">
+      <div *ngIf="step1Flag">
+        <ion-row class="form-row" *ngIf="getstationname!=''">
+          <ion-col size="4.5">
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.station' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: right">
+            <div class="title">:</div>
+          </ion-col>
+          <ion-col size="7" style="text-align: left">
+            <div class="preknowntitle"><b>{{getstationname}}</b></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="getmachinename!=''">
+          <ion-col size="4.5">
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.machine' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: right">
+            <div class="title">:</div>
+          </ion-col>
+          <ion-col size="7" style="text-align: left">
+            <div class="preknowntitle"><b>{{getmachinename}}</b></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="getbreakdown!=''">
+          <ion-col size="4.5">
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.problem' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: right">
+            <div class="title">:</div>
+          </ion-col>
+          <ion-col size="7" style="text-align: left">
+            <div class="preknowntitle"><b>{{getbreakdown}}</b></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="getactivity!=''">
+          <ion-col size="4.5">
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.activity' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: right">
+            <div class="title">:</div>
+          </ion-col>
+
+          <ion-col size="7" style="text-align: left">
+            <div class="preknowntitle"><b>{{getactivity}}</b></div>
+          </ion-col>
+        </ion-row>
+
+        <div class="hl4line"></div>
+
+        <ion-row class="form-row">
+          <ion-col *ngIf="(getstatusid == '2' || getstatusid == '4')">
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.istheworkordercompleted' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col *ngIf="(getstatusid == '3' || getstatusid == '10')">
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.abletoaccept' | translate}}
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row">
+          <ion-col>
+            <ion-row>
+              <ion-col style="text-align: right">
+                <div>
+                  <input
+                    type="radio"
+                    id="radio_yes"
+                    name="radio_option"
+                    value="Yes"
+                    [checked]="yesradiobuttonchecked"
+                    (change)="onOptionChange('Yes')"
+                  />
+                  <label for="radio_yes" style="padding-right: 10px"
+                    >{{ 'MAINTENANCEACCEPTMODAL.yes' | translate}}</label
+                  >
+                  <input
+                    type="radio"
+                    id="radio_no"
+                    name="radio_option"
+                    value="No"
+                    [checked]="noradiobuttonchecked"
+                    (change)="onOptionChange('No')"
+                  />
+                  <label for="radio_no"
+                    >{{ 'MAINTENANCEACCEPTMODAL.no' | translate}}</label
+                  >
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="reasonFlag">
+          <ion-col size="4.5">
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.reason' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: right">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="7">
+            <ion-select
+              [interfaceOptions]="reasonOptions"
+              formControlName="select_reason"
+              multiple="false"
+              [okText]="'GENERALBUTTON.okay' | translate"
+              [cancelText]="'GENERALBUTTON.dismiss' | translate"
+              class="selectdropdown"
+              placeholder="{{ 'MAINTENANCEACCEPTMODAL.select' | translate}}"
+              (ionChange)="reasonhandleChange($event)"
+            >
+              <ion-select-option
+                value="{{parseString(value)}}"
+                *ngFor="let value of reasonArr; let i = index"
+                >{{ value.reason_name }}</ion-select-option
+              >
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="conditionFlag">
+          <ion-col size="4.5">
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.condition' | translate}}
+            </div>
+          </ion-col>
+          <ion-col size="7.5">
+            <ion-row>
+              <ion-col style="text-align: right">
+                <div>
+                  <input
+                    type="radio"
+                    id="radio_good"
+                    name="radio_conditionoption"
+                    value="Good"
+                  />
+                  <label for="radio_good" style="padding-right: 10px"
+                    >{{ 'MAINTENANCEACCEPTMODAL.good' | translate}}</label
+                  >
+                  <input
+                    type="radio"
+                    id="radio_abnormal"
+                    name="radio_conditionoption"
+                    value="Abnormal"
+                  />
+                  <label for="radio_abnormal"
+                    >{{ 'MAINTENANCEACCEPTMODAL.abnormal' | translate}}</label
+                  >
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div *ngIf="step2Flag" style="margin: 0px 0px 5px 0px">
+        <!-- Maintenance Type -->
+        <div *ngIf="maintenancetypeFlag">
+          <ion-row class="form-row">
+            <ion-col size="4.5">
+              <div class="title">
+                {{ 'MAINTENANCEACKNOWLEDGEMODAL.maintenancetype' | translate}}
+              </div>
+            </ion-col>
+
+            <ion-col size="0.5" style="text-align: center">
+              <div class="title">:</div>
+            </ion-col>
+
+            <ion-col size="7">
+              <ion-select
+                [interfaceOptions]="maintenancetypeOptions"
+                formControlName="select_maintenancetype"
+                multiple="false"
+                [okText]="'GENERALBUTTON.okay' | translate"
+                [cancelText]="'GENERALBUTTON.dismiss' | translate"
+                class="selectdropdown"
+                placeholder="{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}"
+                (ionChange)="maintenancetypehandleChange($event)"
+              >
+                <ion-select-option
+                  value="{{parseString(value)}}"
+                  *ngFor="let value of maintenancetypeArr; let i = index"
+                  >{{ value.maintanence_type }}</ion-select-option
+                >
+              </ion-select>
+            </ion-col>
+          </ion-row>
+
+          <div class="hl4line"></div>
+        </div>
+
+        <!-- Part Defect -->
+        <div *ngIf="partFlag" style="margin-top: 10px">
+          <ion-row class="form-row">
+            <ion-col size="4.5">
+              <div class="title" *ngIf="screen == 'CM'">
+                {{ 'MAINTENANCEACKNOWLEDGEMODAL.partdefect' | translate}}
+              </div>
+              <div class="title" *ngIf="screen == 'RoPM'">
+                {{ 'MAINTENANCEACKNOWLEDGEMODAL.partname' | translate}}
+              </div>
+              <div class="title" *ngIf="screen == 'RePM'">
+                {{ 'MAINTENANCEACKNOWLEDGEMODAL.partreplaced' | translate}}
+              </div>
+            </ion-col>
+
+            <ion-col size="0.5" style="text-align: center">
+              <div class="title">:</div>
+            </ion-col>
+
+            <ion-col size="7">
+              <ion-button
+                class="optionbutton"
+                (click)="callmodalcontroller('PartDefect', '')"
+                >{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+          <div
+            class="title"
+            style="margin-top: 10px; color: #3cd2a5; text-align: left"
+            *ngIf="partvalue!='' || getpartdefectvalue!==''"
+          >
+            <b *ngIf="screen == 'CM'"
+              >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selectedpartdefect' |
+              translate}}</b
+            >
+            <b *ngIf="screen == 'ROUT'"
+              >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selectedpartname' |
+              translate}}</b
+            >
+            <b *ngIf="screen == 'REPL'"
+              >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selectedpartreceived' |
+              translate}}</b
+            >
+          </div>
+
+          <div
+            class="title"
+            style="text-align: center"
+            *ngIf="getpartdefectvalue!=''"
+          >
+            {{this.getpartdefectvalue}}
+          </div>
+
+          <div class="hl4line" *ngIf="partvalue==''"></div>
+
+          <div
+            class="title"
+            style="text-align: center"
+            *ngIf="partvalue!=''"
+            [innerHTML]="partvalue"
+          ></div>
+
+          <div *ngIf="partvalue!=''">
+            <div
+              style="font-size: 14px; color: #df4759; text-align: right"
+              (click)="clear('Part')"
+            >
+              <ion-icon
+                class="icon"
+                color="danger"
+                name="backspace-outline"
+              ></ion-icon>
+              <span class="icontext"
+                ><b>
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.clear' | translate}}</b
+                ></span
+              >
+            </div>
+          </div>
+
+          <div class="hl4line" *ngIf="partvalue!=''"></div>
+
+          <div *ngIf="otherFlag">
+            <div class="form-row" style="margin-top: 10px">
+              <div class="col">
+                <div style="font-size: 14px; color: #ffffff">
+                  <b
+                    >{{ 'MAINTENANCEACKNOWLEDGEMODAL.partname' | translate}}
+                    <sup>*</sup></b
+                  >
+                </div>
+              </div>
+            </div>
+
+            <ion-row class="form-row">
+              <ion-col>
+                <input
+                  type="text"
+                  class="form-control"
+                  style="font-size: 14px"
+                  formControlName="txt_partname"
+                  placeholder="{{ 'MAINTENANCEACKNOWLEDGEMODAL.enterpartname' | translate}}"
+                />
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="form-row">
+              <ion-col>
+                <button
+                  type="submit"
+                  class="h7 btn btn-success"
+                  style="margin-top: 5px"
+                  (click)="btn_add('Part')"
+                >
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.add' | translate}}
+                </button>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <!-- Damage Type -->
+        <div *ngIf="damageFlag">
+          <ion-row class="form-row">
+            <ion-col size="5">
+              <div class="title">
+                {{ 'MAINTENANCEACKNOWLEDGEMODAL.damagetype' | translate}}
+              </div>
+            </ion-col>
+
+            <ion-col size="0.5" style="text-align: center">
+              <div class="title">
+                <b>:</b>
+              </div>
+            </ion-col>
+
+            <ion-col size="6.5">
+              <ion-button class="optionbutton" (click)="openDamageType()"
+                >{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+          <div class="hl4line" *ngIf="damagetypevalue==''"></div>
+
+          <div
+            class="title"
+            style="margin-top: 10px; color: #3cd2a5; text-align: left"
+            *ngIf="damagetypevalue!=''"
+          >
+            <b
+              >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selecteddamagetype' |
+              translate}}</b
+            >
+          </div>
+
+          <div
+            class="title"
+            style="text-align: center"
+            *ngIf="damagetypevalue!=''"
+            [innerHTML]="damagetypevalue"
+          ></div>
+
+          <div class="hl4line" *ngIf="damagetypevalue!=''"></div>
+
+          <ion-select
+            [interfaceOptions]="damagetypeOptions"
+            formControlName="select_damagetype"
+            multiple="true"
+            [okText]="'GENERALBUTTON.okay' | translate"
+            [cancelText]="'GENERALBUTTON.dismiss' | translate"
+            class="ionicselect"
+            (ionChange)="damagehandleChange($event)"
+            #damagetypeSelect
+          >
+            <ion-select-option
+              value="{{parseString(value)}}"
+              *ngFor="let value of damageArr; let i = index"
+              >{{ value.damage }}</ion-select-option
+            >
+          </ion-select>
+        </div>
+
+        <!-- Breakdown Causes -->
+        <div *ngIf="breakdowncausesFlag">
+          <ion-row class="form-row">
+            <ion-col size="5">
+              <div class="title">
+                {{ 'MAINTENANCEACKNOWLEDGEMODAL.breakdowncauses' | translate}}
+              </div>
+            </ion-col>
+
+            <ion-col size="0.5" style="text-align: center">
+              <div class="title">
+                <b>:</b>
+              </div>
+            </ion-col>
+
+            <ion-col size="6.5">
+              <ion-button class="optionbutton" (click)="openBreakdownCauses()"
+                >{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+          <div class="hl4line" *ngIf="breakdowncausesvalue==''"></div>
+
+          <div
+            class="title"
+            style="margin-top: 10px; color: #3cd2a5"
+            *ngIf="breakdowncausesvalue!=''"
+          >
+            <b
+              >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selectedbreakdowncauses' |
+              translate}}</b
+            >
+          </div>
+
+          <div
+            class="title"
+            style="text-align: center"
+            *ngIf="breakdowncausesvalue!=''"
+            [innerHTML]="breakdowncausesvalue"
+          ></div>
+
+          <div class="hl4line" *ngIf="breakdowncausesvalue!=''"></div>
+
+          <ion-select
+            [interfaceOptions]="breakdowncausesOptions"
+            formControlName="select_breakdowncauses"
+            multiple="true"
+            [okText]="'GENERALBUTTON.okay' | translate"
+            [cancelText]="'GENERALBUTTON.dismiss' | translate"
+            class="ionicselect"
+            (ionChange)="breakdowncauseshandleChange($event)"
+            #breakdowncausesSelect
+          >
+            <ion-select-option
+              value="{{parseString(value)}}"
+              *ngFor="let value of breakdowncausesArr; let i = index"
+              >{{ value.BreakdownCause }}</ion-select-option
+            >
+          </ion-select>
+        </div>
+      </div>
+
+      <ion-row>
+        <ion-col style="text-align: center !important" no-padding>
+          <button
+            type="submit"
+            [disabled]="saveDisable"
+            class="btn btn-next"
+            (click)="remarksalert()"
+            *ngIf="(getstatusid == '2' || getstatusid == '4') && !verifyFlag"
+          >
+            <span class="icontext" style="color: #ffffff"
+              >{{ 'GENERALBUTTON.savebutton' | translate}}</span
+            >
+          </button>
+
+          <button
+            type="submit"
+            [disabled]="saveDisable"
+            class="btn btn-next"
+            (click)="btn_next('STEP1')"
+            *ngIf="(getstatusid == '2' || getstatusid == '4') && verifyFlag"
+          >
+            <span class="icontext" style="color: #ffffff"
+              >{{ 'MAINTENANCEACKNOWLEDGEMODAL.next' | translate}}</span
+            >
+          </button>
+
+          <button
+            type="submit"
+            [disabled]="saveDisable"
+            class="btn btn-next"
+            (click)="save('')"
+            *ngIf="(getstatusid == '3' || getstatusid == '10')"
+          >
+            <span class="icontext" style="color: #ffffff"
+              >{{ 'GENERALBUTTON.savebutton' | translate}}</span
+            >
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>

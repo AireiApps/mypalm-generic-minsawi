@@ -173,6 +173,7 @@
             name="backpressurereceiver"
             formControlName="txt_backpressurereceiver"
             placeholder="{{ 'HOURLYSTERILIZATIONSTATIONSAVE.backpressureterm' | translate}}"
+            (keypress)="decimalFilter($event)"
             (input)="onChangeBackPressureReceiver()"
           />
         </ion-col>
@@ -194,6 +195,7 @@
             class="h7 form-control"
             formControlName="txt_p1"
             placeholder="{{ 'HOURLYSTERILIZATIONSTATIONSAVE.p1peak' | translate}}"
+            (keypress)="decimalFilter($event)"
             (input)="onChangeP1()"
           />
         </ion-col>
@@ -215,6 +217,7 @@
             class="h7 form-control"
             formControlName="txt_p2"
             placeholder="{{ 'HOURLYSTERILIZATIONSTATIONSAVE.p2peak' | translate}}"
+            (keypress)="decimalFilter($event)"
             (input)="onChangeP2()"
           />
         </ion-col>
@@ -236,6 +239,7 @@
             class="h7 form-control"
             formControlName="txt_p3"
             placeholder="{{ 'HOURLYSTERILIZATIONSTATIONSAVE.p3peak' | translate}}"
+            (keypress)="decimalFilter($event)"
             (input)="onChangeP3()"
           />
         </ion-col>

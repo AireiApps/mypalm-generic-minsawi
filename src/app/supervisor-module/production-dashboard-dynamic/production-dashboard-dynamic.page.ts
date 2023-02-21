@@ -602,7 +602,7 @@ export class ProductionDashboardDynamicPage implements OnInit {
   }
 
   startstopProduction(getbalancecrop) {
-    if (this.productionflag == "0") {
+    if (this.productionflag == "0" || this.productionflag == "") {
       this.productioncount = 1;
     }
 
@@ -1072,6 +1072,8 @@ export class ProductionDashboardDynamicPage implements OnInit {
         typeof breakdownid !== "undefined" &&
         typeof maintenancetypeid !== "undefined"
       ) {
+        this.dashboardForm.controls.select_station.setValue("");
+
         this.problemalertmessage(
           getstationid,
           getstationname,

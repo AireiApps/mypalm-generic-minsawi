@@ -22,7 +22,7 @@
 <ion-content mode="md">
   <div
     class="myCard"
-    *ngIf="userdesignation==5 || userdesignation==6 || userdesignation==9"
+    *ngIf="userdesignation==5 || userdesignation==11 || userdesignation==9"
   >
     <img class="backgroundimage" src="../../../assets/img/header_myPalm.png" />
     <div class="myOverlay">
@@ -52,28 +52,6 @@
 
   <!-- Lab (1006) -->
   <div *ngIf="userdepartmentid==2" #myElementRef>
-    <!-- <ion-grid>
-      <ion-row *ngFor="let item of lab1006Arr">
-        <div
-          class="card"
-          (click)="btn_Action(eachitem)"
-          *ngFor="let eachitem of item"
-        >
-          <ion-col size="3" style="display: flex; align-items: center">
-            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
-          </ion-col>
-          <ion-col size="9" style="display: flex; align-items: center">
-            <p style="font-size: 14px; margin-left: -10; margin-top: 15px">
-              <b>{{eachitem.title}}</b>
-            </p>
-          </ion-col>
-        </div>
-      </ion-row>
-    </ion-grid> -->
-
-    <!-- <div class="title">
-      <ion-label text-wrap>New Oil Losses</ion-label>
-    </div> -->
     <div class="reportstitleheader">
       {{ 'MAINTENANCEHOME.newoillosses' | translate}}
     </div>
@@ -102,9 +80,6 @@
       <ion-col sizze="3"></ion-col>
     </ion-row>
 
-    <!-- <div class="title">
-      <ion-label text-wrap>Reports</ion-label>
-    </div> -->
     <div class="reportstitleheader">
       {{ 'MAINTENANCEHOME.reports' | translate}}
     </div>
@@ -404,6 +379,35 @@
         </div>
       </ion-col>
     </ion-row> -->
+  </div>
+
+  <!-- Chargeman (1006) -->
+  <div *ngIf="userdepartmentid==7 && userdesignation==6" #myElementRef>
+    <div class="reportstitleheader">
+      {{ 'MAINTENANCEHOME.maintenancemonitoring' | translate}}
+    </div>
+
+    <ion-row *ngFor="let item of foremanArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_ReportAction(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <b>{{eachitem.subtitle}}</b>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
   </div>
 
   <!-- Fitter (1006) -->
@@ -949,8 +953,8 @@
     </div>
   </div>
 
-  <!-- Chargeman (1006) -->
-  <div *ngIf="userdepartmentid==7 && userdesignation==6" #myElementRef>
+  <!-- Wireman (1006) -->
+  <div *ngIf="userdepartmentid==7 && userdesignation==11" #myElementRef>
     <form [formGroup]="maintenancehomeForm">
       <div class="form-row" style="margin-top: 10px">
         <div class="h7 text-white" style="text-align: center">

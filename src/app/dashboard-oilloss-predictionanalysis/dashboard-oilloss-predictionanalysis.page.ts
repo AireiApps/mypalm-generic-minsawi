@@ -15,6 +15,7 @@ export class DashboardOillossPredictionanalysisPage implements OnInit {
   oillosspredictionanalysis = this.userlist.report_oillosspredictionanalysis;
 
   weburl;
+  iconname = "tablet-landscape-outline";
 
   constructor(private screenOrientation: ScreenOrientation) {
     //this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
@@ -27,10 +28,24 @@ export class DashboardOillossPredictionanalysisPage implements OnInit {
   }
 
   ngOnDestroy() {
-    /*this.screenOrientation.unlock();
+    this.screenOrientation.unlock();
     this.screenOrientation.lock(
       this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY
-    );*/
+    );
+  }
+
+  btn_orientation() {
+    if (this.screenOrientation.type == "portrait-primary") {
+      this.iconname = "tablet-portrait-outline";
+      this.screenOrientation.lock(
+        this.screenOrientation.ORIENTATIONS.LANDSCAPE
+      );
+    } else if (this.screenOrientation.type == "landscape-primary") {
+      this.iconname = "tablet-landscape-outline";
+      this.screenOrientation.lock(
+        this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY
+      );
+    }
   }
 
   getUrl() {

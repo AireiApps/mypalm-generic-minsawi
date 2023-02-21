@@ -44,6 +44,7 @@ export class ProductionNotificationViewPage implements OnInit {
   partdefect = "";
   damage = "";
   breakdowncauses = "";
+  remarks = "";
   createddatetime = "";
   activity = "";
   carriedoutby = "";
@@ -120,6 +121,7 @@ export class ProductionNotificationViewPage implements OnInit {
         this.partdefect = this.generalArr[0].partdefect;
         this.damage = this.generalArr[0].damages;
         this.breakdowncauses = this.generalArr[0].breakdowncauses;
+        this.remarks = this.generalArr[0].remarks;
         this.createddatetime = this.generalArr[0].insDate;
         this.reportedby = this.generalArr[0].reportBy;
 
@@ -130,6 +132,7 @@ export class ProductionNotificationViewPage implements OnInit {
           this.partdefect == "" &&
           this.damage == "" &&
           this.breakdowncauses == "" &&
+          this.remarks == "" &&
           this.createddatetime
         ) {
           this.detailsnorecordFlag = true;
@@ -183,6 +186,7 @@ export class ProductionNotificationViewPage implements OnInit {
         this.partdefect = "";
         this.damage = "";
         this.breakdowncauses = "";
+        this.remarks = "";
         this.createddatetime = "";
 
         this.activity = "";

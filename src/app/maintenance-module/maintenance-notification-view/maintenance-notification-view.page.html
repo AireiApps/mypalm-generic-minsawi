@@ -153,8 +153,11 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.stationname' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{station}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{station}}</div>
           </ion-col>
         </ion-row>
 
@@ -164,8 +167,11 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.machineryname' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{equipment}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{equipment}}</div>
           </ion-col>
         </ion-row>
 
@@ -178,8 +184,11 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.partname' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{partdefect}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{partdefect}}</div>
           </ion-col>
         </ion-row>
 
@@ -189,8 +198,11 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.currentrunninghours' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{runninghours}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{runninghours}}</div>
           </ion-col>
         </ion-row>
 
@@ -200,8 +212,11 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.damagetype' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{damage}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{damage}}</div>
           </ion-col>
         </ion-row>
 
@@ -211,8 +226,25 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.breakdowncauses' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{breakdowncauses}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{breakdowncauses}}</div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="remarks!=''">
+          <ion-col size="4.5">
+            <div class="h7 text-dark">
+              {{ 'MAINTENANCENOTIFICATIONVIEW.remarks' | translate}}
+            </div>
+          </ion-col>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{remarks}}</div>
           </ion-col>
         </ion-row>
 
@@ -222,8 +254,11 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.dateandtime' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{createddatetime}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{createddatetime}}</div>
           </ion-col>
         </ion-row>
       </div>
@@ -246,8 +281,11 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.smallactivity' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{activity}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{activity}}</div>
           </ion-col>
         </ion-row>
 
@@ -257,8 +295,11 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.partreceived' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{partreceiveddatetime}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{partreceiveddatetime}}</div>
           </ion-col>
         </ion-row>
 
@@ -271,8 +312,11 @@
               translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{activitycompletiondatetime}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{activitycompletiondatetime}}</div>
           </ion-col>
         </ion-row>
 
@@ -282,8 +326,11 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.carriedoutby' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{carriedoutby}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{carriedoutby}}</div>
           </ion-col>
         </ion-row>
 
@@ -293,8 +340,11 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.verifiedby' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{verifiedby}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{verifiedby}}</div>
           </ion-col>
         </ion-row>
       </div>
@@ -320,8 +370,11 @@
               {{ 'MAINTENANCENOTIFICATIONVIEW.acknowlegedby' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{authorizedby}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{authorizedby}}</div>
           </ion-col>
         </ion-row>
 
@@ -332,8 +385,11 @@
               'MAINTENANCENOTIFICATIONVIEW.acknowledgeddatetime' | translate}}
             </div>
           </ion-col>
-          <ion-col size="7.5">
-            <div class="h7 blockdata">: {{authorizeddatetime}}</div>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="h7 text-dark">:</div>
+          </ion-col>
+          <ion-col size="7">
+            <div class="h7 blockdata">{{authorizeddatetime}}</div>
           </ion-col>
         </ion-row>
       </div>

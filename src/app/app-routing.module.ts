@@ -633,6 +633,34 @@ const routes: Routes = [
         (m) => m.ChatbotPageModule
       ),
   },
+  {
+    path: "grading-home",
+    loadChildren: () =>
+      import("./grading-module/grading-home/grading-home.module").then(
+        (m) => m.GradingHomePageModule
+      ),
+  },
+  {
+    path: "grading-vehicle-search",
+    loadChildren: () =>
+      import(
+        "./grading-module/grading-vehicle-search/grading-vehicle-search.module"
+      ).then((m) => m.GradingVehicleSearchPageModule),
+  },
+  {
+    path: "grading-report",
+    loadChildren: () =>
+      import("./grading-module/grading-report/grading-report.module").then(
+        (m) => m.GradingReportPageModule
+      ),
+  },
+  {
+    path: "maintenance-fitterwireman-verify-acknowledge",
+    loadChildren: () =>
+      import(
+        "./maintenance-module/maintenance-fitterwireman-verify-acknowledge/maintenance-fitterwireman-verify-acknowledge.module"
+      ).then((m) => m.MaintenanceFitterwiremanVerifyAcknowledgePageModule),
+  },
 ];
 
 @NgModule({

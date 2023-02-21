@@ -1,0 +1,278 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title color="light" [innerHTML]="mill_name"></ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent">
+          {{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="md">
+  <div class="myCard">
+    <img class="backgroundimage" src="../../../assets/img/header_myPalm.png" />
+    <div class="myOverlay">
+      <div class="usermessagecard">
+        <ion-row>
+          <ion-col size="12">
+            <p
+              style="
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0px;
+                color: #ffffff;
+              "
+            >
+              {{ 'GRADINGHOME.welcome' | translate}} {{userlist.name}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+
+  <div #myElementRef>
+    <form [formGroup]="gradingForm">
+      <!-- <div class="reportstitleheader">
+        {{ 'GRADINGHOME.newgrading' | translate}}
+      </div> -->
+
+      <ion-row style="margin-top: 5px">
+        <ion-col size="6"></ion-col>
+        <ion-col size="6" style="text-align: right !important">
+          <button
+            type="submit"
+            class="btn btn-grading"
+            (click)="btn_receivenewload()"
+          >
+            <span class="icontext" style="color: #ffffff">
+              {{ 'GRADINGHOME.newgrading' | translate}}
+            </span>
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <div *ngIf="receivenewloadFlag">
+        <ion-row class="form-row" *ngIf="selectvehicleFlag">
+          <ion-col size="6">
+            <div class="title">{{ 'GRADINGHOME.vehicle' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="6">
+            <input
+              type="text"
+              class="h7 form-control readonly"
+              formControlName="txt_searchvehicle"
+              placeholder="{{ 'GRADINGHOME.searchvehicle' | translate}}"
+              (click)="callmodalcontroller('Vehicle')"
+              readonly
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="entervehicleFlag">
+          <ion-col size="6">
+            <div class="title">
+              {{ 'GRADINGHOME.vehiclenumber' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="6">
+            <input
+              type="text"
+              class="h7 form-control"
+              formControlName="txt_vehiclenumber"
+              placeholder="{{ 'GRADINGHOME.entervehiclenumber' | translate}}"
+              (keypress)="alphanumberFilter($event)"
+            />
+          </ion-col>
+        </ion-row>
+
+        <div *ngIf="entervehicleFlag">
+          <div
+            style="
+              font-size: 14px;
+              color: #df4759;
+              text-align: right;
+              margin-right: 10px;
+            "
+            (click)="backtoselect()"
+          >
+            <ion-icon
+              class="icon"
+              color="danger"
+              name="arrow-undo-outline"
+            ></ion-icon>
+            <span class="icontext"
+              ><b>{{ 'GENERALBUTTON.select' | translate}}</b></span
+            >
+          </div>
+        </div>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="title">{{ 'GRADINGHOME.hardbunches' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              formControlName="txt_hardbunches"
+              placeholder="%"
+              (keypress)="decimalFilter($event)"
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="title">
+              {{ 'GRADINGHOME.underripebunches' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              formControlName="txt_underripebunches"
+              placeholder="%"
+              (keypress)="decimalFilter($event)"
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="title">{{ 'GRADINGHOME.ripeness' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              formControlName="txt_ripeness"
+              placeholder="%"
+              (keypress)="decimalFilter($event)"
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="title">{{ 'GRADINGHOME.loosefruits' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              formControlName="txt_loosefruits"
+              placeholder="%"
+              (keypress)="decimalFilter($event)"
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col style="text-align: center !important">
+            <button
+              type="submit"
+              [disabled]="confirmDisable"
+              class="btn btn-save"
+              (click)="btn_save()"
+            >
+              {{ 'GENERALBUTTON.savebutton' | translate}}
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <div class="hl4line" style="margin-bottom: 15px"></div>
+      </div>
+
+      <div>
+        <div class="reportstitleheader">
+          {{ 'GRADINGHOME.lastfiverecords' | translate}}
+        </div>
+
+        <ion-card class="bg-card" *ngFor="let value of gradinglistArr">
+          <ion-card-content class="cardcontent">
+            <ion-row *ngIf="(value.vehicleno!='' || value.insDate!='')">
+              <ion-col>
+                <p class="title-content">
+                  {{value.vehicle_no}} - {{value.insdt}}
+                </p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.hardbunches!=''">
+              <ion-col size="7"
+                >{{ 'GRADINGHOME.hardbunches' | translate}}</ion-col
+              >
+
+              <ion-col size="5">
+                <p class="data">: {{value.hard_bunch_percent}}%</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.underripebunches!=''">
+              <ion-col size="7"
+                >{{ 'GRADINGHOME.underripebunches' | translate}}</ion-col
+              >
+
+              <ion-col size="5">
+                <p class="data">: {{value.under_ripe_bunch_percent}}%</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.ripeness!=''">
+              <ion-col size="7"
+                >{{ 'GRADINGHOME.ripeness' | translate}}</ion-col
+              >
+
+              <ion-col size="5">
+                <p class="data">: {{value.ripeness_percent}}%</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.loosefruits!=''">
+              <ion-col size="7"
+                >{{ 'GRADINGHOME.loosefruits' | translate}}</ion-col
+              >
+
+              <ion-col size="5">
+                <p class="data">: {{value.loose_fruit_percent}}%</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
+        <div class="norecordfound" *ngIf="norecordFlag">
+          {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+        </div>
+
+        <div class="pleasewait" *ngIf="pleasewaitflag">
+          <div style="width: 100%; text-align: center">
+            <img
+              style="width: 80px; height: 80px"
+              src="../../../assets/img/loading.gif"
+            />
+          </div>
+          {{ 'NORECORDSFOUND.loading' | translate}}
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>

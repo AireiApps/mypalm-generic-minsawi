@@ -124,9 +124,31 @@
     </ion-grid>
   </div>
 
+  <!-- Chargeman -->
+  <div *ngIf="userdepartmentid==7 && userdesignation==6">
+    <ion-grid>
+      <ion-row *ngFor="let item of foreman1006Arr">
+        <ion-col size="6" *ngFor="let eachitem of item">
+          <div class="card card-height" (click)="btn_Action(eachitem)">
+            <ion-col size="4" style="display: flex; align-items: center">
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+            </ion-col>
+            <ion-col size="8" style="display: flex; align-items: center">
+              <p style="font-size: 14px; margin-left: -10; margin-top: 15px">
+                <b>{{eachitem.title}}</b>
+              </p>
+            </ion-col>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
   <!-- Fitter -->
   <div *ngIf="userdepartmentid==7 && userdesignation==5">
-    <div class="reportstitleheader">{{ 'MAINTENANCEREPORT.maintenancereports' | translate}}</div>
+    <div class="reportstitleheader">
+      {{ 'MAINTENANCEREPORT.maintenancereports' | translate}}
+    </div>
 
     <ion-row *ngFor="let item of fitterArr">
       <ion-col size="6" *ngFor="let eachitem of item">
@@ -151,9 +173,11 @@
     </ion-row>
   </div>
 
-  <!-- Chargeman -->
-  <div *ngIf="userdepartmentid==7 && userdesignation==6">
-    <div class="reportstitleheader">{{ 'MAINTENANCEREPORT.maintenancereports' | translate}}</div>
+  <!-- Wireman -->
+  <div *ngIf="userdepartmentid==7 && userdesignation==11">
+    <div class="reportstitleheader">
+      {{ 'MAINTENANCEREPORT.maintenancereports' | translate}}
+    </div>
 
     <ion-row *ngFor="let item of fitterArr">
       <ion-col size="6" *ngFor="let eachitem of item">

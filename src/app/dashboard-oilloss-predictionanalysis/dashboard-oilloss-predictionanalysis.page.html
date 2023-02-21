@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_orientation()">
+        <ion-icon [name]="iconname"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
     <ion-buttons slot="start">
       <ion-back-button color="whitefav"></ion-back-button>
     </ion-buttons>
-    <ion-title mode="ios" color="light">{{ 'MAINTENANCEHOME.predictionanalysis' | translate}}</ion-title>
+    <ion-title mode="ios" color="light"
+      >{{ 'MAINTENANCEHOME.predictionanalysis' | translate}}</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 

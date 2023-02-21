@@ -57,6 +57,7 @@
     "more": "Profile",
     "reports":"Reports"
   },
+
   "TABSLAB": {
     "dashboard": "Dashboard",
     "home": "Home",    
@@ -68,6 +69,12 @@
     "dashboard": "Dashboard",
     "home": "Home",    
     "chats": "Chats",
+    "more": "Profile"
+  },
+
+  "TABSGRADING": {
+    "home": "Home",
+    "reports":"Reports",   
     "more": "Profile"
   },
 
@@ -453,9 +460,11 @@
     "partname":"Part Name",
     "assignto":"Assign To",
     "select":"Select",
-    "selectedfitter":"Selected Fitter/Chargeman",
+    "selectedfitter":"Selected Fitter/Wireman",
     "confirm":"Confirm",
-    "fitterchargeman":"Fitter/Chargeman List",
+    "fitterchargeman":"Fitter/Wireman List",
+    "fitterlist":"Fitter List",
+    "wiremanlist":"Wireman List",
     "activitymandatory":"Activity Selection is Mandatory",
     "alert":"Alert",
     "alertmessage":"Are you sure, you want to assign this Routine Preventive Maintenance?",
@@ -507,7 +516,7 @@
     "yes":"Yes",
     "verifybutton": "Verify"
   },
-
+  
   "NORECORDSFOUND": {
     "norecordsfound": "No Records Found",
     "loading":"Loading..."
@@ -685,7 +694,8 @@
     "maintenancetype":"Maintenance Type",
     "partdefect":"Part Defect",
     "damagetype":"Damage Type",
-    "authorizedby":"Authorized By"
+    "authorizedby":"Authorized By",
+    "remarks": "Remarks"
   },
   "PREVENTIVEMAINTENANCE":{
     "title":"Preventive Maintenance",
@@ -865,10 +875,12 @@
     "dismiss":"Dismiss",
     "assignto":"Assign To",
     "selectedassignto":"Selected Assign To",
-    "fitterchargeman":"Fitter & Chargeman List",
+    "fitterchargeman":"Fitter/Wireman List",
+    "fitterlist":"Fitter List",
+    "wiremanlist":"Wireman List",
     "assignedtoselection":"Assigned To Selection is Mandatory",
     "assigntomandatory":"Assigned To is Mandatory",
-    "selectedfitter":"Selected Fitter/Chargeman",
+    "selectedfitter":"Selected Fitter/Wireman",
     "assignedto":"Assigned To",
     "assigncorrective":"Are you sure, you want to assign this Corrective Maintenance?",
     "assignsuccess":"Corrective Maintenance Assigned Successfully",
@@ -900,7 +912,7 @@
   },
   "OILLOSSESSREPORT":{
     "oillosses":"Oil Losses",
-    "oillosselist":"Oil Losses List",
+    "oillosselist":"Oil Losses",
     "oillossesedit":"Oil Losses Edit",
     "samplecollectiontime":"Sample Collection Time",
     "fromdate":"From",
@@ -1076,6 +1088,7 @@
     "correctivefailed":"Corrective Maintenance Updation Failed",
     "optional":"Optional"
   },
+
   "MAINTENANCEACKNOWLEDGEMODAL":{
     "maintenancetype":"Maintenance Type",
     "select":"Select",
@@ -1140,16 +1153,19 @@
     "searchpartname":"Search Part Name",
     "verifyacknowledge":"Verify & Acknowledge"
   },
+
   "PREVENTIVEMAINTENANCEASSIGNMODAL":{
     "problem":"Problem",
-    "fitterchargeman":"Fitter/Chargeman List",
+    "fitterchargeman":"Fitter/Wireman List",
+    "fitterlist":"Fitter List",
+    "wiremanlist":"Wireman List",
     "station":"Station",
     "machine":"Machine",
     "partreplaced":"Part Replaced",
     "activity":"Activity",
     "assignto":"Assign To",
     "select":"Select",
-    "selectedfitter":"Selected Fitter/Chargeman",
+    "selectedfitter":"Selected Fitter/Wireman",
     "assignedto":"Assigned To",
     "activitymandatory":"Activity Selection is Mandatory",
     "assigntomandatory":"Assigned To is Mandatory",
@@ -1159,6 +1175,39 @@
     "replacementsuccess":"Replacement Preventive Maintenance Assigned Successfully",
     "replacementfailed":"Replacement Preventive Maintenance Assigning Failed"
   },
+
+  "GRADINGHOME": {
+    "welcome":"Welcome",
+    "newgrading":"Receive New Load",
+    "vehicle":"Vehicle",
+    "vehiclenumber":"Vehicle Number",
+    "hardbunches":"Hard Bunches",
+    "underripebunches":"Under Ripe Bunches",
+    "ripeness":"Ripeness",
+    "loosefruits":"Loose Fruits",
+    "lastfiverecords":"Last 5 Recent Records",
+    "entervehiclenumber":"Enter Vehicle Number",
+    "searchvehicle":"Search Vehicle",
+    "vehiclenumbermandatory":"Vehicle Number is Mandatory",
+    "receivedloadsuccessfully":"Received Load Successfully",
+    "receivedloadfailed":"Receiving Load Failed"
+  },
+  "GRADINGREPORT":{
+    "gradingreport":"Grading Report",
+    "from":"From",
+    "to":"To",
+    "hardbunches":"Hard Bunches",
+    "underripebunches":"Under Ripe Bunches",
+    "ripeness":"Ripeness",
+    "loosefruits":"Loose Fruits"
+  },
+  "SEARCHVEHICLE":{
+    "search":"Search",
+    "searchvehicle":"Search Vehicle",
+    "nosearchrecords":"No Vehicle Found",
+    "loadingmoredata":"Loading more data..."
+  },
+
   "NETWORKERROR":{
     "networkdisconnected":"Network Disconnected",
     "noconnection":"No Connection",

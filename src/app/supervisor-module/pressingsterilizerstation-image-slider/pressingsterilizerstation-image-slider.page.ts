@@ -5,7 +5,6 @@ import { Router } from "@angular/router";
 import { ModalController, NavParams, IonSlides } from "@ionic/angular";
 import { TranslateService } from "@ngx-translate/core";
 
-
 @Component({
   selector: "app-pressingsterilizerstation-image-slider",
   templateUrl: "./pressingsterilizerstation-image-slider.page.html",
@@ -76,7 +75,8 @@ export class PressingsterilizerstationImageSliderPage implements OnInit {
         let eachitem = this.temperatureimages[i];
         let eachreq = {
           image: eachitem,
-          title:  this.translate.instant("IMAGESLIDER.temperatureimage") + (i + 1),
+          title:
+            this.translate.instant("IMAGESLIDER.temperatureimage") + (i + 1),
         };
 
         this.imagesArr.push(eachreq);
@@ -152,7 +152,7 @@ export class PressingsterilizerstationImageSliderPage implements OnInit {
   cancel() {
     this.modalController.dismiss({
       dismissed: true,
-      item: [],
+      item: "",
     });
   }
 }

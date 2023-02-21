@@ -40,6 +40,7 @@ import { DatePickerPluginInterface } from "@capacitor-community/date-picker";
 const DatePicker: DatePickerPluginInterface = Plugins.DatePickerPlugin as any;
 
 import { MaintenanceNotificationAcceptModalPage } from "src/app/maintenance-module/maintenance-notification-accept-modal/maintenance-notification-accept-modal.page";
+import { MaintenanceFitterwiremanVerifyAcknowledgePage } from "src/app/maintenance-module/maintenance-fitterwireman-verify-acknowledge/maintenance-fitterwireman-verify-acknowledge.page";
 
 @Component({
   selector: "app-maintenance-home",
@@ -336,7 +337,7 @@ export class MaintenanceHomePage implements OnInit {
 
     if (
       this.userdepartmentid == 7 &&
-      (this.userdesignation == 5 || this.userdesignation == 6)
+      (this.userdesignation == 5 || this.userdesignation == 11)
     ) {
       this.activatedroute.params.subscribe((val) => {
         if (localStorage.getItem("notificationdata") != "") {
@@ -724,7 +725,7 @@ export class MaintenanceHomePage implements OnInit {
       // To call the api when notificaton comes
       if (
         this.userdepartmentid == 7 &&
-        (this.userdesignation == 5 || this.userdesignation == 6)
+        (this.userdesignation == 5 || this.userdesignation == 11)
       ) {
         if (this.tabs_segment == "Routine Preventive Maintenance") {
           this.getDCList();

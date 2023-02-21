@@ -79,9 +79,9 @@ export class ReportMaintenanceNotificationPage implements OnInit {
     this.count = parseInt(localStorage.getItem("badge_count"));
     this.notifi.updateNotification();
     this.updateNotification();
-    this.getLiveNotification();*/
+    this.getLiveNotification();
 
-    this.getNotification();
+    this.getNotification();*/
   }
 
   ionViewDidEnter() {
@@ -194,7 +194,7 @@ export class ReportMaintenanceNotificationPage implements OnInit {
       max: this.currentdate,
       theme: "dark",
       doneText: this.translate.instant("GENERALBUTTON.done"),
-      cancelText:this.translate.instant("GENERALBUTTON.cancelbutton"),
+      cancelText: this.translate.instant("GENERALBUTTON.cancelbutton"),
     }).then(
       (val) => {
         if (val.value) {

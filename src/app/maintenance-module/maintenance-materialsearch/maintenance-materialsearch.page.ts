@@ -194,19 +194,6 @@ export class MaintenanceMaterialsearchPage implements OnInit {
     });
   }
 
-  gettextColor(status) {
-    let color;
-
-    if (status == 1) {
-      color = "#006426";
-    } else if (status == 0) {
-      color = "#b91818";
-    } else {
-      color = "#000000";
-    }
-    return color;
-  }
-
   pagination(event) {
     setTimeout(() => {
       if (this.materialArr.length == this.totalpage / this.size) {
@@ -226,6 +213,19 @@ export class MaintenanceMaterialsearchPage implements OnInit {
         this.loadData(false, String(z), this.searching);
       }
     }, 500);
+  }
+
+  gettextColor(status) {
+    let color;
+
+    if (status == 1) {
+      color = "#006426";
+    } else if (status == 0) {
+      color = "#b91818";
+    } else {
+      color = "#000000";
+    }
+    return color;
   }
 
   dismiss() {

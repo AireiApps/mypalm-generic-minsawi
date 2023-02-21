@@ -202,6 +202,79 @@ const routes_foreman: Routes = [
   },
 ];
 
+const routes_chargeman: Routes = [
+  {
+    path: "",
+    component: TabsPage,
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: "tabmaintenancedashboard",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../maintenance-module/maintenance-dashboard/maintenance-dashboard.module"
+              ).then((m) => m.MaintenanceDashboardPageModule),
+          },
+        ],
+      },
+      {
+        path: "tabmaintenancehome",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../maintenance-module/maintenance-home/maintenance-home.module"
+              ).then((m) => m.MaintenanceHomePageModule),
+          },
+        ],
+      },
+      {
+        path: "tabqrcodescanner",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../scanner-module/qrcodescanner/qrcodescanner.module"
+              ).then((m) => m.QrcodescannerPageModule),
+          },
+        ],
+      },
+      {
+        path: "tabreport",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../maintenance-module/maintenance-report/maintenance-report.module"
+              ).then((m) => m.MaintenanceReportPageModule),
+          },
+        ],
+      },
+      {
+        path: "tab3",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../more/more.module").then((m) => m.MorePageModule),
+          },
+        ],
+      },
+      {
+        path: "",
+        redirectTo: "/tabs/tabmaintenancedashboard",
+        pathMatch: "full",
+      },
+    ],
+  },
+];
+
 const routes_fitter: Routes = [
   {
     path: "",
@@ -263,7 +336,7 @@ const routes_fitter: Routes = [
   },
 ];
 
-const routes_chargeman: Routes = [
+const routes_wireman: Routes = [
   {
     path: "",
     component: TabsPage,
@@ -502,6 +575,55 @@ const routes_sterilizerpress: Routes = [
   },
 ];
 
+const routes_grading: Routes = [
+  {
+    path: "",
+    component: TabsPage,
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: "tabgradinghome",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../grading-module/grading-home/grading-home.module").then(
+                (m) => m.GradingHomePageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabgradingreports",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../grading-module/grading-report/grading-report.module"
+              ).then((m) => m.GradingReportPageModule),
+          },
+        ],
+      },
+      {
+        path: "tabprofile",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../more/more.module").then((m) => m.MorePageModule),
+          },
+        ],
+      },
+      {
+        path: "",
+        redirectTo: "/tabs/tabgradinghome",
+        pathMatch: "full",
+      },
+    ],
+  },
+];
+
 //console.log(userlist);
 
 if (userlist) {
@@ -525,9 +647,13 @@ if (userlist) {
         newRoutes = routes_fitter;
       } else if (userlist.desigId == 6) {
         newRoutes = routes_chargeman;
+      } else if (userlist.desigId == 11) {
+        newRoutes = routes_wireman;
       } else {
         newRoutes = routes_engineering;
       }
+    } else if (userlist.dept_id == 10) {
+      newRoutes = routes_grading;
     } else if (userlist.dept_id == 25) {
       newRoutes = routes_management;
     } else {

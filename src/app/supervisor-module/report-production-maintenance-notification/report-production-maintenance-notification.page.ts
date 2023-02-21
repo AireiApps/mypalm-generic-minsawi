@@ -144,7 +144,7 @@ export class ReportProductionMaintenanceNotificationPage implements OnInit {
       max: this.currentdate,
       theme: "dark",
       doneText: this.translate.instant("GENERALBUTTON.done"),
-      cancelText:this.translate.instant("GENERALBUTTON.cancelbutton"),
+      cancelText: this.translate.instant("GENERALBUTTON.cancelbutton"),
     }).then(
       (val) => {
         if (val.value) {

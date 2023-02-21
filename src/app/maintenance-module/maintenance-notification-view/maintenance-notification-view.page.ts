@@ -54,6 +54,7 @@ export class MaintenanceNotificationViewPage implements OnInit {
   damagesid = "";
   breakdowncauses = "";
   breakdowncausesid = "";
+  remarks = "";
   createddatetime = "";
   activity = "";
   carriedoutby = "";
@@ -161,6 +162,7 @@ export class MaintenanceNotificationViewPage implements OnInit {
         this.damagesid = this.generalArr[0].damagesid;
         this.breakdowncauses = this.generalArr[0].breakdowncauses;
         this.breakdowncausesid = this.generalArr[0].breakdowncausesidnew;
+        this.remarks = this.generalArr[0].remarks;
         this.createddatetime = this.generalArr[0].insDate;
 
         this.statusid = this.generalArr[0].statusId;
@@ -173,6 +175,7 @@ export class MaintenanceNotificationViewPage implements OnInit {
           this.partdefect == "" &&
           this.damage == "" &&
           this.breakdowncauses == "" &&
+          this.remarks == "" &&
           this.createddatetime
         ) {
           this.detailsnorecordFlag = true;
@@ -237,6 +240,7 @@ export class MaintenanceNotificationViewPage implements OnInit {
         this.breakdowncauses = "";
         this.breakdowncausesid = "";
 
+        this.remarks = "";
         this.createddatetime = "";
 
         this.activity = "";
@@ -376,11 +380,19 @@ export class MaintenanceNotificationViewPage implements OnInit {
             this.fromscreen == "RePM" ||
             this.fromscreen == "RePMACK"
           ) {
+            this.commonservice.presentToast(
+              this.translate.instant("MAINTENANCEACKNOWLEDGEMODAL.success")
+            );
+
             this.router.navigate([
               "/maintenance-pvrpv-list",
               { reportdate: "" },
             ]);
           } else {
+            this.commonservice.presentToast(
+              this.translate.instant("MAINTENANCEACKNOWLEDGEMODAL.success")
+            );
+
             this.router.navigate([
               "/maintenance-notification-list",
               { reportdate: "" },

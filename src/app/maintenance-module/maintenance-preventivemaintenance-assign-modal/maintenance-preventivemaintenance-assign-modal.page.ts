@@ -64,9 +64,14 @@ export class MaintenancePreventivemaintenanceAssignModalPage implements OnInit {
 
   // Ionic Select Header
   public assignedtoOptions: any = {
-    header: this.translate.instant(
-      "PREVENTIVEMAINTENANCEASSIGN.fitterchargeman"
-    ),
+    header:
+      this.userlist.desigId == 4
+        ? this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.fitterlist"
+          )
+        : this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.wiremanlist"
+          ),
     cssClass: "singleselect",
   };
 
@@ -279,7 +284,7 @@ export class MaintenancePreventivemaintenanceAssignModalPage implements OnInit {
   btn_close() {
     this.modalController.dismiss({
       dismissed: true,
-      item: [],
+      item: "",
     });
   }
 

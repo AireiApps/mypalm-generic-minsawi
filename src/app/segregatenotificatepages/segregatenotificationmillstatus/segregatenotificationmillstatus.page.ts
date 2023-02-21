@@ -196,11 +196,7 @@ export class SegregatenotificationmillstatusPage implements OnInit {
         }
       }
     } else if (value.redirect == "HOURLY PRESS") {
-      if (this.designationid == 7 || this.designationid == 8) {
-        this.router.navigate(["/production-sterilizerpress-hourlyreporting"]);
-      } else {
-        this.router.navigate(["/production-hourlypressingstation"]);
-      }
+      this.router.navigate(["/production-hourlypressingstation"]);
     } else if (value.redirect == "HOURLY STERILIZER") {
       this.router.navigate(["/production-hourlysterilizerstation"]);
     } else if (value.redirect == "HOURLY OIL LOSS") {

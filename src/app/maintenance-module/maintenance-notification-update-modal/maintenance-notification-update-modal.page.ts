@@ -126,9 +126,14 @@ export class MaintenanceNotificationUpdateModalPage implements OnInit {
   };
 
   public assignedtoOptions: any = {
-    header: this.translate.instant(
-      "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.fitterchargeman"
-    ),
+    header:
+      this.userlist.desigId == 4
+        ? this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.fitterlist"
+          )
+        : this.translate.instant(
+            "MAINTENANCEENGINEERINGNOTIFICATIONMODAL.wiremanlist"
+          ),
     cssClass: "singleselect",
   };
 
@@ -749,7 +754,7 @@ export class MaintenanceNotificationUpdateModalPage implements OnInit {
   btn_close() {
     this.modalController.dismiss({
       dismissed: true,
-      item: [],
+      item: "",
     });
   }
 

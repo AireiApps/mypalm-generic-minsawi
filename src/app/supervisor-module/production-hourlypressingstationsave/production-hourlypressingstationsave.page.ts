@@ -565,7 +565,8 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
 
   async showalert() {
     if (this.pressstationForm.valid) {
-      const alert = await this.alertController.create({
+      this.save();
+      /*const alert = await this.alertController.create({
         header: this.translate.instant("HOURLYPRESSSTATIONSAVE.alertheader"),
         cssClass: "alertmessage",
         message: this.translate.instant("HOURLYPRESSSTATIONSAVE.alertmessage"),
@@ -585,7 +586,7 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
         ],
       });
 
-      await alert.present();
+      await alert.present();*/
     } else {
       this.translate.instant("HOURLYPRESSSTATIONSAVE.pleasefilltheform");
     }
@@ -682,11 +683,20 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
   cancel() {
     this.modalController.dismiss({
       dismissed: true,
-      item: [],
+      item: "",
     });
   }
 
   parseString(item) {
     return JSON.stringify(item);
+  }
+
+  decimalFilter(event: any) {
+    const reg = /^-?\d*(\.\d{0,2})?$/;
+    let input = event.target.value + String.fromCharCode(event.charCode);
+
+    if (!reg.test(input)) {
+      event.preventDefault();
+    }
   }
 }

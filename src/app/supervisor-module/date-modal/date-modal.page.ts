@@ -54,7 +54,10 @@ export class DateModalPage implements OnInit {
 
     if (this.getmillstartdatetime != "") {
       this.selectmillstartdatetime = this.getmillstartdatetime;
-      this.selectmillstartdatetime = moment(this.selectmillstartdatetime,"YYYY-MM-DD HH:mm").format("DD-MM-YYYY HH:mm");
+      this.selectmillstartdatetime = moment(
+        this.selectmillstartdatetime,
+        "YYYY-MM-DD HH:mm"
+      ).format("DD-MM-YYYY HH:mm");
     }
 
     this.getmillstopdatetime = navParams.get("millstop_datetime");
@@ -129,7 +132,9 @@ export class DateModalPage implements OnInit {
 
     if (this.getmillstartdatetime != "") {
       if (this.selectmillstartdatetime == "") {
-        this.commonservice.presentToast(this.translate.instant("SUPERVISORDASHBOARD.startdatetimemandatory"));
+        this.commonservice.presentToast(
+          this.translate.instant("SUPERVISORDASHBOARD.startdatetimemandatory")
+        );
       } else {
         /*millstartdatetime = moment(
           this.dateForm.value.txt_millstartdatetime
@@ -144,7 +149,9 @@ export class DateModalPage implements OnInit {
 
     if (this.getmillstopdatetime != "") {
       if (this.selectmillstopdatetime == "") {
-        this.commonservice.presentToast(this.translate.instant("SUPERVISORDASHBOARD.stopdatetimemandatory"));
+        this.commonservice.presentToast(
+          this.translate.instant("SUPERVISORDASHBOARD.stopdatetimemandatory")
+        );
       } else {
         /*millstopdatetime = moment(
           this.dateForm.value.txt_millstopdatetime
@@ -163,7 +170,9 @@ export class DateModalPage implements OnInit {
         Date.parse(this.dateForm.value.txt_millstopdatetime) <
         Date.parse(this.dateForm.value.txt_millstartdatetime)
       ) {
-        this.commonservice.presentToast(this.translate.instant("SUPERVISORDASHBOARD.greaterdatetime"));
+        this.commonservice.presentToast(
+          this.translate.instant("SUPERVISORDASHBOARD.greaterdatetime")
+        );
         return;
       }
     }
@@ -189,7 +198,9 @@ export class DateModalPage implements OnInit {
           dismissed: true,
         });
       } else {
-        this.commonservice.presentToast(this.translate.instant("SUPERVISORDASHBOARD.failed"));
+        this.commonservice.presentToast(
+          this.translate.instant("SUPERVISORDASHBOARD.failed")
+        );
       }
     });
   }
@@ -197,7 +208,7 @@ export class DateModalPage implements OnInit {
   cancel() {
     this.modalController.dismiss({
       dismissed: true,
-      item: [],
+      item: "",
     });
   }
 }

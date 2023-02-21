@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AIREIService } from "src/app/api/api.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import * as moment from "moment";
 import { TranslateService } from "@ngx-translate/core";
 import { LanguageService } from "src/app/services/language-service/language.service";
@@ -39,17 +39,15 @@ export class SegregatenotificationmaintenancenotificationPage
     private languageService: LanguageService,
     private translate: TranslateService,
     private service: AIREIService,
+    private activatedroute: ActivatedRoute,
     private router: Router
   ) {
-    this.getNotification();
+    this.activatedroute.params.subscribe((val) => {
+      this.getNotification();
+    });
   }
 
   ngOnInit() {
-    /*App.addListener("appStateChange", (state: AppState) => {
-      if (state.isActive == true) {
-        this.ionViewDidEnter();
-      }
-    });*/
     this.getNotification();
   }
 
@@ -294,11 +292,7 @@ export class SegregatenotificationmaintenancenotificationPage
         ]);
       }
     } else if (value.redirect == "HOURLY PRESS") {
-      if (this.designationid == 7 || this.designationid == 8) {
-        this.router.navigate(["/production-sterilizerpress-hourlyreporting"]);
-      } else {
-        this.router.navigate(["/production-hourlypressingstation"]);
-      }
+      this.router.navigate(["/production-hourlypressingstation"]);
     } else if (value.redirect == "HOURLY STERILIZER") {
       this.router.navigate(["/production-hourlysterilizerstation"]);
     } else if (value.redirect == "HOURLY OIL LOSS") {

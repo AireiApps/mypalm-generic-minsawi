@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title mode="ios" color="light"
+      >{{ 'GRADINGREPORT.gradingreport' | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home-box">
+    <form [formGroup]="gradingReportForm">
+      <ion-row style="margin-top: 10px">
+        <ion-col size="1.6" style="align-self: center" no-padding>
+          <div class="h7 text-white">
+            <b>{{ 'GRADINGREPORT.from' | translate}}</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="3.45">
+          <input
+            type="text"
+            class="h7 form-control readonly"
+            formControlName="from_date"
+            placeholder="DD-MM-YYYY"
+            (click)="openFromDateTimePicker()"
+            readonly
+          />
+        </ion-col>
+
+        <ion-col size="1" style="align-self: center" no-padding>
+          <div class="h7 text-white">
+            <b>{{ 'GRADINGREPORT.to' | translate}}</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="3.45">
+          <input
+            type="text"
+            class="h7 form-control readonly"
+            formControlName="to_date"
+            placeholder="DD-MM-YYYY"
+            (click)="openToDateTimePicker()"
+            readonly
+          />
+        </ion-col>
+
+        <ion-col size="2.5">
+          <button
+            type="button"
+            class="h7 btn btn-general btn-sm float-right"
+            style="height: 31px; width: 100%"
+            (click)="getGradingReport()"
+          >
+            {{ 'GENERALBUTTON.getrecords' | translate}}
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <hr />
+    </form>
+
+    <div *ngIf="!norecordFlag">
+      <ion-card class="bg-card" *ngFor="let value of gradinglistArr">
+        <ion-card-content class="cardcontent">
+          <ion-row *ngIf="(value.vehicleno!='' || value.insDate!='')">
+            <ion-col>
+              <p class="title-content">
+                {{value.vehicle_no}} - {{value.insdt}}
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.hardbunches!=''">
+            <ion-col size="7"
+              >{{ 'GRADINGREPORT.hardbunches' | translate}}</ion-col
+            >
+
+            <ion-col size="5">
+              <p class="data">: {{value.hard_bunch_percent}}%</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.underripebunches!=''">
+            <ion-col size="7"
+              >{{ 'GRADINGREPORT.underripebunches' | translate}}</ion-col
+            >
+
+            <ion-col size="5">
+              <p class="data">: {{value.under_ripe_bunch_percent}}%</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.ripeness!=''">
+            <ion-col size="7"
+              >{{ 'GRADINGREPORT.ripeness' | translate}}</ion-col
+            >
+
+            <ion-col size="5">
+              <p class="data">: {{value.ripeness_percent}}%</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.loosefruits!=''">
+            <ion-col size="7"
+              >{{ 'GRADINGREPORT.loosefruits' | translate}}</ion-col
+            >
+
+            <ion-col size="5">
+              <p class="data">: {{value.loose_fruit_percent}}%</p>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="norecords" *ngIf="norecordFlag">
+      {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+    </div>
+  </div>
+</ion-content>

@@ -63,7 +63,7 @@ export class ProductionMachineshutdownalertModalPage implements OnInit {
   };
 
   public maintenancetypeOptions: any = {
-    header: this.translate.instant("SUPERVISORDASHBOARD.maintetnancetype")    ,
+    header: this.translate.instant("SUPERVISORDASHBOARD.maintetnancetype"),
     cssClass: "multiselect",
   };
 
@@ -128,7 +128,7 @@ export class ProductionMachineshutdownalertModalPage implements OnInit {
       resultdata = result;
       if (resultdata.httpcode == 200) {
         this.breakdownArr = resultdata.data;
-        console.log(resultdata.data)
+        console.log(resultdata.data);
         let eachArr = [];
 
         for (let i = 0; i < this.breakdownArr.length; i++) {
@@ -175,7 +175,6 @@ export class ProductionMachineshutdownalertModalPage implements OnInit {
       let resultdata: any;
       resultdata = result;
       if (resultdata.httpcode == 200) {
-        
         this.maintenancetypeArr = resultdata.data;
 
         let eachArr = [];
@@ -243,7 +242,9 @@ export class ProductionMachineshutdownalertModalPage implements OnInit {
 
   save() {
     if (this.step1Form.value.select_breakdown == "") {
-      this.commonservice.presentToast(this.translate.instant("SUPERVISORDASHBOARD.problemmandatory"));
+      this.commonservice.presentToast(
+        this.translate.instant("SUPERVISORDASHBOARD.problemmandatory")
+      );
       return;
     }
 
@@ -286,7 +287,7 @@ export class ProductionMachineshutdownalertModalPage implements OnInit {
   btn_close() {
     this.modalController.dismiss({
       dismissed: true,
-      item: [],
+      item: "",
     });
   }
 

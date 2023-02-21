@@ -594,6 +594,27 @@ ion-footer {
   }
 }
 
+.vehicle-modal {
+  --width: 95% !important;
+  --height: 80% !important;
+  --border-radius: 10px !important;
+  --backdrop-opacity: 0.8;
+  //--background: #000000b2;
+  --background: #ffffff;
+  backdrop-filter: blur(1px);
+
+  .modal-wrapper {
+    border: 2px solid #ffffff;
+    border-radius: 10px !important;
+  }
+
+  ion-content {
+    --background: none;
+    background-color: #ffffff;
+    background-image: none;
+  }
+}
+
 // .checklistassign-modal .modal-wrapper {
 //   min-height: 400px;
 //   height: auto;

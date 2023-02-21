@@ -598,7 +598,7 @@ export class ProductionHourlysterilizerstationPage implements OnInit {
   }
 
   onChangeBackPressureReceiver() {
-    if (this.sterilizerstationForm.value.txt_backpressurereceiver != "") {
+    /*if (this.sterilizerstationForm.value.txt_backpressurereceiver != "") {
       if (
         this.sterilizerstationForm.value.txt_backpressurereceiver >=
           this.backpressurethreshold_min &&
@@ -609,27 +609,24 @@ export class ProductionHourlysterilizerstationPage implements OnInit {
       } else {
         this.backpressurevalidationflag = 1;
       }
-    }
+    }*/
 
-    /*if (this.sterilizerstationForm.value.txt_backpressurereceiver != "") {
-      if (
-        this.sterilizerstationForm.value.txt_backpressurereceiver >
-        this.backpressurethreshold_max
-      ) {
+    if (this.sterilizerstationForm.value.txt_backpressurereceiver != "") {
+      if (this.sterilizerstationForm.value.txt_backpressurereceiver > 100) {
         this.backpressurevalidationflag = 1;
 
-        this.peakthresholdalert(
+        /*this.peakthresholdalert(
           this.backpressurealerttitle,
           this.backpressurealertmessage
-        );
+        );*/
       } else {
         this.backpressurevalidationflag = 0;
       }
-    }*/
+    }
   }
 
   onChangeP1() {
-    if (this.sterilizerstationForm.value.txt_p1 != "") {
+    /*if (this.sterilizerstationForm.value.txt_p1 != "") {
       if (
         this.sterilizerstationForm.value.txt_p1 >= this.p1peakthreshold_min &&
         this.sterilizerstationForm.value.txt_p1 <= this.p1peakthreshold_max
@@ -638,20 +635,20 @@ export class ProductionHourlysterilizerstationPage implements OnInit {
       } else {
         this.p1validationflag = 1;
       }
-    }
+    }*/
 
-    /*if (this.sterilizerstationForm.value.txt_p1 != "") {
-      if (this.sterilizerstationForm.value.txt_p1 > this.p1peakthreshold_max) {
+    if (this.sterilizerstationForm.value.txt_p1 != "") {
+      if (this.sterilizerstationForm.value.txt_p1 > 100) {
         this.p1validationflag = 1;
-        this.peakthresholdalert(this.p1peakalerttitle, this.p1peakalertmessage);
+        //this.peakthresholdalert(this.p1peakalerttitle, this.p1peakalertmessage);
       } else {
         this.p1validationflag = 0;
       }
-    }*/
+    }
   }
 
   onChangeP2() {
-    if (this.sterilizerstationForm.value.txt_p2 != "") {
+    /*if (this.sterilizerstationForm.value.txt_p2 != "") {
       if (
         this.sterilizerstationForm.value.txt_p2 >= this.p2peakthreshold_min &&
         this.sterilizerstationForm.value.txt_p2 <= this.p2peakthreshold_max
@@ -660,21 +657,21 @@ export class ProductionHourlysterilizerstationPage implements OnInit {
       } else {
         this.p2validationflag = 1;
       }
-    }
+    }*/
 
-    /*if (this.sterilizerstationForm.value.txt_p2 != "") {
-      if (this.sterilizerstationForm.value.txt_p2 > this.p2peakthreshold_max) {
+    if (this.sterilizerstationForm.value.txt_p2 != "") {
+      if (this.sterilizerstationForm.value.txt_p2 > 100) {
         this.p2validationflag = 1;
 
-        this.peakthresholdalert(this.p2peakalerttitle, this.p2peakalertmessage);
+        //this.peakthresholdalert(this.p2peakalerttitle, this.p2peakalertmessage);
       } else {
         this.p2validationflag = 0;
       }
-    }*/
+    }
   }
 
   onChangeP3() {
-    if (this.sterilizerstationForm.value.txt_p3 != "") {
+    /*if (this.sterilizerstationForm.value.txt_p3 != "") {
       if (
         this.sterilizerstationForm.value.txt_p3 >= this.p3peakthreshold_min &&
         this.sterilizerstationForm.value.txt_p3 <= this.p3peakthreshold_max
@@ -683,17 +680,17 @@ export class ProductionHourlysterilizerstationPage implements OnInit {
       } else {
         this.p3validationflag = 1;
       }
-    }
+    }*/
 
-    /*if (this.sterilizerstationForm.value.txt_p3 != "") {
-      if (this.sterilizerstationForm.value.txt_p3 > this.p3peakthreshold_max) {
+    if (this.sterilizerstationForm.value.txt_p3 != "") {
+      if (this.sterilizerstationForm.value.txt_p3 > 100) {
         this.p3validationflag = 1;
 
-        this.peakthresholdalert(this.p3peakalerttitle, this.p3peakalertmessage);
+        //this.peakthresholdalert(this.p3peakalerttitle, this.p3peakalertmessage);
       } else {
         this.p3validationflag = 0;
       }
-    }*/
+    }
   }
 
   btn_view(type) {
@@ -867,7 +864,16 @@ export class ProductionHourlysterilizerstationPage implements OnInit {
           this.save();
         }
       } else {
-        this.save();
+        if (
+          this.backpressurevalidationflag == 1 ||
+          this.p1validationflag == 1 ||
+          this.p2validationflag == 1 ||
+          this.p3validationflag == 1
+        ) {
+          this.commonservice.presentToast("Please enter a value within 100");
+        } else {
+          this.save();
+        }
       }
     } else {
       this.commonservice.presentToast(
@@ -988,7 +994,8 @@ export class ProductionHourlysterilizerstationPage implements OnInit {
 
   async confirmalert() {
     if (this.sterilizerstationForm.valid) {
-      const alert = await this.alertController.create({
+      this.confirm();
+      /*const alert = await this.alertController.create({
         header: this.translate.instant(
           "HOURLYSTERILIZATIONSTATIONSAVE.alertheader"
         ),
@@ -1012,7 +1019,7 @@ export class ProductionHourlysterilizerstationPage implements OnInit {
         ],
       });
 
-      await alert.present();
+      await alert.present();*/
     } else {
       this.translate.instant(
         "HOURLYSTERILIZATIONSTATIONSAVE.pleasefilltheform"
@@ -1138,5 +1145,14 @@ export class ProductionHourlysterilizerstationPage implements OnInit {
 
   parseString(item) {
     return JSON.stringify(item);
+  }
+
+  decimalFilter(event: any) {
+    const reg = /^-?\d*(\.\d{0,2})?$/;
+    let input = event.target.value + String.fromCharCode(event.charCode);
+
+    if (!reg.test(input)) {
+      event.preventDefault();
+    }
   }
 }

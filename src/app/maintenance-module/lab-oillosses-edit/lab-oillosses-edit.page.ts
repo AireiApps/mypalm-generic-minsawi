@@ -213,7 +213,8 @@ export class LabOillossesEditPage implements OnInit {
       for (let i = 0; i < rowcontrol.length; i++) {
         const controlsub = <FormArray>this.oillossesForm.get(["pressRows", i]);
         if (controlsub.value != null && controlsub.value != "") {
-          if (
+          this.oillossvaluearr.push(String(controlsub.value));
+          /*if (
             controlsub.value >= this.oillossthreshold_min &&
             controlsub.value <= this.oillossthreshold_max
           ) {
@@ -221,19 +222,6 @@ export class LabOillossesEditPage implements OnInit {
           } else {
             this.oillossalertFlag = true;
             this.oillossvaluearr.push(String(controlsub.value));
-          }
-
-          /*if (
-            controlsub.value >= this.oillossthreshold_min &&
-            controlsub.value <= this.oillossthreshold_max
-          ) {
-            this.oillossvaluearr.push(String(controlsub.value));
-          } else {
-            this.thresholdalert(
-              this.oillossalerttitle,
-              this.oillossalertmessage
-            );
-            return;
           }*/
         } else {
           this.oillossvaluearr.push("~");
@@ -248,7 +236,7 @@ export class LabOillossesEditPage implements OnInit {
         return;
       }
 
-      if (this.oillossalertFlag) {
+      /*if (this.oillossalertFlag) {
         this.thresholdalert(this.oillossalerttitle, this.oillossalertmessage);
       } else {
         const alert = await this.alertController.create({
@@ -272,7 +260,29 @@ export class LabOillossesEditPage implements OnInit {
         });
 
         await alert.present();
-      }
+      }*/
+
+      const alert = await this.alertController.create({
+        header: this.translate.instant("OILLOSSESSREPORT.header"),
+        cssClass: "alertmessage",
+        message: this.translate.instant("OILLOSSESSREPORT.alertmessage"),
+        buttons: [
+          {
+            text: this.translate.instant("GENERALBUTTON.cancelbutton"),
+            role: "cancel",
+            cssClass: "secondary",
+            handler: (cancel) => {},
+          },
+          {
+            text: this.translate.instant("GENERALBUTTON.sure"),
+            handler: () => {
+              this.save();
+            },
+          },
+        ],
+      });
+
+      await alert.present();
     } else {
       this.commonservice.presentToast(
         this.translate.instant("GENERALBUTTON.pleasefilltheform")

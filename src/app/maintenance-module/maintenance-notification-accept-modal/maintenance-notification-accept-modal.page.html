@@ -22,7 +22,9 @@
 
       <ion-row class="form-row" *ngIf="stationname!=''">
         <ion-col size="4.5">
-          <div class="title">{{ 'MAINTENANCEACCEPTMODAL.station' | translate}}</div>
+          <div class="title">
+            {{ 'MAINTENANCEACCEPTMODAL.station' | translate}}
+          </div>
         </ion-col>
 
         <ion-col size="0.5" style="text-align: right">
@@ -35,7 +37,9 @@
 
       <ion-row class="form-row" *ngIf="machinename!=''">
         <ion-col size="4.5">
-          <div class="title">{{ 'MAINTENANCEACCEPTMODAL.machine' | translate}}</div>
+          <div class="title">
+            {{ 'MAINTENANCEACCEPTMODAL.machine' | translate}}
+          </div>
         </ion-col>
 
         <ion-col size="0.5" style="text-align: right">
@@ -48,7 +52,9 @@
 
       <ion-row class="form-row" *ngIf="partdefectname!=''">
         <ion-col size="4.5">
-          <div class="title">{{ 'MAINTENANCEACCEPTMODAL.partname' | translate}}</div>
+          <div class="title">
+            {{ 'MAINTENANCEACCEPTMODAL.partname' | translate}}
+          </div>
         </ion-col>
 
         <ion-col size="0.5" style="text-align: right">
@@ -61,7 +67,9 @@
 
       <ion-row class="form-row" *ngIf="breakdowncoding!=''">
         <ion-col size="4.5">
-          <div class="title">{{ 'MAINTENANCEACCEPTMODAL.problem' | translate}}</div>
+          <div class="title">
+            {{ 'MAINTENANCEACCEPTMODAL.problem' | translate}}
+          </div>
         </ion-col>
 
         <ion-col size="0.5" style="text-align: right">
@@ -74,7 +82,9 @@
 
       <ion-row class="form-row" *ngIf="activityname!=''">
         <ion-col size="4.5">
-          <div class="title">{{ 'MAINTENANCEACCEPTMODAL.activity' | translate}}</div>
+          <div class="title">
+            {{ 'MAINTENANCEACCEPTMODAL.activity' | translate}}
+          </div>
         </ion-col>
 
         <ion-col size="0.5" style="text-align: right">
@@ -90,11 +100,15 @@
       <div *ngIf="generalArr.length>0">
         <ion-row class="form-row">
           <ion-col *ngIf="(statusid == '2' || statusid == '4')">
-            <div class="title">{{ 'MAINTENANCEACCEPTMODAL.istheworkordercompleted' | translate}}</div>
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.istheworkordercompleted' | translate}}
+            </div>
           </ion-col>
 
           <ion-col *ngIf="(statusid == '3' || statusid == '10')">
-            <div class="title">{{ 'MAINTENANCEACCEPTMODAL.abletoaccept' | translate}}</div>
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.abletoaccept' | translate}}
+            </div>
           </ion-col>
         </ion-row>
 
@@ -110,7 +124,9 @@
                     value="Yes"
                     (change)="onOptionChange('Yes')"
                   />
-                  <label for="radio_yes" style="padding-right: 20px">{{ 'MAINTENANCEACCEPTMODAL.yes' | translate}}</label>
+                  <label for="radio_yes" style="padding-right: 10px"
+                    >{{ 'MAINTENANCEACCEPTMODAL.yes' | translate}}</label
+                  >
                   <input
                     type="radio"
                     id="radio_no"
@@ -118,7 +134,9 @@
                     value="No"
                     (change)="onOptionChange('No')"
                   />
-                  <label for="radio_no">{{ 'MAINTENANCEACCEPTMODAL.no' | translate}}</label>
+                  <label for="radio_no"
+                    >{{ 'MAINTENANCEACCEPTMODAL.no' | translate}}</label
+                  >
                 </div>
               </ion-col>
             </ion-row>
@@ -127,7 +145,9 @@
 
         <ion-row class="form-row" *ngIf="reasonFlag">
           <ion-col size="4.5">
-            <div class="title">{{ 'MAINTENANCEACCEPTMODAL.reason' | translate}}</div>
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.reason' | translate}}
+            </div>
           </ion-col>
 
           <ion-col size="0.5" style="text-align: right">
@@ -175,7 +195,9 @@
 
         <ion-row class="form-row" *ngIf="conditionFlag">
           <ion-col size="4.5">
-            <div class="title">{{ 'MAINTENANCEACCEPTMODAL.condition' | translate}}</div>
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.condition' | translate}}
+            </div>
           </ion-col>
           <ion-col size="7.5">
             <ion-row>
@@ -188,7 +210,7 @@
                     value="Good"
                     (change)="onConditionOptionChange('Good')"
                   />
-                  <label for="radio_good" style="padding-right: 20px"
+                  <label for="radio_good" style="padding-right: 10px"
                     >{{ 'MAINTENANCEACCEPTMODAL.good' | translate}}</label
                   >
                   <input
@@ -198,7 +220,9 @@
                     value="Abnormal"
                     (change)="onConditionOptionChange('Abnormal')"
                   />
-                  <label for="radio_abnormal">{{ 'MAINTENANCEACCEPTMODAL.abnormal' | translate}}</label>
+                  <label for="radio_abnormal"
+                    >{{ 'MAINTENANCEACCEPTMODAL.abnormal' | translate}}</label
+                  >
                 </div>
               </ion-col>
             </ion-row>
@@ -208,7 +232,9 @@
         <div *ngIf="damageFlag">
           <ion-row class="form-row">
             <ion-col size="4.5">
-              <div class="title">{{ 'MAINTENANCEACCEPTMODAL.damagetype' | translate}}</div>
+              <div class="title">
+                {{ 'MAINTENANCEACCEPTMODAL.damagetype' | translate}}
+              </div>
             </ion-col>
 
             <ion-col size="7.5" style="text-align: right">
@@ -264,7 +290,9 @@
               (click)="remarksalert()"
               *ngIf="(statusid == '2' || statusid == '4')"
             >
-              <span class="icontext" style="color: #ffffff">{{ 'GENERALBUTTON.savebutton' | translate}}</span>
+              <span class="icontext" style="color: #ffffff"
+                >{{ 'GENERALBUTTON.savebutton' | translate}}</span
+              >
             </button>
 
             <button
@@ -274,7 +302,9 @@
               (click)="save('')"
               *ngIf="(statusid == '3' || statusid == '10')"
             >
-              <span class="icontext" style="color: #ffffff">{{ 'GENERALBUTTON.savebutton' | translate}}</span>
+              <span class="icontext" style="color: #ffffff"
+                >{{ 'GENERALBUTTON.savebutton' | translate}}</span
+              >
             </button>
           </ion-col>
         </ion-row>

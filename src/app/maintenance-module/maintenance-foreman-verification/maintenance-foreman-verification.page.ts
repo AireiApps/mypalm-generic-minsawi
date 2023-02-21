@@ -972,7 +972,7 @@ export class MaintenanceForemanVerificationPage implements OnInit {
   btn_close() {
     this.modalController.dismiss({
       dismissed: true,
-      item: [],
+      item: "",
     });
   }
 

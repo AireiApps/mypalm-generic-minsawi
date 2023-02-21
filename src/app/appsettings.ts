@@ -214,4 +214,12 @@ export class appsettings {
     "maintenance_notification_foreman_verify";
 
   public static verificationflag = "get_verify_setting";
+
+  public static vehiclelist = "vehicle_list";
+
+  public static gradingvehiclelist = "get_grading_list";
+
+  public static gradingreport = "get_grading_report";
+
+  public static savegrading = "insert_grading";
 }
