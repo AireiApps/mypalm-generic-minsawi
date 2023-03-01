@@ -107,8 +107,10 @@ export class MaintenanceNotificationListPage implements OnInit {
       select_status: new FormControl(""),
     });
 
-    if (this.designationid == 2) {
+    if (this.designationid == 2 && this.userlist.verificationacccess != 3) {
       this.tabs_segment = "Acknowledgement";
+    } else {
+      this.secondtabs_segment = "Created";
     }
 
     if (this.departmentid == 7 && this.designationid == 2) {
@@ -168,10 +170,16 @@ export class MaintenanceNotificationListPage implements OnInit {
     this.updateNotification();
     this.getLiveNotification();
 
-    if (this.tabs_segment == "") {
-      this.getNotification();
-    } else if (this.tabs_segment == "Acknowledgement") {
-      this.getAcknowledgeNotification();
+    if (this.userlist.verificationacccess != 3) {
+      if (this.tabs_segment == "") {
+        this.getNotification();
+      } else if (this.tabs_segment == "Acknowledgement") {
+        this.getAcknowledgeNotification();
+      }
+    } else {
+      this.secondtabs_segment = "Created";
+
+      this.getCreatedNotification(this.secondsegmentChanged);
     }
   }
 
@@ -183,10 +191,16 @@ export class MaintenanceNotificationListPage implements OnInit {
     this.updateNotification();
     this.getLiveNotification();
 
-    if (this.tabs_segment == "") {
-      this.getNotification();
-    } else if (this.tabs_segment == "Acknowledgement") {
-      this.getAcknowledgeNotification();
+    if (this.userlist.verificationacccess != 3) {
+      if (this.tabs_segment == "") {
+        this.getNotification();
+      } else if (this.tabs_segment == "Acknowledgement") {
+        this.getAcknowledgeNotification();
+      }
+    } else {
+      this.secondtabs_segment = "Created";
+
+      this.getCreatedNotification(this.secondsegmentChanged);
     }
   }
 
@@ -299,7 +313,7 @@ export class MaintenanceNotificationListPage implements OnInit {
     }
 
     if (status == "10") {
-      color = "#409b00";
+      color = "#01b800";
     }
 
     if (status == "12") {
@@ -590,7 +604,11 @@ export class MaintenanceNotificationListPage implements OnInit {
 
   secondsegmentChanged(ev: any) {
     //console.log(this.thirdtabs_segment);
-    if (this.tabs_segment == "All") {
+    if (this.userlist.verificationacccess != 3) {
+      if (this.tabs_segment == "All") {
+        this.getCreatedNotification(this.secondtabs_segment);
+      }
+    } else {
       this.getCreatedNotification(this.secondtabs_segment);
     }
   }

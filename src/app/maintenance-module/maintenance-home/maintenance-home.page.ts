@@ -325,15 +325,11 @@ export class MaintenanceHomePage implements OnInit {
     this.notificationdate =
       this.activatedroute.snapshot.paramMap.get("reportdate");
 
-    if (
-      typeof this.notificationdate !== "undefined" &&
-      this.notificationdate !== null &&
-      this.notificationdate != ""
-    ) {
-      this.fromdate = moment(this.notificationdate, "YYYY-MM-DD").format(
-        "DD-MM-YYYY"
-      );
-    }
+    this.maintenancehomeForm = this.fb.group({
+      pickdate: new FormControl(this.fromdate),
+    });
+
+    this.tabs_segment = "Routine Preventive Maintenance";
 
     if (
       this.userdepartmentid == 7 &&
@@ -353,6 +349,21 @@ export class MaintenanceHomePage implements OnInit {
               this.notificationdata.redirect ==
               "ROUTINE PREVENTIVE MAINTENANCE NOTIFICATION"
             ) {
+              if (
+                typeof this.notificationdata.fromdate !== "undefined" &&
+                this.notificationdata.fromdate !== null &&
+                this.notificationdata.fromdate != ""
+              ) {
+                this.fromdate = moment(
+                  this.notificationdata.fromdate,
+                  "YYYY-MM-DD"
+                ).format("DD-MM-YYYY");
+
+                this.maintenancehomeForm.controls.pickdate.setValue(
+                  this.fromdate
+                );
+              }
+
               localStorage.setItem("notificationdata", "");
 
               this.tabs_segment = "Routine Preventive Maintenance";
@@ -362,6 +373,21 @@ export class MaintenanceHomePage implements OnInit {
               this.notificationdata.redirect ==
               "REPLACEMENT PREVENTIVE MAINTENANCE NOTIFICATION"
             ) {
+              if (
+                typeof this.notificationdata.fromdate !== "undefined" &&
+                this.notificationdata.fromdate !== null &&
+                this.notificationdata.fromdate != ""
+              ) {
+                this.fromdate = moment(
+                  this.notificationdata.fromdate,
+                  "YYYY-MM-DD"
+                ).format("DD-MM-YYYY");
+
+                this.maintenancehomeForm.controls.pickdate.setValue(
+                  this.fromdate
+                );
+              }
+
               localStorage.setItem("notificationdata", "");
 
               this.tabs_segment = "Replacement Preventive Maintenance";
@@ -371,6 +397,21 @@ export class MaintenanceHomePage implements OnInit {
               this.notificationdata.redirect ==
               "CORRECTIVE MAINTENANCE NOTIFICATION"
             ) {
+              if (
+                typeof this.notificationdata.fromdate !== "undefined" &&
+                this.notificationdata.fromdate !== null &&
+                this.notificationdata.fromdate != ""
+              ) {
+                this.fromdate = moment(
+                  this.notificationdata.fromdate,
+                  "YYYY-MM-DD"
+                ).format("DD-MM-YYYY");
+
+                this.maintenancehomeForm.controls.pickdate.setValue(
+                  this.fromdate
+                );
+              }
+
               localStorage.setItem("notificationdata", "");
 
               this.tabs_segment = "Corrective Maintenance";
@@ -403,12 +444,6 @@ export class MaintenanceHomePage implements OnInit {
         this.ionViewDidEnter();
       });
     }
-
-    this.maintenancehomeForm = this.fb.group({
-      pickdate: new FormControl(this.fromdate),
-    });
-
-    this.tabs_segment = "Routine Preventive Maintenance";
   }
 
   ngOnInit() {}
@@ -707,7 +742,7 @@ export class MaintenanceHomePage implements OnInit {
     }
 
     if (status == "10") {
-      color = "#409b00";
+      color = "#01b800";
     }
 
     return color;
@@ -715,6 +750,7 @@ export class MaintenanceHomePage implements OnInit {
 
   btn_notification() {
     localStorage.setItem("badge_count", "0");
+
     this.router.navigate(["/segregatenotification"]);
   }
 
@@ -1041,26 +1077,49 @@ export class MaintenanceHomePage implements OnInit {
 
       return await modal.present();
     } else {
-      const modal = await this.modalController.create({
-        component: MaintenanceNotificationAcceptModalPage,
-        componentProps: {
-          item: JSON.stringify(value),
-        },
-        showBackdrop: true,
-        backdropDismiss: false,
-        cssClass: ["notification-modal"],
-      });
+      if (this.userlist.verificationacccess == 3) {
+        const modal = await this.modalController.create({
+          component: MaintenanceFitterwiremanVerifyAcknowledgePage,
+          componentProps: {
+            item: JSON.stringify(value),
+          },
+          showBackdrop: true,
+          backdropDismiss: false,
+          cssClass: ["notification-modal"],
+        });
 
-      modal.onDidDismiss().then((modaldata) => {
-        if (modaldata["data"]["screen"] == "RePM") {
-          this.tabs_segment = "Replacement Preventive Maintenance";
-        } else if (modaldata["data"]["screen"] == "CM") {
-          this.tabs_segment = "Corrective Maintenance";
-        }
-        this.getRecords();
-      });
+        modal.onDidDismiss().then((modaldata) => {
+          if (modaldata["data"]["screen"] == "RePM") {
+            this.tabs_segment = "Replacement Preventive Maintenance";
+          } else if (modaldata["data"]["screen"] == "CM") {
+            this.tabs_segment = "Corrective Maintenance";
+          }
+          this.getRecords();
+        });
 
-      return await modal.present();
+        return await modal.present();
+      } else {
+        const modal = await this.modalController.create({
+          component: MaintenanceNotificationAcceptModalPage,
+          componentProps: {
+            item: JSON.stringify(value),
+          },
+          showBackdrop: true,
+          backdropDismiss: false,
+          cssClass: ["notification-modal"],
+        });
+
+        modal.onDidDismiss().then((modaldata) => {
+          if (modaldata["data"]["screen"] == "RePM") {
+            this.tabs_segment = "Replacement Preventive Maintenance";
+          } else if (modaldata["data"]["screen"] == "CM") {
+            this.tabs_segment = "Corrective Maintenance";
+          }
+          this.getRecords();
+        });
+
+        return await modal.present();
+      }
     }
   }
 

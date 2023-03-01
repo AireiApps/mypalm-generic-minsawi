@@ -86,10 +86,13 @@ export class MaintenanceAcknowledgeModalPage implements OnInit {
   getbreakdown = "";
   getstatus = "";
   getstatusid = "";
+  getdamageid = "";
+  getdamagevalue = "";
   getpartdefectid = "";
   getpartdefectvalue = "";
 
   getrunninghours = "";
+  getremarks = "";
   getcreateddatetime = "";
   getreportedby = "";
   getactivity = "";
@@ -121,6 +124,9 @@ export class MaintenanceAcknowledgeModalPage implements OnInit {
   damagetypevalue = "";
   damagetypeidArr = [];
   damagetypevalueArr = [];
+
+  existdamagetypeidArr = [];
+  existdamagetypevalueArr = [];
 
   breakdowncausesid = "";
   breakdowncausesvalue = "";
@@ -224,15 +230,35 @@ export class MaintenanceAcknowledgeModalPage implements OnInit {
     this.getbreakdown = this.params.breakdowncoding;
     this.getstatus = this.params.statusname;
     this.getstatusid = this.params.statusId;
+    this.getdamageid = this.params.damagesid;
+    this.getdamagevalue = this.nl2br(this.params.damages);
     this.getpartdefectid = this.params.partdefectid;
     this.getpartdefectvalue = this.params.partdefect;
 
-    console.log(this.getstatusid);
+    //console.log(this.getstatusid);
 
     if (this.getpartdefectvalue != "") {
       this.step2completedFlag = true;
     } else {
       this.step2completedFlag = false;
+    }
+
+    if (this.getdamagevalue != "") {
+      var damageid = this.getdamageid.split(",");
+      var damagevalue = this.getdamagevalue.split(",");
+
+      for (let i = 0; i < damageid.length; i++) {
+        this.existdamagetypeidArr.push(parseInt(damageid[i]));
+        this.existdamagetypevalueArr.push(damagevalue[i]);
+        //this.damagetypeidArr.push(damageid[i]);
+        //this.damagetypevalueArr.push(damagevalue[i]);
+      }
+
+      //console.log(this.existdamagetypeidArr);
+
+      this.step3completedFlag = true;
+    } else {
+      this.step3completedFlag = false;
     }
 
     this.step1Form = this.fb.group({
@@ -358,13 +384,25 @@ export class MaintenanceAcknowledgeModalPage implements OnInit {
         let eachArr = [];
 
         for (let i = 0; i < this.damageArr.length; i++) {
+          let existFlag = false;
           let eachitem = this.damageArr[i];
-          let eachreq = {
-            id: eachitem.id,
-            damage: eachitem.damage,
-            selected: 0,
-          };
-          eachArr.push(eachreq);
+
+          if (this.getdamageid != "" && this.getdamageid != "0") {
+            for (let j = 0; j < this.existdamagetypeidArr.length; j++) {
+              if (eachitem.id == this.existdamagetypeidArr[j]) {
+                existFlag = true;
+              }
+            }
+          }
+
+          if (!existFlag) {
+            let eachreq = {
+              id: eachitem.id,
+              damage: eachitem.damage,
+              selected: 0,
+            };
+            eachArr.push(eachreq);
+          }
 
           if (this.damagetypeid != "") {
             if (eachitem.id == this.damagetypeid) {
@@ -450,6 +488,7 @@ export class MaintenanceAcknowledgeModalPage implements OnInit {
         this.generalArr = resultdata.data.general;
 
         this.getrunninghours = this.generalArr[0].runningHours;
+        this.getremarks = this.generalArr[0].remarks;
         this.getcreateddatetime = this.generalArr[0].insDate;
         this.getreportedby = this.generalArr[0].reportBy;
 
@@ -478,6 +517,7 @@ export class MaintenanceAcknowledgeModalPage implements OnInit {
         this.generalArr = [];
 
         this.getrunninghours = "";
+        this.getremarks = "";
         this.getcreateddatetime = "";
         this.getactivity = "";
         this.getpartreceiveddatetime = "";
@@ -560,9 +600,16 @@ export class MaintenanceAcknowledgeModalPage implements OnInit {
 
   damagehandleChange(e) {
     let value = e.detail.value;
+
     if (value.length > 0) {
       this.damagetypeidArr = [];
       this.damagetypevalueArr = [];
+
+      if (this.getdamageid != "" && this.getdamageid != "0") {
+        this.damagetypeidArr.push(this.getdamageid);
+        this.damagetypevalueArr.push(this.getdamagevalue);
+      }
+
       for (let i = 0; i < value.length; i++) {
         this.damagetypeidArr.push(JSON.parse(value[i]).id);
         this.damagetypevalueArr.push(JSON.parse(value[i]).damage);
@@ -668,13 +715,20 @@ export class MaintenanceAcknowledgeModalPage implements OnInit {
         }
       }
 
-      if (this.step1Form.value.select_damagetype == "") {
-        this.commonservice.presentToast(
-          this.translate.instant(
-            "MAINTENANCEACKNOWLEDGEMODAL.damagetypeselection"
-          )
-        );
-        return;
+      if (this.getdamageid != "" && this.getdamageid != "0") {
+        if (this.damagetypeidArr.length <= 0) {
+          this.damagetypeidArr.push(this.getdamageid);
+          this.damagetypevalueArr.push(this.getdamagevalue);
+        }
+      } else {
+        if (this.step1Form.value.select_damagetype == "") {
+          this.commonservice.presentToast(
+            this.translate.instant(
+              "MAINTENANCEACKNOWLEDGEMODAL.damagetypeselection"
+            )
+          );
+          return;
+        }
       }
 
       if (this.step1Form.value.select_breakdowncauses == "") {

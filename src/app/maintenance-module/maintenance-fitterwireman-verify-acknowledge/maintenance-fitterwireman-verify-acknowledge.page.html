@@ -90,6 +90,24 @@
           </ion-col>
         </ion-row>
 
+        <ion-row
+          class="form-row"
+          *ngIf="getpartdefectvalue!='' && screen == 'ROUT'"
+        >
+          <ion-col size="4.5">
+            <div class="title">
+              {{ 'MAINTENANCEACCEPTMODAL.partname' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: right">
+            <div class="title">:</div>
+          </ion-col>
+          <ion-col size="7" style="text-align: left">
+            <div class="preknowntitle"><b>{{getpartdefectvalue}}</b></div>
+          </ion-col>
+        </ion-row>
+
         <ion-row class="form-row" *ngIf="getbreakdown!=''">
           <ion-col size="4.5">
             <div class="title">
@@ -218,6 +236,7 @@
                     id="radio_good"
                     name="radio_conditionoption"
                     value="Good"
+                    (change)="onConditionOptionChange('Good')"
                   />
                   <label for="radio_good" style="padding-right: 10px"
                     >{{ 'MAINTENANCEACCEPTMODAL.good' | translate}}</label
@@ -227,6 +246,7 @@
                     id="radio_abnormal"
                     name="radio_conditionoption"
                     value="Abnormal"
+                    (change)="onConditionOptionChange('Abnormal')"
                   />
                   <label for="radio_abnormal"
                     >{{ 'MAINTENANCEACCEPTMODAL.abnormal' | translate}}</label
@@ -236,13 +256,65 @@
             </ion-row>
           </ion-col>
         </ion-row>
+
+        <div *ngIf="abnormaldamageFlag">
+          <ion-row class="form-row">
+            <ion-col size="4.5">
+              <div class="title">
+                {{ 'MAINTENANCEACCEPTMODAL.damagetype' | translate}}
+              </div>
+            </ion-col>
+
+            <ion-col size="7.5" style="text-align: right">
+              <ion-button class="optionbutton" (click)="openDamageType()"
+                >{{ 'MAINTENANCEACCEPTMODAL.select' | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+          <div class="hl4line" *ngIf="damagetypevalue==''"></div>
+
+          <div
+            class="title"
+            style="margin-top: 10px; color: #3cd2a5; text-align: left"
+            *ngIf="damagetypevalue!=''"
+          >
+            <b>{{ 'MAINTENANCEACCEPTMODAL.selecteddamagetype' | translate}}</b>
+          </div>
+
+          <div
+            class="title"
+            style="text-align: center"
+            *ngIf="damagetypevalue!=''"
+            [innerHTML]="damagetypevalue"
+          ></div>
+
+          <div class="hl4line" *ngIf="damagetypevalue!=''"></div>
+
+          <ion-select
+            [interfaceOptions]="damagetypeOptions"
+            formControlName="select_damagetype"
+            multiple="true"
+            [okText]="'GENERALBUTTON.okay' | translate"
+            [cancelText]="'GENERALBUTTON.dismiss' | translate"
+            class="ionicselect"
+            (ionChange)="damagehandleChange($event)"
+            #damagetypeSelect
+          >
+            <ion-select-option
+              value="{{parseString(value)}}"
+              *ngFor="let value of damageArr; let i = index"
+              >{{ value.damage }}</ion-select-option
+            >
+          </ion-select>
+        </div>
       </div>
 
       <div *ngIf="step2Flag" style="margin: 0px 0px 5px 0px">
         <!-- Maintenance Type -->
         <div *ngIf="maintenancetypeFlag">
           <ion-row class="form-row">
-            <ion-col size="4.5">
+            <ion-col size="5">
               <div class="title">
                 {{ 'MAINTENANCEACKNOWLEDGEMODAL.maintenancetype' | translate}}
               </div>
@@ -252,7 +324,7 @@
               <div class="title">:</div>
             </ion-col>
 
-            <ion-col size="7">
+            <ion-col size="6.5">
               <ion-select
                 [interfaceOptions]="maintenancetypeOptions"
                 formControlName="select_maintenancetype"
@@ -278,14 +350,14 @@
         <!-- Part Defect -->
         <div *ngIf="partFlag" style="margin-top: 10px">
           <ion-row class="form-row">
-            <ion-col size="4.5">
+            <ion-col size="5">
               <div class="title" *ngIf="screen == 'CM'">
                 {{ 'MAINTENANCEACKNOWLEDGEMODAL.partdefect' | translate}}
               </div>
-              <div class="title" *ngIf="screen == 'RoPM'">
+              <div class="title" *ngIf="screen == 'ROUT'">
                 {{ 'MAINTENANCEACKNOWLEDGEMODAL.partname' | translate}}
               </div>
-              <div class="title" *ngIf="screen == 'RePM'">
+              <div class="title" *ngIf="screen == 'REPL'">
                 {{ 'MAINTENANCEACKNOWLEDGEMODAL.partreplaced' | translate}}
               </div>
             </ion-col>
@@ -294,7 +366,7 @@
               <div class="title">:</div>
             </ion-col>
 
-            <ion-col size="7">
+            <ion-col size="6.5">
               <ion-button
                 class="optionbutton"
                 (click)="callmodalcontroller('PartDefect', '')"
@@ -400,64 +472,125 @@
 
         <!-- Damage Type -->
         <div *ngIf="damageFlag">
-          <ion-row class="form-row">
-            <ion-col size="5">
-              <div class="title">
-                {{ 'MAINTENANCEACKNOWLEDGEMODAL.damagetype' | translate}}
-              </div>
-            </ion-col>
+          <div *ngIf="getdamageid==''">
+            <ion-row class="form-row">
+              <ion-col size="5">
+                <div class="title">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.damagetype' | translate}}
+                </div>
+              </ion-col>
 
-            <ion-col size="0.5" style="text-align: center">
-              <div class="title">
-                <b>:</b>
-              </div>
-            </ion-col>
+              <ion-col size="0.5" style="text-align: center">
+                <div class="title">
+                  <b>:</b>
+                </div>
+              </ion-col>
 
-            <ion-col size="6.5">
-              <ion-button class="optionbutton" (click)="openDamageType()"
-                >{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}
-              </ion-button>
-            </ion-col>
-          </ion-row>
+              <ion-col size="6.5">
+                <ion-button class="optionbutton" (click)="openDamageType()"
+                  >{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row>
 
-          <div class="hl4line" *ngIf="damagetypevalue==''"></div>
+            <div class="hl4line" *ngIf="damagetypevalue==''"></div>
 
-          <div
-            class="title"
-            style="margin-top: 10px; color: #3cd2a5; text-align: left"
-            *ngIf="damagetypevalue!=''"
-          >
-            <b
-              >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selecteddamagetype' |
-              translate}}</b
+            <div
+              class="title"
+              style="margin-top: 10px; color: #3cd2a5; text-align: left"
+              *ngIf="damagetypevalue!=''"
             >
+              <b
+                >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selecteddamagetype' |
+                translate}}</b
+              >
+            </div>
+
+            <div
+              class="title"
+              style="text-align: center"
+              *ngIf="damagetypevalue!=''"
+              [innerHTML]="damagetypevalue"
+            ></div>
+
+            <div class="hl4line" *ngIf="damagetypevalue!=''"></div>
+
+            <ion-select
+              [interfaceOptions]="damagetypeOptions"
+              formControlName="select_damagetype"
+              multiple="true"
+              [okText]="'GENERALBUTTON.okay' | translate"
+              [cancelText]="'GENERALBUTTON.dismiss' | translate"
+              class="ionicselect"
+              (ionChange)="damagehandleChange($event)"
+              #damagetypeSelect
+            >
+              <ion-select-option
+                value="{{parseString(value)}}"
+                *ngFor="let value of damageArr; let i = index"
+                >{{ value.damage }}</ion-select-option
+              >
+            </ion-select>
           </div>
 
-          <div
-            class="title"
-            style="text-align: center"
-            *ngIf="damagetypevalue!=''"
-            [innerHTML]="damagetypevalue"
-          ></div>
+          <div *ngIf="getdamageid!=''">
+            <ion-row class="form-row">
+              <ion-col size="5">
+                <div class="title">
+                  {{ 'MAINTENANCEACKNOWLEDGEMODAL.damagetype' | translate}}
+                </div>
+              </ion-col>
 
-          <div class="hl4line" *ngIf="damagetypevalue!=''"></div>
+              <ion-col size="0.5" style="text-align: center">
+                <div class="title">
+                  <b>:</b>
+                </div>
+              </ion-col>
 
-          <ion-select
-            [interfaceOptions]="damagetypeOptions"
-            formControlName="select_damagetype"
-            multiple="true"
-            [okText]="'GENERALBUTTON.okay' | translate"
-            [cancelText]="'GENERALBUTTON.dismiss' | translate"
-            class="ionicselect"
-            (ionChange)="damagehandleChange($event)"
-            #damagetypeSelect
-          >
-            <ion-select-option
-              value="{{parseString(value)}}"
-              *ngFor="let value of damageArr; let i = index"
-              >{{ value.damage }}</ion-select-option
+              <ion-col size="6.5">
+                <ion-button class="optionbutton" (click)="openDamageType()"
+                  >{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+            <div
+              class="title"
+              style="margin-top: 10px; color: #3cd2a5; text-align: left"
+              *ngIf="getdamageid!=''"
             >
-          </ion-select>
+              <b
+                >{{ 'MAINTENANCEACKNOWLEDGEMODAL.selecteddamagetype' |
+                translate}}</b
+              >
+            </div>
+
+            <div
+              class="title"
+              style="text-align: center"
+              *ngIf="damagetypevalue!='' || getdamagevalue!=''"
+              [innerHTML]="damagetypevalue || getdamagevalue"
+            ></div>
+
+            <div class="hl4line" *ngIf="getdamageid!=''"></div>
+
+            <ion-select
+              [interfaceOptions]="damagetypeOptions"
+              formControlName="select_damagetype"
+              multiple="true"
+              [okText]="'GENERALBUTTON.okay' | translate"
+              [cancelText]="'GENERALBUTTON.dismiss' | translate"
+              class="ionicselect"
+              (ionChange)="damagehandleChange($event)"
+              #damagetypeSelect
+            >
+              <ion-select-option
+                value="{{parseString(value)}}"
+                *ngFor="let value of damageArr; let i = index"
+                >{{ value.damage }}</ion-select-option
+              >
+            </ion-select>
+          </div>
         </div>
 
         <!-- Breakdown Causes -->
@@ -530,7 +663,7 @@
             [disabled]="saveDisable"
             class="btn btn-next"
             (click)="remarksalert()"
-            *ngIf="(getstatusid == '2' || getstatusid == '4') && !verifyFlag"
+            *ngIf="(getstatusid == '2' || getstatusid == '4') && (!verifyFlag || step2Flag)"
           >
             <span class="icontext" style="color: #ffffff"
               >{{ 'GENERALBUTTON.savebutton' | translate}}</span
@@ -542,7 +675,7 @@
             [disabled]="saveDisable"
             class="btn btn-next"
             (click)="btn_next('STEP1')"
-            *ngIf="(getstatusid == '2' || getstatusid == '4') && verifyFlag"
+            *ngIf="(getstatusid == '2' || getstatusid == '4') && verifyFlag && !step2Flag"
           >
             <span class="icontext" style="color: #ffffff"
               >{{ 'MAINTENANCEACKNOWLEDGEMODAL.next' | translate}}</span
@@ -553,7 +686,7 @@
             type="submit"
             [disabled]="saveDisable"
             class="btn btn-next"
-            (click)="save('')"
+            (click)="save('', '', '', '')"
             *ngIf="(getstatusid == '3' || getstatusid == '10')"
           >
             <span class="icontext" style="color: #ffffff"

@@ -481,7 +481,7 @@ export class MaintenanceForemanPvrpvListPage implements OnInit {
     }
 
     if (status == "10") {
-      color = "#409b00";
+      color = "#01b800";
     }
 
     if (status == "12") {
@@ -539,7 +539,7 @@ export class MaintenanceForemanPvrpvListPage implements OnInit {
       language: this.languageService.selected,
     };
 
-    //console.log(req);
+    console.log(req);
 
     this.service.getPreventiveMaintenanceList(req).then((result) => {
       var resultdata: any;

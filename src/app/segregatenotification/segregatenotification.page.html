@@ -4,13 +4,13 @@
       <ion-back-button
         color="whitefav"
         defaultHref="/tabs/tabmaintenancedashboard"
-        *ngIf="((departmentid==25 && designationid==1) || (departmentid==7 && designationid==2) || (departmentid==7 && designationid==4))"
+        *ngIf="((departmentid==25 && designationid==1) || (departmentid==7 && designationid==2) || (departmentid==7 && designationid==4) || (departmentid==7 && designationid==6))"
       ></ion-back-button>
 
       <ion-back-button
         color="whitefav"
         defaultHref="/tabs/tabmaintenancehome"
-        *ngIf="((departmentid==7 && designationid==5) || (departmentid==7 && designationid==6) || (departmentid==2 && designationid==9))"
+        *ngIf="((departmentid==7 && designationid==5) || (departmentid==7 && designationid==11) || (departmentid==2 && designationid==9))"
       ></ion-back-button>
 
       <ion-back-button
@@ -23,13 +23,12 @@
     <ion-title color="light" mode="ios"
       >{{ 'NOTIFICATION.title' | translate}}</ion-title
     >
-    <ion-title color="light"></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-tabs
-    *ngIf="designationid!=3 && designationid!=5 && designationid!=6 && designationid!=7 && designationid!=8 && designationid!=9"
+    *ngIf="designationid!=3 && designationid!=5 && designationid!=7 && designationid!=8 && designationid!=9 && designationid!=11"
   >
     <ion-tab-bar slot="top" style="height: 10%">
       <ion-tab-button tab="tabmillstatus">
@@ -51,7 +50,7 @@
 
   <div
     class="home-box"
-    *ngIf="designationid==3 || designationid==5 || designationid==6 || designationid==7 || designationid==8 || designationid==9"
+    *ngIf="designationid==3 || designationid==5 || designationid==7 || designationid==8 || designationid==9 || designationid==11"
   >
     <ion-buttons *ngIf="todaysnotificationArr.length > 0">
       <button

@@ -155,7 +155,7 @@ export class SegregatenotificationalertsPage implements OnInit {
     this.getNotification();
 
     if (value.redirect == "ROUTINE PREVENTIVE MAINTENANCE NOTIFICATION") {
-      if (this.designationid == 5 || this.designationid == 6) {
+      if (this.designationid == 5 || this.designationid == 11) {
         this.router.navigate(["/tabs/tabmaintenancehome"]);
       } else {
         this.router.navigate(["/maintenance-pvrpv-list"]);
@@ -163,7 +163,7 @@ export class SegregatenotificationalertsPage implements OnInit {
     } else if (
       value.redirect == "REPLACEMENT PREVENTIVE MAINTENANCE NOTIFICATION"
     ) {
-      if (this.designationid == 5 || this.designationid == 6) {
+      if (this.designationid == 5 || this.designationid == 11) {
         this.router.navigate(["/tabs/tabmaintenancehome"]);
       } else {
         this.router.navigate(["/maintenance-pvrpv-list"]);
@@ -174,7 +174,7 @@ export class SegregatenotificationalertsPage implements OnInit {
       if (this.departmentid == 4) {
         this.router.navigate(["/production-notification-list"]);
       } else {
-        if (this.designationid == 5 || this.designationid == 6) {
+        if (this.designationid == 5 || this.designationid == 11) {
           this.router.navigate(["/tabs/tabmaintenancehome"]);
         } else {
           this.router.navigate(["/maintenance-notification-list"]);

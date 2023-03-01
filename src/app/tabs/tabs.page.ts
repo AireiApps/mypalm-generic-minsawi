@@ -1,10 +1,11 @@
 // tslint:disable-next-line: triple-equals
 // tslint:disable-next-line: use-lifecycle-interface
 
-import { Component, OnInit, NgZone } from "@angular/core";
+import { Component, OnInit, NgZone, ViewChild } from "@angular/core";
 import { HttpserviceService } from "../services/httpservice/httpservice.service";
 import "rxjs/add/observable/interval";
 import { Observable } from "rxjs";
+import { IonTabs } from "@ionic/angular";
 
 @Component({
   selector: "app-tabs",
@@ -12,9 +13,12 @@ import { Observable } from "rxjs";
   styleUrls: ["./tabs.page.scss"],
 })
 export class TabsPage implements OnInit {
+  @ViewChild("tabs") tabs: IonTabs;
+
   userlist = JSON.parse(localStorage.getItem("userlist"));
   designationid = this.userlist.desigId;
   departmentId = 1;
+
   constructor(private httpservice: HttpserviceService, private zone: NgZone) {
     // Observable.interval(10000)
     //   .subscribe((val) => {  });
@@ -35,6 +39,10 @@ export class TabsPage implements OnInit {
 
   ionViewDidEnter() {
     this.departmentId = this.userlist.dept_id;
+
+    /*if (this.designationid == 5 || this.designationid == 11) {
+      this.tabs.select("tabmaintenancehome");
+    }*/
   }
 
   getTabCheck(currentId) {

@@ -187,6 +187,27 @@ export class MaintenanceServiceService {
     });
   }
 
+  saveFitterVerificationAcknowledgeNotification(params) {
+    var reqOpts: any;
+    reqOpts = this.formParams(params);
+
+    var api =
+      localStorage.getItem("endpoint") +
+      appsettings.savefitterverificationacknowledgenotification;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, reqOpts).subscribe(
+        (data) => {
+          console.log(data);
+          resolve(data);
+        },
+        (error) => {
+          console.log(error);
+          reject(error);
+        }
+      );
+    });
+  }
+
   getNotificationList(params) {
     var reqOpts: any;
     reqOpts = this.formParams(params);

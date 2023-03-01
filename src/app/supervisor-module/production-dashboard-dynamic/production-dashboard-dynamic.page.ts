@@ -92,6 +92,8 @@ export class ProductionDashboardDynamicPage implements OnInit {
   selectedlanguage = "";
   getplatform: string;
 
+  searchedstationid = "";
+
   constructor(
     private languageService: LanguageService,
     private translate: TranslateService,
@@ -154,7 +156,7 @@ export class ProductionDashboardDynamicPage implements OnInit {
 
     this.forceUpdated();
 
-    this.dashboardForm.controls.select_station.setValue("");
+    //this.dashboardForm.controls.select_station.setValue("");
 
     this.getStation();
   }
@@ -263,7 +265,7 @@ export class ProductionDashboardDynamicPage implements OnInit {
   }
 
   refreshRecords() {
-    this.dashboardForm.controls.select_station.setValue("");
+    //this.dashboardForm.controls.select_station.setValue("");
 
     this.getStation();
   }
@@ -297,13 +299,13 @@ export class ProductionDashboardDynamicPage implements OnInit {
   }
 
   onChangeStation() {
-    var searchedstationid = this.dashboardForm.value.select_station;
+    this.searchedstationid = this.dashboardForm.value.select_station;
 
     var item = this.filterstationsArr.filter(
-      (item) => item.stationid === parseInt(searchedstationid)
+      (item) => item.stationid === parseInt(this.searchedstationid)
     );
 
-    if (searchedstationid == "") {
+    if (this.searchedstationid == "") {
       this.stationsArr = this.filterstationsArr;
     } else {
       this.stationsArr = item;
@@ -354,7 +356,7 @@ export class ProductionDashboardDynamicPage implements OnInit {
         this.productionflag = resultdata.data[0].status;
         this.breakdownflag = resultdata.data[0].breakdownflag;
 
-        console.log(this.productionflag);
+        //console.log(this.productionflag);
 
         this.mill_startdatetime = resultdata.data[0].start_date;
         this.mill_stopdatetime = resultdata.data[0].stop_date;
@@ -408,9 +410,9 @@ export class ProductionDashboardDynamicPage implements OnInit {
 
         this.productionalerttitle = "Amaran";
         this.startalertmessage =
-          "Dengan mengklik butang hijau anda mengesahkan bahawa pengeluaran kilang telah bermula";
+          "Dengan menekan butang hijau anda mengesahkan bahawa operasi kilang akan dimulakan.";
         this.stopalertmessage =
-          "Dengan mengklik butang merah anda mengesahkan bahawa pengeluaran kilang telah berhenti";
+          "Dengan menekan butang merah anda mengesahkan bahawa operasi kilang akan diberhentikan.";
         this.breakdownalerttitle = "Amaran";
         this.breakdownalertmessage = "Sila masukkan sebab breakdown";
         this.reasonplaceholder = "Sebab Kerosakan";
@@ -445,6 +447,18 @@ export class ProductionDashboardDynamicPage implements OnInit {
 
         this.filterstationsArr = this.stationsArr;
 
+        // Search Process
+        var item = this.filterstationsArr.filter(
+          (item) => item.stationid === parseInt(this.searchedstationid)
+        );
+
+        if (this.searchedstationid == "") {
+          this.stationsArr = this.filterstationsArr;
+        } else {
+          this.stationsArr = item;
+        }
+        // End
+
         if (this.productionflag == "1") {
           this.previoushistoryuienable = false;
 
@@ -453,14 +467,14 @@ export class ProductionDashboardDynamicPage implements OnInit {
           this.welcomemessage = this.translate.instant(
             "SUPERVISORDASHBOARD.productionstarted"
           );
-          this.dashboardForm.controls.select_station.setValue("");
+          //this.dashboardForm.controls.select_station.setValue("");
         } else {
           this.uienable = false;
 
           this.welcomemessage = this.translate.instant(
             "SUPERVISORDASHBOARD.productionstopped"
           );
-          this.dashboardForm.controls.select_station.setValue("");
+          //this.dashboardForm.controls.select_station.setValue("");
           this.previoushistory();
         }
       } else {
@@ -470,7 +484,7 @@ export class ProductionDashboardDynamicPage implements OnInit {
 
         this.uienable = false;
 
-        this.dashboardForm.controls.select_station.setValue("");
+        //this.dashboardForm.controls.select_station.setValue("");
         this.previoushistory();
       }
     });
@@ -1072,7 +1086,7 @@ export class ProductionDashboardDynamicPage implements OnInit {
         typeof breakdownid !== "undefined" &&
         typeof maintenancetypeid !== "undefined"
       ) {
-        this.dashboardForm.controls.select_station.setValue("");
+        //this.dashboardForm.controls.select_station.setValue("");
 
         this.problemalertmessage(
           getstationid,

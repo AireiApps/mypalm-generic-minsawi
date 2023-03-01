@@ -293,7 +293,7 @@ export class MaintenanceForemanNotificationListPage implements OnInit {
     }
 
     if (status == "10") {
-      color = "#409b00";
+      color = "#01b800";
     }
 
     if (status == "12") {

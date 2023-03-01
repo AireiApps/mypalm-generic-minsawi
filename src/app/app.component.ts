@@ -232,13 +232,17 @@ export class AppComponent implements OnInit {
           if (
             designationid == "3" ||
             designationid == "5" ||
-            designationid == "6" ||
+            designationid == "11" ||
             designationid == "7" ||
             designationid == "8" ||
             designationid == "9"
           ) {
             this.router.navigate(["/segregatenotification"]);
-          } else if (designationid == "2" || designationid == "4") {
+          } else if (
+            designationid == "2" ||
+            designationid == "4" ||
+            designationid == "6"
+          ) {
             if (redirectpage == '"MAINTENANCE"') {
               this.router.navigate([
                 "/segregatenotification/tabmaintenancenotification",

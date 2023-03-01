@@ -79,7 +79,7 @@
   },
 
   "SCHEDULING":{
-    "title": "Scheduling"
+    "title": "Maintenance Calendar"
   },
 
   "SUPERVISORDASHBOARD": {
@@ -646,9 +646,9 @@
   },
   "MAINTENANCENOTIFICATIONVIEW":{
     "correctivemaintenanceackview":"Corrective Maintenance Acknowledgment",
-    "correctivemaintenanceview":"Corrective Maintenance View",
-    "routinepreventivemaintenanceview":"Routine Preventive Maintenance View",
-    "replacementpreventivemaintenanceview":"Replacement Preventive Maintenance View",
+    "correctivemaintenanceview":"Corrective Maintenance",
+    "routinepreventivemaintenanceview":"Routine Preventive Maintenance",
+    "replacementpreventivemaintenanceview":"Replacement Preventive Maintenance",
     "replacementpreventivemaintenanceackview":"Replacement Preventive Maintenance Acknowledgment",
     "maintenance":"MAINTENANCE",
     "notificationform":"NOTIFICATION FORM",
@@ -1076,6 +1076,7 @@
     "selecteddamagetype":"Selected Damage Type",
     "correctivemaintenance":"Corrective Maintenance",
     "jobselectionmandatory":"Job Accept Selection is Mandatory",
+    "reasonselectionmandatory":"Reason Selection is Mandatory",
     "workorderselectionmandatory":"Work Order Selection is Mandatory",
     "conditionmandatory":"Condition Selection is Mandatory",
     "damagetypemandatory":"Damage Type Selection is Mandatory",
@@ -1088,7 +1089,6 @@
     "correctivefailed":"Corrective Maintenance Updation Failed",
     "optional":"Optional"
   },
-
   "MAINTENANCEACKNOWLEDGEMODAL":{
     "maintenancetype":"Maintenance Type",
     "select":"Select",
@@ -1179,15 +1179,15 @@
   "GRADINGHOME": {
     "welcome":"Welcome",
     "newgrading":"Receive New Load",
-    "vehicle":"Vehicle",
+    "vehicle":"Vehicle Number",
     "vehiclenumber":"Vehicle Number",
     "hardbunches":"Hard Bunches",
     "underripebunches":"Under Ripe Bunches",
-    "ripeness":"Ripeness",
+    "ripeness":"Overall Ripeness",
     "loosefruits":"Loose Fruits",
-    "lastfiverecords":"Last 5 Recent Records",
+    "lastfiverecords":"Most Recent Five Records",
     "entervehiclenumber":"Enter Vehicle Number",
-    "searchvehicle":"Search Vehicle",
+    "searchvehicle":"Select Vehicle",
     "vehiclenumbermandatory":"Vehicle Number is Mandatory",
     "receivedloadsuccessfully":"Received Load Successfully",
     "receivedloadfailed":"Receiving Load Failed"
@@ -1203,7 +1203,7 @@
   },
   "SEARCHVEHICLE":{
     "search":"Search",
-    "searchvehicle":"Search Vehicle",
+    "searchvehicle":"Select Vehicle",
     "nosearchrecords":"No Vehicle Found",
     "loadingmoredata":"Loading more data..."
   },

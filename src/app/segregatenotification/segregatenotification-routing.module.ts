@@ -58,7 +58,11 @@ const routes_maintenance: Routes = [
 if (userlist) {
   if (userlist.dept_id) {
     if (userlist.dept_id == 7) {
-      if (userlist.desigId == 2 || userlist.desigId == 4) {
+      if (
+        userlist.desigId == 2 ||
+        userlist.desigId == 4 ||
+        userlist.desigId == 6
+      ) {
         newRoutes = routes_maintenance;
       } else {
         newRoutes = routes_general;

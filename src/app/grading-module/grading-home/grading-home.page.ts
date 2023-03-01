@@ -274,25 +274,36 @@ export class GradingHomePage implements OnInit {
 
       vehiclemodal.onDidDismiss().then((modeldata) => {
         let viewform = modeldata.data.data;
-        this.params = JSON.parse(viewform);
-        //console.log(this.params.id);
-        if (this.params.id != 0) {
-          this.vehicleid = this.params.id;
-          this.vehiclenumber = this.params.vehicle_no;
+        if (viewform != "") {
+          this.params = JSON.parse(viewform);
+          //console.log(this.params.id);
+          if (this.params.id != 0) {
+            this.vehicleid = this.params.id;
+            this.vehiclenumber = this.params.vehicle_no;
 
-          //console.log(this.vehiclenumber);
+            //console.log(this.vehiclenumber);
 
-          this.gradingForm.controls.txt_searchvehicle.setValue(
-            this.vehiclenumber
-          );
-        } else {
-          this.vehicleid = this.params.id;
-          this.vehiclenumber = this.params.vehicle_no;
+            this.gradingForm.controls.txt_searchvehicle.setValue(
+              this.vehiclenumber
+            );
+            this.gradingForm.controls.txt_vehiclenumber.setValue("");
+          } else {
+            this.vehicleid = this.params.id;
+            this.vehiclenumber = this.params.vehicle_no;
 
-          this.gradingForm.controls.txt_searchvehicle.setValue("");
+            //console.log(modeldata.data.searchtext);
 
-          this.selectvehicleFlag = false;
-          this.entervehicleFlag = true;
+            this.gradingForm.controls.txt_searchvehicle.setValue("");
+
+            if (modeldata.data.searchtext != "") {
+              this.gradingForm.controls.txt_vehiclenumber.setValue(
+                modeldata.data.searchtext
+              );
+            }
+
+            this.selectvehicleFlag = false;
+            this.entervehicleFlag = true;
+          }
         }
       });
 

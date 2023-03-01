@@ -475,6 +475,20 @@ export class MaintenanceNotificationAcceptModalPage implements OnInit {
     }
 
     if (
+      this.optionSelected == "No" &&
+      (this.statusid == "3" || this.statusid == "10")
+    ) {
+      if (this.reasonid == "") {
+        this.commonservice.presentToast(
+          this.translate.instant(
+            "MAINTENANCEACCEPTMODAL.reasonselectionmandatory"
+          )
+        );
+        return;
+      }
+    }
+
+    if (
       this.optionSelected == "Yes" &&
       (this.statusid == "2" || this.statusid == "4") &&
       this.screen == "ROUT"
@@ -532,7 +546,7 @@ export class MaintenanceNotificationAcceptModalPage implements OnInit {
       };
     }
 
-    console.log(req);
+    console.log("Accept:", req);
 
     this.maintenanceservice.saveFitterAcceptNotification(req).then((result) => {
       var resultdata: any;

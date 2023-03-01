@@ -18,7 +18,7 @@ export class DashboardOillossPredictionanalysisPage implements OnInit {
   iconname = "tablet-landscape-outline";
 
   constructor(private screenOrientation: ScreenOrientation) {
-    //this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
   }
 
   ngOnInit() {}
@@ -34,7 +34,7 @@ export class DashboardOillossPredictionanalysisPage implements OnInit {
     );
   }
 
-  btn_orientation() {
+  /*btn_orientation() {
     if (this.screenOrientation.type == "portrait-primary") {
       this.iconname = "tablet-portrait-outline";
       this.screenOrientation.lock(
@@ -46,7 +46,7 @@ export class DashboardOillossPredictionanalysisPage implements OnInit {
         this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY
       );
     }
-  }
+  }*/
 
   getUrl() {
     let formatedurl =
@@ -55,7 +55,7 @@ export class DashboardOillossPredictionanalysisPage implements OnInit {
       "?mobile=1&user_id=" +
       this.user_id;
 
-    console.log(formatedurl);
+    //console.log(formatedurl);
 
     this.weburl = formatedurl;
   }

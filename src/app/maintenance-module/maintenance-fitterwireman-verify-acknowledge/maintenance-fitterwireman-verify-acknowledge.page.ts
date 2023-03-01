@@ -98,7 +98,8 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
   getbreakdown = "";
   getstatusid = "";
   getstatus = "";
-  getgetstationid = "";
+  getdamageid = "";
+  getdamagevalue = "";
   getpartdefectid = "";
   getpartdefectvalue = "";
 
@@ -117,6 +118,7 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
   reasonid = "";
   reason = "";
   cssenable = 0;
+  createcmFlag = 0;
 
   maintenancetypeid = "";
   maintenancetypevalue = "";
@@ -125,6 +127,9 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
   damagetypevalue = "";
   damagetypeidArr = [];
   damagetypevalueArr = [];
+
+  existdamagetypeidArr = [];
+  existdamagetypevalueArr = [];
 
   breakdowncausesid = "";
   breakdowncausesvalue = "";
@@ -148,8 +153,6 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
 
   repairactivitynorecordFlag = false;
   jobauthorizationnorecordFlag = false;
-  yesradiobuttonchecked = false;
-  noradiobuttonchecked = false;
 
   reasonFlag = false;
   conditionFlag = false;
@@ -159,6 +162,13 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
   otherFlag = false;
   damageFlag = false;
   breakdowncausesFlag = false;
+
+  abnormaldamageFlag = false;
+
+  yesradiobuttonchecked = false;
+  noradiobuttonchecked = false;
+  goodradiobuttonchecked = false;
+  abnormalradiobuttonchecked = false;
 
   saveDisable = false;
 
@@ -222,9 +232,16 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
     this.getstatusid = this.params.statusId;
     this.getnotificationid = this.params.id;
     this.getpartdefectvalue = this.params.partdefect;
+    this.getpartdefectid = this.params.partdefectid;
     this.screen = this.params.type;
 
-    console.log(this.screen);
+    //console.log(this.screen);
+
+    if (this.getpartdefectvalue != "") {
+      this.step2completedFlag = true;
+    } else {
+      this.step2completedFlag = false;
+    }
 
     this.verifyacknowledgeForm = this.fb.group({
       select_reason: new FormControl(""),
@@ -323,7 +340,26 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
       if (resultdata.httpcode == 200) {
         this.generalArr = resultdata.data.general;
 
-        this.getpartdefectid = this.generalArr[0].partdefectid;
+        this.getdamageid = this.generalArr[0].damagesid;
+        this.getdamagevalue = this.generalArr[0].damages;
+
+        if (this.getdamagevalue != "") {
+          var damageid = this.getdamageid.split(",");
+          var damagevalue = this.getdamagevalue.split(",");
+
+          for (let i = 0; i < damageid.length; i++) {
+            this.existdamagetypeidArr.push(parseInt(damageid[i]));
+            this.existdamagetypevalueArr.push(damagevalue[i]);
+            //this.damagetypeidArr.push(damageid[i]);
+            //this.damagetypevalueArr.push(damagevalue[i]);
+          }
+
+          //console.log(this.existdamagetypeidArr);
+
+          this.step3completedFlag = true;
+        } else {
+          this.step3completedFlag = false;
+        }
 
         this.getrunninghours = this.generalArr[0].runningHours;
         this.getcreateddatetime = this.generalArr[0].insDate;
@@ -433,13 +469,25 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
         let eachArr = [];
 
         for (let i = 0; i < this.damageArr.length; i++) {
+          let existFlag = false;
           let eachitem = this.damageArr[i];
-          let eachreq = {
-            id: eachitem.id,
-            damage: eachitem.damage,
-            selected: 0,
-          };
-          eachArr.push(eachreq);
+
+          if (this.getdamageid != "" && this.getdamageid != "0") {
+            for (let j = 0; j < this.existdamagetypeidArr.length; j++) {
+              if (eachitem.id == this.existdamagetypeidArr[j]) {
+                existFlag = true;
+              }
+            }
+          }
+
+          if (!existFlag) {
+            let eachreq = {
+              id: eachitem.id,
+              damage: eachitem.damage,
+              selected: 0,
+            };
+            eachArr.push(eachreq);
+          }
 
           if (this.damagetypeid != "") {
             if (eachitem.id == this.damagetypeid) {
@@ -450,15 +498,23 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
 
         this.damageArr = eachArr;
 
-        this.damageFlag = true;
+        if (this.screen == "ROUT") {
+          this.abnormaldamageFlag = true;
+        } else {
+          this.damageFlag = true;
 
-        this.getBreakDownCauses();
+          this.getBreakDownCauses();
+        }
       } else {
         this.damageArr = [];
 
-        this.damageFlag = false;
+        if (this.screen == "ROUT") {
+          this.abnormaldamageFlag = false;
+        } else {
+          this.damageFlag = false;
 
-        this.getBreakDownCauses();
+          this.getBreakDownCauses();
+        }
       }
     });
   }
@@ -545,15 +601,19 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
     }
   }
 
-  /*onConditionOptionChange(value) {
+  onConditionOptionChange(value) {
     this.conditionoptionSelected = value;
 
     if (this.getstatusid == "2" || this.getstatusid == "4") {
       if (this.conditionoptionSelected == "Abnormal") {
         this.getDamage();
+
+        this.createcmFlag = 1;
+      } else {
+        this.abnormaldamageFlag = false;
       }
     }
-  }*/
+  }
 
   reasonhandleChange(e) {
     let value = e.detail.value;
@@ -634,6 +694,12 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
     if (value.length > 0) {
       this.damagetypeidArr = [];
       this.damagetypevalueArr = [];
+
+      if (this.getdamageid != "" && this.getdamageid != "0") {
+        this.damagetypeidArr.push(this.getdamageid);
+        this.damagetypevalueArr.push(this.getdamagevalue);
+      }
+
       for (let i = 0; i < value.length; i++) {
         this.damagetypeidArr.push(JSON.parse(value[i]).id);
         this.damagetypevalueArr.push(JSON.parse(value[i]).damage);
@@ -642,16 +708,20 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
       this.damagetypeid = this.damagetypeidArr.join(",");
       this.damagetypevalue = this.nl2br(this.damagetypevalueArr.join(", "));
 
-      this.step3completedFlag = true;
-      this.getStatusColor("STEP3");
+      if (this.screen != "ROUT") {
+        this.step3completedFlag = true;
+        this.getStatusColor("STEP3");
+      }
     } else {
       this.damagetypeidArr = [];
       this.damagetypevalueArr = [];
       this.damagetypeid = "";
       this.damagetypevalue = "";
 
-      this.step3completedFlag = false;
-      this.getStatusColor("STEP3");
+      if (this.screen != "ROUT") {
+        this.step3completedFlag = false;
+        this.getStatusColor("STEP3");
+      }
     }
   }
 
@@ -684,12 +754,6 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
   }
 
   btn_next(type) {
-    let radios = document.getElementsByName("radio_option");
-    for (let i = 0, length = radios.length; i < length; i++) {
-      console.log(radios[i]);
-    }
-    console.log(radios);
-
     if (type == "STEP1") {
       this.cssenable = 1;
 
@@ -745,13 +809,20 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
         }
       }
 
-      if (this.verifyacknowledgeForm.value.select_damagetype == "") {
-        this.commonservice.presentToast(
-          this.translate.instant(
-            "MAINTENANCEACKNOWLEDGEMODAL.damagetypeselection"
-          )
-        );
-        return;
+      if (this.getdamageid != "" && this.getdamageid != "0") {
+        if (this.damagetypeidArr.length <= 0) {
+          this.damagetypeidArr.push(this.getdamageid);
+          this.damagetypevalueArr.push(this.getdamagevalue);
+        }
+      } else {
+        if (this.verifyacknowledgeForm.value.select_damagetype == "") {
+          this.commonservice.presentToast(
+            this.translate.instant(
+              "MAINTENANCEACKNOWLEDGEMODAL.damagetypeselection"
+            )
+          );
+          return;
+        }
       }
 
       if (this.verifyacknowledgeForm.value.select_breakdowncauses == "") {
@@ -889,49 +960,228 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
       }
     }
 
-    //let alertmessage = "Please enter Reason for Breakdown and Balance Crop";
-    let alertmessage = this.translate.instant(
-      "MAINTENANCEACCEPTMODAL.enterremark"
-    );
+    let partid = [];
+    let partvalue = [];
+    let otherpartname = [];
 
-    this.alertController
-      .create({
-        header: "",
-        message: alertmessage,
-        cssClass: "alertmessage",
-        backdropDismiss: false,
-        inputs: [
-          {
-            name: "remarks",
-            type: "textarea",
-            cssClass: "alertinput",
-            placeholder: this.translate.instant(
-              "MAINTENANCEACCEPTMODAL.optional"
+    if (this.verifyFlag) {
+      if (this.verifyacknowledgeForm.value.select_maintenancetype == "") {
+        this.commonservice.presentToast(
+          this.translate.instant(
+            "MAINTENANCEACKNOWLEDGEMODAL.maintenancetypeselection"
+          )
+        );
+        return;
+      }
+
+      if (this.getpartdefectid != "" && this.getpartdefectid != "0") {
+        partid.push(this.getpartdefectid);
+        partvalue.push(this.getpartdefectvalue);
+      } else {
+        if (this.partidArr.length <= 0) {
+          if (this.screen == "CM") {
+            this.commonservice.presentToast(
+              this.translate.instant(
+                "MAINTENANCEACKNOWLEDGEMODAL.partdefectmandatory"
+              )
+            );
+          } else if (this.screen == "ROUT") {
+            this.commonservice.presentToast(
+              this.translate.instant(
+                "MAINTENANCEACKNOWLEDGEMODAL.partselection"
+              )
+            );
+          } else if (this.screen == "REPL") {
+            this.commonservice.presentToast(
+              this.translate.instant(
+                "MAINTENANCEACKNOWLEDGEMODAL.partreplacedselection"
+              )
+            );
+          } else {
+            this.commonservice.presentToast(
+              this.translate.instant(
+                "MAINTENANCEACKNOWLEDGEMODAL.partselection"
+              )
+            );
+          }
+
+          return;
+        }
+      }
+
+      if (this.getdamageid != "" && this.getdamageid != "0") {
+        if (this.damagetypeidArr.length <= 0) {
+          this.damagetypeidArr.push(this.getdamageid);
+          this.damagetypevalueArr.push(this.getdamagevalue);
+        }
+      } else {
+        if (this.verifyacknowledgeForm.value.select_damagetype == "") {
+          this.commonservice.presentToast(
+            this.translate.instant(
+              "MAINTENANCEACKNOWLEDGEMODAL.damagetypeselection"
+            )
+          );
+          return;
+        }
+      }
+
+      if (this.verifyacknowledgeForm.value.select_breakdowncauses == "") {
+        this.commonservice.presentToast(
+          this.translate.instant(
+            "MAINTENANCEACKNOWLEDGEMODAL.breakdowncausesselection"
+          )
+        );
+        return;
+      }
+
+      for (let i = 0; i < this.partidArr.length; i++) {
+        if (this.partidArr[i] == 0) {
+          otherpartname.push(this.partvalueArr[i]);
+        } else {
+          partid.push(this.partidArr[i]);
+        }
+      }
+
+      partvalue.push(this.partvalueArr);
+    }
+
+    if (this.screen != "ROUT") {
+      let alertmessage = this.translate.instant(
+        "MAINTENANCEACCEPTMODAL.enterremark"
+      );
+
+      this.alertController
+        .create({
+          header: "",
+          message: alertmessage,
+          cssClass: "alertmessage",
+          backdropDismiss: false,
+          inputs: [
+            {
+              name: "remarks",
+              type: "textarea",
+              cssClass: "alertinput",
+              placeholder: this.translate.instant(
+                "MAINTENANCEACCEPTMODAL.optional"
+              ),
+            },
+          ],
+          buttons: [
+            {
+              text: this.translate.instant("GENERALBUTTON.cancelbutton"),
+              role: "cancel",
+              handler: (cancel) => {
+                //console.log("Confirm Cancel");
+              },
+            },
+            {
+              text: this.translate.instant("GENERALBUTTON.okay"),
+              handler: (data: any) => {
+                this.save(data.remarks, partid, partvalue, otherpartname);
+              },
+            },
+          ],
+        })
+        .then((res) => {
+          res.present();
+        });
+    } else {
+      if (
+        this.conditionoptionSelected != "" &&
+        this.conditionoptionSelected == "Good"
+      ) {
+        let alertmessage = this.translate.instant(
+          "MAINTENANCEACCEPTMODAL.enterremark"
+        );
+
+        this.alertController
+          .create({
+            header: "",
+            message: alertmessage,
+            cssClass: "alertmessage",
+            backdropDismiss: false,
+            inputs: [
+              {
+                name: "remarks",
+                type: "textarea",
+                cssClass: "alertinput",
+                placeholder: this.translate.instant(
+                  "MAINTENANCEACCEPTMODAL.optional"
+                ),
+              },
+            ],
+            buttons: [
+              {
+                text: this.translate.instant("GENERALBUTTON.cancelbutton"),
+                role: "cancel",
+                handler: (cancel) => {
+                  //console.log("Confirm Cancel");
+                },
+              },
+              {
+                text: this.translate.instant("GENERALBUTTON.okay"),
+                handler: (data: any) => {
+                  this.save(data.remarks, partid, partvalue, otherpartname);
+                },
+              },
+            ],
+          })
+          .then((res) => {
+            res.present();
+          });
+      } else {
+        if (this.conditionoptionSelected == "Abnormal") {
+          if (this.damagetypeid.length <= 0) {
+            this.commonservice.presentToast(
+              this.translate.instant(
+                "MAINTENANCEACCEPTMODAL.damagetypemandatory"
+              )
+            );
+            return;
+          }
+        }
+
+        let alertmessage;
+
+        alertmessage = this.translate.instant(
+          "MAINTENANCENOTIFICATIONVIEW.alert"
+        );
+
+        this.alertController
+          .create({
+            header: this.translate.instant(
+              "MAINTENANCENOTIFICATIONVIEW.header"
             ),
-          },
-        ],
-        buttons: [
-          {
-            text: this.translate.instant("GENERALBUTTON.cancelbutton"),
-            role: "cancel",
-            handler: (cancel) => {
-              //console.log("Confirm Cancel");
-            },
-          },
-          {
-            text: this.translate.instant("GENERALBUTTON.okay"),
-            handler: (data: any) => {
-              this.save(data.remarks);
-            },
-          },
-        ],
-      })
-      .then((res) => {
-        res.present();
-      });
+            message: alertmessage,
+            cssClass: "alertmessage",
+            backdropDismiss: true,
+            buttons: [
+              {
+                text: this.translate.instant("MAINTENANCENOTIFICATIONVIEW.no"),
+                role: "no",
+                cssClass: "secondary",
+                handler: (no) => {
+                  this.createcmFlag = 0;
+                  this.save("", partid, partvalue, otherpartname);
+                },
+              },
+              {
+                text: this.translate.instant("MAINTENANCENOTIFICATIONVIEW.yes"),
+                handler: () => {
+                  this.createcmFlag = 1;
+                  this.save("", partid, partvalue, otherpartname);
+                },
+              },
+            ],
+          })
+          .then((res) => {
+            res.present();
+          });
+      }
+    }
   }
 
-  save(getremarks) {
+  save(getremarks, getpartid, getpart, getotherpartname) {
     if (this.optionSelected == "") {
       if (this.getstatusid == "3" || this.getstatusid == "10") {
         this.commonservice.presentToast(
@@ -939,25 +1189,17 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
         );
         return;
       }
-
-      if (this.getstatusid == "2" || this.getstatusid == "4") {
-        this.commonservice.presentToast(
-          this.translate.instant(
-            "MAINTENANCEACCEPTMODAL.workorderselectionmandatory"
-          )
-        );
-        return;
-      }
     }
 
     if (
-      this.optionSelected == "Yes" &&
-      (this.getstatusid == "2" || this.getstatusid == "4") &&
-      this.screen == "ROUT"
+      this.optionSelected == "No" &&
+      (this.getstatusid == "3" || this.getstatusid == "10")
     ) {
-      if (this.conditionoptionSelected == "") {
+      if (this.reasonid == "") {
         this.commonservice.presentToast(
-          this.translate.instant("MAINTENANCEACCEPTMODAL.conditionmandatory")
+          this.translate.instant(
+            "MAINTENANCEACCEPTMODAL.reasonselectionmandatory"
+          )
         );
         return;
       }
@@ -974,72 +1216,125 @@ export class MaintenanceFitterwiremanVerifyAcknowledgePage implements OnInit {
         dept_id: this.userlist.dept_id,
         design_id: this.userlist.desigId,
         id: this.getnotificationid,
-        acceptmaterial: this.optionSelected,
+        stationid: this.getstationid,
+        equipment: this.getmachineid,
+        maintanence_type: "",
+        part_defect: "",
+        other_part_name: "",
+        damage: "",
+        breakdown_cause: "",
+        flag: this.screen,
         reason_id: this.reasonid,
+        acceptmaterial: this.optionSelected,
         workordercompleted: "",
         condition: "",
-        damagetype: "",
         remarks: getremarks,
+        cmflag: this.createcmFlag,
         language: this.languageService.selected,
       };
     } else {
-      req = {
-        userid: this.userlist.userId,
-        millcode: this.userlist.millcode,
-        dept_id: this.userlist.dept_id,
-        design_id: this.userlist.desigId,
-        id: this.getnotificationid,
-        acceptmaterial: "",
-        reason_id: "",
-        workordercompleted: this.optionSelected,
-        condition: this.conditionoptionSelected,
-        //damagetype: this.damagetypeidArr.join(","),
-        remarks: getremarks,
-        language: this.languageService.selected,
-      };
+      if (this.verifyFlag) {
+        req = {
+          userid: this.userlist.userId,
+          millcode: this.userlist.millcode,
+          dept_id: this.userlist.dept_id,
+          design_id: this.userlist.desigId,
+          id: this.getnotificationid,
+          stationid: this.getstationid,
+          equipment: this.getmachineid,
+          maintanence_type: String(
+            JSON.parse(this.verifyacknowledgeForm.value.select_maintenancetype)
+              .id
+          ),
+          part_defect: getpartid.join(","),
+          other_part_name: getotherpartname.join(","),
+          damage: this.damagetypeidArr.join(","),
+          breakdown_cause: this.breakdowncausesidArr.join(","),
+          flag: this.screen,
+          reason_id: "",
+          acceptmaterial: "",
+          workordercompleted: this.optionSelected,
+          condition: this.conditionoptionSelected,
+          remarks: getremarks,
+          cmflag: this.createcmFlag,
+          language: this.languageService.selected,
+        };
+      } else {
+        var getdamagetype = "";
+        if (this.screen == "ROUT") {
+          getdamagetype = this.damagetypeidArr.join(",");
+        }
+
+        req = {
+          userid: this.userlist.userId,
+          millcode: this.userlist.millcode,
+          dept_id: this.userlist.dept_id,
+          design_id: this.userlist.desigId,
+          id: this.getnotificationid,
+          stationid: this.getstationid,
+          equipment: this.getmachineid,
+          maintanence_type: "",
+          part_defect: "",
+          other_part_name: "",
+          damage: getdamagetype,
+          breakdown_cause: "",
+          flag: this.screen,
+          reason_id: this.reasonid,
+          acceptmaterial: "",
+          workordercompleted: this.optionSelected,
+          condition: this.conditionoptionSelected,
+          remarks: getremarks,
+          cmflag: this.createcmFlag,
+          language: this.languageService.selected,
+        };
+      }
     }
 
     console.log(req);
 
-    this.maintenanceservice.saveFitterAcceptNotification(req).then((result) => {
-      var resultdata: any;
-      resultdata = result;
+    this.maintenanceservice
+      .saveFitterVerificationAcknowledgeNotification(req)
+      .then((result) => {
+        var resultdata: any;
+        resultdata = result;
 
-      if (resultdata.httpcode == 200) {
-        this.saveDisable = false;
+        if (resultdata.httpcode == 200) {
+          this.saveDisable = false;
 
-        if (this.screen == "RePM") {
-          this.commonservice.presentToast(
-            this.translate.instant("MAINTENANCEACCEPTMODAL.replacementsuccess")
-          );
+          if (this.screen == "REPL") {
+            this.commonservice.presentToast(
+              this.translate.instant(
+                "MAINTENANCEACCEPTMODAL.replacementsuccess"
+              )
+            );
+          }
+
+          if (this.screen == "CM") {
+            this.commonservice.presentToast(
+              this.translate.instant("MAINTENANCEACCEPTMODAL.correctivesuccess")
+            );
+          }
+
+          this.modalController.dismiss({
+            dismissed: true,
+            screen: this.screen,
+          });
+        } else {
+          this.saveDisable = false;
+
+          if (this.screen == "REPL") {
+            this.commonservice.presentToast(
+              this.translate.instant("MAINTENANCEACCEPTMODAL.replacementfailed")
+            );
+          }
+
+          if (this.screen == "CM") {
+            this.commonservice.presentToast(
+              this.translate.instant("MAINTENANCEACCEPTMODAL.correctivefailed")
+            );
+          }
         }
-
-        if (this.screen == "CM") {
-          this.commonservice.presentToast(
-            this.translate.instant("MAINTENANCEACCEPTMODAL.correctivesuccess")
-          );
-        }
-
-        this.modalController.dismiss({
-          dismissed: true,
-          screen: this.screen,
-        });
-      } else {
-        this.saveDisable = false;
-
-        if (this.screen == "RePM") {
-          this.commonservice.presentToast(
-            this.translate.instant("MAINTENANCEACCEPTMODAL.replacementfailed")
-          );
-        }
-
-        if (this.screen == "CM") {
-          this.commonservice.presentToast(
-            this.translate.instant("MAINTENANCEACCEPTMODAL.correctivefailed")
-          );
-        }
-      }
-    });
+      });
   }
 
   async callmodalcontroller(type, value) {

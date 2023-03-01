@@ -339,7 +339,10 @@
                   >{{'PREVENTIVEMAINTENANCE.inprogress' | translate}}</ion-label
                 >
               </ion-segment-button>
-              <ion-segment-button value="Acknowledgement">
+              <ion-segment-button
+                value="Acknowledgement"
+                *ngIf="userlist.verificationacccess<3"
+              >
                 <ion-badge
                   class="secondbadgecount badgeblink"
                   *ngIf="ropmacknowledgerecords!=0"
@@ -1024,7 +1027,10 @@
             >
           </ion-segment-button>
 
-          <ion-segment-button value="Verify">
+          <ion-segment-button
+            value="Verify"
+            *ngIf="userlist.verificationacccess!=3"
+          >
             <ion-badge
               class="badgecount badgeblink"
               *ngIf="repmverifyrecords!=0"
@@ -1417,7 +1423,10 @@
                 >
               </ion-segment-button>
 
-              <ion-segment-button value="Acknowledgement">
+              <ion-segment-button
+                value="Acknowledgement"
+                *ngIf="userlist.verificationacccess!=3"
+              >
                 <ion-badge
                   class="secondbadgecount badgeblink"
                   *ngIf="repmacknowledgerecords!=0"

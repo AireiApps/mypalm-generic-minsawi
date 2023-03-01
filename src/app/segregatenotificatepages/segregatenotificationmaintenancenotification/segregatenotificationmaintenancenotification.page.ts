@@ -151,14 +151,14 @@ export class SegregatenotificationmaintenancenotificationPage
     this.getNotification();
 
     if (value.redirect == "ROUTINE PREVENTIVE MAINTENANCE NOTIFICATION") {
-      if (this.designationid == 4) {
+      if (this.designationid == 4 || this.designationid == 6) {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
         this.router.navigate([
           "/maintenance-foreman-pvrpv-list",
           { reportdate: value.fromdate },
         ]);
-      } else if (this.designationid == 5 || this.designationid == 6) {
+      } else if (this.designationid == 5 || this.designationid == 11) {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
         this.router.navigate([
@@ -186,14 +186,14 @@ export class SegregatenotificationmaintenancenotificationPage
     } else if (
       value.redirect == "REPLACEMENT PREVENTIVE MAINTENANCE NOTIFICATION"
     ) {
-      if (this.designationid == 4) {
+      if (this.designationid == 4 || this.designationid == 6) {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
         this.router.navigate([
           "/maintenance-foreman-pvrpv-list",
           { reportdate: value.fromdate },
         ]);
-      } else if (this.designationid == 5 || this.designationid == 6) {
+      } else if (this.designationid == 5 || this.designationid == 11) {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
         this.router.navigate([
@@ -212,7 +212,7 @@ export class SegregatenotificationmaintenancenotificationPage
       value.redirect ==
       "REPLACEMENT PREVENTIVE MAINTENANCE NOTIFICATION VERIFICATION"
     ) {
-      if (this.designationid == 4) {
+      if (this.designationid == 4 || this.designationid == 6) {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
         this.router.navigate([
@@ -241,14 +241,14 @@ export class SegregatenotificationmaintenancenotificationPage
       if (this.departmentid == 4) {
         this.router.navigate(["/production-notification-list"]);
       } else {
-        if (this.designationid == 4) {
+        if (this.designationid == 4 || this.designationid == 6) {
           localStorage.setItem("notificationdata", JSON.stringify(value));
 
           this.router.navigate([
             "/maintenance-foreman-notification-list",
             { reportdate: value.fromdate },
           ]);
-        } else if (this.designationid == 5 || this.designationid == 6) {
+        } else if (this.designationid == 5 || this.designationid == 11) {
           localStorage.setItem("notificationdata", JSON.stringify(value));
 
           this.router.navigate([
@@ -276,7 +276,7 @@ export class SegregatenotificationmaintenancenotificationPage
     } else if (
       value.redirect == "CORRECTIVE MAINTENANCE NOTIFICATION VERIFICATION"
     ) {
-      if (this.designationid == 4) {
+      if (this.designationid == 4 || this.designationid == 6) {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
         this.router.navigate([

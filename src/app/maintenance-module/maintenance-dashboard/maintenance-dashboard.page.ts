@@ -74,6 +74,8 @@ export class MaintenanceDashboardPage implements OnInit {
   filterTerm: string;
   getplatform: string;
 
+  searchedstationid = "";
+
   constructor(
     private translate: TranslateService,
     private languageService: LanguageService,
@@ -126,7 +128,7 @@ export class MaintenanceDashboardPage implements OnInit {
 
     this.forceUpdated();
 
-    this.dashboardForm.controls.select_station.setValue("");
+    //this.dashboardForm.controls.select_station.setValue("");
 
     this.getStation();
   }
@@ -284,19 +286,19 @@ export class MaintenanceDashboardPage implements OnInit {
   }
 
   refreshRecords() {
-    this.dashboardForm.controls.select_station.setValue("");
+    //this.dashboardForm.controls.select_station.setValue("");
 
     this.getProductionStatus();
   }
 
   onChangeStation() {
-    var searchedstationid = this.dashboardForm.value.select_station;
+    this.searchedstationid = this.dashboardForm.value.select_station;
 
     var item = this.filterstationsArr.filter(
-      (item) => item.stationid === parseInt(searchedstationid)
+      (item) => item.stationid === parseInt(this.searchedstationid)
     );
 
-    if (searchedstationid == "") {
+    if (this.searchedstationid == "") {
       this.stationsArr = this.filterstationsArr;
     } else {
       this.stationsArr = item;
@@ -389,6 +391,18 @@ export class MaintenanceDashboardPage implements OnInit {
 
         this.filterstationsArr = this.stationsArr;
 
+        // Search Process
+        var item = this.filterstationsArr.filter(
+          (item) => item.stationid === parseInt(this.searchedstationid)
+        );
+
+        if (this.searchedstationid == "") {
+          this.stationsArr = this.filterstationsArr;
+        } else {
+          this.stationsArr = item;
+        }
+        // End
+
         if (this.productionflag == "1") {
           this.uienable = true;
         } else {
@@ -450,7 +464,7 @@ export class MaintenanceDashboardPage implements OnInit {
         });
 
         modal.onDidDismiss().then((data) => {
-          this.dashboardForm.controls.select_station.setValue("");
+          //this.dashboardForm.controls.select_station.setValue("");
 
           this.ionViewDidEnter();
         });

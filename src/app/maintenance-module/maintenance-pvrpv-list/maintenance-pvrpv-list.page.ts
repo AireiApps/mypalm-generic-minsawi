@@ -135,9 +135,17 @@ export class MaintenancePvrpvListPage implements OnInit {
 
     if (this.designationid == 2) {
       if (this.tabs_segment == "Routine") {
-        this.secondtabs_segment = "Acknowledgement";
+        if (this.userlist.verificationacccess != 3) {
+          this.secondtabs_segment = "Acknowledgement";
+        } else {
+          this.thirdtabs_segment = "Created";
+        }
       } else if (this.tabs_segment == "Replacement") {
-        this.secondtabs_segment = "Acknowledgement";
+        if (this.userlist.verificationacccess != 3) {
+          this.secondtabs_segment = "Acknowledgement";
+        } else {
+          this.thirdtabs_segment = "Created";
+        }
       }
     }
 
@@ -321,12 +329,24 @@ export class MaintenancePvrpvListPage implements OnInit {
 
     if (this.designationid == 2) {
       if (this.tabs_segment == "Routine") {
-        if (this.secondtabs_segment == "Acknowledgement") {
-          this.getRoPMAcknowledgePVNotification();
+        if (this.userlist.verificationacccess != 3) {
+          if (this.secondtabs_segment == "Acknowledgement") {
+            this.getRoPMAcknowledgePVNotification();
+          }
+        } else {
+          if (this.thirdtabs_segment == "Created") {
+            this.getRoPMCreatedPVNotification(this.thirdtabs_segment);
+          }
         }
       } else {
-        if (this.secondtabs_segment == "Acknowledgement") {
-          this.getRePMAcknowledgePVNotification();
+        if (this.userlist.verificationacccess != 3) {
+          if (this.secondtabs_segment == "Acknowledgement") {
+            this.getRePMAcknowledgePVNotification();
+          }
+        } else {
+          if (this.thirdtabs_segment == "Created") {
+            this.getRePMCreatedPVNotification(this.thirdtabs_segment);
+          }
         }
       }
     }
@@ -350,16 +370,28 @@ export class MaintenancePvrpvListPage implements OnInit {
 
     if (this.designationid == 2) {
       if (this.tabs_segment == "Routine") {
-        if (this.secondtabs_segment == "All") {
-          this.getRoPMCreatedPVNotification(this.thirdtabs_segment);
-        } else if (this.secondtabs_segment == "Acknowledgement") {
-          this.getRoPMAcknowledgePVNotification();
+        if (this.userlist.verificationacccess != 3) {
+          if (this.secondtabs_segment == "All") {
+            this.getRoPMCreatedPVNotification(this.thirdtabs_segment);
+          } else if (this.secondtabs_segment == "Acknowledgement") {
+            this.getRoPMAcknowledgePVNotification();
+          }
+        } else {
+          if (this.thirdtabs_segment == "Created") {
+            this.getRePMCreatedPVNotification(this.thirdtabs_segment);
+          }
         }
       } else {
-        if (this.secondtabs_segment == "All") {
-          this.getRePMCreatedPVNotification(this.thirdtabs_segment);
-        } else if (this.secondtabs_segment == "Acknowledgement") {
-          this.getRePMAcknowledgePVNotification();
+        if (this.userlist.verificationacccess != 3) {
+          if (this.secondtabs_segment == "All") {
+            this.getRePMCreatedPVNotification(this.thirdtabs_segment);
+          } else if (this.secondtabs_segment == "Acknowledgement") {
+            this.getRePMAcknowledgePVNotification();
+          }
+        } else {
+          if (this.thirdtabs_segment == "Created") {
+            this.getRePMCreatedPVNotification(this.thirdtabs_segment);
+          }
         }
       }
     }
@@ -572,7 +604,7 @@ export class MaintenancePvrpvListPage implements OnInit {
     }
 
     if (status == "10") {
-      color = "#409b00";
+      color = "#01b800";
     }
 
     if (status == "12") {
@@ -917,30 +949,42 @@ export class MaintenancePvrpvListPage implements OnInit {
   segmentChanged(ev: any) {
     //console.log("Segment changed", ev.detail.value);
     if (ev.detail.value == "Routine") {
-      if (this.designationid != 2) {
-        this.getRoutineNotification();
-      } else {
-        this.secondtabs_segment = "Acknowledgement";
-
-        if (this.secondtabs_segment == "Acknowledgement") {
-          this.getRoPMAcknowledgePVNotification();
+      if (this.userlist.verificationacccess != 3) {
+        if (this.designationid != 2) {
+          this.getRoutineNotification();
         } else {
-          this.getRoPMCreatedPVNotification(this.thirdtabs_segment);
+          this.secondtabs_segment = "Acknowledgement";
+
+          if (this.secondtabs_segment == "Acknowledgement") {
+            this.getRoPMAcknowledgePVNotification();
+          } else {
+            this.getRoPMCreatedPVNotification(this.thirdtabs_segment);
+          }
         }
+      } else {
+        this.thirdtabs_segment = "Created";
+
+        this.getRoPMCreatedPVNotification(this.thirdtabs_segment);
       }
     }
 
     if (ev.detail.value == "Replacement") {
-      if (this.designationid != 2) {
-        this.getReplacementNotification();
-      } else {
-        this.secondtabs_segment = "Acknowledgement";
-
-        if (this.secondtabs_segment == "Acknowledgement") {
-          this.getRePMAcknowledgePVNotification();
+      if (this.userlist.verificationacccess != 3) {
+        if (this.designationid != 2) {
+          this.getReplacementNotification();
         } else {
-          this.getRePMCreatedPVNotification(this.thirdtabs_segment);
+          this.secondtabs_segment = "Acknowledgement";
+
+          if (this.secondtabs_segment == "Acknowledgement") {
+            this.getRePMAcknowledgePVNotification();
+          } else {
+            this.getRePMCreatedPVNotification(this.thirdtabs_segment);
+          }
         }
+      } else {
+        this.thirdtabs_segment = "Created";
+
+        this.getRePMCreatedPVNotification(this.thirdtabs_segment);
       }
     }
   }
@@ -971,12 +1015,20 @@ export class MaintenancePvrpvListPage implements OnInit {
 
   thirdsegmentChanged(ev: any) {
     //console.log(this.thirdtabs_segment);
-    if (this.tabs_segment == "Routine") {
-      if (this.secondtabs_segment == "All") {
-        this.getRoPMCreatedPVNotification(this.thirdtabs_segment);
+    if (this.userlist.verificationacccess != 3) {
+      if (this.tabs_segment == "Routine") {
+        if (this.secondtabs_segment == "All") {
+          this.getRoPMCreatedPVNotification(this.thirdtabs_segment);
+        }
+      } else {
+        if (this.secondtabs_segment == "All") {
+          this.getRePMCreatedPVNotification(this.thirdtabs_segment);
+        }
       }
     } else {
-      if (this.secondtabs_segment == "All") {
+      if (this.tabs_segment == "Routine") {
+        this.getRoPMCreatedPVNotification(this.thirdtabs_segment);
+      } else {
         this.getRePMCreatedPVNotification(this.thirdtabs_segment);
       }
     }

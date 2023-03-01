@@ -112,11 +112,13 @@ export class AIREIService {
       "language=" +
       params.language;
 
-    console.log(newurl);
+    //console.log(newurl);
 
     return new Promise((resolve, reject) => {
       this.httpClient.get(newurl).subscribe(
         (data) => {
+          console.log(data);
+
           resolve(data);
         },
         (error) => {

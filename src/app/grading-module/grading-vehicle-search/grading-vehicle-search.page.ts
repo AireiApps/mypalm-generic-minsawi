@@ -150,6 +150,7 @@ export class GradingVehicleSearchPage implements OnInit {
   getvalue(getitem) {
     this.modalController.dismiss({
       dismissed: true,
+      searchtext: this.searchTerm,
       data: JSON.stringify(getitem),
     });
   }
@@ -191,6 +192,7 @@ export class GradingVehicleSearchPage implements OnInit {
   dismiss() {
     this.modalController.dismiss({
       dismissed: true,
+      searchtext: "",
       data: "",
     });
   }

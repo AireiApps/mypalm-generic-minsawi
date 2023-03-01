@@ -40,9 +40,18 @@ export class SegregatenotificationPage implements OnInit {
     private activatedroute: ActivatedRoute,
     private router: Router
   ) {
-    this.activatedroute.params.subscribe((val) => {
-      this.getNotification();
-    });
+    if (
+      this.designationid == "3" ||
+      this.designationid == "7" ||
+      this.designationid == "8" ||
+      this.designationid == "9" ||
+      this.designationid == "5" ||
+      this.designationid == "11"
+    ) {
+      this.activatedroute.params.subscribe((val) => {
+        this.getNotification();
+      });
+    }
   }
 
   ngOnInit() {
@@ -55,8 +64,17 @@ export class SegregatenotificationPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.getNotification();
-    //console.log("View Did Init");
+    if (
+      this.designationid == "3" ||
+      this.designationid == "7" ||
+      this.designationid == "8" ||
+      this.designationid == "9" ||
+      this.designationid == "5" ||
+      this.designationid == "11"
+    ) {
+      this.getNotification();
+      //console.log("View Did Init");
+    }
   }
 
   gettodaysnotification() {
@@ -100,7 +118,7 @@ export class SegregatenotificationPage implements OnInit {
       this.designationid == "9"
     ) {
       this.filterstatus = "3";
-    } else if (this.designationid == "5" || this.designationid == "6") {
+    } else if (this.designationid == "5" || this.designationid == "11") {
       this.filterstatus = "2";
     }
 
@@ -112,7 +130,7 @@ export class SegregatenotificationPage implements OnInit {
       language: this.languageService.selected,
     };
 
-    //console.log(req);
+    //console.log("Test -->" + JSON.stringify(req));
 
     this.service.getsegregatenotification(req).then((result) => {
       let resultdata: any;
@@ -163,18 +181,15 @@ export class SegregatenotificationPage implements OnInit {
     this.getNotification();
 
     if (value.redirect == "ROUTINE PREVENTIVE MAINTENANCE NOTIFICATION") {
-      if (this.designationid == 4) {
+      if (this.designationid == 4 || this.designationid == 6) {
         this.router.navigate([
           "/maintenance-foreman-pvrpv-list",
           { reportdate: value.fromdate },
         ]);
-      } else if (this.designationid == 5 || this.designationid == 6) {
+      } else if (this.designationid == 5 || this.designationid == 11) {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
-        this.router.navigate([
-          "/tabs/tabmaintenancehome",
-          { reportdate: value.fromdate },
-        ]);
+        this.router.navigate(["/tabs", { reportdate: value.fromdate }]);
       } else {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
@@ -196,20 +211,17 @@ export class SegregatenotificationPage implements OnInit {
     } else if (
       value.redirect == "REPLACEMENT PREVENTIVE MAINTENANCE NOTIFICATION"
     ) {
-      if (this.designationid == 4) {
+      if (this.designationid == 4 || this.designationid == 6) {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
         this.router.navigate([
           "/maintenance-foreman-pvrpv-list",
           { reportdate: value.fromdate },
         ]);
-      } else if (this.designationid == 5 || this.designationid == 6) {
+      } else if (this.designationid == 5 || this.designationid == 11) {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
-        this.router.navigate([
-          "/tabs/tabmaintenancehome",
-          { reportdate: value.fromdate },
-        ]);
+        this.router.navigate(["/tabs", { reportdate: value.fromdate }]);
       } else {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
@@ -222,7 +234,7 @@ export class SegregatenotificationPage implements OnInit {
       value.redirect ==
       "REPLACEMENT PREVENTIVE MAINTENANCE NOTIFICATION VERIFICATION"
     ) {
-      if (this.designationid == 4) {
+      if (this.designationid == 4 || this.designationid == 6) {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
         this.router.navigate([
@@ -251,20 +263,17 @@ export class SegregatenotificationPage implements OnInit {
       if (this.departmentid == 4) {
         this.router.navigate(["/production-notification-list"]);
       } else {
-        if (this.designationid == 4) {
+        if (this.designationid == 4 || this.designationid == 6) {
           localStorage.setItem("notificationdata", JSON.stringify(value));
 
           this.router.navigate([
             "/maintenance-foreman-notification-list",
             { reportdate: value.fromdate },
           ]);
-        } else if (this.designationid == 5 || this.designationid == 6) {
+        } else if (this.designationid == 5 || this.designationid == 11) {
           localStorage.setItem("notificationdata", JSON.stringify(value));
 
-          this.router.navigate([
-            "/tabs/tabmaintenancehome",
-            { reportdate: value.fromdate },
-          ]);
+          this.router.navigate(["/tabs", { reportdate: value.fromdate }]);
         } else {
           localStorage.setItem("notificationdata", JSON.stringify(value));
 
@@ -286,7 +295,7 @@ export class SegregatenotificationPage implements OnInit {
     } else if (
       value.redirect == "CORRECTIVE MAINTENANCE NOTIFICATION VERIFICATION"
     ) {
-      if (this.designationid == 4) {
+      if (this.designationid == 4 || this.designationid == 6) {
         localStorage.setItem("notificationdata", JSON.stringify(value));
 
         this.router.navigate([

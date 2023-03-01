@@ -199,6 +199,9 @@ export class appsettings {
   public static savefitteracceptnotification =
     "maintenance_notification_fitter_save";
 
+  public static savefitterverificationacknowledgenotification =
+    "maintenance_notification_fitter_complete";
+
   public static updatecorrectivemaintenanceauthorize =
     "maintenance_notification_engineer_authorize";
 

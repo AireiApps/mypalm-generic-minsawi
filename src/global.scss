@@ -573,6 +573,17 @@ ion-footer {
   }
 }
 
+.fitterwiremannotification-modal {
+  --width: 100% !important;
+  --height: 100% !important;
+
+  /*ion-content {
+    --background: none;
+    background-color: #1d2730;
+    background-image: none;
+  }*/
+}
+
 .acknowledgement-modal {
   --width: 95% !important;
   --height: 80% !important;
