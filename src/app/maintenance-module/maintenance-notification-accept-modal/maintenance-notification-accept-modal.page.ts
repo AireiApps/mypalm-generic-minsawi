@@ -554,18 +554,26 @@ export class MaintenanceNotificationAcceptModalPage implements OnInit {
 
       if (resultdata.httpcode == 200) {
         this.saveDisable = false;
+        this.commonservice.presentToast(
+          this.translate.instant("MAINTENANCEACCEPTMODAL.success")
+        );
+        // console.log("Screen:", this.screen);
+        // if (this.screen == "REPL") {
+        //   this.commonservice.presentToast(
+        //     this.translate.instant("MAINTENANCEACCEPTMODAL.replacementsuccess")
+        //   );
+        // }
 
-        if (this.screen == "RePM") {
-          this.commonservice.presentToast(
-            this.translate.instant("MAINTENANCEACCEPTMODAL.replacementsuccess")
-          );
-        }
-
-        if (this.screen == "CM") {
-          this.commonservice.presentToast(
-            this.translate.instant("MAINTENANCEACCEPTMODAL.correctivesuccess")
-          );
-        }
+        // if (this.screen == "CM") {
+        //   this.commonservice.presentToast(
+        //     this.translate.instant("MAINTENANCEACCEPTMODAL.correctivesuccess")
+        //   );
+        // }
+        // if (this.screen == "ROUT") {
+        //   this.commonservice.presentToast(
+        //     this.translate.instant("MAINTENANCEACCEPTMODAL.routinesuccess")
+        //   );
+        // }
 
         this.modalController.dismiss({
           dismissed: true,
@@ -574,17 +582,25 @@ export class MaintenanceNotificationAcceptModalPage implements OnInit {
       } else {
         this.saveDisable = false;
 
-        if (this.screen == "RePM") {
-          this.commonservice.presentToast(
-            this.translate.instant("MAINTENANCEACCEPTMODAL.replacementfailed")
-          );
-        }
+        this.commonservice.presentToast(
+          this.translate.instant("MAINTENANCEACCEPTMODAL.failed")
+        );
+        // if (this.screen == "REPL") {
+        //   this.commonservice.presentToast(
+        //     this.translate.instant("MAINTENANCEACCEPTMODAL.replacementfailed")
+        //   );
+        // }
 
-        if (this.screen == "CM") {
-          this.commonservice.presentToast(
-            this.translate.instant("MAINTENANCEACCEPTMODAL.correctivefailed")
-          );
-        }
+        // if (this.screen == "CM") {
+        //   this.commonservice.presentToast(
+        //     this.translate.instant("MAINTENANCEACCEPTMODAL.correctivefailed")
+        //   );
+        // }
+        // if (this.screen == "ROUT") {
+        //   this.commonservice.presentToast(
+        //     this.translate.instant("MAINTENANCEACCEPTMODAL.routinefailed")
+        //   );
+        // }
       }
     });
   }

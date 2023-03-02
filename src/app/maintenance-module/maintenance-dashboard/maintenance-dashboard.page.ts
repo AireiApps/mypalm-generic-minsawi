@@ -58,7 +58,8 @@ export class MaintenanceDashboardPage implements OnInit {
   mill_name = this.nl2br(this.userlist.millname);
 
   count = 0;
-  productionflag = "";
+  productionflag = "0";
+  breakdownflag = 0;
 
   uienable = false;
   pleasewaitflag = false;
@@ -68,6 +69,7 @@ export class MaintenanceDashboardPage implements OnInit {
   filterstationsArr = [];
   stationsArr = [];
   txt_millproductionstatus = "";
+  txt_millstartstop = "";
   millstartdatetime = "";
   millstopdatetime = "";
 
@@ -348,6 +350,7 @@ export class MaintenanceDashboardPage implements OnInit {
       resultdata = result;
       if (resultdata.httpcode == 200) {
         this.productionflag = resultdata.data[0].status;
+        this.breakdownflag = resultdata.data[0].breakdownflag;
 
         this.millstartdatetime = resultdata.data[0].mill_start_date;
         this.millstopdatetime = resultdata.data[0].mill_stop_date;
@@ -356,10 +359,28 @@ export class MaintenanceDashboardPage implements OnInit {
           this.txt_millproductionstatus = this.translate.instant(
             "MAINTENANCEDASHBOARD.inoperation"
           );
-        } else {
-          this.txt_millproductionstatus = this.translate.instant(
-            "MAINTENANCEDASHBOARD.stoppedoperation"
+
+          this.txt_millstartstop = this.translate.instant(
+            "MAINTENANCEDASHBOARD.millstartdatetime"
           );
+        } else if (this.productionflag == "0") {
+          if (this.breakdownflag == 1) {
+            this.txt_millproductionstatus = this.translate.instant(
+              "MAINTENANCEDASHBOARD.stoppedoperation"
+            );
+
+            this.txt_millstartstop = this.translate.instant(
+              "MAINTENANCEDASHBOARD.stoppedbreakdownoperation"
+            );
+          } else {
+            this.txt_millproductionstatus = this.translate.instant(
+              "MAINTENANCEDASHBOARD.stoppedoperation"
+            );
+
+            this.txt_millstartstop = this.translate.instant(
+              "MAINTENANCEDASHBOARD.millstopdatetime"
+            );
+          }
         }
 
         this.getStations();

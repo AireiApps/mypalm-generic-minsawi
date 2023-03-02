@@ -53,6 +53,7 @@ export class MaintenanceNotificationDashboardPage implements OnInit {
 
   count = 0;
   productionflag = "0";
+  breakdownflag = 0;
   productioncount = 0;
 
   uienable = false;
@@ -60,6 +61,7 @@ export class MaintenanceNotificationDashboardPage implements OnInit {
 
   stationsArr = [];
   txt_millproductionstatus = "";
+  txt_millstartstop = "";
   millstartdatetime = "";
   millstopdatetime = "";
 
@@ -279,6 +281,7 @@ export class MaintenanceNotificationDashboardPage implements OnInit {
       resultdata = result;
       if (resultdata.httpcode == 200) {
         this.productionflag = resultdata.data[0].status;
+        this.breakdownflag = resultdata.data[0].breakdownflag;
 
         this.millstartdatetime = resultdata.data[0].mill_start_date;
         this.millstopdatetime = resultdata.data[0].mill_stop_date;
@@ -287,11 +290,30 @@ export class MaintenanceNotificationDashboardPage implements OnInit {
           this.txt_millproductionstatus = this.translate.instant(
             "MAINTENANCEDASHBOARD.inoperation"
           );
-        } else {
-          this.txt_millproductionstatus = this.translate.instant(
-            "MAINTENANCEDASHBOARD.stoppedoperation"
+
+          this.txt_millstartstop = this.translate.instant(
+            "MAINTENANCEDASHBOARD.millstartdatetime"
           );
+        } else if (this.productionflag == "0") {
+          if (this.breakdownflag == 1) {
+            this.txt_millproductionstatus = this.translate.instant(
+              "MAINTENANCEDASHBOARD.stoppedoperation"
+            );
+
+            this.txt_millstartstop = this.translate.instant(
+              "MAINTENANCEDASHBOARD.stoppedbreakdownoperation"
+            );
+          } else {
+            this.txt_millproductionstatus = this.translate.instant(
+              "MAINTENANCEDASHBOARD.stoppedoperation"
+            );
+
+            this.txt_millstartstop = this.translate.instant(
+              "MAINTENANCEDASHBOARD.millstopdatetime"
+            );
+          }
         }
+
         this.getStations();
       } else {
         this.productionflag = "0";

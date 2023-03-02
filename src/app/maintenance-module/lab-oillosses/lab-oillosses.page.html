@@ -3,7 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button color="whitefav"></ion-back-button>
     </ion-buttons>
-    <ion-title mode="ios" color="light">{{ 'OILLOSSESSREPORT.oillosses' | translate}}</ion-title>
+    <ion-title mode="ios" color="light"
+      >{{ 'OILLOSSESSREPORT.oillosses' | translate}}</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -31,7 +33,10 @@
     <div class="form-row" style="margin-top: 20px">
       <div class="col">
         <div class="h7 text-white">
-          <b>{{ 'OILLOSSESSREPORT.samplecollectiontime' | translate}} <sup>*</sup></b>
+          <b
+            >{{ 'OILLOSSESSREPORT.samplecollectiontime' | translate}}
+            <sup>*</sup></b
+          >
         </div>
       </div>
 
@@ -63,7 +68,7 @@
           <input
             type="number"
             class="h7 form-control text-dark"
-            placeholder="{{ 'OILLOSSESSREPORT.enter' | translate}} {{pressArr[i]}}"
+            placeholder="{{ 'OILLOSSESSREPORT.enter' | translate}}"
             (keypress)="decimalFilter($event)"
             [formControlName]="i"
           />
@@ -71,7 +76,9 @@
       </div>
     </div>
 
-    <div class="show" *ngIf="!showFlag">{{ 'OILLOSSESSREPORT.nopressmachinefound' | translate}}</div>
+    <div class="show" *ngIf="!showFlag">
+      {{ 'OILLOSSESSREPORT.nopressmachinefound' | translate}}
+    </div>
 
     <div style="text-align: center" *ngIf="showFlag">
       <button
@@ -81,7 +88,7 @@
         (click)="showalert()"
         style="margin-top: 10px; margin-bottom: 10px"
       >
-      {{ 'GENERALBUTTON.savebutton' | translate}}
+        {{ 'GENERALBUTTON.savebutton' | translate}}
       </button>
     </div>
   </form>

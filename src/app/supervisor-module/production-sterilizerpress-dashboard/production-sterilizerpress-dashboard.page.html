@@ -69,9 +69,7 @@
 
           <ion-row>
             <ion-col style="text-align: center" *ngIf="productionflag=='1'">
-              <p class="mdfont">
-                {{ 'MAINTENANCEDASHBOARD.millstartdatetime' | translate}}
-              </p>
+              <p class="mdfont">{{txt_millstartstop}}</p>
               <p
                 class="mdfont"
                 style="color: #008000"
@@ -100,9 +98,7 @@
             </ion-col>
 
             <ion-col style="text-align: center" *ngIf="productionflag!='1'">
-              <p class="mdfont">
-                {{ 'MAINTENANCEDASHBOARD.millstopdatetime' | translate}}
-              </p>
+              <p class="mdfont">{{txt_millstartstop}}</p>
               <p
                 class="mdfont"
                 style="color: #cb4335"
