@@ -102,8 +102,24 @@ export class ReportPressstationhourlyperformancePage implements OnInit {
     );
   }
 
-  async btn_ViewImages(levelimages, digestorimages, temperatureimages) {
-    if (levelimages != "" || digestorimages != "" || temperatureimages != "") {
+  async btn_ViewImages(
+    temperatureimages,
+    motorimages,
+    levelimages,
+    digestorimages,
+    pressmotorimages,
+    fibreflowimages,
+    hydraulicpressureimages
+  ) {
+    if (
+      temperatureimages != "" ||
+      motorimages != "" ||
+      levelimages != "" ||
+      digestorimages != "" ||
+      pressmotorimages != "" ||
+      fibreflowimages != "" ||
+      hydraulicpressureimages != ""
+    ) {
       this.screenOrientation.unlock();
       this.screenOrientation.lock(
         this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY
@@ -113,9 +129,13 @@ export class ReportPressstationhourlyperformancePage implements OnInit {
         component: PressingsterilizerstationImageSliderPage,
         componentProps: {
           from: "Press",
+          temperatureitem: temperatureimages,
+          motoritem: motorimages,
           levelitem: levelimages,
           digestoritem: digestorimages,
-          temperatureitem: temperatureimages,
+          pressmotoritem: pressmotorimages,
+          fibreflowitem: fibreflowimages,
+          hydraulicpressureitem: hydraulicpressureimages,
         },
       });
 

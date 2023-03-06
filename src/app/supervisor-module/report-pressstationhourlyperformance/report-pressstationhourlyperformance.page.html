@@ -219,16 +219,16 @@
                 <td scope="row" *ngIf="general.image==1">
                   <button
                     type="button"
-                    class="h7 btn btn-outline-info btn-sm"
-                    (click)="btn_ViewImages(value.levelimages, value.drainageimages, value.temperatureimages)"
-                    *ngIf="(value.levelimages!='' || value.drainageimages!='' || value.temperatureimages!='')"
+                    class="h7 btn btn-imageview btn-sm"
+                    (click)="btn_ViewImages(value.temperatureimages, value.motorimages, value.levelimages, value.drainageimages, value.pressmotorimages, value.fibreflowimages, value.hydraulicpressureimages)"
+                    *ngIf="(value.temperatureimages!='' || value.motorimages!='' || value.levelimages!='' || value.drainageimages!='' || value.pressmotorimages!='' || value.fibreflowimages!='' || value.hydraulicpressureimages!='')"
                   >
                     <span class="icontext"
                       >{{ 'GENERALBUTTON.viewbutton' | translate}}</span
                     >
                   </button>
                   <span
-                    *ngIf="(value.levelimages =='' && value.drainageimages =='' && value.temperatureimages =='')"
+                    *ngIf="(value.temperatureimages =='' && value.motorimages =='' && value.levelimages =='' && value.drainageimages =='' && value.pressmotorimages =='' && value.fibreflowimages =='' && value.hydraulicpressureimages =='')"
                     >-</span
                   >
                 </td>

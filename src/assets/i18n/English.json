@@ -133,7 +133,7 @@
     "inoperation":"In Operation",
     "stoppedbreakdownoperation":"Mill Stop (Breakdown) Date & Time",
     "stoppedoperation":"Stopped Operation",
-    "themachineriesunder":"The machineries under",
+    "themachineriesunder":"The machineries under ",
     "machineoff":" are currently switched off. Tapping on this button will start all the machineries and the running hours will be monitored.",
     "problemmandatory":"Problem Selection is Mandatory",
     "productiondashboard":"Production Dashboard",
@@ -260,6 +260,7 @@
   },
 
   "HOURLYPRESSSTATIONSAVE": {
+    "addimages" : "Add Image",
     "images" : "Images",
     "observationtime": "Observation Time",
     "temperature" : "Temperature",
@@ -270,7 +271,7 @@
     "hydraulicpressure": "Hydraulic Pressure",
     "dilutiontemperature": "Dilution Temperature",
     "levelimages": "Level Images",
-    "drainageimages": "Drainage Images",
+    "drainageimages": "Digestor Drainage Images",
     "temperatureimages": "Temperature Images",
     "alert": "Please confirm the data before saving",
     "uploded": "Uploaded (",
@@ -286,7 +287,10 @@
     "savedfail": "Pressing Station Insertion Failed",
     "uploadbuttonmessage": "Use Upload button to Upload images",
     "select":"Select",
-    "confirmbutton":"Confirm"
+    "confirmbutton":"Confirm",
+    "motorimages": "Motor Images",
+    "fibreflowimages": "Fibre Flow Images",
+    "hydraulicpressureimages": "Hydraulic Pressure Images"
   },
 
   "STERILIZATIONSTATIONPOPUP": {
@@ -698,7 +702,8 @@
     "partdefect":"Part Defect",
     "damagetype":"Damage Type",
     "authorizedby":"Authorized By",
-    "remarks": "Remarks"
+    "remarks": "Remarks",
+    "back":"Back"
   },
   "PREVENTIVEMAINTENANCE":{
     "title":"Preventive Maintenance",
@@ -1007,9 +1012,13 @@
   },
   "IMAGESLIDER":{
     "viewimage":"View Image",
-    "levelimage":"Level Image",
-    "digestorimage":"Digestor Image ",
     "temperatureimage":"Temperature Image ",
+    "motorimage":"Digestor Motor Image ",
+    "levelimage":"Level Image ",
+    "digestorimage":"Digestor Image ",
+    "pressmotorimage":"Press Motor Image ",
+    "fibreflowimage":"Fibre Flow Image ",
+    "hydraulicpressureimage":"Hydraulic Pressure Image ",
     "fruittypeimage":"Fruit Type Image ",
     "p1image":"P1 Image ",
     "p3image":"P3 Image "
@@ -1179,7 +1188,8 @@
     "alert":"Alert",
     "alertmessage":"Are you sure, you want to assign this Replacement Preventive Maintenance?",
     "replacementsuccess":"Replacement Preventive Maintenance Assigned Successfully",
-    "replacementfailed":"Replacement Preventive Maintenance Assigning Failed"
+    "replacementfailed":"Replacement Preventive Maintenance Assigning Failed",
+    "confirmbutton":"Confirm"
   },
 
   "GRADINGHOME": {

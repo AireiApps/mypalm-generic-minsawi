@@ -860,4 +860,21 @@ export class MaintenanceServiceService {
       );
     });
   }
+  getChatResponse(params) {
+    //var newurl = appsettings.chatapi + "?" + "msg=" + params;
+    var newurl = appsettings.chatresponse + "?" + "msg=" + params;
+    console.log(newurl);
+
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(newurl).subscribe(
+        (data) => {
+          resolve(data);
+        },
+        (error) => {
+          console.log(error);
+          reject(error);
+        }
+      );
+    });
+  }
 }

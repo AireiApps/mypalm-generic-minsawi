@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="light">Chat Bot</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #pageTop>
+  <div style="flex-direction: row; display: flex; margin-top: 5px">
+    <ion-img class="toolbar" src="../../assets/img/simedarby_log.png"></ion-img>
+    <div>
+      <div class="label">
+        <p class="heading">MyPalm</p>
+        <p class="data" [innerHTML]>
+          Hi! I'm MyPalm Bot. What information are you looking for? Click on one
+          of the options below or type something to start.
+        </p>
+        <p class="time">{{getcurrenttime}}</p>
+      </div>
+      <!-- <div class="welcomelabel" text-center style="display: flex;justify-content:center ;">
+        <img class="welcomeimg" src="../../assets/img/robot-waving.gif"/>
+      </div> -->
+      <div style="text-align: right">
+        <img class="welcomeimg" src="../../assets/img/robot-waving.gif" />
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let value of responseArr">
+    <div style="flex-direction: row-reverse; display: flex">
+      <div class="labeldata" *ngIf="value.question!=''">
+        <p class="heading">{{userlist.name}}</p>
+        <p class="data">{{value.question}}</p>
+        <p class="time">{{value.time}}</p>
+      </div>
+    </div>
+    <div style="flex-direction: row; display: flex">
+      <ion-img
+        class="dataimage"
+        src="../../assets/img/simedarby_log.png"
+      ></ion-img>
+      <div class="innerhtml">
+        <p class="heading">MyPalm</p>
+        <div *ngIf="value.responses!=''" [innerHTML]="value.responses"></div>
+        <div
+          *ngFor="let item of value.buttons"
+          style="display: flex; flex-direction: row"
+        >
+          <button (click)="getMessages(item)" *ngIf="item!=''">{{item}}</button>
+        </div>
+        <p class="time">{{value.time}}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <div class="list">
+    <ion-row>
+      <ion-col size="10">
+        <ion-input
+          placeholder="Enter your message..."
+          class="h7 form-control"
+          [(ngModel)]="newMessage"
+        ></ion-input>
+      </ion-col>
+      <ion-col size="2">
+        <div class="h7 send_btn" (click)="getMessages('')">
+          <ion-icon name="send-sharp"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-footer>

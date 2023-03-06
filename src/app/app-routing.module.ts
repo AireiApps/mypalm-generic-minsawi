@@ -661,6 +661,13 @@ const routes: Routes = [
         "./maintenance-module/maintenance-fitterwireman-verify-acknowledge/maintenance-fitterwireman-verify-acknowledge.module"
       ).then((m) => m.MaintenanceFitterwiremanVerifyAcknowledgePageModule),
   },
+  {
+    path: "chatbot-screen",
+    loadChildren: () =>
+      import("./chatbot-screen/chatbot-screen.module").then(
+        (m) => m.ChatbotScreenPageModule
+      ),
+  },
 ];
 
 @NgModule({

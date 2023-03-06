@@ -49,17 +49,30 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
 
   isDisabled = false;
   viewFlag = false;
+
+  temperatureimagesettingsflag = 0;
+  motorimagesettingsflag = 0;
   levelimagesettingsflag = 0;
   drainageimagesettingsflag = 0;
-  temperatureimagesettingsflag = 0;
+  pressmotorimagesettingsflag = 0;
+  pressfibreflowimagesettingsflag = 0;
+  presshydraulicpressureimagesettingsflag = 0;
 
+  temperatureimageuiflag = false;
+  motorimageuiflag = false;
   levelimageuiflag = false;
   drainageimageuiflag = false;
-  temperatureimageuiflag = false;
+  pressmotorimageuiflag = false;
+  pressfibreflowimageuiflag = false;
+  presshydraulicpressureimageuiflag = false;
 
+  temperatureimageviewFlag = false;
+  motorimageviewFlag = false;
   levelimageviewFlag = false;
   drainageimageviewFlag = false;
-  temperatureimageviewFlag = false;
+  pressmotorimageviewFlag = false;
+  pressfibreflowimageviewFlag = false;
+  presshydraulicpressureimageviewFlag = false;
 
   imagetype = "";
 
@@ -75,14 +88,22 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
   view_dilutiontemperature = "";
 
   imagePaths = {
+    temperatureimage_path: "",
+    motorimage_path: "",
     levelimage_path: "",
     drainageimage_path: "",
-    temperatureimage_path: "",
+    pressmotorimage_path: "",
+    pressfibreflowimage_path: "",
+    presshydraulicpressureimage_path: "",
   };
 
+  temperatureimagesArr = [];
+  motorimagesArr = [];
   levelimagesArr = [];
   drainageimagesArr = [];
-  temperatureimagesArr = [];
+  pressmotorimagesArr = [];
+  pressfibreflowimagesArr = [];
+  presshydraulicpressureimagesArr = [];
 
   constructor(
     private languageService: LanguageService,
@@ -115,9 +136,15 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
       select_pressmotoramps: new FormControl("", Validators.required),
       select_digestormotoramps: new FormControl("", Validators.required),
       //txt_dilutiontemperature: new FormControl("", Validators.required),
+
+      txt_temperatureimageupload: new FormControl(""),
+      txt_motorimageupload: new FormControl(""),
       txt_levelimageupload: new FormControl(""),
       txt_drainageimageupload: new FormControl(""),
-      txt_temperatureimageupload: new FormControl(""),
+
+      txt_pressmotorimageupload: new FormControl(""),
+      txt_pressfibreflowimageupload: new FormControl(""),
+      txt_presshydraulicpressureimageupload: new FormControl(""),
     });
   }
 
@@ -125,6 +152,330 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
 
   ionViewDidEnter() {
     this.getImageSettingsFlag();
+  }
+
+  addImages(type) {
+    if (type == "Temperature") {
+      if (this.temperatureimagesettingsflag == 1) {
+        if (this.temperatureimageuiflag) {
+          this.temperatureimageuiflag = false;
+        } else {
+          this.temperatureimageuiflag = true;
+        }
+      }
+
+      if (this.motorimagesettingsflag == 1) {
+        if (this.motorimageuiflag) {
+          this.motorimageuiflag = false;
+        }
+      }
+
+      if (this.levelimagesettingsflag == 1) {
+        if (this.levelimageuiflag) {
+          this.levelimageuiflag = false;
+        }
+      }
+
+      if (this.drainageimagesettingsflag == 1) {
+        if (this.drainageimageuiflag) {
+          this.drainageimageuiflag = false;
+        }
+      }
+
+      if (this.pressmotorimagesettingsflag == 1) {
+        if (this.pressmotorimageuiflag) {
+          this.pressmotorimageuiflag = false;
+        }
+      }
+
+      if (this.pressfibreflowimagesettingsflag == 1) {
+        if (this.pressfibreflowimageuiflag) {
+          this.pressfibreflowimageuiflag = false;
+        }
+      }
+
+      if (this.presshydraulicpressureimagesettingsflag == 1) {
+        if (this.presshydraulicpressureimageuiflag) {
+          this.presshydraulicpressureimageuiflag = false;
+        }
+      }
+    }
+
+    if (type == "Motor") {
+      if (this.temperatureimagesettingsflag == 1) {
+        if (this.temperatureimageuiflag) {
+          this.temperatureimageuiflag = false;
+        }
+      }
+
+      if (this.motorimagesettingsflag == 1) {
+        if (this.motorimageuiflag) {
+          this.motorimageuiflag = false;
+        } else {
+          this.motorimageuiflag = true;
+        }
+      }
+
+      if (this.levelimagesettingsflag == 1) {
+        if (this.levelimageuiflag) {
+          this.levelimageuiflag = false;
+        }
+      }
+
+      if (this.drainageimagesettingsflag == 1) {
+        if (this.drainageimageuiflag) {
+          this.drainageimageuiflag = false;
+        }
+      }
+
+      if (this.pressmotorimagesettingsflag == 1) {
+        if (this.pressmotorimageuiflag) {
+          this.pressmotorimageuiflag = false;
+        }
+      }
+
+      if (this.pressfibreflowimagesettingsflag == 1) {
+        if (this.pressfibreflowimageuiflag) {
+          this.pressfibreflowimageuiflag = false;
+        }
+      }
+
+      if (this.presshydraulicpressureimagesettingsflag == 1) {
+        if (this.presshydraulicpressureimageuiflag) {
+          this.presshydraulicpressureimageuiflag = false;
+        }
+      }
+    }
+
+    if (type == "Level") {
+      if (this.temperatureimagesettingsflag == 1) {
+        if (this.temperatureimageuiflag) {
+          this.temperatureimageuiflag = false;
+        }
+      }
+
+      if (this.motorimagesettingsflag == 1) {
+        if (this.motorimageuiflag) {
+          this.motorimageuiflag = false;
+        }
+      }
+
+      if (this.levelimagesettingsflag == 1) {
+        if (this.levelimageuiflag) {
+          this.levelimageuiflag = false;
+        } else {
+          this.levelimageuiflag = true;
+        }
+      }
+
+      if (this.drainageimagesettingsflag == 1) {
+        if (this.drainageimageuiflag) {
+          this.drainageimageuiflag = false;
+        }
+      }
+
+      if (this.pressmotorimagesettingsflag == 1) {
+        if (this.pressmotorimageuiflag) {
+          this.pressmotorimageuiflag = false;
+        }
+      }
+
+      if (this.pressfibreflowimagesettingsflag == 1) {
+        if (this.pressfibreflowimageuiflag) {
+          this.pressfibreflowimageuiflag = false;
+        }
+      }
+
+      if (this.presshydraulicpressureimagesettingsflag == 1) {
+        if (this.presshydraulicpressureimageuiflag) {
+          this.presshydraulicpressureimageuiflag = false;
+        }
+      }
+    }
+
+    if (type == "Drainage") {
+      if (this.temperatureimagesettingsflag == 1) {
+        if (this.temperatureimageuiflag) {
+          this.temperatureimageuiflag = false;
+        }
+      }
+
+      if (this.motorimagesettingsflag == 1) {
+        if (this.motorimageuiflag) {
+          this.motorimageuiflag = false;
+        }
+      }
+
+      if (this.levelimagesettingsflag == 1) {
+        if (this.levelimageuiflag) {
+          this.levelimageuiflag = false;
+        }
+      }
+
+      if (this.drainageimagesettingsflag == 1) {
+        if (this.drainageimageuiflag) {
+          this.drainageimageuiflag = false;
+        } else {
+          this.drainageimageuiflag = true;
+        }
+      }
+
+      if (this.pressmotorimagesettingsflag == 1) {
+        if (this.pressmotorimageuiflag) {
+          this.pressmotorimageuiflag = false;
+        }
+      }
+
+      if (this.pressfibreflowimagesettingsflag == 1) {
+        if (this.pressfibreflowimageuiflag) {
+          this.pressfibreflowimageuiflag = false;
+        }
+      }
+
+      if (this.presshydraulicpressureimagesettingsflag == 1) {
+        if (this.presshydraulicpressureimageuiflag) {
+          this.presshydraulicpressureimageuiflag = false;
+        }
+      }
+    }
+
+    if (type == "PressMotor") {
+      if (this.temperatureimagesettingsflag == 1) {
+        if (this.temperatureimageuiflag) {
+          this.temperatureimageuiflag = false;
+        }
+      }
+
+      if (this.motorimagesettingsflag == 1) {
+        if (this.motorimageuiflag) {
+          this.motorimageuiflag = false;
+        }
+      }
+
+      if (this.levelimagesettingsflag == 1) {
+        if (this.levelimageuiflag) {
+          this.levelimageuiflag = false;
+        }
+      }
+
+      if (this.drainageimagesettingsflag == 1) {
+        if (this.drainageimageuiflag) {
+          this.drainageimageuiflag = false;
+        }
+      }
+
+      if (this.pressmotorimagesettingsflag == 1) {
+        if (this.pressmotorimageuiflag) {
+          this.pressmotorimageuiflag = false;
+        } else {
+          this.pressmotorimageuiflag = true;
+        }
+      }
+
+      if (this.pressfibreflowimagesettingsflag == 1) {
+        if (this.pressfibreflowimageuiflag) {
+          this.pressfibreflowimageuiflag = false;
+        }
+      }
+
+      if (this.presshydraulicpressureimagesettingsflag == 1) {
+        if (this.presshydraulicpressureimageuiflag) {
+          this.presshydraulicpressureimageuiflag = false;
+        }
+      }
+    }
+
+    if (type == "PressFibreFlow") {
+      if (this.temperatureimagesettingsflag == 1) {
+        if (this.temperatureimageuiflag) {
+          this.temperatureimageuiflag = false;
+        }
+      }
+
+      if (this.motorimagesettingsflag == 1) {
+        if (this.motorimageuiflag) {
+          this.motorimageuiflag = false;
+        }
+      }
+
+      if (this.levelimagesettingsflag == 1) {
+        if (this.levelimageuiflag) {
+          this.levelimageuiflag = false;
+        }
+      }
+
+      if (this.drainageimagesettingsflag == 1) {
+        if (this.drainageimageuiflag) {
+          this.drainageimageuiflag = false;
+        }
+      }
+
+      if (this.pressmotorimagesettingsflag == 1) {
+        if (this.pressmotorimageuiflag) {
+          this.pressmotorimageuiflag = false;
+        }
+      }
+
+      if (this.pressfibreflowimagesettingsflag == 1) {
+        if (this.pressfibreflowimageuiflag) {
+          this.pressfibreflowimageuiflag = false;
+        } else {
+          this.pressfibreflowimageuiflag = true;
+        }
+      }
+
+      if (this.presshydraulicpressureimagesettingsflag == 1) {
+        if (this.presshydraulicpressureimageuiflag) {
+          this.presshydraulicpressureimageuiflag = false;
+        }
+      }
+    }
+
+    if (type == "PressHydraulicPressure") {
+      if (this.temperatureimagesettingsflag == 1) {
+        if (this.temperatureimageuiflag) {
+          this.temperatureimageuiflag = false;
+        }
+      }
+
+      if (this.motorimagesettingsflag == 1) {
+        if (this.motorimageuiflag) {
+          this.motorimageuiflag = false;
+        }
+      }
+
+      if (this.levelimagesettingsflag == 1) {
+        if (this.levelimageuiflag) {
+          this.levelimageuiflag = false;
+        }
+      }
+
+      if (this.drainageimagesettingsflag == 1) {
+        if (this.drainageimageuiflag) {
+          this.drainageimageuiflag = false;
+        }
+      }
+
+      if (this.pressmotorimagesettingsflag == 1) {
+        if (this.pressmotorimageuiflag) {
+          this.pressmotorimageuiflag = false;
+        }
+      }
+
+      if (this.pressfibreflowimagesettingsflag == 1) {
+        if (this.pressfibreflowimageuiflag) {
+          this.pressfibreflowimageuiflag = false;
+        }
+      }
+
+      if (this.presshydraulicpressureimagesettingsflag == 1) {
+        if (this.presshydraulicpressureimageuiflag) {
+          this.presshydraulicpressureimageuiflag = false;
+        } else {
+          this.presshydraulicpressureimageuiflag = true;
+        }
+      }
+    }
   }
 
   getImageSettingsFlag() {
@@ -140,15 +491,39 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
       let resultdata: any;
       resultdata = result;
       if (resultdata.httpcode == 200) {
+        this.temperatureimagesettingsflag =
+          resultdata.data[0].temperatureimagesettingsflag;
+        this.motorimagesettingsflag = resultdata.data[0].motorimagesettingsflag;
         this.levelimagesettingsflag = resultdata.data[0].levelimagesettingsflag;
         this.drainageimagesettingsflag =
           resultdata.data[0].drainageimagesettingsflag;
-        this.temperatureimagesettingsflag =
-          resultdata.data[0].temperatureimagesettingsflag;
 
-        /*this.levelimagesettingsflag = 1;
+        this.pressmotorimagesettingsflag =
+          resultdata.data[0].pressmotorimagesettingsflag;
+        this.pressfibreflowimagesettingsflag =
+          resultdata.data[0].pressfibreflowimagesettingsflag;
+        this.presshydraulicpressureimagesettingsflag =
+          resultdata.data[0].presshydraulicpressureimagesettingsflag;
+
+        /*this.temperatureimagesettingsflag = 1;
+        this.motorimagesettingsflag = 1;
+        this.levelimagesettingsflag = 1;
         this.drainageimagesettingsflag = 1;
-        this.temperatureimagesettingsflag = 1;*/
+        this.pressmotorimagesettingsflag = 1;
+        this.pressfibreflowimagesettingsflag = 1;
+        this.presshydraulicpressureimagesettingsflag = 1;*/
+
+        /*if (this.temperatureimagesettingsflag == 1) {
+          this.temperatureimageuiflag = true;
+        } else {
+          this.temperatureimageuiflag = false;
+        }
+
+        if (this.motorimagesettingsflag == 1) {
+          this.motorimageuiflag = true;
+        } else {
+          this.motorimageuiflag = false;
+        }
 
         if (this.levelimagesettingsflag == 1) {
           this.levelimageuiflag = true;
@@ -162,17 +537,34 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
           this.drainageimageuiflag = false;
         }
 
-        if (this.temperatureimagesettingsflag == 1) {
-          this.temperatureimageuiflag = true;
+        if (this.pressmotorimagesettingsflag == 1) {
+          this.pressmotorimageuiflag = true;
         } else {
-          this.temperatureimageuiflag = false;
+          this.pressmotorimageuiflag = false;
         }
+
+        if (this.pressfibreflowimagesettingsflag == 1) {
+          this.pressfibreflowimageuiflag = true;
+        } else {
+          this.pressfibreflowimageuiflag = false;
+        }
+
+        if (this.presshydraulicpressureimagesettingsflag == 1) {
+          this.presshydraulicpressureimageuiflag = true;
+        } else {
+          this.presshydraulicpressureimageuiflag = false;
+        }*/
 
         this.getPercentageValue();
       } else {
+        this.temperatureimagesettingsflag = 0;
+        this.motorimagesettingsflag = 0;
         this.levelimagesettingsflag = 0;
         this.drainageimagesettingsflag = 0;
-        this.temperatureimagesettingsflag = 0;
+        this.pressmotorimagesettingsflag = 0;
+        this.pressfibreflowimagesettingsflag = 0;
+        this.presshydraulicpressureimagesettingsflag = 0;
+
         this.getPercentageValue();
       }
     });
@@ -198,6 +590,55 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
         resultdata = JSON.parse(resultdata.response);
 
         if (resultdata.httpcode == 200) {
+          if (type == "Temperature") {
+            this.imagePaths.temperatureimage_path =
+              resultdata.data.uploaded_path;
+
+            this.temperatureimagesArr.push(
+              this.imagePaths.temperatureimage_path
+            );
+
+            if (this.temperatureimagesArr.length == 1) {
+              this.pressstationForm.controls.txt_temperatureimageupload.setValue(
+                this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+                  this.temperatureimagesArr.length +
+                  this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+              );
+            } else if (this.temperatureimagesArr.length > 1) {
+              this.pressstationForm.controls.txt_temperatureimageupload.setValue(
+                this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+                  this.temperatureimagesArr.length +
+                  this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+              );
+            } else {
+              this.pressstationForm.controls.txt_temperatureimageupload.setValue(
+                ""
+              );
+            }
+          }
+
+          if (type == "Motor") {
+            this.imagePaths.motorimage_path = resultdata.data.uploaded_path;
+
+            this.motorimagesArr.push(this.imagePaths.motorimage_path);
+
+            if (this.motorimagesArr.length == 1) {
+              this.pressstationForm.controls.txt_motorimageupload.setValue(
+                this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+                  this.motorimagesArr.length +
+                  this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+              );
+            } else if (this.motorimagesArr.length > 1) {
+              this.pressstationForm.controls.txt_motorimageupload.setValue(
+                this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+                  this.motorimagesArr.length +
+                  this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+              );
+            } else {
+              this.pressstationForm.controls.txt_motorimageupload.setValue("");
+            }
+          }
+
           if (type == "Level") {
             this.imagePaths.levelimage_path = resultdata.data.uploaded_path;
 
@@ -244,34 +685,84 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
             }
           }
 
-          if (type == "Temperature") {
-            this.imagePaths.temperatureimage_path =
+          if (type == "PressMotor") {
+            this.imagePaths.pressmotorimage_path =
               resultdata.data.uploaded_path;
 
-            this.temperatureimagesArr.push(
-              this.imagePaths.temperatureimage_path
-            );
+            this.pressmotorimagesArr.push(this.imagePaths.pressmotorimage_path);
 
-            if (this.temperatureimagesArr.length == 1) {
-              this.pressstationForm.controls.txt_temperatureimageupload.setValue(
+            if (this.pressmotorimagesArr.length == 1) {
+              this.pressstationForm.controls.txt_pressmotorimageupload.setValue(
                 this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
-                  this.temperatureimagesArr.length +
+                  this.pressmotorimagesArr.length +
                   this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
               );
-            } else if (this.temperatureimagesArr.length > 1) {
-              this.pressstationForm.controls.txt_temperatureimageupload.setValue(
+            } else if (this.pressmotorimagesArr.length > 1) {
+              this.pressstationForm.controls.txt_pressmotorimageupload.setValue(
                 this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
-                  this.temperatureimagesArr.length +
+                  this.pressmotorimagesArr.length +
                   this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
               );
             } else {
-              this.pressstationForm.controls.txt_temperatureimageupload.setValue(
+              this.pressstationForm.controls.txt_pressmotorimageupload.setValue(
                 ""
               );
             }
           }
 
-          //this.commonservice.presentToast(type + " Image Added Successfully!");
+          if (type == "PressFibreFlow") {
+            this.imagePaths.pressfibreflowimage_path =
+              resultdata.data.uploaded_path;
+
+            this.pressfibreflowimagesArr.push(
+              this.imagePaths.pressfibreflowimage_path
+            );
+
+            if (this.pressfibreflowimagesArr.length == 1) {
+              this.pressstationForm.controls.txt_pressfibreflowimageupload.setValue(
+                this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+                  this.pressfibreflowimagesArr.length +
+                  this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+              );
+            } else if (this.pressfibreflowimagesArr.length > 1) {
+              this.pressstationForm.controls.txt_pressfibreflowimageupload.setValue(
+                this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+                  this.pressfibreflowimagesArr.length +
+                  this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+              );
+            } else {
+              this.pressstationForm.controls.txt_pressfibreflowimageupload.setValue(
+                ""
+              );
+            }
+          }
+
+          if (type == "PressHydraulicPressure") {
+            this.imagePaths.presshydraulicpressureimage_path =
+              resultdata.data.uploaded_path;
+
+            this.presshydraulicpressureimagesArr.push(
+              this.imagePaths.presshydraulicpressureimage_path
+            );
+
+            if (this.presshydraulicpressureimagesArr.length == 1) {
+              this.pressstationForm.controls.txt_presshydraulicpressureimageupload.setValue(
+                this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+                  this.presshydraulicpressureimagesArr.length +
+                  this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+              );
+            } else if (this.presshydraulicpressureimagesArr.length > 1) {
+              this.pressstationForm.controls.txt_presshydraulicpressureimageupload.setValue(
+                this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+                  this.presshydraulicpressureimagesArr.length +
+                  this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+              );
+            } else {
+              this.pressstationForm.controls.txt_presshydraulicpressureimageupload.setValue(
+                ""
+              );
+            }
+          }
         } else {
           this.commonservice.presentToast(
             type +
@@ -283,6 +774,170 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
         console.log(err);
       }
     );
+
+    /*var dummyimagepath = "http://test.mypalm.com.my/java/generic_upload/1013-generic7898-1677923173458.jpg";
+
+    if (type == "Temperature") {
+      this.imagePaths.temperatureimage_path = dummyimagepath;
+
+      this.temperatureimagesArr.push(this.imagePaths.temperatureimage_path);
+
+      if (this.temperatureimagesArr.length == 1) {
+        this.pressstationForm.controls.txt_temperatureimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.temperatureimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+        );
+      } else if (this.temperatureimagesArr.length > 1) {
+        this.pressstationForm.controls.txt_temperatureimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.temperatureimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+        );
+      } else {
+        this.pressstationForm.controls.txt_temperatureimageupload.setValue("");
+      }
+    }
+
+    if (type == "Motor") {
+      this.imagePaths.motorimage_path = dummyimagepath;
+
+      this.motorimagesArr.push(this.imagePaths.motorimage_path);
+
+      if (this.motorimagesArr.length == 1) {
+        this.pressstationForm.controls.txt_motorimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.motorimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+        );
+      } else if (this.motorimagesArr.length > 1) {
+        this.pressstationForm.controls.txt_motorimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.motorimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+        );
+      } else {
+        this.pressstationForm.controls.txt_motorimageupload.setValue("");
+      }
+    }
+
+    if (type == "Level") {
+      this.imagePaths.levelimage_path = dummyimagepath;
+
+      this.levelimagesArr.push(this.imagePaths.levelimage_path);
+
+      if (this.levelimagesArr.length == 1) {
+        this.pressstationForm.controls.txt_levelimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.levelimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+        );
+      } else if (this.levelimagesArr.length > 1) {
+        this.pressstationForm.controls.txt_levelimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.levelimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+        );
+      } else {
+        this.pressstationForm.controls.txt_levelimageupload.setValue("");
+      }
+    }
+
+    if (type == "Drainage") {
+      this.imagePaths.drainageimage_path = dummyimagepath;
+
+      this.drainageimagesArr.push(this.imagePaths.drainageimage_path);
+
+      if (this.drainageimagesArr.length == 1) {
+        this.pressstationForm.controls.txt_drainageimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.drainageimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+        );
+      } else if (this.drainageimagesArr.length > 1) {
+        this.pressstationForm.controls.txt_drainageimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.drainageimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+        );
+      } else {
+        this.pressstationForm.controls.txt_drainageimageupload.setValue("");
+      }
+    }
+
+    if (type == "PressMotor") {
+      this.imagePaths.pressmotorimage_path = dummyimagepath;
+
+      this.pressmotorimagesArr.push(this.imagePaths.pressmotorimage_path);
+
+      if (this.pressmotorimagesArr.length == 1) {
+        this.pressstationForm.controls.txt_pressmotorimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.pressmotorimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+        );
+      } else if (this.pressmotorimagesArr.length > 1) {
+        this.pressstationForm.controls.txt_pressmotorimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.pressmotorimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+        );
+      } else {
+        this.pressstationForm.controls.txt_pressmotorimageupload.setValue("");
+      }
+    }
+
+    if (type == "PressFibreFlow") {
+      this.imagePaths.pressfibreflowimage_path = dummyimagepath;
+
+      this.pressfibreflowimagesArr.push(
+        this.imagePaths.pressfibreflowimage_path
+      );
+
+      if (this.pressfibreflowimagesArr.length == 1) {
+        this.pressstationForm.controls.txt_pressfibreflowimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.pressfibreflowimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+        );
+      } else if (this.pressfibreflowimagesArr.length > 1) {
+        this.pressstationForm.controls.txt_pressfibreflowimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.pressfibreflowimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+        );
+      } else {
+        this.pressstationForm.controls.txt_pressfibreflowimageupload.setValue(
+          ""
+        );
+      }
+    }
+
+    if (type == "PressHydraulicPressure") {
+      this.imagePaths.presshydraulicpressureimage_path = dummyimagepath;
+
+      this.presshydraulicpressureimagesArr.push(
+        this.imagePaths.presshydraulicpressureimage_path
+      );
+
+      if (this.presshydraulicpressureimagesArr.length == 1) {
+        this.pressstationForm.controls.txt_presshydraulicpressureimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.presshydraulicpressureimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+        );
+      } else if (this.presshydraulicpressureimagesArr.length > 1) {
+        this.pressstationForm.controls.txt_presshydraulicpressureimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.presshydraulicpressureimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+        );
+      } else {
+        this.pressstationForm.controls.txt_presshydraulicpressureimageupload.setValue(
+          ""
+        );
+      }
+    }*/
   }
 
   getPercentageValue() {
@@ -494,6 +1149,44 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
   btn_view(type) {
     this.imagetype = type;
 
+    if (this.imagetype == "Temperature") {
+      if (this.temperatureimagesArr.length > 0) {
+        this.temperatureimageviewFlag = true;
+      } else {
+        if (this.temperatureimagesArr.length > 1) {
+          this.commonservice.presentToast(
+            type +
+              this.translate.instant("HOURLYPRESSSTATIONSAVE.imagesnotfound")
+          );
+        } else {
+          this.commonservice.presentToast(
+            type +
+              this.translate.instant("HOURLYPRESSSTATIONSAVE.imagenotfound")
+          );
+        }
+      }
+    }
+
+    if (this.imagetype == "Motor") {
+      if (this.motorimagesArr.length > 0) {
+        this.motorimageviewFlag = true;
+      } else {
+        if (this.motorimagesArr.length > 1) {
+          this.commonservice.presentToast(
+            "Digestor " +
+              type +
+              this.translate.instant("HOURLYPRESSSTATIONSAVE.imagesnotfound")
+          );
+        } else {
+          this.commonservice.presentToast(
+            "Digestor " +
+              type +
+              this.translate.instant("HOURLYPRESSSTATIONSAVE.imagenotfound")
+          );
+        }
+      }
+    }
+
     if (this.imagetype == "Level") {
       if (this.levelimagesArr.length > 0) {
         this.levelimageviewFlag = true;
@@ -530,18 +1223,54 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
       }
     }
 
-    if (this.imagetype == "Temperature") {
-      if (this.temperatureimagesArr.length > 0) {
-        this.temperatureimageviewFlag = true;
+    if (this.imagetype == "PressMotor") {
+      if (this.pressmotorimagesArr.length > 0) {
+        this.pressmotorimageviewFlag = true;
       } else {
-        if (this.temperatureimagesArr.length > 1) {
+        if (this.pressmotorimagesArr.length > 1) {
           this.commonservice.presentToast(
-            type +
+            "Press Motor" +
               this.translate.instant("HOURLYPRESSSTATIONSAVE.imagesnotfound")
           );
         } else {
           this.commonservice.presentToast(
-            type +
+            "Press Motor" +
+              this.translate.instant("HOURLYPRESSSTATIONSAVE.imagenotfound")
+          );
+        }
+      }
+    }
+
+    if (this.imagetype == "PressFibreFlow") {
+      if (this.pressfibreflowimagesArr.length > 0) {
+        this.pressfibreflowimageviewFlag = true;
+      } else {
+        if (this.pressfibreflowimagesArr.length > 1) {
+          this.commonservice.presentToast(
+            "Fibre Flow" +
+              this.translate.instant("HOURLYPRESSSTATIONSAVE.imagesnotfound")
+          );
+        } else {
+          this.commonservice.presentToast(
+            "Fibre Flow" +
+              this.translate.instant("HOURLYPRESSSTATIONSAVE.imagenotfound")
+          );
+        }
+      }
+    }
+
+    if (this.imagetype == "PressHydraulicPressure") {
+      if (this.presshydraulicpressureimagesArr.length > 0) {
+        this.presshydraulicpressureimageviewFlag = true;
+      } else {
+        if (this.presshydraulicpressureimagesArr.length > 1) {
+          this.commonservice.presentToast(
+            "Hydraulic Pressure" +
+              this.translate.instant("HOURLYPRESSSTATIONSAVE.imagesnotfound")
+          );
+        } else {
+          this.commonservice.presentToast(
+            "Hydraulic Pressure" +
               this.translate.instant("HOURLYPRESSSTATIONSAVE.imagenotfound")
           );
         }
@@ -550,6 +1279,14 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
   }
 
   imageviewcancel() {
+    if (this.imagetype == "Temperature") {
+      this.temperatureimageviewFlag = false;
+    }
+
+    if (this.imagetype == "Motor") {
+      this.motorimageviewFlag = false;
+    }
+
     if (this.imagetype == "Level") {
       this.levelimageviewFlag = false;
     }
@@ -558,8 +1295,16 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
       this.drainageimageviewFlag = false;
     }
 
-    if (this.imagetype == "Temperature") {
-      this.temperatureimageviewFlag = false;
+    if (this.imagetype == "PressMotor") {
+      this.pressmotorimageviewFlag = false;
+    }
+
+    if (this.imagetype == "PressFibreflow") {
+      this.pressfibreflowimageviewFlag = false;
+    }
+
+    if (this.imagetype == "PressHydraulicPressure") {
+      this.presshydraulicpressureimageviewFlag = false;
     }
   }
 
@@ -631,13 +1376,18 @@ export class ProductionHourlypressingstationsavePage implements OnInit {
         dilutionTemperature: "",
         running_user_id: localStorage.getItem("runninghourid"),
         date: getcurrentdate,
+        temperatureimages: this.temperatureimagesArr.join("~"),
+        motorimages: this.motorimagesArr.join("~"),
         levelimages: this.levelimagesArr.join("~"),
         drainageimages: this.drainageimagesArr.join("~"),
-        temperatureimages: this.temperatureimagesArr.join("~"),
+        pressmotorimages: this.pressmotorimagesArr.join("~"),
+        pressfibreflowimages: this.pressfibreflowimagesArr.join("~"),
+        presshydraulicpressureimages:
+          this.presshydraulicpressureimagesArr.join("~"),
         language: this.languageService.selected,
       };
 
-      //console.log(req);
+      console.log(req);
 
       this.supervisorservice.saveHourlyPressingStation(req).then((result) => {
         var resultdata: any;

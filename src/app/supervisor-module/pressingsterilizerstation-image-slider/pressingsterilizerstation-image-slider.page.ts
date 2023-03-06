@@ -3,6 +3,7 @@ import { AIREIService } from "src/app/api/api.service";
 import { SupervisorService } from "src/app/services/supervisor-service/supervisor.service";
 import { Router } from "@angular/router";
 import { ModalController, NavParams, IonSlides } from "@ionic/angular";
+import { ScreenOrientation } from "@ionic-native/screen-orientation/ngx";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
@@ -11,9 +12,13 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ["./pressingsterilizerstation-image-slider.page.scss"],
 })
 export class PressingsterilizerstationImageSliderPage implements OnInit {
+  temperatureimages = [];
+  motorimages = [];
   levelimages = [];
   digestorimages = [];
-  temperatureimages = [];
+  pressmotorimages = [];
+  fibreflowimages = [];
+  hydraulicpressureimages = [];
 
   fruittypeimages = [];
   p1images = [];
@@ -23,21 +28,50 @@ export class PressingsterilizerstationImageSliderPage implements OnInit {
 
   constructor(
     private translate: TranslateService,
+    private screenOrientation: ScreenOrientation,
     public modalController: ModalController,
     public navParams: NavParams,
     private router: Router,
     private supervisorservice: SupervisorService
   ) {
+    this.screenOrientation.lock(
+      this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY
+    );
+
     let fromparams = navParams.get("from");
 
     if (fromparams == "Press") {
+      let temperatureparams = navParams.get("temperatureitem");
+      let motorparams = navParams.get("motoritem");
       let levelparams = navParams.get("levelitem");
       let digestorparams = navParams.get("digestoritem");
-      let temperatureparams = navParams.get("temperatureitem");
+      let pressmotorparams = navParams.get("pressmotoritem");
+      let fibreflowparams = navParams.get("fibreflowitem");
+      let hydraulicpressureparams = navParams.get("hydraulicpressureitem");
 
       console.log(
-        levelparams + "\n" + digestorparams + "\n" + temperatureparams
+        temperatureparams +
+          "\n" +
+          motorparams +
+          "\n" +
+          levelparams +
+          "\n" +
+          digestorparams +
+          "\n" +
+          pressmotorparams +
+          "\n" +
+          fibreflowparams +
+          "\n" +
+          hydraulicpressureparams
       );
+
+      if (temperatureparams.length > 0) {
+        this.temperatureimages = temperatureparams.split("~");
+      }
+
+      if (motorparams.length > 0) {
+        this.motorimages = motorparams.split("~");
+      }
 
       if (levelparams.length > 0) {
         this.levelimages = levelparams.split("~");
@@ -47,8 +81,37 @@ export class PressingsterilizerstationImageSliderPage implements OnInit {
         this.digestorimages = digestorparams.split("~");
       }
 
-      if (temperatureparams.length > 0) {
-        this.temperatureimages = temperatureparams.split("~");
+      if (pressmotorparams.length > 0) {
+        this.pressmotorimages = pressmotorparams.split("~");
+      }
+
+      if (fibreflowparams.length > 0) {
+        this.fibreflowimages = fibreflowparams.split("~");
+      }
+
+      if (hydraulicpressureparams.length > 0) {
+        this.hydraulicpressureimages = hydraulicpressureparams.split("~");
+      }
+
+      for (let i = 0; i < this.temperatureimages.length; i++) {
+        let eachitem = this.temperatureimages[i];
+        let eachreq = {
+          image: eachitem,
+          title:
+            this.translate.instant("IMAGESLIDER.temperatureimage") + (i + 1),
+        };
+
+        this.imagesArr.push(eachreq);
+      }
+
+      for (let i = 0; i < this.motorimages.length; i++) {
+        let eachitem = this.motorimages[i];
+        let eachreq = {
+          image: eachitem,
+          title: this.translate.instant("IMAGESLIDER.motorimage") + (i + 1),
+        };
+
+        this.imagesArr.push(eachreq);
       }
 
       for (let i = 0; i < this.levelimages.length; i++) {
@@ -71,12 +134,34 @@ export class PressingsterilizerstationImageSliderPage implements OnInit {
         this.imagesArr.push(eachreq);
       }
 
-      for (let i = 0; i < this.temperatureimages.length; i++) {
-        let eachitem = this.temperatureimages[i];
+      for (let i = 0; i < this.pressmotorimages.length; i++) {
+        let eachitem = this.pressmotorimages[i];
         let eachreq = {
           image: eachitem,
           title:
-            this.translate.instant("IMAGESLIDER.temperatureimage") + (i + 1),
+            this.translate.instant("IMAGESLIDER.pressmotorimage") + (i + 1),
+        };
+
+        this.imagesArr.push(eachreq);
+      }
+
+      for (let i = 0; i < this.fibreflowimages.length; i++) {
+        let eachitem = this.fibreflowimages[i];
+        let eachreq = {
+          image: eachitem,
+          title: this.translate.instant("IMAGESLIDER.fibreflowimage") + (i + 1),
+        };
+
+        this.imagesArr.push(eachreq);
+      }
+
+      for (let i = 0; i < this.hydraulicpressureimages.length; i++) {
+        let eachitem = this.hydraulicpressureimages[i];
+        let eachreq = {
+          image: eachitem,
+          title:
+            this.translate.instant("IMAGESLIDER.hydraulicpressureimage") +
+            (i + 1),
         };
 
         this.imagesArr.push(eachreq);
@@ -137,6 +222,11 @@ export class PressingsterilizerstationImageSliderPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    this.screenOrientation.unlock();
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+  }
 
   slideOpts = {
     centeredSlides: true,

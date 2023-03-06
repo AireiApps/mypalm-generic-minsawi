@@ -23,6 +23,7 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class MorePage implements OnInit {
   @ViewChild("myElementRef", { static: false }) myElementRef: ElementRef;
+  userlist = JSON.parse(localStorage.getItem("userlist"));
 
   appPages = [
     /*Commented by Suresh Kumar K on 15.09.2020 as said by Mr.Veda
@@ -42,7 +43,6 @@ export class MorePage implements OnInit {
       icon: "lock-closed-outline",
     },*/
   ];
-  userlist = JSON.parse(localStorage.getItem("userlist"));
 
   department = "";
   designation = "";
@@ -214,8 +214,11 @@ export class MorePage implements OnInit {
     // }
   }
 
+  // chatbot() {
+  //   this.router.navigate(["/chatbot"]);
+  // }
   chatbot() {
-    this.router.navigate(["/chatbot"]);
+    this.router.navigate(["/chatbot-screen"]);
   }
 
   nl2br(text: string) {

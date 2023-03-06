@@ -3,7 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button color="whitefav"></ion-back-button>
     </ion-buttons>
-    <ion-title mode="ios" color="light">{{ 'OILLOSSESSREPORT.oillosselist' | translate}}</ion-title>
+    <ion-title mode="ios" color="light"
+      >{{ 'OILLOSSESSREPORT.oillosselist' | translate}}</ion-title
+    >
   </ion-toolbar>
 
   <ion-toolbar class="bg-search-color">
@@ -20,7 +22,9 @@
   <form [formGroup]="oillossesForm">
     <ion-row style="margin-top: 10px">
       <ion-col size="1.6" style="align-self: center" no-padding>
-        <div class="h7 text-white"><b>{{ 'OILLOSSESSREPORT.fromdate' | translate}}</b></div>
+        <div class="h7 text-white">
+          <b>{{ 'OILLOSSESSREPORT.fromdate' | translate}}</b>
+        </div>
       </ion-col>
 
       <ion-col size="3.45" no-padding>
@@ -37,7 +41,9 @@
       </ion-col>
 
       <ion-col size="1" style="align-self: center" no-padding>
-        <div class="h7 text-white"><b>{{ 'OILLOSSESSREPORT.todate' | translate}}</b></div>
+        <div class="h7 text-white">
+          <b>{{ 'OILLOSSESSREPORT.todate' | translate}}</b>
+        </div>
       </ion-col>
 
       <ion-col size="3.45" no-padding>
@@ -58,7 +64,7 @@
           style="height: 31px; width: 100%"
           (click)="getOilLosses()"
         >
-        {{ 'GENERALBUTTON.getrecords' | translate}}
+          {{ 'GENERALBUTTON.getrecords' | translate}}
         </button>
       </ion-col>
     </ion-row>
@@ -73,7 +79,9 @@
       (click)="btn_OilLossesNew()"
     >
       <!-- <ion-icon class="icon" name="cog"></ion-icon> -->
-      <span class="icontext">{{ 'OILLOSSESSREPORT.newoillosses' | translate}}</span>
+      <span class="icontext"
+        >{{ 'OILLOSSESSREPORT.newoillosses' | translate}}</span
+      >
     </button>
   </ion-row>
   <div class="home-box">
@@ -114,7 +122,9 @@
           (click)="btn_OilLossesEdit(general)"
         >
           <ion-icon class="icon" name="create-outline"></ion-icon>
-          <span class="icontext"> {{ 'GENERALBUTTON.updatebutton' | translate}}</span>
+          <span class="icontext">
+            {{ 'GENERALBUTTON.updatebutton' | translate}}</span
+          >
         </button>
 
         <!-- <button
@@ -128,7 +138,9 @@
       </ion-row>
     </div>
 
-    <div class="norecords" *ngIf="enableflag==true">{{ 'NORECORDSFOUND.norecordsfound' | translate}}</div>
+    <div class="norecords" *ngIf="enableflag==true">
+      {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+    </div>
 
     <div class="pleasewait" *ngIf="pleasewaitflag">
       <div style="width: 100%; text-align: center">

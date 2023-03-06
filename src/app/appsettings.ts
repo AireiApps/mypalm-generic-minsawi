@@ -225,4 +225,6 @@ export class appsettings {
   public static gradingreport = "get_grading_report";
 
   public static savegrading = "insert_grading";
+
+  public static chatresponse = "http://103.27.72.29:9109/api";
 }

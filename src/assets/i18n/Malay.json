@@ -139,7 +139,7 @@
     "maintenancetype":"Jenis Penyelenggaraan",
     "reasonselectionmandatory":"Pilihan \"Sebab\" adalah wajib",
     "inoperation":"Dalam Operasi",
-    "stoppedbreakdownoperation":"Tarikh & Masa Tamat Operasi (Pecahan)",
+    "stoppedbreakdownoperation":"Tarikh & Masa Tamat Operasi (Breakdown)",
     "stoppedoperation":"Operasi Dihentikan",
     "themachineriesunder":"Mesin-mesin di bawah ",
     "machineoff":" kini dihentikan. Tekan pada butang ini untuk memulakan semua mesin dan waktu mesin beroperasi akan dipantau",
@@ -268,6 +268,7 @@
   },
 
   "HOURLYPRESSSTATIONSAVE": {
+    "addimages" : "Tambah Imej",
     "images" : "Imej",
     "observationtime": "Observation Time",
     "temperature" : "Temperature",
@@ -278,7 +279,7 @@
     "hydraulicpressure": "Hydraulic Pressure",
     "dilutiontemperature": "Dilution Temperature",
     "levelimages": "Level Images",
-    "drainageimages": "Drainage Images",
+    "drainageimages": "Digestor Drainage Images",
     "temperatureimages": "Temperature Images",
     "alert": "Sila semak rekod sebelum sahkan",
     "uploded": "Dimuat Naik (",
@@ -294,7 +295,10 @@
     "savedfail": "Memasukkan Stesen Menekan Gagal",
     "uploadbuttonmessage": "Gunakan butang Muat Naik untuk Muat Naik imej",
     "select":"Select",
-    "confirmbutton":"Sahkan"
+    "confirmbutton":"Sahkan",
+    "motorimages": "Motor Images",
+    "fibreflowimages": "Fiber Flow Images",
+    "hydraulicpressureimages": "Hydraulic Pressure Images"
   },
 
   "STERILIZATIONSTATIONPOPUP": {
@@ -412,7 +416,7 @@
   "NEWCORRECTIVEMAINTENACE":{
     "newmaintenancenotification": "Notifikasi Penyelenggaraan Baru",
     "newcorrectivemaintenance": "Notifikasi Corrective Maintenance Baru",
-    "part1": "BAHAGIAN 1: PELAPORAN (PEMBERITAHUAN)",
+    "part1": "BAHAGIAN 1: PELAPORAN (NOTIFIKASI)",
     "malfunctiondateandtime": "Tarikh & Masa Mula Pincang ",
     "station": "Stesen ",
     "selectstation": "Pilih Stesen",
@@ -422,8 +426,8 @@
     "enterproblem": "Masukkan Masalah",
     "notificationtype": "Jenis Notifikasi ",
     "selectnotificationtype": "Pilih Jenis Notifikasi",
-    "breakdowncoding": "Pengekodan Pecahan ",
-    "selectbreakdowncoding": "Pilih Pengekodan Pecahan",
+    "breakdowncoding": "Breakdown Coding ",
+    "selectbreakdowncoding": "Select Breakdown Coding",
     "maintenancetype": "Jenis Penyelenggaraan",
     "selectmaintenancetype": "Pilih Jenis Penyelenggaraan",
     "partdefect": "Bahagian Kerosakan ",
@@ -438,7 +442,7 @@
     "okay": "OK",
     "dismiss": "Batal",
     "breakdowncauses": "Punca Breakdown",
-    "selectbreakdowncauses": "Pilih Punca Pecahan",
+    "selectbreakdowncauses": "Pilih Punca Breakdown",
     "alertheader": "Perhatian",
     "alertmessage": "Adakah anda pasti menjimatkan Corrective Maintenance",
     "makesurestationmachineselected": "Pastikan Stesen dan Mesin Dipilih",
@@ -453,7 +457,7 @@
     "equipment":"peralatan",
     "problem":"Masalah",
     "notificationtype":"Jenis Notifikasi",
-    "breakdowncoding":"Pengekodan Pecahan",
+    "breakdowncoding":"Breakdown Coding",
     "maintenancetype":"Jenis Penyelenggaraan",
     "partdefect":"Bahagian Kerosakan",
     "damages":"Jenis Kerosakan",
@@ -464,7 +468,7 @@
     "part3":"BAHAGIAN 3: PENGELUARAN BAHAN",
     "material":"bahan",
     "quantity":"Kuantiti",
-    "assignedto":"Ditugaskan untuk",
+    "assignedto":"Ditugaskan Kepada",
     "next":"Seterusnya",
     "created":"Baru",
     "inprogress":"Dalam Proses",
@@ -481,7 +485,7 @@
     "assignto":"Tugaskan Kepada",
     "select":"Pilih",
     "selectedfitter":"Tukang Pasang/Pengurus Terpilih",
-    "confirm":"Diterima",
+    "confirm":"Sahkan",
     "fitterchargeman":"Senarai Fitter/Chargeman",
     "fitterlist":"Senarai Fitter",
     "wiremanlist":"Senarai Wireman",
@@ -581,7 +585,7 @@
   "MAINTENANCEDASHBOARD":{
     "home":"Laman Utama",
     "welcome":"Selamat Datang",
-    "millproductionstatus":"Status pengeluaran kilang",
+    "millproductionstatus":"STATUS PENGOPERASIAN KILANG",
     "searchbystation":"Cari Mengikut Stesen",
     "loading":"Sistem Sedang Memuatkan...",
     "alertmessage":"Versi baru MyPalm tersedia, sila kemas kini versi ",
@@ -670,7 +674,7 @@
     "routinepreventivemaintenanceview":"Routine Preventive Maintenance",
     "replacementpreventivemaintenanceview":"Replacement Preventive Maintenance",
     "replacementpreventivemaintenanceackview":"Replacement Preventive Maintenance Acknowledgment",
-    "maintenance":"BORANG PEMBERITAHUAN",
+    "maintenance":"BORANG NOTIFIKASI",
     "notificationform":"PENYELENGGARAAN",
     "maintenancenotificationno":"Id",
     "notificationtype":"Jenis Notifikasi",
@@ -678,7 +682,7 @@
     "breakdowncategory":"Kategori Breakdown",
     "reportedby":"Dilaporkan Oleh",
     "status":"Status",
-    "maintenancenotificationdetails":"BUTIRAN PEMBERITAHUAN PENYELENGGARAAN",
+    "maintenancenotificationdetails":"BUTIRAN NOTIFIKASI PENYELENGGARAAN",
     "stationname":"Nama Stesen",
     "machineryname":"Nama Mesin",
     "partname":"Nama Part",
@@ -715,7 +719,8 @@
     "partdefect":"Bahagian Kerosakan",
     "damagetype":"Jenis Kerosakan",
     "authorizedby":"Dibenarkan Oleh",
-    "remarks": "Kenyataan"
+    "remarks": "Kenyataan",
+    "back":"Kembali"
   },
   "PREVENTIVEMAINTENANCE":{
     "title":"Preventive Maintenance",
@@ -899,7 +904,7 @@
     "fitterlist":"Senarai Fitter",
     "wiremanlist":"Senarai Wireman",
     "assignedtoselection":"Pilihan “Tugaskan Kepada” adalah wajib",
-    "assigntomandatory":"Ditugaskan untuk wajib",
+    "assigntomandatory":"Pilihan \"Tugaskan Kepada\" adalah wajib!",
     "selectedfitter":"Tukang Pasang/Pengurus Terpilih",
     "assignedto":"Ditugaskan Kepada",
     "assigncorrective":"Adakah anda pasti ingin menyimpan rekod ini?",
@@ -1024,9 +1029,14 @@
   },
   "IMAGESLIDER":{
     "viewimage":"Lihat gambar",
-    "levelimage":"Imej tahap",
-    "digestorimage":"Imej pencernaan ",
     "temperatureimage":"Imej suhu ",
+    "motorimage":"Imej Motor Digestor ",
+    "levelimage":"Imej tahap ",
+    "digestorimage":"Imej pencernaan ",
+    "pressmotorimage":"Tekan Imej Motor ",
+    "fibreflowimage":"Imej Aliran Gentian ",
+    "hydraulicpressureimage":"Imej Tekanan Hidraulik ",
+
     "fruittypeimage":"Imej jenis buah ",
     "p1image":"Imej P1 ",
     "p3image":"P3 Imej "
@@ -1068,7 +1078,7 @@
   "PRODUCTIONNOTIFICATIONNEW":{
     "newcorrectivemaintenance":"Notifikasi Corrective Maintenance Baru",
     "searchbystation":"Cari Mengikut Stesen",
-    "millproductionstatus":"Status pengeluaran kilang",
+    "millproductionstatus":"STATUS PENGOPERASIAN KILANG",
     "running":"Sedang berjalan",
     "stopped":"Telah Dihentikan"
   },
@@ -1125,13 +1135,13 @@
     "selectedbreakdowncauses":"Punca Breakdown yang Dipilih",
     "verify":"Sahkan",
     "next":"Seterusnya",
-    "maintenance":"BORANG PEMBERITAHUAN",
-    "notificationform":"MAINTENANCE",
+    "maintenance":"BORANG NOTIFIKASI",
+    "notificationform":"PENYELENGGARAAN",
     "id":"ID",
     "notificationtype":"Jenis Notifikasi",
     "problem":"Masalah",
     "status":"Status",
-    "maintenancenotificationdetails":"Butiran pemberitahuan maintenance",
+    "maintenancenotificationdetails":"BUTIRAN NOTIFIKASI PENYELENGGARAAN",
     "stationname":"Nama Stesen",
     "machineryname":"Nama Mesin",
     "damage":"Kerosakan",
@@ -1184,37 +1194,38 @@
     "assignto":"Tugaskan Kepada",
     "select":"Pilih",
     "selectedfitter":"Tukang Pasang/Pengurus Terpilih",
-    "assignedto":"Ditugaskan untuk",
+    "assignedto":"Ditugaskan Kepada",
     "activitymandatory":"Pilihan \"Tugasan Kepada\" adalah Wajib",
-    "assigntomandatory":"Ditugaskan untuk wajib",
+    "assigntomandatory":"Pilihan \"Tugaskan Kepada\" adalah wajib!",
     "activitysmandatory":"Aktiviti adalah wajib",
     "alert":"Perhatian",
     "alertmessage":"Adakah anda pasti, anda mahu menetapkan Replacement Preventive Maintenance ini?",
     "replacementsuccess":"Penyelenggaraan Pencegahan Penggantian Berjaya Ditugaskan",
-    "replacementfailed":"Penyerahan Penyelenggaraan Pencegahan Penggantian Gagal"
+    "replacementfailed":"Penyerahan Penyelenggaraan Pencegahan Penggantian Gagal",
+    "confirmbutton":"Sahkan"
   },
 
   "GRADINGHOME": {
-    "welcome":"Welcome",
-    "newgrading":"Receive New Load",
+    "welcome":"Selamat Datang",
+    "newgrading":"Terima Muatan Baru",
     "vehicle":"Vehicle Number",
     "vehiclenumber":"Vehicle Number",
     "hardbunches":"Hard Bunches",
     "underripebunches":"Under Ripe Bunches",
     "ripeness":"Overall Ripeness",
     "loosefruits":"Loose Fruits",
-    "lastfiverecords":"Most Recent Five Records",
+    "lastfiverecords":"Lima Rekod Terkini",
     "entervehiclenumber":"Enter Vehicle Number",
     "searchvehicle":"Select Vehicle",
-    "vehiclenumbermandatory":"Vehicle Number is Mandatory",
-    "receivedloadsuccessfully":"Received Load Successfully",
-    "receivedloadfailed":"Receiving Load Failed"
+    "vehiclenumbermandatory":"Nombor Kenderaan adalah Wajib",
+    "receivedloadsuccessfully":"Nombor Kenderaan adalah Wajib",
+    "receivedloadfailed":"Gagal Menerima Beban"
   },
 
   "GRADINGREPORT":{
-    "gradingreport":"Grading Report",
-    "from":"From",
-    "to":"To",
+    "gradingreport":"Laporan Penggredan",
+    "from":"Dari",
+    "to":"Ke",
     "hardbunches":"Hard Bunches",
     "underripebunches":"Under Ripe Bunches",
     "ripeness":"Ripeness",
@@ -1222,10 +1233,10 @@
   },
 
   "SEARCHVEHICLE":{
-    "search":"Search",
-    "searchvehicle":"Select Vehicle",
-    "nosearchrecords":"No Vehicle Found",
-    "loadingmoredata":"Loading more data..."
+    "search":"Cari",
+    "searchvehicle":"Pilih Kenderaan",
+    "nosearchrecords":"Tiada Kenderaan Ditemui",
+    "loadingmoredata":"Memuatkan lebih banyak data..."
   },
 
   "NETWORKERROR":{

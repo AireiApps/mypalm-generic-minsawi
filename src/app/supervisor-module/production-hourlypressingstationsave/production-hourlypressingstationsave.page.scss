@@ -14,9 +14,12 @@
 
 ion-card {
   box-shadow: none;
-  border-radius: 20px;
-
+  border-radius: 10px;
+  background: none;
+  margin: 20px 15px 20px 15px;
   img {
+    width: 500px;
+    height: 500px;
     object-fit: cover;
     transform: scale(1.1, 1.1) rotate(1deg);
     transition: 600ms all ease-in-out;
@@ -43,9 +46,10 @@ ion-card {
 .imagecard {
   margin: 10px;
   padding: 5px 0px 5px 0px;
-  background-color: #fdfdfd;
+  background-color: transparent;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
+  border: 1px solid #ffffff;
   border-radius: 5px; /* 5px rounded corners */
 }
 
@@ -214,6 +218,24 @@ ion-select::part(placeholder) {
   border-color: #ff9f0c;
 }
 
+.btn-imageview {
+  width: 125px;
+  font-size: 12px;
+  //background-color: #30beff;
+  background-color: none;
+  border-color: #30beff;
+  color: #ffffff;
+}
+
+.btn-imageupload {
+  width: 125px;
+  font-size: 12px;
+  //background-color: #ff9f0c;
+  background-color: none;
+  border-color: #ff9f0c;
+  color: #ffffff;
+}
+
 .btn-general {
   width: 150px;
   font-size: 14px;
@@ -247,6 +269,13 @@ ion-select::part(placeholder) {
   //background-color: #a8b6bc;
   background-color: none;
   border-color: #ff9f0c;
+  color: #ffffff;
+}
+
+.btn-add {
+  font-size: 12px;
+  background-color: none;
+  border-color: #3cd2a5;
   color: #ffffff;
 }
 

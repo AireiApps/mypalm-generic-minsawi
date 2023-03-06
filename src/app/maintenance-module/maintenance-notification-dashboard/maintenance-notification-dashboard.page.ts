@@ -34,6 +34,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { LanguageService } from "src/app/services/language-service/language.service";
 // Modal Pages - Start
 import { WebviewWeeklyreportPage } from "src/app/maintenance-module/webview-weeklyreport/webview-weeklyreport.page";
+import { SchedulePage } from "src/app/maintenance-module/schedule/schedule.page";
 // Modal Pages - End
 
 @Component({
@@ -357,18 +358,16 @@ export class MaintenanceNotificationDashboardPage implements OnInit {
     });
   }
 
-  async callmodalcontroller(value) {
-    if (value == "WEEKLYREPORT") {
-      const modal = await this.modalController.create({
-        component: WebviewWeeklyreportPage,
-      });
+  async callmodalcontroller() {
+    const modal = await this.modalController.create({
+      component: SchedulePage,
+    });
 
-      modal.onDidDismiss().then((data) => {
-        this.ionViewDidEnter();
-      });
+    modal.onDidDismiss().then((data) => {
+      this.ionViewDidEnter();
+    });
 
-      return await modal.present();
-    }
+    return await modal.present();
   }
 
   nl2br(text: string) {

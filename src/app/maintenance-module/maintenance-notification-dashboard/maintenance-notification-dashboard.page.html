@@ -8,14 +8,18 @@
     </ion-avatar>
     <ion-title color="light" [innerHTML]="mill_name"></ion-title>
 
-    <!-- <ion-buttons slot="primary">
-      <ion-button class="bg-light-color" (click)="btn_notification()">
-        <ion-badge *ngIf="count && count != 0" color="accent"
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="callmodalcontroller()">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </ion-button>
+
+      <!-- <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge class="todaybadge" *ngIf="count && count != 0" color="accent"
           >{{ count }}</ion-badge
         >
         <ion-icon name="notifications-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
+      </ion-button> -->
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

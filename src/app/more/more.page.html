@@ -93,12 +93,19 @@
     /></a>
   </div>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <!-- Chatbot - Start -->
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    *ngIf="userlist.chatbotflag == 1"
+  >
     <ion-fab-button size="large" (click)="chatbot()">
       <img
         style="width: 40px; height: 40px"
-        src="../../assets/img/chatbot.png"
+        src="../../assets/img/chatbotimg.png"
       />
     </ion-fab-button>
   </ion-fab>
+  <!-- Chatbot - End -->
 </ion-content>

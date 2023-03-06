@@ -305,7 +305,7 @@ export class LabOillossesPage implements OnInit {
           this.translate.instant("OILLOSSESSREPORT.insertedsuccessfully")
         );
 
-        this.router.navigate(["/lab-oillosses-list"]);
+        this.router.navigate(["/lab-oillosses-list", { reportdate: "" }]);
       } else {
         this.isDisabled = false;
 

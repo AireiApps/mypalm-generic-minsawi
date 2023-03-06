@@ -1,37 +1,47 @@
 <ion-header>
   <ion-toolbar class="bg-brown-color">
     <ion-buttons slot="start">
-      <ion-back-button color="whitefav"></ion-back-button>
+      <ion-back-button
+        style="text-transform: none"
+        text="{{ 'MAINTENANCENOTIFICATIONVIEW.back' | translate}}"
+        icon="chevron-back-outline"
+        color="whitefav"
+      ></ion-back-button>
     </ion-buttons>
-    <ion-title
+
+    <!-- <ion-title
       color="light"
       mode="ios"
       *ngIf="fromscreen =='' || fromscreen =='CM' || fromscreen =='CMReport'"
       >{{ 'MAINTENANCENOTIFICATIONVIEW.correctivemaintenanceview' |
       translate}}</ion-title
-    >
-    <ion-title color="light" mode="ios" *ngIf="fromscreen =='CMACK'"
+    > -->
+
+    <!-- <ion-title color="light" mode="ios" *ngIf="fromscreen =='CMACK'"
       >{{ 'MAINTENANCENOTIFICATIONVIEW.correctivemaintenanceackview' |
       translate}}</ion-title
-    >
-    <ion-title
+    > -->
+
+    <!-- <ion-title
       color="light"
       mode="ios"
       *ngIf="fromscreen =='RoPM' || fromscreen =='RoPMReport'"
       >{{ 'MAINTENANCENOTIFICATIONVIEW.routinepreventivemaintenanceview' |
       translate}}</ion-title
-    >
-    <ion-title
+    > -->
+
+    <!-- <ion-title
       color="light"
       mode="ios"
       *ngIf="fromscreen =='RePM' || fromscreen =='RePMReport'"
       >{{ 'MAINTENANCENOTIFICATIONVIEW.replacementpreventivemaintenanceview' |
       translate}}</ion-title
-    >
-    <ion-title color="light" mode="ios" *ngIf="fromscreen =='RePMACK'"
+    > -->
+
+    <!-- <ion-title color="light" mode="ios" *ngIf="fromscreen =='RePMACK'"
       >{{ 'MAINTENANCENOTIFICATIONVIEW.replacementpreventivemaintenanceackview'
       | translate}}</ion-title
-    >
+    > -->
   </ion-toolbar>
 </ion-header>
 

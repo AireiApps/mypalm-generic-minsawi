@@ -147,7 +147,21 @@ export class MaintenanceNotificationViewPage implements OnInit {
         this.notificationstatusid = this.generalArr[0].statusId;
         this.notificationno = this.generalArr[0].notificationno;
         this.stationcode = this.generalArr[0].stationcode;
-        this.notificationtype = this.generalArr[0].notificationtype;
+
+        if (this.fromscreen == "RoPM" || this.fromscreen == "RoPMReport") {
+          this.notificationtype =
+            "Routine " + this.generalArr[0].notificationtype;
+        } else if (
+          this.fromscreen == "RePM" ||
+          this.fromscreen == "RePMReport" ||
+          this.fromscreen == "RePMACK"
+        ) {
+          this.notificationtype =
+            "Replacement " + this.generalArr[0].notificationtype;
+        } else {
+          this.notificationtype = this.generalArr[0].notificationtype;
+        }
+
         this.breakdowncoding = this.generalArr[0].breakdowncoding;
         this.maintenancetype = this.generalArr[0].maintenancetype;
         this.maintenancetypeid = this.generalArr[0].maintenancetypeid;
