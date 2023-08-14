@@ -1,0 +1,243 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title color="light" mode="ios" [innerHTML]="mill_name"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="md">
+  <div class="myCard">
+    <img class="backgroundimage" src="../../../assets/img/header_myPalm.png" />
+    <div class="myOverlay">
+      <div class="usermessagecard">
+        <ion-row>
+          <ion-col size="12">
+            <p
+              style="
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0px;
+                color: #ffffff;
+              "
+            >
+              {{ 'RAMPHOME.welcome' | translate}} {{userlist.name}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+
+  <div class="support" *ngIf="despatchimageFlag==0">
+    <img src="../../../assets/img/spacefill.png" />
+  </div>
+
+  <div #myElementRef>
+    <form [formGroup]="rampForm">
+      <div style="margin-top: 20px">
+        <!-- Vehicle Number select and enter -->
+        <ion-row class="form-row" *ngIf="selectvehicleFlag">
+          <ion-col size="4.5">
+            <div class="title">{{ 'RAMPHOME.vehiclenumber' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="7.5">
+            <input
+              type="text"
+              class="h7 form-control readonly"
+              formControlName="txt_searchvehicle"
+              placeholder="{{ 'RAMPHOME.searchvehicle' | translate}}"
+              (click)="callmodalcontroller('Vehicle')"
+              readonly
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="entervehicleFlag">
+          <ion-col size="4.5">
+            <div class="title">{{ 'RAMPHOME.vehiclenumber' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="7.5">
+            <input
+              type="text"
+              class="h7 form-control"
+              formControlName="txt_vehiclenumber"
+              placeholder="{{ 'RAMPHOME.enter' | translate}}"
+              (keypress)="alphanumberFilter($event)"
+            />
+          </ion-col>
+        </ion-row>
+
+        <div *ngIf="entervehicleFlag">
+          <div
+            style="
+              font-size: 14px;
+              color: #df4759;
+              text-align: right;
+              margin-right: 10px;
+            "
+            (click)="backtoselect()"
+          >
+            <ion-icon
+              class="icon"
+              color="danger"
+              name="arrow-undo-outline"
+            ></ion-icon>
+            <span class="icontext"
+              ><b>{{ 'GENERALBUTTON.select' | translate}}</b></span
+            >
+          </div>
+        </div>
+
+        <!-- Net Weight -->
+        <ion-row class="form-row">
+          <ion-col size="4.5">
+            <div class="title">
+              {{ 'RAMPHOME.netweight' | translate}} <b>(MT)</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="7.5">
+            <input
+              type="number"
+              class="h7 form-control"
+              formControlName="txt_netweight"
+              placeholder="{{ 'GRADINGHOME.enter' | translate}}"
+              (keypress)="decimalFilter($event)"
+            />
+          </ion-col>
+        </ion-row>
+
+        <!-- Destination -->
+        <ion-row class="form-row">
+          <ion-col size="4.5">
+            <div class="title">{{ 'RAMPHOME.destination' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="7.5">
+            <ion-select
+              mode="md"
+              [interfaceOptions]="destinationOptions"
+              formControlName="select_destination"
+              multiple="false"
+              [okText]="'GENERALBUTTON.okay' | translate"
+              [cancelText]="'GENERALBUTTON.cancelbutton' | translate"
+              class="selectdropdown"
+              placeholder="{{ 'RAMPHOME.select' | translate}}"
+              (ionChange)="destinationhandleChange($event)"
+              [(ngModel)]="defaultdestination"
+            >
+              <ion-select-option
+                value="{{value.id+'~'+value.destination+'~'+value.destinationlatitude+'~'+value.destinationlongitude}}"
+                *ngFor="let value of destinationArr; let i = index"
+                >{{ value.destination }}</ion-select-option
+              >
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
+        <!-- Dispatch Image -->
+        <ion-row class="form-row" *ngIf="despatchimageFlag==1">
+          <ion-col size="4.5">
+            <div class="title">{{ 'RAMPHOME.despatchimage' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="7.5">
+            <ion-row>
+              <ion-col style="padding: 0px; text-align: center">
+                <div
+                  class="imagePreview"
+                  *ngIf="imagePaths.despatchimage_path==''"
+                ></div>
+
+                <div
+                  class="imagePresent"
+                  *ngIf="imagePaths.despatchimage_path!=''"
+                >
+                  <img
+                    class="imagePresent"
+                    [src]="imagePaths.despatchimage_path"
+                  />
+                </div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col
+                style="
+                  padding-left: 0px;
+                  padding-right: 0px;
+                  text-align: center;
+                "
+              >
+                <button
+                  type="submit"
+                  class="btn btn-imageupload"
+                  (click)="imageUpload('Despatch')"
+                >
+                  <ion-icon class="icon" name="camera-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'GENERALBUTTON.uploadbutton' | translate}}</span
+                  >
+                </button>
+              </ion-col>
+            </ion-row>
+
+            <!-- <ion-row>
+              <ion-col
+                size="7.5"
+                style="padding-left: 0px; text-align: left; display: grid"
+              >
+                <button
+                  type="submit"
+                  class="btn btn-imageupload"
+                  (click)="imageUpload('Despatch')"
+                >
+                  <ion-icon class="icon" name="camera-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'GENERALBUTTON.uploadbutton' | translate}}</span
+                  >
+                </button>
+              </ion-col>
+
+              <ion-col
+                size="4.5"
+                style="padding-left: 0px; padding-right: 0px; text-align: right"
+              >
+                <button
+                  type="submit"
+                  class="btn btn-imageview"
+                  (click)="btn_view('Despatch')"
+                >
+                  <ion-icon class="icon" name="eye-outline"></ion-icon>
+                  <span class="icontext">
+                    {{ 'GENERALBUTTON.viewbutton' | translate}}
+                  </span>
+                </button>
+              </ion-col>
+            </ion-row> -->
+          </ion-col>
+        </ion-row>
+
+        <ion-row style="margin-top: 20px">
+          <ion-col style="text-align: center !important">
+            <button
+              type="submit"
+              [disabled]="confirmDisable"
+              class="btn btn-save"
+              (click)="detailsconfirmationalert()"
+            >
+              {{ 'GENERALBUTTON.savebutton' | translate}}
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </form>
+  </div>
+</ion-content>

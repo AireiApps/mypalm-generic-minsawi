@@ -260,6 +260,42 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:306681786638:android:6629d2e1e366080676275f",
+        "android_client_info": {
+          "package_name": "com.airei.milltracking.mypalmgeneric.mikk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzzBzCZbEhCi3sNiftrpDqalfTTb0nDyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306681786638-i6lvvvg2l8fjtoi6l9gl9vbn6uv29rqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306681786638-2ufjtk66m4gh0jaid7o63p2ql5k0fo2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.airei.milltracking.mypalm.sdplantation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:306681786638:android:b0126329e959331776275f",
         "android_client_info": {
           "package_name": "com.airei.milltracking.mypalmioi"

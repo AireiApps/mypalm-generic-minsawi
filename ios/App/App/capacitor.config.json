@@ -1,6 +1,6 @@
 {
-  "appId": "com.airei.milltracking",
-  "appName": "MyPalm",
+  "appId": "com.airei.milltracking.mypalm.mikk",
+  "appName": "MyPalm MIKK",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

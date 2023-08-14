@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="light">Production Timeline</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home-box">
+    <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="viewproductiontimereport()">
+          <div class="item">
+            <img
+              src="../../assets/img/mmslogreport.png"
+              alt="Production Report"
+            />
+            <div class="container txt-home">
+              <p>View Production Timeline</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="communication()">
+          <div class="item">
+            <img
+              src="../../assets/img/communicationhistory.png"
+              alt="Daily PL"
+            />
+            <div class="container txt-home">
+              <p>Comm.</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

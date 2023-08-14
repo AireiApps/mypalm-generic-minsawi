@@ -1,0 +1,67 @@
+.twodigitbadgecount {
+  background: white;
+  padding: 5px;
+  color: red;
+  border-radius: 20px;
+  position: absolute;
+  right: -0.8rem;
+  opacity: 0.9;
+  font-size: 15px;
+  margin: 5px;
+}
+
+.iostwodigitbadgecount {
+  background: white;
+  padding: 5px;
+  color: red;
+  border-radius: 20px;
+  position: absolute;
+  right: -0.6rem;
+  opacity: 0.9;
+  font-size: 15px;
+  margin: 5px;
+}
+
+.onedigitbadgecount {
+  background: white;
+  padding: 5px;
+  color: red;
+  border-radius: 20px;
+  position: absolute;
+  right: -0.2rem;
+  opacity: 0.9;
+  font-size: 15px;
+  margin: 5px;
+}
+
+.badgecount {
+  background-color: red;
+  padding: 8px;
+  margin: 8px 5px 5px 5px;
+  color: #ffffff;
+  border-radius: 20px;
+  position: absolute;
+  top: -0.2rem;
+  right: -1rem;
+  opacity: 0.9;
+  font-size: 18px;
+}
+
+.badgeblink {
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.bg-light-color {
+  --color: var(--ion-color-white);
+}

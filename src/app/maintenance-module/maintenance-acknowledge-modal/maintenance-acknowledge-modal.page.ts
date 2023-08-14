@@ -580,7 +580,6 @@ export class MaintenanceAcknowledgeModalPage implements OnInit {
   openAssignedTo() {
     this.assignedtoRef.open();
   }
-
   maintenancetypehandleChange(e) {
     let value = e.detail.value;
     if (value.length > 0) {

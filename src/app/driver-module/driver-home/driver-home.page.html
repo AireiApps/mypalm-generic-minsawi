@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title color="light" mode="ios" [innerHTML]="mill_name"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="md">
+  <div class="myCard">
+    <img class="backgroundimage" src="../../../assets/img/header_myPalm.png" />
+    <div class="myOverlay">
+      <div class="usermessagecard">
+        <ion-row>
+          <ion-col size="12">
+            <p
+              style="
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0px;
+                color: #ffffff;
+              "
+            >
+              {{ 'GRADINGHOME.welcome' | translate}} {{userlist.name}}
+              <br />
+              <span style="font-size: 11px"> Have a safe journey </span>
+            </p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+
+  <div class="support">
+    <img src="../../../assets/img/spacefill.png" />
+  </div>
+
+  <div #myElementRef>
+    <form [formGroup]="driverForm">
+      <div style="margin-top: 10px">
+        <ion-row class="form-row">
+          <ion-col size="5">
+            <div class="title">{{ 'DRIVERHOME.supplier' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="7">
+            <input
+              type="text"
+              class="h7 form-control readonly"
+              formControlName="txt_searchsupplier"
+              placeholder="{{ 'DRIVERHOME.searchsupplier' | translate}}"
+              (click)="callmodalcontroller('Supplier')"
+              readonly
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="selectvehicleFlag">
+          <ion-col size="5">
+            <div class="title">{{ 'DRIVERHOME.vehicle' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="7">
+            <input
+              type="text"
+              class="h7 form-control readonly"
+              formControlName="txt_searchvehicle"
+              placeholder="{{ 'DRIVERHOME.searchvehicle' | translate}}"
+              (click)="callmodalcontroller('Vehicle')"
+              readonly
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="entervehicleFlag">
+          <ion-col size="5">
+            <div class="title">{{ 'DRIVERHOME.vehicle' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="7">
+            <input
+              type="text"
+              class="h7 form-control"
+              formControlName="txt_vehiclenumber"
+              placeholder="{{ 'DRIVERHOME.entervehiclenumber' | translate}}"
+              (keypress)="alphanumberFilter($event)"
+            />
+          </ion-col>
+        </ion-row>
+
+        <div *ngIf="entervehicleFlag">
+          <div
+            style="
+              font-size: 14px;
+              color: #df4759;
+              text-align: right;
+              margin-right: 10px;
+            "
+            (click)="backtoselect()"
+          >
+            <ion-icon
+              class="icon"
+              color="danger"
+              name="arrow-undo-outline"
+            ></ion-icon>
+            <span class="icontext"
+              ><b>{{ 'GENERALBUTTON.select' | translate}}</b></span
+            >
+          </div>
+        </div>
+
+        <ion-row style="margin-top: 10px">
+          <ion-col style="text-align: center !important">
+            <button
+              type="submit"
+              [disabled]="confirmDisable"
+              class="btn btn-save"
+              (click)="btn_save()"
+            >
+              {{ 'GENERALBUTTON.savebutton' | translate}}
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </form>
+  </div>
+</ion-content>

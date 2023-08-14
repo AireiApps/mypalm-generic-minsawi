@@ -1,12 +1,35 @@
 <ion-header>
   <ion-toolbar class="bg-brown-color">
-    <ion-avatar slot="start">
+    <ion-avatar
+      slot="start"
+      *ngIf="designationid != 1 && designationid != 22 && designationid != 10 && designationid != 2 && designationid != 4 && designationid != 6"
+    >
       <ion-img
         class="toolbarimage"
         src="../../../assets/img/logo.png"
       ></ion-img>
     </ion-avatar>
-    <ion-title color="light" [innerHTML]="mill_name"></ion-title>
+    <ion-title
+      color="light"
+      [innerHTML]="mill_name"
+      *ngIf="designationid != 1 && designationid != 22 && designationid != 10 && designationid != 2 && designationid != 4 && designationid != 6"
+    ></ion-title>
+
+    <ion-buttons
+      slot="start"
+      mode="md"
+      *ngIf="designationid == 1 || designationid == 22 || designationid == 10 || designationid == 2 || designationid == 4 || designationid == 6"
+    >
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title
+      color="light"
+      mode="ios"
+      *ngIf="designationid == 1 || designationid == 22 || designationid == 10 || designationid == 2 || designationid == 4 || designationid == 6"
+      >Profile</ion-title
+    >
+
     <ion-buttons slot="end">
       <ion-button (click)="openLanguagePopOver($event)">
         <ion-icon name="ellipsis-vertical-outline" color="light"></ion-icon>
@@ -43,6 +66,12 @@
 
         <div class="profile-usertitle" *ngIf="userlist">
           <div class="profile-usertitle-name">{{userlist.name}}</div>
+          <div
+            class="profile-supplier"
+            *ngIf="userlist.supplier_acc_name != ''"
+          >
+            ( {{userlist.supplier_acc_name}} )
+          </div>
           <div class="profile-usertitle-job">{{designation}}</div>
         </div>
 

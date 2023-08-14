@@ -10,6 +10,7 @@ export class SchedulingReportPage implements OnInit {
   userlist = JSON.parse(localStorage.getItem("userlist"));
   user_id = this.userlist.userId;
   language = this.userlist.language;
+  baseurl = this.userlist.report_url;
 
   mill_name = this.userlist.millname;
 
@@ -38,7 +39,8 @@ export class SchedulingReportPage implements OnInit {
 
   getUrl() {
     let formatedurl =
-      "http://103.27.72.29/mypalmtest/index.php/Maintenance_planning/schedule?mobile=1&user_id=" +
+      this.baseurl +
+      "/index.php/Maintenance_planning/schedule?mobile=1&user_id=" +
       this.user_id +
       "&language=" +
       this.language;

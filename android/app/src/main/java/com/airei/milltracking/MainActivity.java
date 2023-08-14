@@ -1,4 +1,4 @@
-package com.airei.milltracking;
+package com.airei.milltracking.mypalm.mikk;
 
 import android.os.Bundle;
 

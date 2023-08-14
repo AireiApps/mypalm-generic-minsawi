@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar class="bg-brown-color">
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" mode="md">
       <ion-back-button color="whitefav"></ion-back-button>
     </ion-buttons>
-    <ion-title color="light">{{ 'PRODUCTIONHOME.hourlyproductionreporting' | translate}}</ion-title>
+    <ion-title color="light"
+      >{{ 'PRODUCTIONHOME.hourlyproductionreporting' | translate}}</ion-title
+    >
     <ion-buttons slot="primary">
       <ion-button class="bg-light-color" (click)="btn_notification()">
         <ion-badge *ngIf="count && count != 0" color="accent"
@@ -31,54 +33,54 @@
               <img
                 src="{{eachitem.imgpath}}"
                 alt="PROFILE"
-                *ngIf="eachitem.name=='Pressing Station' && designationId==7"
+                *ngIf="eachitem.name=='Pressing Station' && designationId==17"
               />
 
               <img
                 style="opacity: 0.5"
                 src="{{eachitem.imgpath}}"
                 alt="PROFILE"
-                *ngIf="eachitem.name=='Pressing Station' && designationId!=7"
+                *ngIf="eachitem.name=='Pressing Station' && designationId!=17"
               />
 
               <img
                 src="{{eachitem.imgpath}}"
                 alt="PROFILE"
-                *ngIf="eachitem.name=='Sterilisation Station' && designationId==8"
+                *ngIf="eachitem.name=='Sterilisation Station' && designationId==18"
               />
 
               <img
                 style="opacity: 0.5"
                 src="{{eachitem.imgpath}}"
                 alt="PROFILE"
-                *ngIf="eachitem.name=='Sterilisation Station' && designationId!=8 "
+                *ngIf="eachitem.name=='Sterilisation Station' && designationId!=18 "
               />
             </ion-col>
             <ion-col size="8" style="display: flex; align-items: center">
               <p
                 style="font-size: 14px; margin-left: -10; margin-top: 15px"
-                *ngIf="eachitem.name=='Pressing Station' && designationId==7"
+                *ngIf="eachitem.name=='Pressing Station' && designationId==17"
               >
                 <b>{{eachitem.title}}</b>
               </p>
 
               <p
                 style="font-size: 14px; margin-left: -10; margin-top: 15px"
-                *ngIf="eachitem.name=='Pressing Station' && designationId!=7"
+                *ngIf="eachitem.name=='Pressing Station' && designationId!=17"
               >
                 <b>{{eachitem.title}}</b>
               </p>
 
               <p
                 style="font-size: 14px; margin-left: -10; margin-top: 15px"
-                *ngIf="eachitem.name=='Sterilisation Station'  && designationId==8"
+                *ngIf="eachitem.name=='Sterilisation Station'  && designationId==18"
               >
                 <b>{{eachitem.title}}</b>
               </p>
 
               <p
                 style="font-size: 14px; margin-left: -10; margin-top: 15px"
-                *ngIf="eachitem.name=='Sterilisation Station' && designationId!=8"
+                *ngIf="eachitem.name=='Sterilisation Station' && designationId!=18"
               >
                 <b>{{eachitem.title}}</b>
               </p>

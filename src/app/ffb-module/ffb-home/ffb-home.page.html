@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title color="light" mode="ios" [innerHTML]="mill_name"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="md">
+  <div class="myCard">
+    <img class="backgroundimage" src="../../../assets/img/header_myPalm.png" />
+    <div class="myOverlay">
+      <div class="usermessagecard">
+        <ion-row>
+          <ion-col size="12">
+            <p
+              style="
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0px;
+                color: #ffffff;
+              "
+            >
+              {{ 'FFBSUPPLIERHOME.welcome' | translate}} {{userlist.name}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+
+  <div #myElementRef>
+    <form [formGroup]="gradingForm">
+      <ion-row style="margin-top: 5px">
+        <ion-col size="6"></ion-col>
+        <ion-col size="6" style="text-align: right !important">
+          <button type="submit" class="btn btn-grading" (click)="btn_newramp()">
+            <span class="icontext" style="color: #ffffff"
+              >{{ 'FFBSUPPLIERHOME.addnewramp' | translate}}</span
+            >
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <div *ngIf="receivenewloadFlag">
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="title">{{ 'FFBSUPPLIERHOME.rampname' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="6">
+            <input
+              type="text"
+              class="h7 form-control"
+              formControlName="txt_rampname"
+              placeholder="{{ 'FFBSUPPLIERHOME.enter' | translate}}"
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="title">{{ 'FFBSUPPLIERHOME.rampcode' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="6">
+            <input
+              type="text"
+              class="h7 form-control"
+              formControlName="txt_rampcode"
+              placeholder="{{ 'FFBSUPPLIERHOME.enter' | translate}}"
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col style="text-align: center !important">
+            <button
+              type="submit"
+              [disabled]="confirmDisable"
+              class="btn btn-save"
+              (click)="btn_save()"
+            >
+              {{ 'GENERALBUTTON.savebutton' | translate}}
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <div
+          class="hl4line"
+          style="margin-bottom: 15px"
+          *ngIf="ffbramplistArr.length > 0 && !norecordFlag"
+        ></div>
+      </div>
+
+      <div *ngIf="uinorecordFlag">
+        <div class="reportstitleheader">
+          {{ 'FFBSUPPLIERHOME.ramp' | translate}}
+        </div>
+        <ion-card class="bg-card" *ngFor="let value of ffbramplistArr">
+          <ion-card-content class="cardcontent">
+            <ion-row *ngIf="value.rampname!=''">
+              <ion-col size="5"
+                >{{ 'FFBSUPPLIERHOME.rampname' | translate}}</ion-col
+              >
+              <ion-col size="7">
+                <p class="data">: {{value.rampname}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.rampcode!=''">
+              <ion-col size="5"
+                >{{ 'FFBSUPPLIERHOME.rampcode' | translate}}</ion-col
+              >
+              <ion-col size="7">
+                <p class="data">: {{value.rampcode}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.dateandtime!=''">
+              <ion-col size="5"
+                >{{ 'FFBSUPPLIERHOME.datetime' | translate}}</ion-col
+              >
+              <ion-col size="7">
+                <p class="data">: {{value.dateandtime}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <ion-infinite-scroll
+        threshold="100px"
+        (ionInfinite)="ffbramppagination($event)"
+        *ngIf="ffbramplistArr.length>0"
+      >
+        <ion-infinite-scroll-content
+          class="loadmore"
+          loadingSpinner="bubbles"
+          loadingText="{{ 'NORECORDSFOUND.loadingmoredata' | translate}}"
+        >
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+      <div class="norecords" *ngIf="norecordFlag">
+        {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+      </div>
+
+      <div class="pleasewait" *ngIf="pleasewaitflag">
+        <div style="width: 100%; text-align: center">
+          <img
+            style="width: 80px; height: 80px"
+            src="../../../assets/img/loading.gif"
+          />
+        </div>
+        {{ 'NORECORDSFOUND.loading' | translate}}
+      </div>
+    </form>
+  </div>
+</ion-content>

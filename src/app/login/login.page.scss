@@ -7,6 +7,14 @@ ion-toolbar {
   }
 }
 
+.content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 45%;
+  transform: translateY(-50%);
+}
+
 ion-content {
   //--background: linear-gradient(180deg, #02af16 0%, #006426 74%);
 
@@ -113,6 +121,16 @@ ion-item {
     letter-spacing: 0.5px;
     text-decoration: none;
   }
+}
+
+.disableicon {
+  vertical-align: middle;
+  color: #ffffff71;
+}
+
+.icon {
+  vertical-align: middle;
+  color: #ffffff;
 }
 
 .copyrights {

@@ -5,6 +5,7 @@ import {
   ViewChild,
   NgZone,
 } from "@angular/core";
+import { ScreenOrientation } from "@ionic-native/screen-orientation/ngx";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AIREIService } from "src/app/api/api.service";
@@ -14,8 +15,9 @@ import {
   Animation,
   AnimationController,
   ModalController,
+  IonSlides,
 } from "@ionic/angular";
-
+import { ImageUploadService } from "src/app/services/imageupload-service/imageupload";
 import { GradingserviceService } from "src/app/services/grading-service/gradingservice.service";
 
 import { TranslateService } from "@ngx-translate/core";
@@ -34,6 +36,7 @@ import { AuthGuardService } from "src/app/services/authguard/auth-guard.service"
 const { PushNotifications } = Plugins;
 
 import { GradingVehicleSearchPage } from "src/app/grading-module/grading-vehicle-search/grading-vehicle-search.page";
+import { PressingsterilizerstationImageSliderPage } from "src/app/supervisor-module/pressingsterilizerstation-image-slider/pressingsterilizerstation-image-slider.page";
 
 @Component({
   selector: "app-grading-home",
@@ -60,11 +63,21 @@ export class GradingHomePage implements OnInit {
   entervehicleFlag = false;
   confirmDisable = false;
   pleasewaitflag = false;
+  uinorecordFlag = false;
+  previousstatusofnorecordflag: boolean;
   norecordFlag = false;
 
-  vehicleid;
-  vehiclenumber;
+  vehicleid = 0;
+  vehiclenumber = "";
   receivenewloadclick = 0;
+
+  imagePaths = {
+    hardbunchesimage_path: "",
+  };
+
+  hardbunchesimagesArr = [];
+  imagetype = "";
+  imageview = "";
 
   gradinglistArr = [];
 
@@ -83,7 +96,10 @@ export class GradingHomePage implements OnInit {
     private market: Market,
     private animationCtrl: AnimationController,
     private gradingservice: GradingserviceService,
-    public vehiclemodalController: ModalController
+    public vehiclemodalController: ModalController,
+    public viewimagemodalController: ModalController,
+    private screenOrientation: ScreenOrientation,
+    private imgUpload: ImageUploadService
   ) {
     this.gradingForm = this.fb.group({
       txt_searchvehicle: new FormControl(""),
@@ -91,13 +107,21 @@ export class GradingHomePage implements OnInit {
       txt_hardbunches: new FormControl("", Validators.required),
       txt_underripebunches: new FormControl("", Validators.required),
       txt_ripeness: new FormControl("", Validators.required),
+      txt_overdue: new FormControl("", Validators.required),
       txt_loosefruits: new FormControl("", Validators.required),
+      txt_hardbunchesimageupload: new FormControl(""),
+    });
+
+    this.activatedroute.params.subscribe((val) => {
+      this.screenOrientation.lock(
+        this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY
+      );
     });
   }
 
   ngOnInit() {}
 
-  ionViewDidEnter() {
+  ngAfterViewInit(): void {
     const animation: Animation = this.animationCtrl
       .create()
       .addElement(this.myElementRef.nativeElement)
@@ -105,7 +129,6 @@ export class GradingHomePage implements OnInit {
       .fromTo("opacity", "0", "1");
 
     animation.play();
-
     PushNotifications.removeAllDeliveredNotifications();
 
     this.count = parseInt(localStorage.getItem("badge_count"));
@@ -113,7 +136,99 @@ export class GradingHomePage implements OnInit {
     this.updateNotification();
     this.getLiveNotification();
 
+    this.forceUpdated();
+  }
+
+  ionViewDidEnter() {
+    PushNotifications.removeAllDeliveredNotifications();
+
+    this.count = parseInt(localStorage.getItem("badge_count"));
+    this.notifi.updateNotification();
+    this.updateNotification();
+    this.getLiveNotification();
+
+    this.forceUpdated();
+
     this.getGrading();
+  }
+
+  forceUpdated() {
+    var app_version;
+
+    this.appVersion.getVersionNumber().then(
+      (versionNumber) => {
+        app_version = versionNumber;
+
+        console.log(app_version);
+
+        let req = {
+          user_id: this.userlist.userId,
+          millcode: this.userlist.millcode,
+          dept_id: this.userlist.dept_id,
+          language: this.languageService.selected,
+        };
+
+        this.commonservice.getSettings(req).then((result) => {
+          var resultdata: any;
+          resultdata = result;
+          let updateVersion = resultdata.appVersion;
+          let logout = resultdata.islogOut;
+
+          if (typeof logout !== "undefined" && logout !== null) {
+            if (logout == 1) {
+              this.notifi.logoutupdateNotification();
+              localStorage.clear();
+              this.router.navigate(["/login"], { replaceUrl: true });
+            } else {
+              if (updateVersion > app_version) {
+                this.alertForce(updateVersion);
+              }
+            }
+          } else {
+            if (updateVersion > app_version) {
+              this.alertForce(updateVersion);
+            }
+          }
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  async alertForce(app_version) {
+    let alert = await this.alertController.create({
+      header: this.translate.instant("FORCEUPDATE.header"),
+      backdropDismiss: false,
+      message: this.translate.instant("FORCEUPDATE.message") + app_version,
+      buttons: [
+        {
+          text: this.translate.instant("FORCEUPDATE.button"),
+          handler: () => {
+            let appId;
+
+            if (this.platform.is("android")) {
+              appId = "com.airei.milltracking.mypalm.mikk";
+            } else {
+              appId = "id1573914314";
+            }
+
+            this.market
+              .open(appId)
+              .then((response) => {
+                /*this.notifi.logoutupdateNotification();
+                localStorage.clear();
+                this.router.navigate(["/login"], { replaceUrl: true });*/
+              })
+              .catch((error) => {
+                console.warn(error);
+              });
+          },
+        },
+      ],
+    });
+    alert.present();
   }
 
   updateNotification() {
@@ -136,11 +251,127 @@ export class GradingHomePage implements OnInit {
     this.router.navigate(["/segregatenotification"]);
   }
 
+  slideOpts = {
+    centeredSlides: true,
+    autoplay: {
+      disableOnInteraction: true,
+    },
+  };
+
+  slidesDidLoad(slides: IonSlides) {
+    slides.startAutoplay();
+  }
+
+  imageUpload(type) {
+    this.imgUpload.ImageUploadCommon(type).then(
+      (result) => {
+        var resultdata: any;
+        resultdata = result;
+
+        resultdata = JSON.parse(resultdata.response);
+
+        if (resultdata.httpcode == 200) {
+          if (type == "HB") {
+            this.imagePaths.hardbunchesimage_path =
+              resultdata.data.uploaded_path;
+
+            this.hardbunchesimagesArr.push(
+              this.imagePaths.hardbunchesimage_path
+            );
+
+            if (this.hardbunchesimagesArr.length == 1) {
+              this.gradingForm.controls.txt_hardbunchesimageupload.setValue(
+                this.translate.instant(
+                  "HOURLYSTERILIZATIONSTATIONSAVE.uploded"
+                ) +
+                  this.hardbunchesimagesArr.length +
+                  this.translate.instant(
+                    "HOURLYSTERILIZATIONSTATIONSAVE.image1"
+                  )
+              );
+            } else {
+              this.gradingForm.controls.txt_hardbunchesimageupload.setValue("");
+            }
+          }
+          //this.commonservice.presentToast(type + " Image Added Successfully!");
+        } else {
+          this.commonservice.presentToast(
+            type +
+              this.translate.instant(
+                "HOURLYSTERILIZATIONSTATIONSAVE.imageaddedfailed"
+              )
+          );
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    /*var dummyimagepath =
+      "http://demo.mypalm.com.my/java/generic_upload/1014-generic1333-1679038204465.jpg";
+
+    if (type == "HB") {
+      this.imagePaths.hardbunchesimage_path = dummyimagepath;
+
+      this.hardbunchesimagesArr.push(this.imagePaths.hardbunchesimage_path);
+
+      if (this.hardbunchesimagesArr.length == 1) {
+        this.gradingForm.controls.txt_hardbunchesimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.hardbunchesimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image1")
+        );
+      } else if (this.hardbunchesimagesArr.length > 1) {
+        this.gradingForm.controls.txt_hardbunchesimageupload.setValue(
+          this.translate.instant("HOURLYPRESSSTATIONSAVE.uploded") +
+            this.hardbunchesimagesArr.length +
+            this.translate.instant("HOURLYPRESSSTATIONSAVE.image2")
+        );
+      } else {
+        this.gradingForm.controls.txt_hardbunchesimageupload.setValue("");
+      }
+    }*/
+  }
+
+  btn_view(type) {
+    this.imagetype = type;
+
+    if (this.imagetype == "HB") {
+      if (this.hardbunchesimagesArr.length > 0) {
+        this.imagetype = "Hard Bunches Image";
+
+        this.imageview = "";
+
+        this.imageview = this.hardbunchesimagesArr.join("~");
+
+        this.ViewImages(this.imageview);
+      } else {
+        if (this.hardbunchesimagesArr.length > 1) {
+          this.commonservice.presentToast(
+            "Hard Bunches" +
+              this.translate.instant(
+                "HOURLYSTERILIZATIONSTATIONSAVE.imagesnotfound"
+              )
+          );
+        } else {
+          this.commonservice.presentToast(
+            "Hard Bunches" +
+              this.translate.instant(
+                "HOURLYSTERILIZATIONSTATIONSAVE.imagenotfound"
+              )
+          );
+        }
+      }
+    }
+  }
+
   getGrading() {
     if (this.receivenewloadclick == 1) {
       this.receivenewloadclick = 0;
       this.receivenewloadFlag = false;
       this.gradingForm.reset();
+      this.cleardata();
     }
 
     this.pleasewaitflag = true;
@@ -160,11 +391,15 @@ export class GradingHomePage implements OnInit {
       resultdata = result;
       if (resultdata.httpcode == 200) {
         this.gradinglistArr = resultdata.data;
+        this.uinorecordFlag = true;
         this.norecordFlag = false;
+        this.previousstatusofnorecordflag = this.norecordFlag;
         this.pleasewaitflag = false;
       } else {
         this.gradinglistArr = [];
+        this.uinorecordFlag = true;
         this.norecordFlag = true;
+        this.previousstatusofnorecordflag = this.norecordFlag;
         this.pleasewaitflag = false;
       }
     });
@@ -172,13 +407,24 @@ export class GradingHomePage implements OnInit {
 
   btn_receivenewload() {
     this.gradingForm.reset();
+    this.cleardata();
 
     if (this.receivenewloadclick == 0) {
       this.receivenewloadclick = 1;
       this.receivenewloadFlag = true;
+
+      if (this.norecordFlag) {
+        this.uinorecordFlag = false;
+        this.norecordFlag = false;
+      }
     } else {
       this.receivenewloadclick = 0;
       this.receivenewloadFlag = false;
+
+      if (this.previousstatusofnorecordflag) {
+        this.uinorecordFlag = true;
+        this.norecordFlag = true;
+      }
     }
 
     this.selectvehicleFlag = true;
@@ -192,6 +438,8 @@ export class GradingHomePage implements OnInit {
       if (this.vehicleid != 0) {
         if (this.vehiclenumber != "") {
           get_vehiclenumber = this.vehiclenumber;
+
+          //console.log(this.vehiclenumber + "\n" + this.vehicleid);
         } else {
           this.commonservice.presentToast(
             this.translate.instant("GRADINGHOME.vehiclenumbermandatory")
@@ -199,7 +447,30 @@ export class GradingHomePage implements OnInit {
           return;
         }
       } else {
-        get_vehiclenumber = this.gradingForm.value.txt_vehiclenumber;
+        if (
+          this.gradingForm.value.txt_vehiclenumber != 0 &&
+          typeof this.gradingForm.value.txt_vehiclenumber !== "undefined" &&
+          this.gradingForm.value.txt_vehiclenumber !== null
+        ) {
+          get_vehiclenumber = this.gradingForm.value.txt_vehiclenumber;
+        } else {
+          this.commonservice.presentToast(
+            this.translate.instant("GRADINGHOME.vehiclenumbermandatory")
+          );
+          return;
+        }
+      }
+
+      if (
+        this.gradingForm.value.txt_underripebunches > 100 ||
+        this.gradingForm.value.txt_ripeness > 100 ||
+        this.gradingForm.value.txt_overdue > 100 ||
+        this.gradingForm.value.txt_loosefruits > 100
+      ) {
+        this.commonservice.presentToast(
+          this.translate.instant("GRADINGHOME.percentagevalidation")
+        );
+        return;
       }
 
       this.confirmDisable = true;
@@ -214,17 +485,21 @@ export class GradingHomePage implements OnInit {
         hard_bunch_percent: this.gradingForm.value.txt_hardbunches,
         under_ripe_bunch_percent: this.gradingForm.value.txt_underripebunches,
         ripeness_percent: this.gradingForm.value.txt_ripeness,
+        overdue_percent: this.gradingForm.value.txt_overdue,
         loose_fruit_percent: this.gradingForm.value.txt_loosefruits,
+        hard_bunches_image: this.hardbunchesimagesArr.join("~"),
         language: this.languageService.selected,
       };
 
-      console.log(req);
+      //console.log(req);
 
       this.gradingservice.saveGrading(req).then((result) => {
         var resultdata: any;
         resultdata = result;
         if (resultdata.httpcode == 200) {
           this.confirmDisable = false;
+
+          this.cleardata();
 
           this.commonservice.presentToast(
             this.translate.instant("GRADINGHOME.receivedloadsuccessfully")
@@ -242,6 +517,8 @@ export class GradingHomePage implements OnInit {
         } else {
           this.confirmDisable = false;
 
+          this.cleardata();
+
           this.commonservice.presentToast(
             this.translate.instant("GRADINGHOME.receivedloadfailed")
           );
@@ -254,11 +531,76 @@ export class GradingHomePage implements OnInit {
     }
   }
 
+  checkData() {
+    if (
+      this.gradingForm.value.txt_hardbunches != "" &&
+      typeof this.gradingForm.value.txt_hardbunches !== "undefined" &&
+      this.gradingForm.value.txt_hardbunches !== null
+    ) {
+      if (Number.isInteger(this.gradingForm.value.txt_hardbunches)) {
+        this.gradingForm.controls.txt_hardbunches.setValue(
+          Number(this.gradingForm.value.txt_hardbunches).toFixed(1)
+        );
+      }
+    }
+
+    if (
+      this.gradingForm.value.txt_underripebunches != "" &&
+      typeof this.gradingForm.value.txt_underripebunches !== "undefined" &&
+      this.gradingForm.value.txt_underripebunches !== null
+    ) {
+      if (Number.isInteger(this.gradingForm.value.txt_underripebunches)) {
+        this.gradingForm.controls.txt_underripebunches.setValue(
+          Number(this.gradingForm.value.txt_underripebunches).toFixed(1)
+        );
+      }
+    }
+
+    if (
+      this.gradingForm.value.txt_ripeness != "" &&
+      typeof this.gradingForm.value.txt_ripeness !== "undefined" &&
+      this.gradingForm.value.txt_ripeness !== null
+    ) {
+      if (Number.isInteger(this.gradingForm.value.txt_ripeness)) {
+        this.gradingForm.controls.txt_ripeness.setValue(
+          Number(this.gradingForm.value.txt_ripeness).toFixed(1)
+        );
+      }
+    }
+
+    if (
+      this.gradingForm.value.txt_overdue != "" &&
+      typeof this.gradingForm.value.txt_overdue !== "undefined" &&
+      this.gradingForm.value.txt_overdue !== null
+    ) {
+      if (Number.isInteger(this.gradingForm.value.txt_overdue)) {
+        this.gradingForm.controls.txt_overdue.setValue(
+          Number(this.gradingForm.value.txt_overdue).toFixed(1)
+        );
+      }
+    }
+
+    if (
+      this.gradingForm.value.txt_loosefruits != "" &&
+      typeof this.gradingForm.value.txt_loosefruits !== "undefined" &&
+      this.gradingForm.value.txt_loosefruits !== null
+    ) {
+      if (Number.isInteger(this.gradingForm.value.txt_loosefruits)) {
+        this.gradingForm.controls.txt_loosefruits.setValue(
+          Number(this.gradingForm.value.txt_loosefruits).toFixed(1)
+        );
+      }
+    }
+  }
+
   btn_Action(item) {
     this.router.navigate([item.path]);
   }
 
   backtoselect() {
+    this.gradingForm.controls.txt_searchvehicle.setValue("");
+    this.gradingForm.controls.txt_vehiclenumber.setValue("");
+
     this.selectvehicleFlag = true;
     this.entervehicleFlag = false;
   }
@@ -274,9 +616,14 @@ export class GradingHomePage implements OnInit {
 
       vehiclemodal.onDidDismiss().then((modeldata) => {
         let viewform = modeldata.data.data;
+
+        //console.log("GetData --->" + viewform);
+
         if (viewform != "") {
           this.params = JSON.parse(viewform);
+
           //console.log(this.params.id);
+
           if (this.params.id != 0) {
             this.vehicleid = this.params.id;
             this.vehiclenumber = this.params.vehicle_no;
@@ -304,10 +651,32 @@ export class GradingHomePage implements OnInit {
             this.selectvehicleFlag = false;
             this.entervehicleFlag = true;
           }
+        } else {
+          this.vehicleid = 0;
+          this.vehiclenumber = "";
+
+          this.gradingForm.controls.txt_searchvehicle.setValue("");
+          this.gradingForm.controls.txt_vehiclenumber.setValue("");
         }
       });
 
       return await vehiclemodal.present();
+    }
+  }
+
+  async ViewImages(hardbunchesimages) {
+    if (hardbunchesimages != "") {
+      const viewimagemodal = await this.viewimagemodalController.create({
+        component: PressingsterilizerstationImageSliderPage,
+        componentProps: {
+          from: "Grading",
+          gradingitem: hardbunchesimages,
+        },
+      });
+
+      viewimagemodal.onDidDismiss().then((data) => {});
+
+      return await viewimagemodal.present();
     }
   }
 
@@ -325,11 +694,22 @@ export class GradingHomePage implements OnInit {
   }
 
   decimalFilter(event: any) {
-    const reg = /^-?\d*(\.\d{0,2})?$/;
+    const reg = /^-?\d*(\.\d{0,1})?$/;
     let input = event.target.value + String.fromCharCode(event.charCode);
 
     if (!reg.test(input)) {
       event.preventDefault();
     }
+  }
+
+  cleardata() {
+    this.vehicleid = 0;
+    this.vehiclenumber = "";
+
+    this.gradingForm.controls.txt_searchvehicle.setValue("");
+    this.gradingForm.controls.txt_vehiclenumber.setValue("");
+    this.gradingForm.controls.txt_hardbunchesimageupload.setValue("");
+
+    this.hardbunchesimagesArr = [];
   }
 }

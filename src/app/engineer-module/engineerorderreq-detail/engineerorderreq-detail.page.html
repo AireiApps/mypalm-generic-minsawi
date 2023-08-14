@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light" mode="ios">Request Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="col" style="text-align: center; margin-top: 10px">
+    <div class="h6 text-danger">
+      <b>Request Type : {{orderdetail.requesttype}}</b>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col">
+      <div class="h6 text-white">Date</div>
+    </div>
+    <div class="col">
+      <div class="h7 text-white">: {{orderdetail.date}}</div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col">
+      <div class="h6 text-white">Department</div>
+    </div>
+    <div class="col">
+      <div class="h7 text-white">: {{orderdetail.department}}</div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col">
+      <div class="h6 text-white">Name</div>
+    </div>
+    <div class="col">
+      <div class="h7 text-white">: {{orderdetail.requester_name}}</div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col">
+      <div class="h6 text-white">Request For</div>
+    </div>
+    <div class="col">
+      <div class="h7 text-white">: {{orderdetail.requestName}}</div>
+    </div>
+  </div>
+  <div class="home-box">
+    <div *ngFor="let value of recentOrder">
+      <ion-card class="bg-card">
+        <ion-card-content class="cardcontent">
+          <ion-row *ngIf="value.item_name!=''">
+            <ion-col size="4">Part Name </ion-col>
+            <ion-col size="8">
+              <p class="data">: {{value.item_name}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="value.item_code!=''">
+            <ion-col size="4">Part Code </ion-col>
+            <ion-col size="8">
+              <p class="data">: {{value.item_code}}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.station_name!=''">
+            <ion-col size="4">Station</ion-col>
+            <ion-col size="8">
+              <p class="data">: {{value.station_name}}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="value.location_name!=''">
+            <ion-col size="4">Machinery </ion-col>
+            <ion-col size="8">
+              <p class="data">: {{value.location_name}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="value.qty!=''">
+            <ion-col size="4">Qty</ion-col>
+            <ion-col size="8">
+              <p class="data">: {{value.qty}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="value.stock!=''">
+            <ion-col size="4">Stock</ion-col>
+            <ion-col size="8">
+              <p class="data">: {{value.stock}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

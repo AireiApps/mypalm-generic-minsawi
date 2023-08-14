@@ -1,0 +1,38 @@
+.productioncard-background {
+    text-align: center;
+    ion-card {
+      background: #ffffff;
+      position: relative;
+      text-align: center;
+      width: 100%;
+      border: 1px solid #ffffff;
+      border-radius: 20px;
+      box-shadow: -1px 5px 5px 0px #717171b4;
+      margin: auto;
+      background-image: url(../../../assets/img/palmbg.png);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  
+    ion-card-content {
+      background-color: #1d2730;
+      border-top: 1px solid #ffffff;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-image: url(../../../assets/img/cardbg.png);
+      background-size: cover;
+    }
+  
+    ion-card-title {
+      font-size: 12px;
+      width: 100%;
+      font-weight: bold;
+      color: #ffffff;
+    }
+  }

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-back-button color="whitefav" (click)="back()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Maps</ion-title>
+    <ion-buttons slot="end">
+      <button
+        type="button"
+        class="btn btn-recenter"
+        style="text-align: right"
+        (click)="btn_recenter()"
+      >
+        Recenter
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div #map id="map"></div>
+</ion-content>

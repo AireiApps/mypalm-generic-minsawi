@@ -543,16 +543,20 @@ export class ImageUploadService {
             mimeType: "multipart/form-data",
             params: reqparam,
           };
-          console.log(reqparam);
+
+          //console.log(reqparam);
+
           const fileTransfer: FileTransferObject = this.transfer.create();
           this.commonservice.presentLoading();
           // Use the FileTransfer to upload the image
           fileTransfer.upload(targetPath, url, options).then(
             (data) => {
+              // Added to remove cache on 11.08.2023
+              //window.caches.delete(filename);
+
               this.commonservice.dimmissLoading();
               var resultdata: any;
               resultdata = data;
-              //console.log(JSON.stringify(resultdata.response));
               resolve(resultdata);
             },
             (err) => {
@@ -610,7 +614,7 @@ export class ImageUploadService {
               this.commonservice.dimmissLoading();
               var resultdata: any;
               resultdata = data;
-              console.log(JSON.stringify(resultdata.response));
+              //console.log(JSON.stringify(resultdata.response));
               resolve(resultdata);
             },
             (err) => {

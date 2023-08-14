@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color modaltoolbar">
+    <ion-title mode="ios" color="light"
+      >{{ 'SEARCHVEHICLE.searchvehicle' | translate}}</ion-title
+    >
+
+    <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="dismiss()">
+        <ion-icon color="light" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar class="bg-brown-color modaltoolbar">
+    <ion-searchbar
+      #search
+      debounce="500"
+      (ionChange)="_ionchange($event)"
+      placeholder="{{ 'SEARCHVEHICLE.search' | translate}}"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="vehiclesearchForm">
+    <ion-list>
+      <ion-item *ngFor="let item of vehicleArr" (click)="getvalue(item)">
+        <ion-label class="h7" [style.color]="gettextColor(item.status)"
+          >{{item.vehicle_no}}</ion-label
+        >
+      </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="pagination($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="{{ 'SEARCHVEHICLE.loadingmoredata' | translate}}"
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <div class="norecords" *ngIf="norecordsflag">
+      {{ 'SEARCHVEHICLE.nosearchrecords' | translate}}
+    </div>
+  </form>
+</ion-content>

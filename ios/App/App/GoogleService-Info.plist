@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>306681786638-sojiqca5jk3jjbap9cmmronctvj7hplg.apps.googleusercontent.com</string>
+	<string>306681786638-r03asejp5ovli5u3pdfmac31r3qn84rp.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.306681786638-sojiqca5jk3jjbap9cmmronctvj7hplg</string>
+	<string>com.googleusercontent.apps.306681786638-r03asejp5ovli5u3pdfmac31r3qn84rp</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDbtns2JvtTTbkZpzVGiYuY-gfoQhNMPo0</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.airei.milltracking.mypalm</string>
+	<string>com.airei.milltracking.mypalm.mikk</string>
 	<key>PROJECT_ID</key>
 	<string>mms-airei</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:306681786638:ios:71fc9f8d40b86dbc76275f</string>
+	<string>1:306681786638:ios:9b8fdf1d3928912976275f</string>
 	<key>DATABASE_URL</key>
 	<string>https://mms-airei.firebaseio.com</string>
 </dict>

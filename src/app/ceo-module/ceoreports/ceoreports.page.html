@@ -1,0 +1,462 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="light">Daily Reports</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home-box">
+    <!--<ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="dailypl()">
+          <div class="item">
+            <img src="../../assets/img/profitandloss.png" alt="Daily PL" />
+            <div class="container txt-home">
+              <p>Daily P&L Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="ffbcreditors()">
+          <div class="item">
+            <img
+              src="../../assets/img/ffbcreditorsreport.png"
+              alt="FFB Creditors Report"
+            />
+            <div class="container txt-home">
+              <p>FFB Creditors Statement</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="ffbdebitorreport()">
+          <div class="item">
+            <img src="../../assets/img/ffbdebitorreport.png" alt="FFBDebitor" />
+            <div class="container txt-home">
+              <p>Debtors</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="cashflow()">
+          <div class="item">
+            <img
+              src="../../assets/img/cashflowreport.png"
+              alt="CashFlow Report"
+            />
+            <div class="container txt-home">
+              <p>Cash Flow</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="cashflowstatement()">
+          <div class="item">
+            <img
+              src="../../assets/img/cashflowstatementreport.png"
+              alt="CashFlow Statement Report"
+            />
+            <div class="container txt-home">
+              <p>Cash Flow Statement</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="card item-img" (click)="productionreport()">
+          <div class="item">
+            <img
+              src="../../assets/img/productionreport.png"
+              alt="Production Report"
+            />
+            <div class="container txt-home">
+              <p>Production Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="costofproductionreport()">
+          <div class="item">
+            <img
+              src="../../assets/img/costofproductionreport.png"
+              alt="CostOfProductionReport"
+            />
+            <div class="container txt-home">
+              <p>Cost of Production</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="abcdreport()">
+          <div class="item">
+            <img src="../../assets/img/abcdreport.png" alt="ABCDReport" />
+            <div class="container txt-home">
+              <p>Review Reports</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="budgetcomparereport()">
+          <div class="item">
+            <img src="../../assets/img/budgetreport.png" alt="BudgetCompare" />
+            <div class="container txt-home">
+              <p>Annual Budget</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="directorreport()">
+          <div class="item">
+            <img
+              src="../../assets/img/directorreport.png"
+              alt="DirectorReport"
+            />
+            <div class="container txt-home">
+              <p>Directors Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="issuereport()">
+          <div class="item">
+            <img src="../../assets/img/issuereport.png" alt="IssueReport" />
+            <div class="container txt-home">
+              <p>Store Issue Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="purchasereport()">
+          <div class="item">
+            <img
+              src="../../assets/img/purchasereport.png"
+              alt="PurchaseReport"
+            />
+            <div class="container txt-home">
+              <p>Store Purchase Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>-->
+
+    <!-- <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="dailystockissue()">
+          <div class="item">
+            <img
+              src="../../assets/img/dailyissuecost.png"
+              alt="Daily Issue Cost Report"
+            />
+            <div class="container txt-home">
+              <p>Daily Issue Cost Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="purchasemonthlyreport()">
+          <div class="item">
+            <img
+              src="../../assets/img/monthlypurchasereport.png"
+              alt="PurchaseMonthlyReport"
+            />
+            <div class="container txt-home">
+              <p>Monthly Purchase Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="dailystock()">
+          <div class="item">
+            <img src="../../assets/img/storestock.png" alt="DailyStockReport" />
+            <div class="container txt-home">
+              <p>Store Stock Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="sorhistory()">
+          <div class="item">
+            <img src="../../assets/img/sorhistory.png" alt="SOR History" />
+            <div class="container txt-home">
+              <p>SOR History</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="sor()">
+          <div class="item">
+            <img src="../../assets/img/sortracking.png" alt="SOR Tracking" />
+            <div class="container txt-home">
+              <p>SOR Tracking</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="millreport()">
+          <div class="item">
+            <img
+              src="../../assets/img/palmoilmillreport.png"
+              alt="MillReport"
+            />
+            <div class="container txt-home">
+              <p>Mill Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="maintenancereport()">
+          <div class="item">
+            <img
+              src="../../assets/img/ceomaintenancereport.png"
+              alt="MaintenanceReport"
+            />
+            <div class="container txt-home">
+              <p>Maintenance Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="mmslogreport()">
+          <div class="item">
+            <img
+              src="../../assets/img/productiontimeline.png"
+              alt="Production Timeline"
+            />
+            <div class="container txt-home">
+              <p>Production Timeline</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="supervisorreport()">
+          <div class="item">
+            <img
+              src="../../assets/img/supervisorreport.png"
+              alt="Supervisor Report"
+            />
+            <div class="container txt-home">
+              <p>Supervisor Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="healthreport()">
+          <div class="item">
+            <img
+              src="../../assets/img/workforcebodytemperature.png"
+              alt="Workforce Body Temperature"
+            />
+            <div class="container txt-home">
+              <p>Workforce Body Temperature</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="boilerlog()">
+          <div class="item">
+            <img src="../../assets/img/boilerreport.png" alt="Boiler Report" />
+            <div class="container txt-home">
+              <p>Boiler Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="securityrounds()">
+          <div class="item">
+            <img
+              src="../../assets/img/securityrounds.png"
+              alt="Security Rounds"
+            />
+            <div class="container txt-home">
+              <p>SecurityRounds Report</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="traceability()">
+          <div class="item">
+            <img
+              src="../../assets/img/traceabilityreport.png"
+              alt="Traceability"
+            />
+            <div class="container txt-home">
+              <p>Traceability</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="sustainchecklist()">
+          <div class="item">
+            <img
+              src="../../assets/img/sustainchecklist.png"
+              alt="SustainChecklist"
+            />
+            <div class="container txt-home">
+              <p>Compliance</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="kpi()">
+          <div class="item">
+            <img src="../../assets/img/kpi.png" alt="KPI" />
+            <div class="container txt-home">
+              <p>KPI</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="card item-img" (click)="livetracking()">
+          <div class="item">
+            <img src="../../assets/img/livetracking.png" alt="Live Tracking" />
+            <div class="container txt-home">
+              <p>FFB Live Tracking</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-row>
+      <ion-col size="6">
+        <div class="card item-img" (click)="quoteapproval()">
+          <div class="item">
+            <img
+              src="../../assets/img/palmoilquoteapproval.png"
+              alt="Quote Approval"
+            />
+            <div class="container txt-home">
+              <p>Quote Approval</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+    <div *ngIf="userlist.desigId=='10'">
+      <ion-row *ngFor="let item of itemsArr">
+        <ion-col size="6" *ngFor="let eachitem of item">
+          <div class="card item-img" (click)="btn_Action(eachitem)">
+            <div class="item">
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+              <div class="container txt-home">
+                <p>{{eachitem.title}}</p>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="userlist.desigId=='23'">
+      <ion-row *ngFor="let item of visitingconsultantArr">
+        <ion-col size="6" *ngFor="let eachitem of item">
+          <div class="card item-img" (click)="btn_Action(eachitem)">
+            <div class="item">
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+              <div class="container txt-home">
+                <p>{{eachitem.title}}</p>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="userlist.desigId=='1'">
+      <ion-row *ngFor="let item of managerArr">
+        <ion-col size="6" *ngFor="let eachitem of item">
+          <div class="card item-img" (click)="btn_Action(eachitem)">
+            <div class="item">
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+              <div class="container txt-home">
+                <p>{{eachitem.title}}</p>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

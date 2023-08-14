@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light" mode="ios">Request Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row style="margin-top: 5px">
+    <ion-col size="6"></ion-col>
+    <ion-col size="6" style="text-align: right !important">
+      <button
+        type="submit"
+        class="btn btn-grading"
+        (click)="btn_OrderRequest()"
+      >
+        <span class="icontext" style="color: #ff9f0c"> Request New Item </span>
+      </button>
+    </ion-col>
+  </ion-row>
+  <div *ngIf="uinorecordFlag">
+    <div class="reportstitleheader">Recent Request Items</div>
+
+    <ion-card class="bg-card" *ngFor="let value of recentStore">
+      <ion-card-content class="cardcontent">
+        <ion-row *ngIf="(value.sor_no!='' || value.date!='')">
+          <ion-col size="5">
+            <p class="title-content">{{value.sor_no}}</p>
+          </ion-col>
+          <ion-col size="7">
+            <p class="title-content" style="text-align: right">
+              {{value.date}}
+            </p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="value.requesttype!=''">
+          <ion-col size="6" class="text-danger">Request Type</ion-col>
+
+          <ion-col size="6">
+            <p class="data text-danger">: {{value.requesttype}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="value.requestName!=''">
+          <ion-col size="6">Request For</ion-col>
+
+          <ion-col size="6">
+            <p class="data">: {{value.requestName}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="value.noofitems!=''">
+          <ion-col size="6">Items</ion-col>
+
+          <ion-col size="6">
+            <p class="data">: {{value.noofitems}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="value.requester_name!=''">
+          <ion-col size="6">Requester By</ion-col>
+          <ion-col size="6">
+            <p class="data">: {{value.requester_name}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="row-reverse">
+          <button
+            type="button"
+            class="h7 btn btn-assign btn-sm margin-5px"
+            (click)="confirmReceived(value)"
+          >
+            <ion-icon class="icon" name="trash"></ion-icon>
+            <span class="icontext"> Received</span>
+          </button>
+          <button
+            type="button"
+            class="h7 btn btn-view btn-sm margin-5px"
+            (click)="btn_detailAction(value)"
+          >
+            <ion-icon class="icon" name="document-text-outline"></ion-icon>
+            <span class="icontext"> Details</span>
+          </button>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+    <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="newpagination($event)" *ngIf="recentStore.length>0">
+      <ion-infinite-scroll-content class="loadmore" loadingSpinner="bubbles" loadingText="{{ 'NORECORDSFOUND.loadingmoredata' | translate}}">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll> -->
+    <div class="pleasewait" *ngIf="pleasewaitflag">
+      <div style="width: 100%; text-align: center">
+        <img
+          style="width: 80px; height: 80px"
+          src="../../../assets/img/loading.gif"
+        />
+      </div>
+      {{ 'NORECORDSFOUND.loading' | translate}}
+    </div>
+  </div>
+  <div class="norecords" *ngIf="norecordFlag">
+    {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+  </div>
+</ion-content>

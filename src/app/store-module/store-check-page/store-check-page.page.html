@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img class="toolbarimage" src="../../../assets/img/logo.png"></ion-img>
+    </ion-avatar>
+    <ion-title color="light" mode="ios" [innerHTML]="mill_name"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="storecheckform">
+    <div>
+      <ion-row class="form-row">
+        <ion-col size="5.5">
+          <div class="title">
+            Station
+          </div>
+        </ion-col>
+        <ion-col size="0.5" style="text-align: center">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <ion-select mode="md" [interfaceOptions]="stationOptions" formControlName="station_name" multiple="false"
+            [okText]="'Okay'" [cancelText]="'Cancel'" class="selectdropdown" [disabled]="stationflag"
+            placeholder="Select" (ionChange)="stationtypehandleChange($event)">
+            <ion-select-option value="{{parseString(value)}}" *ngFor="let value of stationArr; let i = index">{{
+              value.station_name }}</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <div class="hl4line"></div>
+    </div>
+    <div>
+      <ion-row class="form-row">
+        <ion-col size="5.5">
+          <div class="title">
+            Machinery
+          </div>
+        </ion-col>
+
+        <ion-col size="0.5" style="text-align: center">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-select mode="md" [interfaceOptions]="machineryOptions" formControlName="select_location" multiple="false"
+            [okText]="'Okay'" [cancelText]="'Cancel'" class="selectdropdown" [disabled]="machineflag"
+            placeholder="Select" (ionChange)="machinetypehandleChange($event)">
+            <ion-select-option value="{{parseString(value)}}" *ngFor="let value of locatioArr; let i = index">{{
+              value.location_name }}</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <div class="hl4line"></div>
+    </div>
+    <!-- Parts -->
+    <div>
+      <ion-row class="form-row">
+        <ion-col size="5.5">
+          <div class="title">
+            Part
+          </div>
+        </ion-col>
+        <ion-col size="0.5" style="text-align: center">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-button class="optionbutton" [disabled]="partflag" (click)="callmodalcontroller('PartDefect')">Select
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <!-- Scan the Part -->
+      <div class="selecteddata" *ngIf="partname!=''" [innerHTML]="partname"></div>
+
+      <div *ngIf="partname!=''">
+        <div style="font-size: 14px; color: #df4759; text-align: right" (click)="clear('Part')">
+          <ion-icon class="icon" color="danger" name="backspace-outline"></ion-icon>
+          <span class="icontext"><b>
+              Clear</b></span>
+        </div>
+      </div>
+    </div>
+    <ion-row>
+      <ion-col size="2.5"></ion-col>
+      <ion-col style="text-align: center;margin-top: 10px;">
+        <button type="submit" class="btn btn-grading" (click)="btn_check()">
+          <span class="icontext" style="color: #ff9f0c">
+            Check
+          </span>
+        </button>
+      </ion-col>
+      <ion-col size="2.5"></ion-col>
+    </ion-row>
+    <div *ngIf="checkitemdetails.length>0" >
+      <table style="width: 100%; height: 100%" class="table table-bordered">
+        <tr class="table_head">
+          <th scope="colgroup" style="padding: 4px !important">
+            <span class="mdfont">S.No</span>
+          </th>
+          <th scope="colgroup" style="padding: 4px !important">
+            <span class="mdfont">Parts</span>
+          </th>
+          <th scope="colgroup" style="padding: 4px !important">
+            <span class="mdfont">Stock</span>
+          </th>
+        </tr>
+        
+        <ng-container *ngFor="let value of checkitemdetails; let i=index">
+          <tr>
+            <td scope="row" width="10%">{{i+1}}</td>
+            <td scope="row" width="50%" style="text-align: left;">{{value.partname}}</td>
+            <td scope="row" width="10%">{{value.partbalance}}</td>
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </form>
+</ion-content>

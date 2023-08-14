@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="light">Communication</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="communicationForm">
+    <ion-card class="card">
+      <div class="col" style="margin-top: 10px">
+        <div>Comments</div>
+      </div>
+
+      <div class="form-row" style="margin-top: 5x">
+        <div class="col">
+          <textarea
+            class="form-control"
+            formControlName="taComments"
+            rows="5"
+            placeholder="Enter Comments"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="form-row imgmarigin">
+        <label class="h6 text-muted">Image</label>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8" style="text-align: right">
+              <div
+                class="imagePreview"
+                *ngIf="imagePaths.communication_path == ''"
+              ></div>
+              <div
+                class="imagePresent"
+                *ngIf="imagePaths.communication_path != ''"
+              >
+                <img
+                  class="imagePresent"
+                  [src]="imagePaths.communication_path"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4" style="text-align: right">
+              <label class="btn btn-warning">
+                Upload<input
+                  type="button"
+                  class="uploadFile img"
+                  value="Upload Photo"
+                  style="
+                    width: 0px;
+                    height: 0px;
+                    overflow: hidden;
+                    display: none;
+                  "
+                  (click)="ImageUpload()"
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ion-row>
+        <ion-col size="12">
+          <button
+            type="submit"
+            class="btn btn-success"
+            (click)="btn_save()"
+            style="float: right; margin: 20px"
+          >
+            Submit
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </form>
+</ion-content>

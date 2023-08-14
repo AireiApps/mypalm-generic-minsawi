@@ -1,0 +1,47 @@
+import { Component, OnInit, NgZone } from "@angular/core";
+import { Router } from "@angular/router";
+import { appsettings } from "src/app/appsettings";
+import { HttpserviceService } from "src/app/services/httpservice/httpservice.service";
+
+@Component({
+  selector: "app-balancesheet",
+  templateUrl: "./balancesheet.page.html",
+  styleUrls: ["./balancesheet.page.scss"],
+})
+export class BalancesheetPage implements OnInit {
+  userlist = JSON.parse(localStorage.getItem("userlist"));
+  user_id = this.userlist.userId;
+  mill_name = this.userlist.millname;
+  language = this.userlist.language;
+
+  baseurl = this.userlist.report_url;
+
+  weburl;
+
+  constructor(
+    private router: Router,
+    private httpservice: HttpserviceService,
+    private zone: NgZone
+  ) {}
+
+  ngOnInit() {}
+
+  ngAfterViewInit(): void {
+    this.getUrl();
+  }
+
+  ionViewWillEnter() {
+    this.getUrl();
+  }
+
+  getUrl() {
+    let formatedurl =
+      this.baseurl +
+      "/index.php/Monthly_reports/Balance_sheet_report?mobile=1&user_id=" +
+      this.user_id +
+      "&language=" +
+      this.language;
+
+    this.weburl = formatedurl;
+  }
+}

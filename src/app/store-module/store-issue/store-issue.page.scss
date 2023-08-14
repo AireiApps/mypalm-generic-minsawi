@@ -1,0 +1,275 @@
+.home-box {
+  padding: 5px 5px 5px 5px;
+}
+
+.img-home {
+  margin: 0px 28px 0px 28px;
+  padding: 15px 30px 0px 30px;
+}
+
+.card-height {
+  height: 80%;
+  width: 100%;
+
+  margin: 5px;
+}
+
+.txt-home {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 9px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+  background-color: #f7f7f7; // black
+}
+
+.bg-light-color {
+  --color: var(--ion-color-lightorange);
+}
+
+div.item {
+  text-align: center;
+  padding: 20px 0px 0px 0px;
+}
+
+img {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 20px;
+}
+
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.lbl-head {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.lbl-desc {
+  padding-left: 5px;
+  padding-top: 5px;
+}
+
+.bg-yellow {
+  background-color: #000000;
+  padding: 10px;
+}
+
+form {
+  padding: 5px;
+}
+
+.item-inner {
+  border-style: unset !important;
+}
+
+.imagePreview {
+  width: 150px;
+  height: 150px;
+  background-position: center center;
+  background: url("../../../assets/img/noimage.png");
+  background-color: #fff;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  box-shadow: 0px -3px 6px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  width: 150px;
+}
+
+.btn-success {
+  width: 150px;
+}
+
+.btn-warning {
+  width: 145px;
+}
+
+.btn-upload {
+  margin-top: -5px;
+  display: block;
+  border-radius: 0px;
+  box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
+}
+
+.input-group-addon {
+  padding: 6px;
+}
+
+.imagePresent {
+  width: 150px;
+  height: 150px;
+  background-position: center center;
+  background-color: #fff;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  box-shadow: 0px -3px 6px 2px rgba(0, 0, 0, 0.2);
+}
+
+.form-row {
+  align-items: center;
+  margin: 0px;
+}
+
+.h6marigintop {
+  margin-top: 10px;
+}
+
+.imgmarigin {
+  margin-left: 15px;
+}
+
+.userfont {
+  font-size: 14px;
+}
+
+.mdfont {
+  font-size: 14px;
+}
+
+.btn-grading {
+  width: 150px;
+  background-color: none;
+  font-size: 14px;
+  border-color: #ff9f0c;
+}
+
+.btn-save {
+  width: 150px;
+  font-size: 14px;
+  background-color: none;
+  border-color: #3cd2a5;
+  color: #ffffff;
+}
+
+.selectdropdown {
+  background-color: transparent;
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  border: 0.5px solid #ff9f0c;
+  color: #ffffff;
+  border-radius: 5px;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  --placeholder-color: white;
+  --placeholder-opacity: 1;
+}
+
+.title {
+  color: white;
+  font-size: 14px;
+  text-align: left;
+}
+ion-select::part(icon) {
+  width: 15px;
+  visibility: hidden;
+}
+.ionicselect {
+  color: transparent;
+  font-size: 1px;
+  content-visibility: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+.hl4line {
+  border-top: 1px dashed #ffffff71;
+  height: 0px !important;
+  margin: 20px;
+}
+.optionbutton {
+  --background: transparent;
+  //width: 70%;
+  width: 100%;
+  //height: 50px;
+  height: 40px;
+  font-size: 14px;
+  text-transform: initial;
+  margin: 0 !important;
+  //border-radius: 50px;
+  border-radius: 5px;
+  //margin: 20px 0px 0px 0px;
+  border: 0.5px solid #ff9f0c;
+  --background-activated: transparent;
+  --color-activated: #ffffff;
+  --background-focused: transparent;
+  --color-focused: #ffffff;
+  --background-hover: transparent;
+  --color-hover: #ffffff;
+  --color: #ffffff;
+}
+
+.selecteddata {
+  margin-top: 20px;
+  color: #3cd2a5;
+  text-align: center;
+  font-size: 14px;
+}
+
+.icontext {
+  font-size: 14px;
+  text-align: center;
+}
+
+.bg-card {
+  --background: #ffffff;
+  background-image: url(../../../assets/img/palmbg.png);
+  background-size: cover;
+  border: 1px solid #ffffff;
+  margin: 6px;
+
+  ion-row {
+    margin-top: -6px;
+  }
+
+  ion-col {
+    font-size: 12px;
+  }
+
+  ion-card-content {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .title-content {
+    font-size: 15px;
+    color: #1d2730;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .card-content {
+    padding: 0px;
+  }
+
+  .data {
+    font-size: 12px;
+    color: black;
+    font-weight: bold;
+  }
+  .btn-view {
+    //background-color: #a8b6bc;
+    background-color: none;
+    border-color: #df4759;
+  }
+}
+
+.cardcontent {
+  margin-top: 10px;
+}
+
+.row-reverse {
+  flex-direction: row-reverse;
+}

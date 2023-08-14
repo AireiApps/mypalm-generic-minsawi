@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { appsettings } from "../appsettings";
 import { ToastController, LoadingController } from "@ionic/angular";
 import { PreloadingserviceService } from "src/app/services/preloadingservice/preloadingservice.service";
+import { timeout } from "rxjs/operators";
 
 const httpOptions = {
   headers: {
@@ -92,6 +93,131 @@ export class AIREIService {
     });
   }*/
 
+  getalertnotification(params) {
+    var newurl =
+      localStorage.getItem("endpoint") +
+      appsettings.alertnotification +
+      "?" +
+      "millcode=" +
+      params.millcode +
+      "&" +
+      "userid=" +
+      params.userid +
+      "&" +
+      "departmentid=" +
+      params.departmentid +
+      "&" +
+      "filter=" +
+      params.filter +
+      "&" +
+      "language=" +
+      params.language;
+
+    //console.log(newurl);
+
+    return new Promise((resolve, reject) => {
+      this.httpClient
+        .get(newurl)
+        .pipe(timeout(15000))
+        .subscribe(
+          (data) => {
+            //console.log(data);
+
+            resolve(data);
+          },
+          (error) => {
+            if (error.status == 0) {
+              this.presentToast("Unable to Connect Server");
+            } else if (error.name == "TimeoutError" || error.status == 500) {
+              this.presentToast("Something went wrong...!");
+            }
+
+            reject(error);
+          }
+        );
+    });
+  }
+
+  getalertdetails(params) {
+    var newurl =
+      localStorage.getItem("endpoint") +
+      appsettings.alertdetailsnotification +
+      "?" +
+      "millcode=" +
+      params.millcode +
+      "&" +
+      "userid=" +
+      params.userid +
+      "&" +
+      "departmentid=" +
+      params.departmentid +
+      "&" +
+      "designationid=" +
+      params.designationid +
+      "&" +
+      "baseid=" +
+      params.baseid +
+      "&" +
+      "id=" +
+      params.id +
+      "&" +
+      "type=" +
+      params.type +
+      "&" +
+      "language=" +
+      params.language;
+
+    //console.log(newurl);
+
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(newurl).subscribe(
+        (data) => {
+          console.log(data);
+
+          resolve(data);
+        },
+        (error) => {
+          if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }
+
+          reject(error);
+        }
+      );
+    });
+  }
+
+  updatealertnotification(params) {
+    //this.presentLoading();
+
+    var reqOpts: any;
+    reqOpts = this.formParams(params);
+
+    var api =
+      localStorage.getItem("endpoint") + appsettings.updatealertnotification;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, reqOpts).subscribe(
+        (data) => {
+          //this.dimmissLoading();
+
+          console.log(data);
+          resolve(data);
+        },
+        (error) => {
+          //this.dimmissLoading();
+
+          console.log(error);
+
+          if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }
+
+          reject(error);
+        }
+      );
+    });
+  }
+
   getsegregatenotification(params) {
     var newurl =
       localStorage.getItem("endpoint") +
@@ -115,20 +241,25 @@ export class AIREIService {
     //console.log(newurl);
 
     return new Promise((resolve, reject) => {
-      this.httpClient.get(newurl).subscribe(
-        (data) => {
-          console.log(data);
+      this.httpClient
+        .get(newurl)
+        .pipe(timeout(15000))
+        .subscribe(
+          (data) => {
+            console.log(data);
 
-          resolve(data);
-        },
-        (error) => {
-          if (error.status == 0) {
-            this.presentToast("Unable to Connect Server");
+            resolve(data);
+          },
+          (error) => {
+            if (error.status == 0) {
+              this.presentToast("Unable to Connect Server");
+            } else if (error.name == "TimeoutError" || error.status == 500) {
+              this.presentToast("Something went wrong...!");
+            }
+
+            reject(error);
           }
-
-          reject(error);
-        }
-      );
+        );
     });
   }
 
@@ -174,20 +305,20 @@ export class AIREIService {
 
     var api = localStorage.getItem("endpoint") + appsettings.login_token_update;
 
-    //console.log(api);
-
     return new Promise((resolve, reject) => {
       this.httpClient.post(api, reqOpts).subscribe(
         (data) => {
           console.log(data);
+
           resolve(data);
         },
         (error) => {
           console.log(error);
 
-          /*if (error.status == 0) {
+          if (error.status == 0) {
             this.presentToast("Unable to Connect Server");
-          }*/
+          }
+
           reject(error);
         }
       );
@@ -274,7 +405,7 @@ export class AIREIService {
   }
 
   updateLanguage(params) {
-    this.presentLoading();
+    //this.presentLoading();
 
     var reqOpts: any;
     reqOpts = this.formParams(params);
@@ -369,6 +500,171 @@ export class AIREIService {
     });
   }
 
+  getsummarypopup(params) {
+    //this.presentLoading();
+
+    var newurl =
+      localStorage.getItem("endpoint") +
+      appsettings.getsummarypopup +
+      "?" +
+      "millcode=" +
+      params.millcode +
+      "&" +
+      "userid=" +
+      params.userid +
+      "&" +
+      "language=" +
+      params.language;
+
+    //console.log(newurl);
+
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(newurl).subscribe(
+        (data) => {
+          //this.dimmissLoading();
+
+          console.log(data);
+
+          resolve(data);
+        },
+        (error) => {
+          //this.dimmissLoading();
+
+          if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }
+
+          reject(error);
+        }
+      );
+    });
+  }
+
+  updatesummarypopup(params) {
+    //this.presentLoading();
+
+    var reqOpts: any;
+    reqOpts = this.formParams(params);
+
+    var api = localStorage.getItem("endpoint") + appsettings.updatesummary;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, reqOpts).subscribe(
+        (data) => {
+          //this.dimmissLoading();
+
+          console.log(data);
+          resolve(data);
+        },
+        (error) => {
+          //this.dimmissLoading();
+
+          console.log(error);
+
+          if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }
+
+          reject(error);
+        }
+      );
+    });
+  }
+
+  getsummarypopupflag(params) {
+    var newurl =
+      localStorage.getItem("endpoint") +
+      appsettings.getsummarypopupflag +
+      "?" +
+      "millcode=" +
+      params.millcode +
+      "&" +
+      "userid=" +
+      params.userid +
+      "&" +
+      "departmentid=" +
+      params.departmentid +
+      "&" +
+      "designationid=" +
+      params.designationid +
+      "&" +
+      "language=" +
+      params.language;
+
+    //console.log(newurl);
+
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(newurl).subscribe(
+        (data) => {
+          console.log(data);
+
+          resolve(data);
+        },
+        (error) => {
+          if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }
+
+          reject(error);
+        }
+      );
+    });
+  }
+
+  getmaintenancependingcount(params) {
+    var reqOpts: any;
+    reqOpts = this.formParams(params);
+
+    var api =
+      localStorage.getItem("endpoint") + appsettings.getmaintenancependingcount;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, reqOpts).subscribe(
+        (data) => {
+          //this.dimmissLoading();
+
+          console.log(data);
+          resolve(data);
+        },
+        (error) => {
+          //this.dimmissLoading();
+
+          console.log(error);
+
+          if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }
+
+          reject(error);
+        }
+      );
+    });
+  }
+
+  getDriverHistory(params, type) {
+    var reqOpts: any;
+    reqOpts = this.formParams(params);
+
+    var api =
+      localStorage.getItem("endpoint") +
+      appsettings.driverpendinglistwithdatefiler;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, reqOpts).subscribe(
+        (data) => {
+          console.log(data);
+          resolve(data);
+        },
+        (error) => {
+          console.log(error);
+
+          /*if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }*/
+
+          reject(error);
+        }
+      );
+    });
+  }
+
   async presentToast(message) {
     const toast = await this.toastCtrl.create({
       message: message,
@@ -435,5 +731,230 @@ export class AIREIService {
     return await this.loadingCtrl
       .dismiss()
       .then(() => console.log("dismissed"));
+  }
+
+  getAllDriverByID(req) {
+    // this.presentLoading();
+    var api =
+      localStorage.getItem("endpoint") +
+      appsettings.driverinsertedlist +
+      "?acc_id=" +
+      req.acc_id +
+      "&millcode=" +
+      req.millcode;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, {}, httpOptions).subscribe(
+        (data) => {
+          this.dimmissLoading();
+          console.log(data);
+          resolve(data);
+        },
+        (error) => {
+          this.dimmissLoading();
+          console.log(error);
+
+          /*if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }*/
+
+          reject(error);
+        }
+      );
+    });
+  }
+
+  getAllVechicleByID(req) {
+    //this.presentLoading();
+    var api =
+      localStorage.getItem("endpoint") +
+      appsettings.vehicelinsertedlist +
+      "?acc_id=" +
+      req.acc_id +
+      "&millcode=" +
+      req.millcode;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, {}, httpOptions).subscribe(
+        (data) => {
+          //this.dimmissLoading();
+          console.log(data);
+          resolve(data);
+        },
+        (error) => {
+          //this.dimmissLoading();
+          console.log(error);
+
+          /*if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }*/
+
+          reject(error);
+        }
+      );
+    });
+  }
+
+  getAllProfileID(req) {
+    //this.presentLoading();
+    var api =
+      localStorage.getItem("endpoint") +
+      appsettings.profileView +
+      "?accId=" +
+      req.acc_id +
+      "&millcode=" +
+      req.millcode;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, {}, httpOptions).subscribe(
+        (data) => {
+          this.dimmissLoading();
+
+          console.log(data);
+
+          resolve(data);
+        },
+        (error) => {
+          this.dimmissLoading();
+
+          console.log(error);
+
+          /*if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }*/
+
+          reject(error);
+        }
+      );
+    });
+  }
+
+  getFFBVechicleList(req) {
+    //this.presentLoading();
+    var api =
+      localStorage.getItem("endpoint") +
+      appsettings.ffbvehicleList +
+      "?millcode=" +
+      req.millcode;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, {}, httpOptions).subscribe(
+        (data) => {
+          //this.dimmissLoading();
+          console.log(data);
+          resolve(data);
+        },
+        (error) => {
+          //this.dimmissLoading();
+          console.log(error);
+
+          /*if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }*/
+
+          reject(error);
+        }
+      );
+    });
+  }
+
+  profileUpdateSave(req) {
+    //this.presentLoading();
+
+    var reqOpts: any;
+    console.log(JSON.stringify(req));
+    reqOpts = this.formParams(req);
+
+    var api = localStorage.getItem("endpoint") + appsettings.profileUpdate;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, reqOpts).subscribe(
+        (data) => {
+          this.dimmissLoading();
+
+          console.log(data);
+          resolve(data);
+        },
+        (error) => {
+          this.dimmissLoading();
+
+          console.log(error);
+
+          /*if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }*/
+
+          reject(error);
+        }
+      );
+    });
+  }
+
+  driverSave(req) {
+    //this.presentLoading();
+    var api =
+      localStorage.getItem("endpoint") +
+      appsettings.driverInsert +
+      "?drivername=" +
+      req.drivername +
+      "&drivernric=" +
+      req.drivernric +
+      "&mobile_no=" +
+      req.mobile_no +
+      "&acc_id=" +
+      req.acc_id +
+      "&millcode=" +
+      req.millcode;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, { params: req }, httpOptions).subscribe(
+        (data) => {
+          this.dimmissLoading();
+          console.log(data);
+          resolve(data);
+        },
+        (error) => {
+          this.dimmissLoading();
+          console.log(error);
+
+          /*if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }*/
+
+          reject(error);
+        }
+      );
+    });
+  }
+
+  vechicleSave(req) {
+    //this.presentLoading();
+
+    var api =
+      localStorage.getItem("endpoint") +
+      appsettings.vehicleInsert +
+      "?vehiclenumber=" +
+      req.vehiclenumber +
+      "&vehicle_id=" +
+      req.vehicle_id +
+      "&acc_id=" +
+      req.acc_id +
+      "&millcode=" +
+      req.millcode;
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(api, { params: req }, httpOptions).subscribe(
+        (data) => {
+          this.dimmissLoading();
+
+          console.log(data);
+          resolve(data);
+        },
+        (error) => {
+          this.dimmissLoading();
+
+          console.log(error);
+
+          /*if (error.status == 0) {
+            this.presentToast("Unable to Connect Server");
+          }*/
+
+          reject(error);
+        }
+      );
+    });
   }
 }

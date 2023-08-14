@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="light">Maintenance Report</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="maintenancereportForm">
+    <div class="form-row">
+      <div class="col">
+        <ion-datetime
+          class="h7 form-control"
+          formControlName="pickdate"
+          display-format="DD-MM-YYYY"
+        ></ion-datetime>
+      </div>
+
+      <div class="col">
+        <button
+          type="button"
+          class="btn btn-outline-info btn-sm margin-5px float-right"
+          (click)="callAPI()"
+        >
+          <ion-icon name="filter"></ion-icon>Get Record(s)
+        </button>
+      </div>
+    </div>
+
+    <div *ngFor="let value of maintenancereportlist">
+      <div
+        class="card gedf-card margin-bottom"
+        *ngIf="value.overall_manager_comments!=''"
+      >
+        <div class="card-header" style="text-align: center">
+          <div class="h7 text-danger"><b>{{value.heading}}</b></div>
+        </div>
+        <div style="margin: 5px">
+          <div class="h7 text-muted">Task : {{value.comments}}</div>
+        </div>
+
+        <div style="margin: 5px">
+          <div class="h7 text-danger" *ngIf="value.overallComments == ''">
+            Maintenace Comments : No Comments
+          </div>
+          <div class="h7 text-danger" *ngIf="value.overallComments != ''">
+            Maintenace Comments : {{value.overallComments}}
+          </div>
+        </div>
+
+        <div style="margin: 5px">
+          <div
+            class="h7 text-primary"
+            *ngIf="value.overall_engineer_comments == ''"
+          >
+            Engineer Comments : No Comments
+          </div>
+          <div
+            class="h7 text-primary"
+            *ngIf="value.overall_engineer_comments != ''"
+          >
+            Engineer Comments : {{value.overall_engineer_comments}}
+          </div>
+        </div>
+
+        <div style="margin: 5px">
+          <div
+            class="h7 text-success"
+            *ngIf="value.overall_manager_comments == ''"
+          >
+            Manager Comments : No Comments
+          </div>
+          <div
+            class="h7 text-success"
+            *ngIf="value.overall_manager_comments != ''"
+          >
+            Manager Comments : {{value.overall_manager_comments}}
+          </div>
+        </div>
+
+        <div style="margin: 5px">
+          <div class="h7 text-info" *ngIf="value.overall_ceo_comments == ''">
+            CEO Comments : No Comments
+          </div>
+          <div class="h7 text-info" *ngIf="value.overall_ceo_comments != ''">
+            CEO Comments : {{value.overall_ceo_comments}}
+          </div>
+        </div>
+
+        <ion-row class="row-reverse">
+          <button
+            type="button"
+            class="btn btn-outline-dark btn-sm margin-5px"
+            (click)="btn_comments(value)"
+          >
+            <ion-icon name="newspaper-outline"></ion-icon>
+            Comments
+          </button>
+        </ion-row>
+      </div>
+    </div>
+
+    <!-- <ion-row *ngIf="maintenancereportlist.length > 0">
+
+    <ion-col size="12">
+      <div>General Comments</div>
+      <textarea class="form-control" formControlName="taoverallcomments" [(ngModel)]="overallcomments" readonly></textarea>
+    </ion-col>
+
+    <ion-col size="12">
+      <div>Engineer Comments</div>
+      <textarea class="form-control" formControlName="taengineercomments" [(ngModel)]="engineercomments" readonly></textarea>
+    </ion-col>
+
+    <ion-col size="12">
+      <div>Manager Comments</div>
+      <textarea class="form-control" formControlName="tamanagercomments" [(ngModel)]="managercomments" readonly></textarea>
+    </ion-col>
+
+    <ion-col size="12">
+      <div>CEO Comments</div>
+      <textarea class="form-control" formControlName="taceocomments" [(ngModel)]="ceocomments" readonly></textarea>
+    </ion-col>
+
+    <ion-col size="12">
+      <div>Comments</div>
+      <textarea class="form-control" formControlName="tacomments" placeholder="Enter Comments"></textarea>
+    </ion-col>
+
+    <ion-col size="12">
+      <button type="submit" class="btn btn-success" (click)="btn_save()" style="float: right">Submit</button>
+    </ion-col>
+  </ion-row> -->
+  </form>
+</ion-content>

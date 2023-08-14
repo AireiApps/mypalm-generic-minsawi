@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar
+      *ngIf="designationid != 1 && designationid != 2 && designationid != 23 && designationid != 22 && designationid != 10 && designationid != 16"
+      slot="start"
+    >
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title
+      *ngIf="designationid != 1 && designationid != 2 && designationid != 23 && designationid != 22 && designationid != 10 && designationid != 16"
+      color="light"
+      mode="ios"
+      [innerHTML]="mill_name"
+    ></ion-title>
+    <ion-buttons
+      slot="start"
+      mode="md"
+      *ngIf="designationid == 1 || designationid == 2 || designationid == 23 || designationid == 22 || designationid == 10 || designationid == 16"
+    >
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title
+      color="light"
+      mode="ios"
+      *ngIf="designationid == 1 || designationid == 2 || designationid == 23 || designationid == 22 || designationid == 10 || designationid == 16"
+      >Monthly Payslip</ion-title
+    >
+
+    <ion-buttons slot="primary">
+      <ion-button
+        class="bg-light-color"
+        (click)="btn_notification()"
+        *ngIf="getplatform == 'android' && (designationid == 4 ||  designationid == 5 || designationid == 6 || designationid == 9 || designationid == 17 || designationid == 18)"
+      >
+        <ion-badge
+          class="badgeblink"
+          [ngClass]="{'onedigitbadgecount' : pendingcountlength == 1, 'twodigitbadgecount' : pendingcountlength >= 2}"
+          *ngIf="pendingcount && pendingcount != 0"
+          >{{ pendingcount }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button
+        class="bg-light-color"
+        (click)="btn_notification()"
+        *ngIf="getplatform == 'ios' && (designationid == 4 || designationid == 5 ||  designationid == 6 || designationid == 9 || designationid == 17 || designationid == 18)"
+      >
+        <ion-badge
+          class="badgeblink"
+          [ngClass]="{'onedigitbadgecount' : pendingcountlength == 1, 'iostwodigitbadgecount' : pendingcountlength >= 2}"
+          *ngIf="pendingcount && pendingcount != 0"
+          >{{ pendingcount }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <iframe
+    [src]="weburl | safe"
+    style="width: 100%; height: 100%; border: none"
+    scrolling="yes"
+  ></iframe>
+</ion-content>

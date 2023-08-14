@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-button color="whitefav" (click)="btn_back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light" mode="ios">Update Grading</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home-box">
+    <form [formGroup]="gradingForm">
+      <div>
+        <ion-row class="form-row">
+          <ion-col size="5.5">
+            <div class="title">
+              Date & Time
+            </div>
+          </ion-col>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="title" style="text-align: left">
+              <b>{{gradingdetails.DATE}}</b>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="form-row">
+          <ion-col size="5.5">
+            <div class="title">
+              Vehicle No
+            </div>
+          </ion-col>
+
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+
+          <ion-col size="6">
+            <div class="title" style="text-align: left">
+              <b>{{gradingdetails.VEHICLE}}</b>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="form-row">
+          <ion-col size="5.5">
+            <div class="title">
+              Under Ripe Bunches(%)
+            </div>
+          </ion-col>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="title" style="text-align: left">
+              <b>{{gradingdetails.UNDERRIPE}}</b>
+            </div>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row class="form-row">
+          <ion-col size="5.5">
+            <div class="title">
+              Overall Ripeness(%)
+            </div>
+          </ion-col>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="title" style="text-align: left">
+              <b>{{gradingdetails.RIPE}}</b>
+            </div>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row class="form-row">
+          <ion-col size="5.5">
+            <div class="title">
+              Overripe(%)
+            </div>
+          </ion-col>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="title" style="text-align: left">
+              <b>{{gradingdetails.OVERRIPE}}</b>
+            </div>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row class="form-row">
+          <ion-col size="5.5">
+            <div class="title">
+              Loose Fruits(%)
+            </div>
+          </ion-col>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="title" style="text-align: left">
+              <b>{{gradingdetails.LOOSE}}</b>
+            </div>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row class="form-row">
+          <ion-col size="5.5">
+            <div class="title">
+              Overdue(%)
+            </div>
+          </ion-col>
+          <ion-col size="0.5" style="text-align: center">
+            <div class="title">
+              <b>:</b>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <input type="number" class="h7 form-control" formControlName="txt_overdue"
+              placeholder="{{ 'GRADINGHOME.enter' | translate}}" (keypress)="decimalFilter($event)"
+              (focusout)="checkData()" />
+          </ion-col>
+        </ion-row>
+        <ion-row style="margin-top: 10px">
+          <ion-col style="text-align: center !important" no-padding>
+            <button type="submit" class="btn btn-update" (click)="btn_update()">
+              <span class="icontext" style="color: #ffffff">Update</span>
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </form>
+  </div>
+</ion-content>

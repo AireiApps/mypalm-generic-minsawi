@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="light">Production Comments</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="commentsForm">
+    <div
+      class="h7 text-dark"
+      style="text-align: right; margin-top: 5px; margin-right: 5px"
+    >
+      Date: {{this.detailValue.insdt}}
+    </div>
+
+    <div style="text-align: center; margin-top: 5px">
+      <div class="h6 text-danger"><b>{{this.detailValue.heading}}</b></div>
+    </div>
+
+    <div class="col">
+      <div>Task</div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <textarea
+          class="form-control"
+          formControlName="tatask"
+          readonly
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col">
+      <div>Supervisor Comments</div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <textarea
+          class="form-control"
+          formControlName="tasupervisorcomments"
+          readonly
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col" *ngIf="engineercomments != ''">
+      <div>Engineer Comments</div>
+    </div>
+
+    <div class="form-row" *ngIf="engineercomments != ''">
+      <div class="col">
+        <textarea
+          class="form-control"
+          formControlName="taengineercomments"
+          readonly
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col" *ngIf="managercomments != ''">
+      <div>Manager Comments</div>
+    </div>
+
+    <div class="form-row" *ngIf="managercomments != ''">
+      <div class="col">
+        <textarea
+          class="form-control"
+          formControlName="tamanagercomments"
+          readonly
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col" *ngIf="ceocomments != ''">
+      <div>CEO Comments</div>
+    </div>
+
+    <div class="form-row" *ngIf="ceocomments != ''">
+      <div class="col">
+        <textarea
+          class="form-control"
+          formControlName="taceocomments"
+          readonly
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col">
+      <div>Comments</div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <textarea
+          class="form-control"
+          formControlName="taComments"
+          rows="4"
+          placeholder="Enter Comments"
+        ></textarea>
+      </div>
+    </div>
+
+    <ion-row>
+      <ion-col size="12">
+        <button
+          type="submit"
+          class="btn btn-success"
+          (click)="btn_save()"
+          style="float: right; margin: 10px"
+        >
+          Submit
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

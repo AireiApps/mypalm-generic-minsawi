@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.airei.milltracking" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyPalm</name>
+<widget id="com.airei.milltracking.mypalm.mikk" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>MyPalm MIKK</name>
     <description>Malaysian Palm Oil Mill</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">AIREI Team</author>
     <content src="index.html" />

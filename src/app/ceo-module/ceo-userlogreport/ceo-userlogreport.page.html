@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="light" *ngIf="userlist.desigId!=10"
+      >User Log Report</ion-title
+    >
+    <ion-title mode="ios" color="light" *ngIf="userlist.desigId==10"
+      >User Activity</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <iframe
+    [src]="weburl | safe"
+    style="width: 100%; height: 100%; border: none"
+    scrolling="yes"
+  ></iframe>
+</ion-content>

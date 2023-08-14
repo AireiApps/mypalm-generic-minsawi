@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title color="light" [innerHTML]="mill_name"></ion-title>
+    <ion-buttons slot="primary">
+      <ion-button
+        class="bg-light-color"
+        (click)="btn_notification()"
+        *ngIf="getplatform == 'android'"
+      >
+        <ion-badge
+          class="badgeblink"
+          [ngClass]="{'onedigitbadgecount' : pendingcountlength == 1, 'twodigitbadgecount' : pendingcountlength >= 2}"
+          *ngIf="pendingcount && pendingcount != 0"
+          >{{ pendingcount }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button
+        class="bg-light-color"
+        (click)="btn_notification()"
+        *ngIf="getplatform == 'ios'"
+      >
+        <ion-badge
+          class="badgeblink"
+          [ngClass]="{'onedigitbadgecount' : pendingcountlength == 1, 'iostwodigitbadgecount' : pendingcountlength >= 2}"
+          *ngIf="pendingcount && pendingcount != 0"
+          >{{ pendingcount }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="md">
+  <div #myElementRef class="home-box">
+    <!-- Engineer - Start -->
+    <div *ngIf="userdesignation!=16">
+      <ion-row *ngFor="let item of reportsArr">
+        <ion-col size="6" *ngFor="let eachitem of item">
+          <div
+            class="productioncard-background wrapper"
+            (click)="btn_ReportAction(eachitem)"
+          >
+            <ion-card>
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+
+              <ion-card-content>
+                <ion-card-title>
+                  <b>{{eachitem.title}}</b>
+                </ion-card-title>
+                <ion-card-title>
+                  <div
+                    class="h7 text-white"
+                    [innerHTML]="eachitem.subtitle"
+                  ></div>
+                </ion-card-title>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <!-- Engineer - End -->
+  </div>
+</ion-content>

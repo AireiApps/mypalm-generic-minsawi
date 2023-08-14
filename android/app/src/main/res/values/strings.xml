@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">MyPalm</string>
-    <string name="title_activity_main">MyPalm</string>
-    <string name="package_name">com.airei.milltracking</string>
-    <string name="custom_url_scheme">com.airei.milltracking</string>
+    <string name="app_name">MyPalm MIKK</string>
+    <string name="title_activity_main">MyPalm MIKK</string>
+    <string name="package_name">com.airei.milltracking.mypalm.mikk</string>
+    <string name="custom_url_scheme">com.airei.milltracking.mypalm.mikk</string>
 </resources>

@@ -1,14 +1,8 @@
-import {
-  Component,
-  OnInit,
-  NgZone,
-  ViewChild,
-  ElementRef,
-  Renderer2,
-} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { ScreenOrientation } from "@ionic-native/screen-orientation/ngx";
 import { FormBuilder, FormControl } from "@angular/forms";
 import { AIREIService } from "src/app/api/api.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ModalController, AlertController, IonList } from "@ionic/angular";
 import { GradingserviceService } from "src/app/services/grading-service/gradingservice.service";
 import * as moment from "moment";
@@ -20,6 +14,8 @@ import { Plugins } from "@capacitor/core";
 
 import { DatePickerPluginInterface } from "@capacitor-community/date-picker";
 const DatePicker: DatePickerPluginInterface = Plugins.DatePickerPlugin as any;
+
+import { PressingsterilizerstationImageSliderPage } from "src/app/supervisor-module/pressingsterilizerstation-image-slider/pressingsterilizerstation-image-slider.page";
 
 @Component({
   selector: "app-grading-report",
@@ -41,6 +37,7 @@ export class GradingReportPage implements OnInit {
   todate = "";
 
   gradinglistArr = [];
+  averageArr = [];
 
   norecordFlag = false;
 
@@ -48,13 +45,26 @@ export class GradingReportPage implements OnInit {
     private languageService: LanguageService,
     private translate: TranslateService,
     public modalController: ModalController,
+    private activatedroute: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private service: GradingserviceService
+    private service: GradingserviceService,
+    private screenOrientation: ScreenOrientation
   ) {
     this.gradingReportForm = this.fb.group({
       from_date: new FormControl(this.currentdate),
       to_date: new FormControl(this.currentdate),
+    });
+
+    this.activatedroute.params.subscribe((val) => {
+      this.screenOrientation.lock(
+        this.screenOrientation.ORIENTATIONS.LANDSCAPE
+      );
+
+      this.fromdate = "";
+      this.todate = "";
+
+      this.getGradingReport();
     });
   }
 
@@ -63,7 +73,14 @@ export class GradingReportPage implements OnInit {
   ngAfterViewInit(): void {}
 
   ionViewDidEnter() {
-    this.getGradingReport();
+    //this.getGradingReport();
+  }
+
+  ngOnDestroy() {
+    this.screenOrientation.unlock();
+    this.screenOrientation.lock(
+      this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY
+    );
   }
 
   openFromDateTimePicker() {
@@ -156,11 +173,39 @@ export class GradingReportPage implements OnInit {
 
       if (resultdata.httpcode == 200) {
         this.gradinglistArr = resultdata.data;
+        this.averageArr = resultdata.average;
+        //console.log(this.gradinglistArr);
         this.norecordFlag = false;
       } else {
         this.gradinglistArr = [];
+        this.averageArr = [];
         this.norecordFlag = true;
       }
     });
+  }
+
+  async btn_ViewImages(hardbuchesimages) {
+    if (hardbuchesimages != "") {
+      /*this.screenOrientation.unlock();
+      this.screenOrientation.lock(
+        this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY
+      );*/
+
+      const modal = await this.modalController.create({
+        component: PressingsterilizerstationImageSliderPage,
+        componentProps: {
+          from: "GradingReport",
+          gradingitem: hardbuchesimages,
+        },
+      });
+
+      modal.onDidDismiss().then((data) => {
+        /*this.screenOrientation.lock(
+          this.screenOrientation.ORIENTATIONS.LANDSCAPE
+        );*/
+      });
+
+      return await modal.present();
+    }
   }
 }

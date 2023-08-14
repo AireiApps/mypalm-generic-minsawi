@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title color="light" mode="ios" [innerHTML]="mill_name"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home-box">
+    <form [formGroup]="ffbReportForm">
+      <ion-row style="margin-top: 10px">
+        <ion-col size="1.6" style="align-self: center" no-padding>
+          <div class="h7 text-white">
+            <b>{{ 'RAMPREPORT.from' | translate}}</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="3.45">
+          <input
+            type="text"
+            class="h7 form-control readonly"
+            formControlName="from_date"
+            placeholder="DD-MM-YYYY"
+            (click)="openFromDateTimePicker()"
+            readonly
+          />
+        </ion-col>
+
+        <ion-col size="1" style="align-self: center" no-padding>
+          <div class="h7 text-white">
+            <b>{{ 'RAMPREPORT.to' | translate}}</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="3.45">
+          <input
+            type="text"
+            class="h7 form-control readonly"
+            formControlName="to_date"
+            placeholder="DD-MM-YYYY"
+            (click)="openToDateTimePicker()"
+            readonly
+          />
+        </ion-col>
+
+        <ion-col size="2.5">
+          <button
+            type="button"
+            class="h7 btn btn-general btn-sm float-right"
+            style="height: 31px; width: 100%"
+            (click)="getRampReport()"
+          >
+            {{ 'GENERALBUTTON.getrecords' | translate}}
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <hr />
+    </form>
+
+    <div *ngIf="!norecordFlag">
+      <div style="overflow-x: auto">
+        <table style="width: 100%; height: 100%" class="table table-bordered">
+          <tr class="table_head">
+            <th colspan="1" scope="colgroup" style="padding: 4px !important">
+              <span class="mdfont">{{ 'RAMPREPORT.datetime' | translate}}</span>
+            </th>
+
+            <!-- <th colspan="1" scope="colgroup" style="padding: 4px !important">
+              <span class="mdfont"
+                >{{ 'RAMPREPORT.suppliername' | translate}}</span
+              >
+            </th> -->
+
+            <th colspan="1" scope="colgroup" style="padding: 4px !important">
+              <span class="mdfont"
+                >{{ 'RAMPREPORT.vehiclenumber' | translate}}</span
+              >
+            </th>
+
+            <th colspan="1" scope="colgroup" style="padding: 4px !important">
+              <span class="mdfont"
+                >{{ 'RAMPREPORT.netweight' | translate}}<br />(MT)</span
+              >
+            </th>
+
+            <th colspan="1" scope="colgroup" style="padding: 4px !important">
+              <span class="mdfont"
+                >{{ 'RAMPREPORT.destination' | translate}}</span
+              >
+            </th>
+
+            <th
+              colspan="1"
+              scope="colgroup"
+              style="padding: 4px !important"
+              *ngIf="despatchimageFlag==1"
+            >
+              <span class="mdfont"
+                >{{ 'RAMPREPORT.despatchimage' | translate}}</span
+              >
+            </th>
+
+            <th colspan="1" scope="colgroup" style="padding: 4px !important">
+              <span class="mdfont"
+                >{{ 'GENERALBUTTON.editbutton' | translate}}</span
+              >
+            </th>
+          </tr>
+
+          <ng-container *ngFor="let value of ramplistArr">
+            <tr>
+              <td scope="row">{{value.insdt}}</td>
+              <!-- <td scope="row">{{value.supplier_name}}</td> -->
+              <td scope="row">{{value.vehicle_no}}</td>
+              <td scope="row">{{value.netweight}}</td>
+              <td scope="row">{{value.destination}}</td>
+              <td scope="row" *ngIf="despatchimageFlag==1">
+                <button
+                  type="button"
+                  class="h7 btn btn-imageview btn-sm"
+                  (click)="btn_ViewImages(value.image)"
+                  *ngIf="(value.image!='')"
+                >
+                  <span class="icontext"
+                    >{{ 'GENERALBUTTON.viewbutton' | translate}}</span
+                  >
+                </button>
+                <span *ngIf="(value.image =='')">-</span>
+              </td>
+              <td scope="row">
+                <button
+                  *ngIf="value.editable==1"
+                  type="button"
+                  class="h7 btn btn-imageview btn-sm"
+                  (click)="btn_Edit(value)"
+                >
+                  <span class="icontext"
+                    >{{ 'GENERALBUTTON.editbutton' | translate}}</span
+                  >
+                </button>
+
+                <span *ngIf="value.editable == 0">-</span>
+              </td>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+    </div>
+
+    <div class="norecords" *ngIf="norecordFlag">
+      {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+    </div>
+  </div>
+</ion-content>

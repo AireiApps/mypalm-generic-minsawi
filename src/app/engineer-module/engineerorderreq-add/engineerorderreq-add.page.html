@@ -1,0 +1,284 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light" mode="ios">Request New Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="storeform">
+    <div>
+      <ion-row class="form-row">
+        <ion-col size="5.5">
+          <div class="title">Type</div>
+        </ion-col>
+
+        <ion-col size="0.5" style="text-align: center">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-select
+            mode="md"
+            [interfaceOptions]="typeOptions"
+            formControlName="type"
+            multiple="false"
+            [okText]="'Okay'"
+            [cancelText]="'Cancel'"
+            class="selectdropdown"
+            [disabled]="typeflag"
+            placeholder="Select"
+            (ionChange)="typehandleChange($event)"
+          >
+            <ion-select-option
+              value="{{value.id+'~'+value.type}}"
+              *ngFor="let value of typeArr; let i = index"
+              >{{ value.type }}
+            </ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <div class="hl4line"></div>
+    </div>
+    <div>
+      <ion-row class="form-row">
+        <ion-col size="5.5">
+          <div class="title">Item Request Type</div>
+        </ion-col>
+
+        <ion-col size="0.5" style="text-align: center">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-select
+            mode="md"
+            [interfaceOptions]="requesttypeOptions"
+            formControlName="item_request_type"
+            multiple="false"
+            [okText]="'Okay'"
+            [cancelText]="'Cancel'"
+            class="selectdropdown"
+            [disabled]="requesttypeflag"
+            placeholder="Select"
+            (ionChange)="requesttypehandleChange($event)"
+          >
+            <ion-select-option
+              value="{{value.request_type_id+'~'+value.request_name}}"
+              *ngFor="let value of requestList; let i = index"
+              >{{ value.request_name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <div class="hl4line"></div>
+    </div>
+    <div>
+      <ion-row class="form-row">
+        <ion-col size="5.5">
+          <div class="title">Station</div>
+        </ion-col>
+
+        <ion-col size="0.5" style="text-align: center">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-select
+            mode="md"
+            [interfaceOptions]="stationOptions"
+            formControlName="station_name"
+            multiple="false"
+            [okText]="'Okay'"
+            [cancelText]="'Cancel'"
+            class="selectdropdown"
+            [disabled]="stationflag"
+            placeholder="Select"
+            (ionChange)="stationtypehandleChange($event)"
+          >
+            <ion-select-option
+              value="{{value.station_id+'~'+value.station_name}}"
+              *ngFor="let value of stationArr; let i = index"
+              >{{ value.station_name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <div class="hl4line"></div>
+    </div>
+    <div>
+      <ion-row class="form-row">
+        <ion-col size="5.5">
+          <div class="title">Machinery</div>
+        </ion-col>
+
+        <ion-col size="0.5" style="text-align: center">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-select
+            mode="md"
+            [interfaceOptions]="machineryOptions"
+            formControlName="select_location"
+            multiple="false"
+            [okText]="'Okay'"
+            [cancelText]="'Cancel'"
+            class="selectdropdown"
+            [disabled]="machineflag"
+            placeholder="Select"
+            (ionChange)="machinetypehandleChange($event)"
+          >
+            <ion-select-option
+              value="{{value.location_id+'~'+value.location_name}}"
+              *ngFor="let value of locationArr; let i = index"
+              >{{ value.location_name }}</ion-select-option
+            >
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <div class="hl4line"></div>
+    </div>
+    <!-- Parts -->
+    <div>
+      <ion-row class="form-row">
+        <ion-col size="5.5">
+          <div class="title">Part</div>
+        </ion-col>
+        <ion-col size="0.5" style="text-align: center">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-button
+            class="optionbutton"
+            [disabled]="partflag"
+            (click)="callmodalcontroller('PartDefect')"
+            >Select
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <div
+        class="selecteddata"
+        *ngIf="partname!=''"
+        [innerHTML]="partname"
+      ></div>
+
+      <div *ngIf="partname!=''">
+        <div
+          style="font-size: 14px; color: #df4759; text-align: right"
+          (click)="clear('Part')"
+        >
+          <ion-icon
+            class="icon"
+            color="danger"
+            name="backspace-outline"
+          ></ion-icon>
+          <span class="icontext"><b> Clear</b></span>
+        </div>
+      </div>
+    </div>
+    <div class="hl4line"></div>
+    <!-- Quantity -->
+    <div *ngIf="quantityflag">
+      <ion-row class="form-row">
+        <ion-col size="5.5" style="flex-direction: row">
+          <div class="title">Quantity ({{selectedUnit}})</div>
+        </ion-col>
+
+        <ion-col size="0.5" style="text-align: center">
+          <div class="title">
+            <b>:</b>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div>
+            <input
+              type="number"
+              class="h7 form-control text-dark"
+              formControlName="qty"
+              placeholder="Enter"
+              (input)="onChangeqty()"
+            />
+          </div>
+        </ion-col>
+      </ion-row>
+      <div class="hl4line"></div>
+    </div>
+
+    <ion-row *ngIf="quantityflag">
+      <ion-col size="2.5"></ion-col>
+      <ion-col style="text-align: center">
+        <button type="submit" class="btn btn-grading" (click)="addNewRow()">
+          <span class="icontext" style="color: #ff9f0c"> Add Item </span>
+        </button>
+      </ion-col>
+      <ion-col size="2.5"></ion-col>
+    </ion-row>
+    <div>
+      <ion-card class="bg-card" *ngFor="let itemrow of itemsArr; let i=index">
+        <ion-card-content class="cardcontent">
+          <ion-row>
+            <ion-col>
+              <div class="title-content">{{i+1}}) {{itemrow.part_name}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row style="margin-top: 5px">
+            <ion-col size="3">Station</ion-col>
+            <ion-col size="9">
+              <p class="data">: {{itemrow.station_name}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="3">Machinery</ion-col>
+            <ion-col size="9">
+              <p class="data">: {{itemrow.machine_name}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="3">Qty</ion-col>
+            <ion-col size="9">
+              <p class="data">: {{itemrow.quantity}} {{itemrow.unit}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-reverse">
+            <button
+              type="button"
+              class="h7 btn btn-view btn-sm margin-5px"
+              (click)="deleteRow(i)"
+            >
+              <span class="icontext">Remove</span>
+            </button>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <div class="hl4line" *ngIf="itemsArr.length > 0"></div>
+
+      <ion-row *ngIf="itemsArr.length > 0">
+        <ion-col size="2.5"></ion-col>
+        <ion-col style="text-align: center">
+          <button type="submit" class="btn btn-save" (click)="btn_save()">
+            <span class="icontext" style="color: #3cd2a5"> Request </span>
+          </button>
+        </ion-col>
+        <ion-col size="2.5"></ion-col>
+      </ion-row>
+    </div>
+  </form>
+</ion-content>

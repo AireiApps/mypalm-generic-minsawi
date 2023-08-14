@@ -1,0 +1,244 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title color="light" mode="ios" [innerHTML]="mill_name"></ion-title>
+
+    <!-- <ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent">
+          {{ count }}</ion-badge
+        >
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="md">
+  <div class="myCard">
+    <img class="backgroundimage" src="../../../assets/img/header_myPalm.png" />
+    <div class="myOverlay">
+      <div class="usermessagecard">
+        <ion-row>
+          <ion-col size="12">
+            <p
+              style="
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0px;
+                color: #ffffff;
+              "
+            >
+              {{ 'GRADINGHOME.welcome' | translate}} {{userlist.name}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+
+  <div #myElementRef>
+    <form [formGroup]="gradingForm">
+      <!-- <div class="reportstitleheader">
+        {{ 'GRADINGHOME.newgrading' | translate}}
+      </div> -->
+
+      <ion-row style="margin-top: 5px">
+        <ion-col size="6"></ion-col>
+        <ion-col size="6" style="text-align: right !important">
+          <button
+            type="submit"
+            class="btn btn-grading"
+            (click)="btn_receivenewload()"
+          >
+            <span class="icontext" style="color: #ffffff">
+              {{ 'GRADINGHOME.newgrading' | translate}}
+            </span>
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <div *ngIf="receivenewloadFlag">
+        <ion-row class="form-row" *ngIf="selectvehicleFlag">
+          <ion-col size="6">
+            <div class="title">{{ 'GRADINGHOME.vehicle' | translate}}</div>
+          </ion-col>
+
+          <ion-col size="6">
+            <input
+              type="text"
+              class="h7 form-control readonly"
+              formControlName="txt_searchvehicle"
+              placeholder="{{ 'GRADINGHOME.searchvehicle' | translate}}"
+              (click)="callmodalcontroller('Vehicle')"
+              readonly
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="entervehicleFlag">
+          <ion-col size="6">
+            <div class="title">
+              {{ 'GRADINGHOME.vehiclenumber' | translate}}
+            </div>
+          </ion-col>
+
+          <ion-col size="6">
+            <input
+              type="text"
+              class="h7 form-control"
+              formControlName="txt_vehiclenumber"
+              placeholder="{{ 'GRADINGHOME.entervehiclenumber' | translate}}"
+              (keypress)="alphanumberFilter($event)"
+            />
+          </ion-col>
+        </ion-row>
+
+        <div *ngIf="entervehicleFlag">
+          <div
+            style="
+              font-size: 14px;
+              color: #df4759;
+              text-align: right;
+              margin-right: 10px;
+            "
+            (click)="backtoselect()"
+          >
+            <ion-icon
+              class="icon"
+              color="danger"
+              name="arrow-undo-outline"
+            ></ion-icon>
+            <span class="icontext"
+              ><b>{{ 'GENERALBUTTON.select' | translate}}</b></span
+            >
+          </div>
+        </div>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="title">Overdue <b>(%)</b></div>
+          </ion-col>
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              formControlName="txt_overdue"
+              placeholder="{{ 'GRADINGHOME.enter' | translate}}"
+              (keypress)="decimalFilter($event)"
+              (focusout)="checkData()"
+            />
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="text-align: center !important">
+            <button
+              type="submit"
+              [disabled]="confirmDisable"
+              class="btn btn-save"
+              (click)="btn_save()"
+            >
+              {{ 'GENERALBUTTON.savebutton' | translate}}
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <div
+          class="hl4line"
+          style="margin-bottom: 15px"
+          *ngIf="gradinglistArr.length > 0 && !norecordFlag"
+        ></div>
+      </div>
+
+      <div *ngIf="uinorecordFlag">
+        <div class="reportstitleheader">
+          {{ 'GRADINGHOME.lastfiverecords' | translate}}
+        </div>
+        <ion-card class="bg-card" *ngFor="let value of gradinglistArr">
+          <ion-card-content class="cardcontent">
+            <ion-row *ngIf="value.DATE!=''">
+              <ion-col size="6">Date & Time</ion-col>
+              <ion-col size="6">
+                <p class="data">: {{value.DATE}}</p>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="value.VEHICLE!=''">
+              <ion-col size="6">Vehicle No</ion-col>
+              <ion-col size="6">
+                <p class="data">: {{value.VEHICLE}}</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="value.UNDERRIPE!=''">
+              <ion-col size="6">Under Ripe Bunches(%)</ion-col>
+
+              <ion-col size="6">
+                <p class="data">: {{value.UNDERRIPE}}</p>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="value.RIPE!=''">
+              <ion-col size="6">Overall Ripeness(%)</ion-col>
+
+              <ion-col size="6">
+                <p class="data">: {{value.RIPE}}</p>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="value.OVERRIPE!=''">
+              <ion-col size="6">Overripe(%)</ion-col>
+              <ion-col size="6">
+                <p class="data">: {{value.OVERRIPE}}</p>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="value.LOOSE!=''">
+              <ion-col size="6">Loose Fruits(%)</ion-col>
+
+              <ion-col size="6">
+                <p class="data">: {{value.LOOSE}}</p>
+              </ion-col>
+            </ion-row>
+            <ion-row class="row-reverse">
+              <button
+                type="button"
+                class="h7 btn btn-update btn-sm margin-5px"
+                (click)="btn_updateAction(value)"
+              >
+                <ion-icon class="icon" name="create-outline"></ion-icon>
+                <span class="icontext"> Update</span>
+              </button>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <ion-infinite-scroll
+          threshold="100px"
+          (ionInfinite)="newpagination($event)"
+          *ngIf="gradinglistArr.length>0"
+        >
+          <ion-infinite-scroll-content
+            class="loadmore"
+            loadingSpinner="bubbles"
+            loadingText="{{ 'NORECORDSFOUND.loadingmoredata' | translate}}"
+          >
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+        <div class="pleasewait" *ngIf="pleasewaitflag">
+          <div style="width: 100%; text-align: center">
+            <img
+              style="width: 80px; height: 80px"
+              src="../../../assets/img/loading.gif"
+            />
+          </div>
+          {{ 'NORECORDSFOUND.loading' | translate}}
+        </div>
+      </div>
+
+      <div class="norecords" *ngIf="norecordFlag">
+        {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+      </div>
+    </form>
+  </div>
+</ion-content>

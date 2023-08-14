@@ -7,45 +7,34 @@ let userlist = JSON.parse(localStorage.getItem("userlist"));
 let newRoutes: any;
 let router: Router;
 
-const routes_management: Routes = [
+//FFB Supplier
+const routes_ffbsupplier: Routes = [
   {
     path: "",
     component: TabsPage,
     canActivate: [AuthGuardService],
     children: [
       {
-        path: "tabmaintenancedashboard",
+        path: "tabffbhome",
         children: [
           {
             path: "",
             loadChildren: () =>
-              import(
-                "../maintenance-module/maintenance-notification-dashboard/maintenance-notification-dashboard.module"
-              ).then((m) => m.MaintenanceNotificationDashboardPageModule),
+              import("../ffb-module/ffb-home/ffb-home.module").then(
+                (m) => m.FfbHomePageModule
+              ),
           },
         ],
       },
       {
-        path: "tabmaintenancehome",
+        path: "tabffbreports",
         children: [
           {
             path: "",
             loadChildren: () =>
-              import(
-                "../maintenance-module/maintenance-home/maintenance-home.module"
-              ).then((m) => m.MaintenanceHomePageModule),
-          },
-        ],
-      },
-      {
-        path: "tabqrcodescanner",
-        children: [
-          {
-            path: "",
-            loadChildren: () =>
-              import(
-                "../scanner-module/qrcodescanner/qrcodescanner.module"
-              ).then((m) => m.QrcodescannerPageModule),
+              import("../ffb-module/ffb-reports/ffb-reports.module").then(
+                (m) => m.FfbReportsPageModule
+              ),
           },
         ],
       },
@@ -61,13 +50,308 @@ const routes_management: Routes = [
       },
       {
         path: "",
-        redirectTo: "/tabs/tabmaintenancedashboard",
+        redirectTo: "/tabs/tabffbhome",
         pathMatch: "full",
       },
     ],
   },
 ];
 
+// Driver
+const routes_driver: Routes = [
+  {
+    path: "",
+    component: TabsPage,
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: "home",
+        loadChildren: () =>
+          import("../driver-module/driver-home/driver-home.module").then(
+            (m) => m.DriverHomePageModule
+          ),
+      },
+      {
+        path: "history",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../history/history.module").then(
+                (m) => m.HistoryPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tab3",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../more/more.module").then((m) => m.MorePageModule),
+          },
+        ],
+      },
+
+      {
+        path: "",
+        redirectTo: "/tabs/home",
+        pathMatch: "full",
+      },
+    ],
+  },
+];
+
+//Ramp
+const routes_ramp: Routes = [
+  {
+    path: "",
+    component: TabsPage,
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: "tabramphome",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../ramp-module/ramp-home/ramp-home.module").then(
+                (m) => m.RampHomePageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabrampreports",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../ramp-module/ramp-reports/ramp-reports.module").then(
+                (m) => m.RampReportsPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tab3",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../more/more.module").then((m) => m.MorePageModule),
+          },
+        ],
+      },
+      {
+        path: "",
+        redirectTo: "/tabs/tabramphome",
+        pathMatch: "full",
+      },
+    ],
+  },
+];
+
+// Owner
+const routes_owner: Routes = [
+  {
+    path: "",
+    component: TabsPage,
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: "tabdashboard",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../owner-module/owner-dashboard/owner-dashboard.module"
+              ).then((m) => m.OwnerDashboardPageModule),
+          },
+        ],
+      },
+      {
+        path: "taboilloss",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../owner-module/owner-oilloss/owner-oilloss.module").then(
+                (m) => m.OwnerOillossPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabproduction",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../owner-module/owner-production/owner-production.module"
+              ).then((m) => m.OwnerProductionPageModule),
+          },
+        ],
+      },
+      {
+        path: "tabmaintenance",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../owner-module/owner-maintenance/owner-maintenance.module"
+              ).then((m) => m.OwnerMaintenancePageModule),
+          },
+        ],
+      },
+      {
+        path: "tabpayslip",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabreports",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../owner-module/owner-reports/owner-reports.module").then(
+                (m) => m.OwnerReportsPageModule
+              ),
+          },
+        ],
+      },
+      /*{
+        path: "tabprofile",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../more/more.module").then((m) => m.MorePageModule),
+          },
+        ],
+      },*/
+      {
+        path: "",
+        redirectTo: "/tabs/tabdashboard",
+        pathMatch: "full",
+      },
+    ],
+  },
+];
+
+// Manager
+const routes_manager: Routes = [
+  {
+    path: "",
+    component: TabsPage,
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: "tabhome",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../ceo-module/ceohome/ceohome.module").then(
+                (m) => m.CeohomePageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "taboilloss",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../owner-module/owner-oilloss/owner-oilloss.module").then(
+                (m) => m.OwnerOillossPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabproduction",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../owner-module/owner-production/owner-production.module"
+              ).then((m) => m.OwnerProductionPageModule),
+          },
+        ],
+      },
+      {
+        path: "tabmaintenance",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../owner-module/owner-maintenance/owner-maintenance.module"
+              ).then((m) => m.OwnerMaintenancePageModule),
+          },
+        ],
+      },
+      {
+        path: "tabpayslip",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabsor",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../engineer-module/managertab-sorscreen/managertab-sorscreen.module"
+              ).then((m) => m.ManagertabSorscreenPageModule),
+          },
+        ],
+      },
+      {
+        path: "tabreports",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../owner-module/owner-reports/owner-reports.module").then(
+                (m) => m.OwnerReportsPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "",
+        redirectTo: "/tabs/tabhome",
+        pathMatch: "full",
+      },
+    ],
+  },
+];
+
+// Maintenance Engineer
 const routes_engineering: Routes = [
   {
     path: "",
@@ -87,26 +371,74 @@ const routes_engineering: Routes = [
         ],
       },
       {
-        path: "tabmaintenancehome",
+        path: "tabcorrectivemaintenance",
         children: [
           {
             path: "",
             loadChildren: () =>
               import(
-                "../maintenance-module/maintenance-home/maintenance-home.module"
-              ).then((m) => m.MaintenanceHomePageModule),
+                "../maintenance-module/tab-correctivemaintenance/tab-correctivemaintenance.module"
+              ).then((m) => m.TabCorrectivemaintenancePageModule),
+          },
+        ],
+      },
+      /*{
+        path: "tabpreventivemaintenance",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../maintenance-module/tab-preventivemaintenance/tab-preventivemaintenance.module"
+              ).then((m) => m.TabPreventivemaintenancePageModule),
+          },
+        ],
+      },*/
+      {
+        path: "tabpreventivemaintenance",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../maintenance-module/tab-preventivemaintenance-new/tab-preventivemaintenance-new.module"
+              ).then((m) => m.TabPreventivemaintenanceNewPageModule),
           },
         ],
       },
       {
-        path: "tabqrcodescanner",
+        path: "tabsor",
         children: [
           {
             path: "",
             loadChildren: () =>
               import(
-                "../scanner-module/qrcodescanner/qrcodescanner.module"
-              ).then((m) => m.QrcodescannerPageModule),
+                "../engineer-module/tab-sorscreen/tab-sorscreen.module"
+              ).then((m) => m.TabSorscreenPageModule),
+          },
+        ],
+      },
+      {
+        path: "tabsupervisorhome",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../supervisor-module/production-home/production-home.module"
+              ).then((m) => m.ProductionHomePageModule),
+          },
+        ],
+      },
+      {
+        path: "tabcalendar",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../maintenance-module/schedule/schedule.module").then(
+                (m) => m.SchedulePageModule
+              ),
           },
         ],
       },
@@ -129,6 +461,7 @@ const routes_engineering: Routes = [
   },
 ];
 
+// Maintenance Foreman
 const routes_foreman: Routes = [
   {
     path: "",
@@ -148,48 +481,62 @@ const routes_foreman: Routes = [
         ],
       },
       {
-        path: "tabmaintenancehome",
+        path: "tabcorrectivemaintenance",
         children: [
           {
             path: "",
             loadChildren: () =>
               import(
-                "../maintenance-module/maintenance-home/maintenance-home.module"
-              ).then((m) => m.MaintenanceHomePageModule),
+                "../maintenance-module/tab-correctivemaintenance/tab-correctivemaintenance.module"
+              ).then((m) => m.TabCorrectivemaintenancePageModule),
           },
         ],
       },
-      {
-        path: "tabqrcodescanner",
+      /*{
+        path: "tabpreventivemaintenance",
         children: [
           {
             path: "",
             loadChildren: () =>
               import(
-                "../scanner-module/qrcodescanner/qrcodescanner.module"
-              ).then((m) => m.QrcodescannerPageModule),
+                "../maintenance-module/tab-preventivemaintenance/tab-preventivemaintenance.module"
+              ).then((m) => m.TabPreventivemaintenancePageModule),
           },
         ],
-      },
+      },*/
       {
-        path: "tabreport",
+        path: "tabpreventivemaintenance",
         children: [
           {
             path: "",
             loadChildren: () =>
               import(
-                "../maintenance-module/maintenance-report/maintenance-report.module"
-              ).then((m) => m.MaintenanceReportPageModule),
+                "../maintenance-module/tab-preventivemaintenance-new/tab-preventivemaintenance-new.module"
+              ).then((m) => m.TabPreventivemaintenanceNewPageModule),
           },
         ],
       },
       {
-        path: "tab3",
+        path: "tabcalendar",
         children: [
           {
             path: "",
             loadChildren: () =>
-              import("../more/more.module").then((m) => m.MorePageModule),
+              import("../maintenance-module/schedule/schedule.module").then(
+                (m) => m.SchedulePageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabpayslip",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
           },
         ],
       },
@@ -202,6 +549,7 @@ const routes_foreman: Routes = [
   },
 ];
 
+// Maintenance Chargeman
 const routes_chargeman: Routes = [
   {
     path: "",
@@ -221,48 +569,62 @@ const routes_chargeman: Routes = [
         ],
       },
       {
-        path: "tabmaintenancehome",
+        path: "tabcorrectivemaintenance",
         children: [
           {
             path: "",
             loadChildren: () =>
               import(
-                "../maintenance-module/maintenance-home/maintenance-home.module"
-              ).then((m) => m.MaintenanceHomePageModule),
+                "../maintenance-module/tab-correctivemaintenance/tab-correctivemaintenance.module"
+              ).then((m) => m.TabCorrectivemaintenancePageModule),
           },
         ],
       },
-      {
-        path: "tabqrcodescanner",
+      /*{
+        path: "tabpreventivemaintenance",
         children: [
           {
             path: "",
             loadChildren: () =>
               import(
-                "../scanner-module/qrcodescanner/qrcodescanner.module"
-              ).then((m) => m.QrcodescannerPageModule),
+                "../maintenance-module/tab-preventivemaintenance/tab-preventivemaintenance.module"
+              ).then((m) => m.TabPreventivemaintenancePageModule),
           },
         ],
-      },
+      },*/
       {
-        path: "tabreport",
+        path: "tabpreventivemaintenance",
         children: [
           {
             path: "",
             loadChildren: () =>
               import(
-                "../maintenance-module/maintenance-report/maintenance-report.module"
-              ).then((m) => m.MaintenanceReportPageModule),
+                "../maintenance-module/tab-preventivemaintenance-new/tab-preventivemaintenance-new.module"
+              ).then((m) => m.TabPreventivemaintenanceNewPageModule),
           },
         ],
       },
       {
-        path: "tab3",
+        path: "tabcalendar",
         children: [
           {
             path: "",
             loadChildren: () =>
-              import("../more/more.module").then((m) => m.MorePageModule),
+              import("../maintenance-module/schedule/schedule.module").then(
+                (m) => m.SchedulePageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabpayslip",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
           },
         ],
       },
@@ -275,6 +637,7 @@ const routes_chargeman: Routes = [
   },
 ];
 
+// Fitter
 const routes_fitter: Routes = [
   {
     path: "",
@@ -282,7 +645,7 @@ const routes_fitter: Routes = [
     canActivate: [AuthGuardService],
     children: [
       {
-        path: "tabmaintenancehome",
+        path: "tabjob",
         children: [
           {
             path: "",
@@ -294,26 +657,26 @@ const routes_fitter: Routes = [
         ],
       },
       {
-        path: "tabqrcodescanner",
+        path: "tabcalendar",
         children: [
           {
             path: "",
             loadChildren: () =>
-              import(
-                "../scanner-module/qrcodescanner/qrcodescanner.module"
-              ).then((m) => m.QrcodescannerPageModule),
+              import("../maintenance-module/schedule/schedule.module").then(
+                (m) => m.SchedulePageModule
+              ),
           },
         ],
       },
       {
-        path: "tabreport",
+        path: "tabpayslip",
         children: [
           {
             path: "",
             loadChildren: () =>
-              import(
-                "../maintenance-module/maintenance-report/maintenance-report.module"
-              ).then((m) => m.MaintenanceReportPageModule),
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
           },
         ],
       },
@@ -329,13 +692,14 @@ const routes_fitter: Routes = [
       },
       {
         path: "",
-        redirectTo: "/tabs/tabmaintenancehome",
+        redirectTo: "/tabs/tabjob",
         pathMatch: "full",
       },
     ],
   },
 ];
 
+// Wireman
 const routes_wireman: Routes = [
   {
     path: "",
@@ -343,7 +707,7 @@ const routes_wireman: Routes = [
     canActivate: [AuthGuardService],
     children: [
       {
-        path: "tabmaintenancehome",
+        path: "tabjob",
         children: [
           {
             path: "",
@@ -355,26 +719,26 @@ const routes_wireman: Routes = [
         ],
       },
       {
-        path: "tabqrcodescanner",
+        path: "tabcalendar",
         children: [
           {
             path: "",
             loadChildren: () =>
-              import(
-                "../scanner-module/qrcodescanner/qrcodescanner.module"
-              ).then((m) => m.QrcodescannerPageModule),
+              import("../maintenance-module/schedule/schedule.module").then(
+                (m) => m.SchedulePageModule
+              ),
           },
         ],
       },
       {
-        path: "tabreport",
+        path: "tabpayslip",
         children: [
           {
             path: "",
             loadChildren: () =>
-              import(
-                "../maintenance-module/maintenance-report/maintenance-report.module"
-              ).then((m) => m.MaintenanceReportPageModule),
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
           },
         ],
       },
@@ -390,13 +754,14 @@ const routes_wireman: Routes = [
       },
       {
         path: "",
-        redirectTo: "/tabs/tabmaintenancehome",
+        redirectTo: "/tabs/tabjob",
         pathMatch: "full",
       },
     ],
   },
 ];
 
+// Lab
 const routes_lab: Routes = [
   {
     path: "",
@@ -410,23 +775,48 @@ const routes_lab: Routes = [
             path: "",
             loadChildren: () =>
               import(
-                "../maintenance-module/maintenance-home/maintenance-home.module"
-              ).then((m) => m.MaintenanceHomePageModule),
+                "../maintenance-module/lab-oillosses-dashboard/lab-oillosses-dashboard.module"
+              ).then((m) => m.LabOillossesDashboardPageModule),
           },
         ],
       },
       {
-        path: "tabqrcodescanner",
+        path: "taboilloss",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../owner-module/owner-oilloss/owner-oilloss.module").then(
+                (m) => m.OwnerOillossPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabpayslip",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabreports",
         children: [
           {
             path: "",
             loadChildren: () =>
               import(
-                "../scanner-module/qrcodescanner/qrcodescanner.module"
-              ).then((m) => m.QrcodescannerPageModule),
+                "../maintenance-module/tab-laboilloss-report/tab-laboilloss-report.module"
+              ).then((m) => m.TabLaboillossReportPageModule),
           },
         ],
       },
+
       {
         path: "tab3",
         children: [
@@ -446,6 +836,7 @@ const routes_lab: Routes = [
   },
 ];
 
+// Production
 const routes_production: Routes = [
   {
     path: "",
@@ -456,17 +847,47 @@ const routes_production: Routes = [
         path: "tabsupervisordashboard",
         children: [
           {
-            /*path: "",
-            loadChildren: () =>
-              import(
-                "../supervisor-module/production-dashboard/production-dashboard.module"
-              ).then((m) => m.ProductionDashboardPageModule),*/
-
             path: "",
             loadChildren: () =>
               import(
                 "../supervisor-module/production-dashboard-dynamic/production-dashboard-dynamic.module"
               ).then((m) => m.ProductionDashboardDynamicPageModule),
+          },
+        ],
+      },
+      {
+        path: "tabalert",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../segregatenotificatepages/tabalertacknowledge/tabalertacknowledge.module"
+              ).then((m) => m.TabalertacknowledgePageModule),
+          },
+        ],
+      },
+      {
+        path: "taboilloss",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../owner-module/owner-oilloss/owner-oilloss.module").then(
+                (m) => m.OwnerOillossPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabpayslip",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
           },
         ],
       },
@@ -514,7 +935,8 @@ const routes_production: Routes = [
   },
 ];
 
-const routes_sterilizerpress: Routes = [
+// Press Operator
+const routes_press: Routes = [
   {
     path: "",
     component: TabsPage,
@@ -533,26 +955,38 @@ const routes_sterilizerpress: Routes = [
         ],
       },
       {
+        path: "tabalert",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../segregatenotificatepages/tabalertacknowledge/tabalertacknowledge.module"
+              ).then((m) => m.TabalertacknowledgePageModule),
+          },
+        ],
+      },
+      {
+        path: "tabpayslip",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
+          },
+        ],
+      },
+      {
         path: "tabsupervisorhome",
         children: [
           {
             path: "",
             loadChildren: () =>
               import(
-                "../supervisor-module/production-sterilizerpress-home/production-sterilizerpress-home.module"
-              ).then((m) => m.ProductionSterilizerpressHomePageModule),
-          },
-        ],
-      },
-      {
-        path: "tabqrcodescanner",
-        children: [
-          {
-            path: "",
-            loadChildren: () =>
-              import(
-                "../scanner-module/qrcodescanner/qrcodescanner.module"
-              ).then((m) => m.QrcodescannerPageModule),
+                "../supervisor-module/tab-pressstation-report/tab-pressstation-report.module"
+              ).then((m) => m.TabPressstationReportPageModule),
           },
         ],
       },
@@ -575,6 +1009,81 @@ const routes_sterilizerpress: Routes = [
   },
 ];
 
+// Sterilizer Operator
+const routes_sterilizer: Routes = [
+  {
+    path: "",
+    component: TabsPage,
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: "tabsupervisordashboard",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../supervisor-module/production-sterilizerpress-dashboard/production-sterilizerpress-dashboard.module"
+              ).then((m) => m.ProductionSterilizerpressDashboardPageModule),
+          },
+        ],
+      },
+      {
+        path: "tabalert",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../segregatenotificatepages/tabalertacknowledge/tabalertacknowledge.module"
+              ).then((m) => m.TabalertacknowledgePageModule),
+          },
+        ],
+      },
+      {
+        path: "tabpayslip",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabsupervisorhome",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../supervisor-module/tab-sterilizerstation-report/tab-sterilizerstation-report.module"
+              ).then((m) => m.TabSterilizerstationReportPageModule),
+          },
+        ],
+      },
+      {
+        path: "tab3",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../more/more.module").then((m) => m.MorePageModule),
+          },
+        ],
+      },
+      {
+        path: "",
+        redirectTo: "/tabs/tabsupervisordashboard",
+        pathMatch: "full",
+      },
+    ],
+  },
+];
+
+// Grading
 const routes_grading: Routes = [
   {
     path: "",
@@ -606,6 +1115,18 @@ const routes_grading: Routes = [
         ],
       },
       {
+        path: "tabpayslip",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
+          },
+        ],
+      },
+      {
         path: "tabprofile",
         children: [
           {
@@ -624,20 +1145,187 @@ const routes_grading: Routes = [
   },
 ];
 
+// Store
+const routes_store: Routes = [
+  {
+    path: "",
+    component: TabsPage,
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: "tabstoredashboard",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../store-module/store-dashboard/store-dashboard.module"
+              ).then((m) => m.StoreDashboardPageModule),
+          },
+        ],
+      },
+      {
+        path: "tabstoreissue",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../store-module/store-issue/store-issue.module").then(
+                (m) => m.StoreIssuePageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabstorecheck",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../store-module/store-check-page/store-check-page.module"
+              ).then((m) => m.StoreCheckPagePageModule),
+          },
+        ],
+      },
+      {
+        path: "tabpayslip",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../tabpay-slip/tabpay-slip.module").then(
+                (m) => m.TabpaySlipPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tab3",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../more/more.module").then((m) => m.MorePageModule),
+          },
+        ],
+      },
+      {
+        path: "",
+        redirectTo: "/tabs/tabstoredashboard",
+        pathMatch: "full",
+      },
+    ],
+  },
+];
+
+// CEO
+const routes_CEO: Routes = [
+  {
+    path: "",
+    component: TabsPage,
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: "tabceo",
+        children: [
+          {
+            path: "",
+
+            loadChildren: () =>
+              import("../ceo-module/ceohome/ceohome.module").then(
+                (m) => m.CeohomePageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "taboilloss",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../owner-module/owner-oilloss/owner-oilloss.module").then(
+                (m) => m.OwnerOillossPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabproduction",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../owner-module/owner-production/owner-production.module"
+              ).then((m) => m.OwnerProductionPageModule),
+          },
+        ],
+      },
+      {
+        path: "tabmaintenance",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../owner-module/owner-maintenance/owner-maintenance.module"
+              ).then((m) => m.OwnerMaintenancePageModule),
+          },
+        ],
+      },
+      {
+        path: "tabreports",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../owner-module/owner-reports/owner-reports.module").then(
+                (m) => m.OwnerReportsPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tab3",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../more/more.module").then((m) => m.MorePageModule),
+          },
+        ],
+      },
+      {
+        path: "",
+        redirectTo: "/tabs/tabceo",
+        pathMatch: "full",
+      },
+    ],
+  },
+];
+
 //console.log(userlist);
 
 if (userlist) {
   if (userlist.dept_id) {
+    console.log(userlist.dept_id);
+
     if (userlist.dept_id == 2) {
       newRoutes = routes_lab;
     } else if (userlist.dept_id == 4) {
       if (userlist.desigId == 2) {
         newRoutes = routes_engineering;
-      } else if (userlist.desigId == 7 || userlist.desigId == 8) {
-        newRoutes = routes_sterilizerpress;
+      } else if (userlist.desigId == 17) {
+        newRoutes = routes_press;
+      } else if (userlist.desigId == 18) {
+        newRoutes = routes_sterilizer;
       } else {
         newRoutes = routes_production;
       }
+    } else if (userlist.dept_id == 5) {
+      newRoutes = routes_store;
     } else if (userlist.dept_id == 7) {
       if (userlist.desigId == 2) {
         newRoutes = routes_engineering;
@@ -647,15 +1335,29 @@ if (userlist) {
         newRoutes = routes_fitter;
       } else if (userlist.desigId == 6) {
         newRoutes = routes_chargeman;
-      } else if (userlist.desigId == 11) {
+      } else if (userlist.desigId == 19) {
         newRoutes = routes_wireman;
       } else {
         newRoutes = routes_engineering;
       }
+    } else if (userlist.dept_id == 8) {
+      newRoutes = routes_CEO;
+    } else if (userlist.dept_id == 9) {
+      newRoutes = routes_driver;
     } else if (userlist.dept_id == 10) {
       newRoutes = routes_grading;
+    } else if (userlist.dept_id == 20) {
+      newRoutes = routes_CEO;
     } else if (userlist.dept_id == 25) {
-      newRoutes = routes_management;
+      if (userlist.desigId == 22) {
+        newRoutes = routes_owner;
+      } else {
+        newRoutes = routes_manager;
+      }
+    } else if (userlist.dept_id == 18) {
+      newRoutes = routes_ffbsupplier;
+    } else if (userlist.dept_id == 45) {
+      newRoutes = routes_ramp;
     } else {
       localStorage.clear();
       router.navigateByUrl("/login");

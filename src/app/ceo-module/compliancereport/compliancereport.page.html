@@ -1,0 +1,285 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="light">SOP Compliance</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="sopreportForm">
+    <ion-row>
+      <ion-col size="4">
+        <input
+          type="text"
+          style="padding: 5px; text-align: center"
+          class="h7 form-control readonly"
+          formControlName="pickdate"
+          placeholder="DD-MM-YYYY"
+          (click)="openDateTimePicker()"
+          readonly
+        />
+      </ion-col>
+      <ion-col size="6">
+        <div>
+          <select class="h7 form-control" formControlName="shift">
+            <option value="" selected disabled hidden>Select Shift</option>
+            <option value="0">Shift-A</option>
+            <option value="1">Shift-B</option>
+          </select>
+        </div>
+      </ion-col>
+      <ion-col size="2">
+        <button
+          type="button"
+          class="h7 btn btn-general btn-sm margin-5px float-left"
+          (click)="callAPI()"
+        >
+          {{ 'GENERALBUTTON.getrecords' | translate}}
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <div class="home-box" *ngFor="let value of sopreportlist">
+    <div *ngIf="value.tempBoardReading != ''">
+      <div class="h7 text-dark">{{ 'SOPCOMPLIANCE.ques1' | translate}}</div>
+
+      <ion-row>
+        <ion-col size="12" style="text-align: right">
+          <div class="imagePreview" *ngIf="value.tempBoardReading == ''"></div>
+          <div class="imagePresent" *ngIf="value.tempBoardReading != ''">
+            <img
+              class="imagePresent"
+              (click)="viewimage(value.tempBoardReading)"
+              src="{{value.tempBoardReading}}"
+            />
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="value.conductSafBrfSite != ''">
+      <div style="margin-top: 10px" class="h7 text-dark">
+        {{ 'SOPCOMPLIANCE.ques2' | translate}}
+      </div>
+
+      <ion-row>
+        <ion-col size="12" style="text-align: right">
+          <div class="imagePreview" *ngIf="value.conductSafBrfSite == ''"></div>
+          <div class="imagePresent" *ngIf="value.conductSafBrfSite != ''">
+            <img
+              class="imagePresent"
+              (click)="viewimage(value.conductSafBrfSite)"
+              src="{{value.conductSafBrfSite}}"
+            />
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="value.wearingPpe != ''">
+      <div style="margin-top: 10px" class="h7 text-dark">
+        {{ 'SOPCOMPLIANCE.ques3' | translate}}
+      </div>
+
+      <ion-row>
+        <ion-col size="12" style="text-align: right">
+          <div class="imagePreview" *ngIf="value.wearingPpe == ''"></div>
+          <div class="imagePresent" *ngIf="value.wearingPpe != ''">
+            <img
+              class="imagePresent"
+              (click)="viewimage(value.wearingPpe)"
+              src="{{value.wearingPpe}}"
+            />
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="value.checkFfbEstimitedVolume != ''">
+      <div style="margin-top: 10px" class="h7 text-dark">
+        {{ 'SOPCOMPLIANCE.ques4' | translate}}
+      </div>
+
+      <ion-row>
+        <ion-col size="12" style="text-align: right">
+          <div
+            class="imagePreview"
+            *ngIf="value.checkFfbEstimitedVolume == ''"
+          ></div>
+          <div class="imagePresent" *ngIf="value.checkFfbEstimitedVolume != ''">
+            <img
+              class="imagePresent"
+              (click)="viewimage(value.checkFfbEstimitedVolume)"
+              src="{{value.checkFfbEstimitedVolume}}"
+            />
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="value.ffbvolume != ''">
+      <div style="margin-top: 10px" class="h7 text-dark">
+        {{ 'SOPCOMPLIANCE.ffbvolume' | translate}}
+      </div>
+
+      <div>
+        <input
+          type="text"
+          class="h7 form-control"
+          value="{{value.ffbvolume}}"
+          readonly
+        />
+      </div>
+    </div>
+
+    <div *ngIf="value.statusofproduction != ''">
+      <div style="margin-top: 5px" class="h7 text-dark">
+        <b>{{ 'SOPCOMPLIANCE.ques5' | translate}}</b>
+      </div>
+      <div class="h7" style="margin-top: 5px">
+        {{ value.statusofproduction }}
+      </div>
+    </div>
+
+    <div *ngIf="value.estimatedtimetoStart != ''" style="margin-top: 10px">
+      <div style="margin-top: 5px" class="h7 text-dark">
+        <b>{{ 'SOPCOMPLIANCE.cb5' | translate}}</b>
+      </div>
+      <div class="h7" style="margin-top: 5px">
+        <input
+          type="text"
+          class="h7 form-control"
+          value="{{value.estimatedtimetoStart}}"
+          readonly
+        />
+      </div>
+    </div>
+    <div *ngIf="checklist.length>0" style="margin-top: 10px">
+      <div style="margin-top: 5px; text-align: center" class="h7 text-dark">
+        <b>{{ 'SOPCOMPLIANCE.checklist' | translate}}</b>
+      </div>
+      <div class="h7" style="margin-top: 5px" *ngFor="let item of checklist">
+        {{ item }}
+      </div>
+    </div>
+
+    <div *ngIf="value.numberOfCycle != ''">
+      <div style="margin-top: 10px; text-align: center" class="h7 text-dark">
+        <b>{{ 'SOPCOMPLIANCE.settargets' | translate}}</b>
+      </div>
+      <div class="form-row" style="margin-top: 5px">
+        <div class="col">
+          <div class="h7 text-dark">
+            {{ 'SOPCOMPLIANCE.ques6' | translate}} :
+          </div>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="h7 form-control"
+            value="{{value.numberOfCycle}}"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="value.throughput != ''">
+      <div class="form-row" style="margin-top: 5px">
+        <div class="col">
+          <div class="h7 text-dark">
+            {{ 'SOPCOMPLIANCE.throughput' | translate}} :
+          </div>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="h7 form-control"
+            value="{{value.throughput}}"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="value.overallCpo != ''">
+      <div style="margin-top: 10px; text-align: center" class="h7 text-dark">
+        <b>{{ 'SOPCOMPLIANCE.losses' | translate}}</b>
+      </div>
+      <div class="form-row" style="margin-top: 5px">
+        <div class="col">
+          <div class="h7 text-dark">
+            {{ 'SOPCOMPLIANCE.overallcpo' | translate}} :
+          </div>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="h7 form-control"
+            value="{{value.overallCpo}}"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="value.overallPk != ''">
+      <div class="form-row" style="margin-top: 5px">
+        <div class="col">
+          <div class="h7 text-dark">
+            {{ 'SOPCOMPLIANCE.overallpk' | translate}} :
+          </div>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="h7 form-control"
+            value="{{value.overallPk}}"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="value.cpo != ''">
+      <div style="margin-top: 10px; text-align: center" class="h7 text-dark">
+        <b>{{ 'SOPCOMPLIANCE.extraction' | translate}}</b>
+      </div>
+      <div class="form-row" style="margin-top: 5px">
+        <div class="col">
+          <div class="h7 text-dark">{{ 'SOPCOMPLIANCE.cpo' | translate}} :</div>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="h7 form-control"
+            value="{{value.cpo}}"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="value.pk != ''">
+      <div class="form-row" style="margin-top: 5px">
+        <div class="col">
+          <div class="h7 text-dark">{{ 'SOPCOMPLIANCE.pk' | translate}} :</div>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="h7 form-control"
+            value="{{value.pk}}"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="norecords" *ngIf="norecordsflag">
+    {{ 'NORECORDSFOUND.norecordsfound' | translate}}
+  </div>
+</ion-content>

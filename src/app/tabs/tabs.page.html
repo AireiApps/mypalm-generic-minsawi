@@ -1,14 +1,84 @@
+<!-- FFB Supplier -->
+<ion-tabs *ngIf="getTabCheck(18)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tabffbhome">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabffbreports">
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>Reports</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>{{ 'TABSGRADING.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<!-- Driver -->
+<ion-tabs *ngIf="getTabCheck(9)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="history">
+      <ion-icon name="file-tray-full-outline"></ion-icon>
+      <ion-label>History</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>{{ 'TABSGRADING.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<!-- Ramp -->
+<ion-tabs *ngIf="getTabCheck(45)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tabramphome">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabrampreports">
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>Reports</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>{{ 'TABSGRADING.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
 <!-- Lab -->
 <ion-tabs *ngIf="getTabCheck(2)">
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tabmaintenancehome">
-      <ion-icon name="home-outline"></ion-icon>
-      <ion-label>{{ 'TABSMAINTENANCE.home' | translate}}</ion-label>
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.dashboard' | translate}}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tabqrcodescanner">
-      <ion-icon name="qr-code-outline"></ion-icon>
-      <ion-label>{{ 'TABSMAINTENANCE.scanner' | translate}}</ion-label>
+    <ion-tab-button tab="taboilloss">
+      <ion-icon name="water-outline"></ion-icon>
+      <ion-label>{{ 'TABSSUPERVISOR.oilloss' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <!-- <ion-tab-button tab="tabpayslip">
+      <ion-icon name="bookmarks-outline"></ion-icon>
+      <ion-label>Pay Slip</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button tab="tabreports">
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.reports' | translate}}</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab3">
@@ -19,60 +89,108 @@
 </ion-tabs>
 
 <!-- Maintenance -->
-<ion-tabs #tabs *ngIf="getTabCheck(7)">
+<ion-tabs *ngIf="getTabCheck(7)">
   <ion-tab-bar slot="bottom">
     <ion-tab-button
       tab="tabmaintenancedashboard"
-      *ngIf="(designationid==2 || designationid==4 || designationid==6)"
+      *ngIf="(designationid==4 || designationid==6)"
     >
       <ion-icon name="grid-outline"></ion-icon>
       <ion-label>{{ 'TABSMAINTENANCE.dashboard' | translate}}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tabmaintenancehome">
-      <ion-icon name="settings-outline"></ion-icon>
-      <ion-label>{{ 'TABSMAINTENANCE.monitoring' | translate}}</ion-label>
+    <ion-tab-button tab="tabmaintenancedashboard" *ngIf="(designationid==2)">
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label style="font-size: 11px"
+        >{{ 'TABSMAINTENANCE.dashboard' | translate}}</ion-label
+      >
     </ion-tab-button>
 
     <ion-tab-button
-      tab="tabreport"
-      *ngIf="(designationid==5 || designationid==11)"
+      tab="tabcorrectivemaintenance"
+      *ngIf="(designationid==4 || designationid==6)"
     >
-      <ion-icon name="newspaper-outline"></ion-icon>
-      <ion-label>{{ 'TABSMAINTENANCE.reports' | translate}}</ion-label>
+      <ion-icon name="cog-outline"></ion-icon>
+      <ion-label
+        >{{ 'TABSMAINTENANCE.correctivemaintenance' | translate}}</ion-label
+      >
     </ion-tab-button>
 
-    <ion-tab-button tab="tabqrcodescanner">
+    <ion-tab-button tab="tabcorrectivemaintenance" *ngIf="(designationid==2)">
+      <ion-icon name="cog-outline"></ion-icon>
+      <ion-label style="font-size: 11px"
+        >{{ 'TABSMAINTENANCE.correctivemaintenance' | translate}}</ion-label
+      >
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabpreventivemaintenance"
+      *ngIf="(designationid==4 || designationid==6)"
+    >
+      <ion-icon name="build-outline"></ion-icon>
+      <ion-label
+        >{{ 'TABSMAINTENANCE.preventivemaintenance' | translate}}</ion-label
+      >
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabpreventivemaintenance" *ngIf="(designationid==2)">
+      <ion-icon name="build-outline"></ion-icon>
+      <ion-label style="font-size: 11px"
+        >{{ 'TABSMAINTENANCE.preventivemaintenance' | translate}}</ion-label
+      >
+    </ion-tab-button>
+    <!-- <ion-tab-button tab="tabsor" *ngIf="(designationid==2)">
+      <ion-icon name="cart-outline"></ion-icon>
+      <ion-label style="font-size: 11px">SOR</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button
+      tab="tabjob"
+      *ngIf="(designationid==5 || designationid==19)"
+    >
+      <ion-icon name="reader-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.job' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabcalendar"
+      *ngIf="(designationid==4 || designationid==5 || designationid==6 || designationid==19)"
+    >
+      <ion-icon name="calendar-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.calendar' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabcalendar" *ngIf="(designationid==2 )">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <ion-label style="font-size: 11px"
+        >{{ 'TABSMAINTENANCE.calendar' | translate}}</ion-label
+      >
+    </ion-tab-button>
+
+    <!-- <ion-tab-button tab="tabpayslip" *ngIf="(designationid!=2 )">
+      <ion-icon name="bookmarks-outline"></ion-icon>
+      <ion-label>Pay Slip</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button tab="tabsupervisorhome" *ngIf="(designationid==2)">
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label style="font-size: 11px"
+        >{{ 'TABSSUPERVISOR.reports' | translate}}</ion-label
+      >
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabqrcodescanner"
+      *ngIf="(designationid!=2 && designationid!=4 && designationid!=5 && designationid!=6 && designationid!=19)"
+    >
       <ion-icon name="qr-code-outline"></ion-icon>
       <ion-label>{{ 'TABSMAINTENANCE.scanner' | translate}}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3">
-      <ion-icon name="person-outline"></ion-icon>
-      <ion-label>{{ 'TABSMAINTENANCE.more' | translate}}</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
-
-<!-- Manager -->
-<ion-tabs *ngIf="getTabCheck(25)">
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tabmaintenancedashboard">
-      <ion-icon name="grid-outline"></ion-icon>
-      <ion-label>{{ 'TABSMAINTENANCE.dashboard' | translate}}</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tabmaintenancehome">
-      <ion-icon name="newspaper-outline"></ion-icon>
-      <ion-label>{{ 'TABSMAINTENANCE.reports' | translate}}</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tabqrcodescanner">
-      <ion-icon name="qr-code-outline"></ion-icon>
-      <ion-label>{{ 'TABSMAINTENANCE.scanner' | translate}}</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab3">
+    <ion-tab-button
+      tab="tab3"
+      *ngIf="(designationid!=2 && designationid!=4 && designationid!=6)"
+    >
       <ion-icon name="person-outline"></ion-icon>
       <ion-label>{{ 'TABSMAINTENANCE.more' | translate}}</ion-label>
     </ion-tab-button>
@@ -88,14 +206,30 @@
       <ion-label>{{ 'TABSSUPERVISOR.dashboard' | translate}}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tabsupervisorhome">
-      <ion-icon name="home-outline"></ion-icon>
-      <ion-label>{{ 'TABSSUPERVISOR.home' | translate}}</ion-label>
+    <ion-tab-button tab="tabalert">
+      <ion-icon name="warning-outline"></ion-icon>
+      <ion-label>{{ 'TABSSUPERVISOR.alert' | translate}}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tabqrcodescanner">
-      <ion-icon name="qr-code-outline"></ion-icon>
-      <ion-label>{{ 'TABSSUPERVISOR.scanner' | translate}}</ion-label>
+    <ion-tab-button
+      tab="taboilloss"
+      *ngIf="designationid!=17 && designationid!=18"
+    >
+      <ion-icon name="water-outline"></ion-icon>
+      <ion-label>{{ 'TABSSUPERVISOR.oilloss' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <!-- <ion-tab-button
+      tab="tabpayslip"
+      *ngIf="designationid==17 || designationid==18"
+    >
+      <ion-icon name="bookmarks-outline"></ion-icon>
+      <ion-label>Pay Slip</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button tab="tabsupervisorhome">
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>{{ 'TABSSUPERVISOR.reports' | translate}}</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab3">
@@ -121,6 +255,11 @@
       <ion-label>{{ 'TABSMAINTENANCE.scanner' | translate}}</ion-label>
     </ion-tab-button>
 
+    <!-- <ion-tab-button tab="tabpayslip">
+      <ion-icon name="bookmarks-outline"></ion-icon>
+      <ion-label>Pay Slip</ion-label>
+    </ion-tab-button> -->
+
     <ion-tab-button tab="tab3">
       <ion-icon name="person-outline"></ion-icon>
       <ion-label>{{ 'TABSMAINTENANCE.more' | translate}}</ion-label>
@@ -136,6 +275,11 @@
       <ion-label>{{ 'TABSGRADING.home' | translate}}</ion-label>
     </ion-tab-button>
 
+    <!-- <ion-tab-button tab="tabpayslip">
+      <ion-icon name="bookmarks-outline"></ion-icon>
+      <ion-label>Pay Slip</ion-label>
+    </ion-tab-button> -->
+
     <ion-tab-button tab="tabgradingreports">
       <ion-icon name="newspaper-outline"></ion-icon>
       <ion-label>{{ 'TABSGRADING.reports' | translate}}</ion-label>
@@ -144,6 +288,177 @@
     <ion-tab-button tab="tabprofile">
       <ion-icon name="person-outline"></ion-icon>
       <ion-label>{{ 'TABSGRADING.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<!-- Store -->
+<ion-tabs *ngIf="getTabCheck(5)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tabstoredashboard">
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.dashboard' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabstoreissue">
+      <ion-icon name="cog-outline"></ion-icon>
+      <ion-label>Issue</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabstorecheck">
+      <ion-icon name="build-outline"></ion-icon>
+      <ion-label>Check</ion-label>
+    </ion-tab-button>
+
+    <!-- <ion-tab-button tab="tabpayslip">
+      <ion-icon name="bookmarks-outline"></ion-icon>
+      <ion-label>Pay Slip</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>{{ 'TABSMAINTENANCE.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<!-- CEO -->
+<ion-tabs *ngIf="getTabCheck(8)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tabceo">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="taboilloss"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="water-outline"></ion-icon>
+      <ion-label>{{ 'TABSOWNER.oilloss' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabproduction"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="settings-outline"></ion-icon>
+
+      <ion-label>{{ 'TABSOWNER.production' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabmaintenance"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="construct-outline"></ion-icon>
+      <ion-label>{{ 'TABSOWNER.maintenance' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabreports"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>{{ 'TABSOWNER.reports' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<!-- Manager -->
+<ion-tabs *ngIf="getTabCheck(25)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button
+      tab="tabdashboard"
+      *ngIf="designationid==22"
+      style="--padding-start: 0px; --padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label>{{ 'TABSOWNER.dashboard' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabhome" *ngIf="designationid==1">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="taboilloss"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="water-outline"></ion-icon>
+      <ion-label>{{ 'TABSOWNER.oilloss' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabproduction"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="settings-outline"></ion-icon>
+
+      <ion-label>{{ 'TABSOWNER.production' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabmaintenance"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="construct-outline"></ion-icon>
+      <ion-label>{{ 'TABSOWNER.maintenance' | translate}}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="tabsor" *ngIf="(designationid==1)">
+      <ion-icon name="cart-outline"></ion-icon>
+      <ion-label style="font-size: 11px">SOR</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabreports"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>{{ 'TABSOWNER.reports' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<!-- Visiting Consultant -->
+<ion-tabs *ngIf="getTabCheck(20)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tabceo">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+    <ion-tab-button
+      tab="taboilloss"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="water-outline"></ion-icon>
+      <ion-label>{{ 'TABSOWNER.oilloss' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabproduction"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="settings-outline"></ion-icon>
+
+      <ion-label>{{ 'TABSOWNER.production' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabmaintenance"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="construct-outline"></ion-icon>
+      <ion-label>{{ 'TABSOWNER.maintenance' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabreports"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>{{ 'TABSOWNER.reports' | translate}}</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

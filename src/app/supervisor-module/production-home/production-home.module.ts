@@ -1,15 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import { ProductionHomePageRoutingModule } from './production-home-routing.module';
+import { ProductionHomePageRoutingModule } from "./production-home-routing.module";
 
-import { ProductionHomePage } from './production-home.page';
+import { ProductionHomePage } from "./production-home.page";
 
 import { TranslateModule } from "@ngx-translate/core";
-
 
 @NgModule({
   imports: [
@@ -17,8 +16,8 @@ import { TranslateModule } from "@ngx-translate/core";
     FormsModule,
     IonicModule,
     TranslateModule,
-    ProductionHomePageRoutingModule
+    ProductionHomePageRoutingModule,
   ],
-  declarations: [ProductionHomePage]
+  declarations: [ProductionHomePage],
 })
 export class ProductionHomePageModule {}

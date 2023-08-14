@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="light">Supervisor Report</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row *ngFor="let item of itemsArr">
+    <ion-col size="6" *ngFor="let eachitem of item">
+      <div class="card item-img" (click)="btn_Action(eachitem)">
+        <div class="item">
+          <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+          <div class="container txt-home">
+            <p>{{eachitem.title}}</p>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

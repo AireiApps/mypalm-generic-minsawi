@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color" *ngIf="userdepartmentid==8">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title
+      mode="ios"
+      color="light"
+      mode="ios"
+      [innerHTML]="mill_name"
+    ></ion-title>
+  </ion-toolbar>
+  <ion-toolbar class="bg-brown-color" *ngIf="userdepartmentid==25">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="light">Hourly Reports</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="home-box">
+    <ion-row *ngFor="let item of reportArr">
+      <ion-col size="6" *ngFor="let eachitem of item">
+        <div
+          class="productioncard-background wrapper"
+          (click)="btn_Action(eachitem)"
+        >
+          <ion-card>
+            <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+            <ion-card-content>
+              <ion-card-title>
+                <b>{{eachitem.title}}</b>
+              </ion-card-title>
+              <ion-card-title>
+                <div
+                  class="h7 text-white"
+                  [innerHTML]="eachitem.subtitle"
+                ></div>
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
