@@ -280,7 +280,18 @@
             </div>
             <div class="h6 text-dark"><b>{{value.title}}</b></div>
             <div class="h7 text-dark">{{value.notification_text}}</div>
-            <div>
+
+            <div *ngIf="value.redirect==''">
+              <button
+                type="button"
+                class="h7 btn btn-readnew btn-sm float-right"
+                (click)="updateNotification(value)"
+              >
+                {{ 'SEGREGATENOTIFICATION.readnew' | translate}}
+              </button>
+            </div>
+
+            <div *ngIf="value.redirect!=''">
               <button
                 type="button"
                 class="h7 btn btn-read btn-sm float-right"
@@ -318,7 +329,18 @@
             </div>
             <div class="h6 text-dark"><b>{{value.title}}</b></div>
             <div class="h7 text-dark">{{value.notification_text}}</div>
-            <div>
+
+            <div *ngIf="value.redirect==''">
+              <button
+                type="button"
+                class="h7 btn btn-readnew btn-sm float-right"
+                (click)="updateNotification(value)"
+              >
+                {{ 'SEGREGATENOTIFICATION.readnew' | translate}}
+              </button>
+            </div>
+
+            <div *ngIf="value.redirect!=''">
               <button
                 type="button"
                 class="h7 btn btn-read btn-sm float-right"

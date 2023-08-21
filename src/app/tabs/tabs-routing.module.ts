@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule, Router } from "@angular/router";
+import { Routes, RouterModule } from "@angular/router";
 
 import { TabsPage } from "./tabs.page";
 import { AuthGuardService } from "../services/authguard/auth-guard.service";
+
 let userlist = JSON.parse(localStorage.getItem("userlist"));
 let newRoutes: any;
-let router: Router;
 
 //FFB Supplier
 const routes_ffbsupplier: Routes = [
@@ -1306,6 +1306,76 @@ const routes_CEO: Routes = [
   },
 ];
 
+//Boiler
+const routes_boiler: Routes = [
+  {
+    path: "",
+    component: TabsPage,
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: "tabdashboard",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../boiler-module/dashboard/dashboard.module").then(
+                (m) => m.DashboardPageModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "tabboiler",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../boiler-module/boiler-log-home/boiler-log-home.module"
+              ).then((m) => m.BoilerLogHomePageModule),
+          },
+        ],
+      },
+      {
+        path: "tabreports",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import(
+                "../boiler-module/boiler-report/boiler-report.module"
+              ).then((m) => m.BoilerReportPageModule),
+          },
+        ],
+      },
+      {
+        path: "tab3",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../more/more.module").then((m) => m.MorePageModule),
+          },
+        ],
+      },
+      {
+        path: "",
+        redirectTo: "/tabs/tabdashboard",
+        pathMatch: "full",
+      },
+    ],
+  },
+];
+
+//Unknown User
+const routes_unknown: Routes = [
+  {
+    path: "",
+    redirectTo: "/login",
+    pathMatch: "full",
+  },
+];
 //console.log(userlist);
 
 if (userlist) {
@@ -1314,6 +1384,8 @@ if (userlist) {
 
     if (userlist.dept_id == 2) {
       newRoutes = routes_lab;
+    } else if (userlist.dept_id == 3) {
+      newRoutes = routes_boiler;
     } else if (userlist.dept_id == 4) {
       if (userlist.desigId == 2) {
         newRoutes = routes_engineering;
@@ -1360,14 +1432,15 @@ if (userlist) {
       newRoutes = routes_ramp;
     } else {
       localStorage.clear();
-      router.navigateByUrl("/login");
+      newRoutes = routes_unknown;
     }
   } else {
     localStorage.clear();
-    router.navigateByUrl("/login");
+    newRoutes = routes_unknown;
   }
 } else {
-  newRoutes = routes_engineering;
+  localStorage.clear();
+  newRoutes = routes_unknown;
 }
 
 @NgModule({

@@ -1518,6 +1518,76 @@ const routes: Routes = [
         "./ceo-module/cpo-dispatch-report/cpo-dispatch-report.module"
       ).then((m) => m.CpoDispatchReportPageModule),
   },
+  {
+    path: "boiler-log-home",
+    loadChildren: () =>
+      import("./boiler-module/boiler-log-home/boiler-log-home.module").then(
+        (m) => m.BoilerLogHomePageModule
+      ),
+  },
+  {
+    path: "onehourentry",
+    loadChildren: () =>
+      import("./boiler-module/onehourentry/onehourentry.module").then(
+        (m) => m.OnehourentryPageModule
+      ),
+  },
+  {
+    path: "twohoursentry",
+    loadChildren: () =>
+      import("./boiler-module/twohoursentry/twohoursentry.module").then(
+        (m) => m.TwohoursentryPageModule
+      ),
+  },
+  {
+    path: "fourhoursentry",
+    loadChildren: () =>
+      import("./boiler-module/fourhoursentry/fourhoursentry.module").then(
+        (m) => m.FourhoursentryPageModule
+      ),
+  },
+  {
+    path: "twelvehoursentry",
+    loadChildren: () =>
+      import("./boiler-module/twelvehoursentry/twelvehoursentry.module").then(
+        (m) => m.TwelvehoursentryPageModule
+      ),
+  },
+  {
+    path: "boilerlevels",
+    loadChildren: () =>
+      import("./boiler-module/boilerlevels/boilerlevels.module").then(
+        (m) => m.BoilerlevelsPageModule
+      ),
+  },
+  {
+    path: "boilelogbook",
+    loadChildren: () =>
+      import("./boiler-module/boilelogbook/boilelogbook.module").then(
+        (m) => m.BoilelogbookPageModule
+      ),
+  },
+  {
+    path: "dashboard",
+    loadChildren: () =>
+      import("./boiler-module/dashboard/dashboard.module").then(
+        (m) => m.DashboardPageModule
+      ),
+  },
+  {
+    path: "boiler-report",
+    loadChildren: () =>
+      import("./boiler-module/boiler-report/boiler-report.module").then(
+        (m) => m.BoilerReportPageModule
+      ),
+  },
+  {
+    path: "abnormal-report-screen",
+    loadChildren: () =>
+      import(
+        "./maintenance-module/abnormal-report-screen/abnormal-report-screen.module"
+      ).then((m) => m.AbnormalReportScreenPageModule),
+  },
 ];
 
 @NgModule({

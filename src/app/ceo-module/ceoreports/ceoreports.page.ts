@@ -145,8 +145,8 @@ export class CeoreportsPage implements OnInit {
         imgpath: "../../assets/img/gradingreport.png",
       },
       {
-        title: "Weightbridge Report",
-        name: "Weightbridge Report",
+        title: "Weighbridge Report",
+        name: "Weighbridge Report",
         path: "/ceo-weighbridgereport",
         imgpath: "../../assets/img/weighbridge.png",
       },
@@ -288,8 +288,8 @@ export class CeoreportsPage implements OnInit {
         imgpath: "../../assets/img/gradingreport.png",
       },
       {
-        title: "Weightbridge Report",
-        name: "Weightbridge Report",
+        title: "Weighbridge Report",
+        name: "Weighbridge Report",
         path: "/ceo-weighbridgereport",
         imgpath: "../../assets/img/weighbridge.png",
       },
@@ -431,8 +431,8 @@ export class CeoreportsPage implements OnInit {
         imgpath: "../../assets/img/gradingreport.png",
       },
       {
-        title: "Weightbridge Report",
-        name: "Weightbridge Report",
+        title: "Weighbridge Report",
+        name: "Weighbridge Report",
         path: "/ceo-weighbridgereport",
         imgpath: "../../assets/img/weighbridge.png",
       },

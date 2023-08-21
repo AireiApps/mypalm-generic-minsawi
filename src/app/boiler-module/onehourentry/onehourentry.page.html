@@ -1,0 +1,319 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <ion-button color="whitefav" (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light" mode="ios"
+      >{{ '1HOURLOG.title' | translate}}</ion-title
+    >
+  </ion-toolbar>
+  <ion-toolbar>
+    <div class="firstsegment">
+      <ion-segment
+        (ionChange)="segmentChanged($event)"
+        [(ngModel)]="tabs_segment"
+      >
+        <ion-segment-button value="BoilerPerformance">
+          <ion-label text-wrap class="h7"
+            >{{ '1HOURLOG.boilerperformance' | translate}}</ion-label
+          >
+        </ion-segment-button>
+
+        <ion-segment-button value="TurbinePerformance">
+          <ion-label text-wrap class="h7"
+            >{{ '1HOURLOG.turbineperformance' | translate}}</ion-label
+          >
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #pageTop>
+  <div class="date" style="text-align: center; margin-top: 10px">
+    <b>{{ '1HOURLOG.date' | translate}}: {{formattedcurrentdate}}</b>
+  </div>
+
+  <div [ngSwitch]="tabs_segment">
+    <div *ngSwitchCase="'BoilerPerformance'">
+      <form [formGroup]="boilerperformanceentryForm">
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.frequency' | translate}}
+            </div>
+          </div>
+
+          <div class="col">
+            <ion-datetime
+              class="h7 form-control"
+              formControlName="pick_bphour"
+              display-format="HH:00"
+              placeholder="Select Hour"
+            ></ion-datetime>
+          </div>
+        </div>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.boilerpressure' | translate}} [PSI]
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="txt_boilerpressure"
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.steamoutput' | translate}} [Ton/Hr]
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="txt_steamoutput"
+            />
+          </ion-col>
+        </ion-row>
+        <hr />
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.boilerwaterlevel' | translate}} [%]
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="txt_boilerwaterlevel"
+            />
+          </ion-col>
+        </ion-row>
+        <hr />
+        <div class="boilertitle">
+          <b>{{ '1HOURLOG.boilersmokeanalysis' | translate}}</b>
+        </div>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.opacity' | translate}} [%]
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="txt_opacity"
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.concentration' | translate}} [mg/m]<sup>3</sup>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="txt_concentration"
+            />
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="2.5"></ion-col>
+          <ion-col style="text-align: center">
+            <button
+              type="submit"
+              class="btn btn-save"
+              (click)="boilerperformance_save()"
+            >
+              <span class="icontext"> Save </span>
+            </button>
+          </ion-col>
+          <ion-col size="2.5"></ion-col>
+        </ion-row>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'TurbinePerformance'">
+      <form [formGroup]="turbineperformanceentryForm">
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.frequency' | translate}}
+            </div>
+          </div>
+
+          <div class="col">
+            <!-- <ion-datetime
+              class="h7 form-control"
+              formControlName="pick_tphour"
+              display-format="HH:00"
+              placeholder="Select Hour"
+            ></ion-datetime> -->
+            <input
+              type="text"
+              class="h7 form-control"
+              style="background-color: white"
+              formControlName="pick_tphour"
+              placeholder="Enter"
+              readonly
+            />
+          </div>
+        </div>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.inletpressure' | translate}} [Bar]
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="txt_inletpressure"
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.nozzlepressure' | translate}} [Bar]
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="txt_nozzlepressure"
+            />
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.oilpressure' | translate}} [Bar]
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="txt_oilpressure"
+            />
+          </ion-col>
+        </ion-row>
+        <hr />
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.powerconsumption' | translate}} [kW]
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="txt_powerconsumption"
+            />
+          </ion-col>
+        </ion-row>
+        <hr />
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.powerfrequency' | translate}} [Hz]
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="txt_frequency"
+            />
+          </ion-col>
+        </ion-row>
+        <hr />
+        <ion-row class="form-row">
+          <ion-col size="6">
+            <div class="h7 text-white">
+              {{ '1HOURLOG.powerdistribution' | translate}}
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <ion-select
+              mode="md"
+              [interfaceOptions]="powerdistributionOptions"
+              formControlName="select_powerdistribution"
+              multiple="false"
+              [okText]="'GENERALBUTTON.okay' | translate"
+              [cancelText]="'GENERALBUTTON.cancelbutton' | translate"
+              class="selectdropdown"
+              placeholder="{{ 'MAINTENANCEACKNOWLEDGEMODAL.select' | translate}}"
+              (ionChange)="powerdistributionhandleChange($event)"
+            >
+              <ion-select-option
+                value="{{parseString(value)}}"
+                *ngFor="let value of powerdistributionArr; let i = index"
+                >{{ value.type }}</ion-select-option
+              >
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="form-row" *ngIf="isCommentsenable">
+          <ion-col size="12">
+            <div class="h7 text-white">{{ '1HOURLOG.reason' | translate}}</div>
+            <textarea
+              class="h7 form-control text-dark"
+              style="margin-top: 10px"
+              formControlName="taReason"
+              rows="3"
+            ></textarea>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="2.5"></ion-col>
+          <ion-col style="text-align: center">
+            <button
+              type="submit"
+              class="btn btn-save"
+              (click)="turbineperformance_save()"
+            >
+              <span class="icontext"> Save </span>
+            </button>
+          </ion-col>
+          <ion-col size="2.5"></ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </div>
+</ion-content>

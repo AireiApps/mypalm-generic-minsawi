@@ -37,7 +37,7 @@ export class SummaryPopupPage implements OnInit {
               average: "-",
             },
             {
-              title: "Overdue(%)",
+              title: "Deduction(%)",
               average: "-",
             },
             {

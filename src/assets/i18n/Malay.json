@@ -688,6 +688,7 @@
     "older":"Lama",
     "message":"Pengemaskinian Pemberitahuan Gagal!",
     "read":"Kemas Kini",
+    "readnew":"Baca",
     "acknowledge":"Terima",
     "current":"Hari ini",
     "previous":"Sejarah"
@@ -1373,7 +1374,7 @@
     "hardbunches":"Hard Bunches",
     "underripebunches":"Under Ripe Bunches",
     "ripeness":"Overall Ripeness",
-    "overdue":"Overdue",
+    "overdue":"Pengurangan",
     "loosefruits":"Loose Fruits",
     "lastfiverecords":"Rekod Terkini",
     "entervehiclenumber":"Masukkan No. Kenderaan",
@@ -1396,7 +1397,7 @@
     "underripe":"Under Ripe",
     "bunches":"Bunches",
     "ripeness":"Ripeness",
-    "overdue":"Overdue",
+    "overdue":"Pengurangan",
     "loosefruits":"Loose Fruits",
     "image":"Imej",
     "doneby": "Dilakukan Oleh",
@@ -1661,5 +1662,125 @@
     "netweightmandatory":"Berat Bersih adalah Wajib",
     "rampdataupdatedsuccessfully":"Data Ramp Berjaya Diedit",
     "rampdataupdatedfailed":"Pengemaskinian Data Tanjakan Gagal"
+  },
+  "BOILERDASHBOARD": {
+  	"selectshift": "Select Shift",
+  	"shifta": "Shift-A",
+  	"shiftb": "Shift-B",
+  	"checkin": "Check-In",
+  	"checkout": "Check-Out",
+  	"startboiler": "Start-Up Boiler",
+  	"stopboiler": "Shutdown Boiler",
+  	"delete": "Delete"
+  },
+
+  "BOILERHOME":
+  {
+    "title": "Home",
+    "boilerlog": "Boiler Log Entry",
+    "turbineperformance": "Turbine Performance",
+    "boilerperformance": "Boiler Performance",
+    "breakdowndowntime": "Breakdown/Downtime",
+    "reportedmaintenace": "Report Maintenance",
+    "requestitem": "Request Item",
+    "boilerlogbook": "Boiler Log Book",
+    "reports": "Reports"
+  },
+
+  "BOILERLOGENTRY":
+  {
+    "title": "Boiler Log Entry",
+    "1hourlog": "1 Hour Log",
+    "2hourslog": "2 Hours Log",
+    "4hourslog": "4 Hours Log",
+    "12hourslog": "12 Hours Log",
+    "levels": "Levels"
+  },
+  "1HOURLOG":
+  {
+    "title": "1 Hour Log",    
+    "boilerperformance": "Boiler Performance",
+    "turbineperformance": "Turbine Performance",
+    "date": "Date",
+    "frequency": "Frequency",
+    "boilerpressure": "Boiler Pressure",
+    "steamoutput": "Steam Output",
+    "boilerpressuresteamoutputimage": "Boiler Pressure and Steam Output Image",
+    "boilerwaterlevel": "Boiler Water Level",
+    "boilerwaterlevelimage": "Boiler Water Level Image",
+    "boilersmokeanalysis": "Boiler Smoke Analysis",
+    "opacity": "Opacity",
+    "concentration": "Concentration",
+    "smokeanalysisimage": "Smoke Analysis Image",
+    "inletpressure": "Inlet Pressure",
+    "nozzlepressure": "Nozzle Pressure",
+    "oilpressure": "Oil Pressure",
+    "powerconsumption": "Power Consumption",
+    "powerconsumptionimage": "Power Consumption Image",
+    "powerfrequency": "Power Frequency",
+    "powerfrequencyimage": "Power Frequency Image",
+    "powerdistribution": "Power Distribution",
+    "reason": "Reason",
+    "selectoption": "Select Option",
+    "powerdistributionimage": "Power Distribution Image"
+  },
+
+  "2HOURSLOG":
+  {
+    "title": "2 Hours Log",
+    "date": "Date",
+    "frequency": "Frequency",
+    "selecthour": "Hour",
+    "blowtime": "BlowDown",
+    "selecttime": "Time"
+  },
+
+  "4HOURSLOG":
+  {
+    "title": "4 Hours Log",
+    "date": "Date",
+    "frequency": "Frequency",
+    "selecthour": "Hour",
+    "ashremoval": "Ash Removal",
+    "sootblow": "Soot Blow",
+    "selecttime": "Time"
+  },
+
+  "12HOURSLOG":
+  {
+    "title": "12 Hours Log",
+    "date": "Date",
+    "frequency": "Frequency",
+    "selecthour": "Hour",
+    "watergageglasstesting": "Water Gage Glass Testing",
+    "lowwaterleveltesting": "Low Water Level Testing",
+    "selecttime": "Time"
+  },
+  "LEVELS":
+  {
+    "title": "Levels",
+    "water": "Water",
+    "chemical": "Chemical",
+    "level": "Level",
+    "date": "Date",
+    "waterclarifierdrainout": "Water Clarifier Drain Out",
+    "waterclarifierdrainoutimage": "Water Clarifier Drain Out Image",
+    "sandfilterbackwash": "Sand Filter Backwash",
+    "sandfilterbackwashimage": "Sand Filter Backwash Image",
+    "softenerregeneration": "Softener Regeneration",
+    "softenerregenerationimage": "Softener Regeneration Image",
+    "sofener": "Softener",
+    "hardness": "Hardness",
+    "tds": "TDS",
+    "select": "Select",
+    "selecttime": "Time",
+    "corrosioninhibitor": "Corrosion Inhibitor",
+    "scaleinhibitor": "Scale Inhibitor",
+    "sludgeconditioner": "Sludge Conditioner",
+    "onlinecleaning": "On-Line Cleaning",
+    "overheadtank": "Overhead Tank",
+    "boilerfeedwatertank": "Boiler Feed Water Tank",
+    "tubineoillevel": "Turbine Oil Level"    
   }
+
 }

@@ -19,9 +19,9 @@ export class CeoGradingreportsHomePage implements OnInit {
         imgpath: "../../assets/img/gradingreport.png",
       },
       {
-        title: "Weightbridge",
+        title: "Weighbridge",
         subtitle: "Report",
-        name: "Weightbridge Report",
+        name: "Weighbridge Report",
         path: "/ceo-weighbridgereport",
         imgpath: "../../assets/img/weighbridge.png",
       },

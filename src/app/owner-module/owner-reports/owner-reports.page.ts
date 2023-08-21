@@ -104,14 +104,21 @@ export class OwnerReportsPage implements OnInit {
         imgpath: "../../assets/img/corrective_report.png",
       },
       {
+        title: "Abnormal",
+        subtitle: "Report",
+        name: "Abnormal Report",
+        path: "/abnormal-report-screen",
+        imgpath: "../../assets/img/pressmachineroutinecheck.png",
+      },
+    ],
+    [
+      {
         title: this.translate.instant("PRODUCTIONHOME.preventivetitle"),
         subtitle: this.translate.instant("PRODUCTIONHOME.preventivesubtitle"),
         name: "Preventive Maintenance",
         path: "/report-pvrpv",
         imgpath: "../../assets/img/preventive_report.png",
       },
-    ],
-    [
       {
         title: "Running Hours",
         subtitle: this.nl2br("<br>"),
@@ -119,6 +126,8 @@ export class OwnerReportsPage implements OnInit {
         path: "/owner-machinerunninghours",
         imgpath: "../../assets/img/machinerunninghours.png",
       },
+    ],
+    [
       {
         title: "Performance",
         subtitle: "Analysis",
@@ -168,14 +177,21 @@ export class OwnerReportsPage implements OnInit {
         imgpath: "../../assets/img/corrective_report.png",
       },
       {
+        title: "Abnormal",
+        subtitle: "Report",
+        name: "Abnormal Report",
+        path: "/abnormal-report-screen",
+        imgpath: "../../assets/img/pressmachineroutinecheck.png",
+      },
+    ],
+    [
+      {
         title: this.translate.instant("PRODUCTIONHOME.preventivetitle"),
         subtitle: this.translate.instant("PRODUCTIONHOME.preventivesubtitle"),
         name: "Preventive Maintenance",
         path: "/report-pvrpv",
         imgpath: "../../assets/img/preventive_report.png",
       },
-    ],
-    [
       {
         title: "Running Hours",
         subtitle: this.nl2br("<br>"),
@@ -183,6 +199,8 @@ export class OwnerReportsPage implements OnInit {
         path: "/owner-machinerunninghours",
         imgpath: "../../assets/img/machinerunninghours.png",
       },
+    ],
+    [
       {
         title: "Performance",
         subtitle: "Analysis",
@@ -190,8 +208,6 @@ export class OwnerReportsPage implements OnInit {
         path: "/owner-oillosses-dataanalysis",
         imgpath: "../../assets/img/performanceanalysis.png",
       },
-    ],
-    [
       {
         title: "Hourly Lab",
         subtitle: "Report",
@@ -199,6 +215,8 @@ export class OwnerReportsPage implements OnInit {
         path: "/ceo-hourlylabreport",
         imgpath: "../../assets/img/labdailyreport.png",
       },
+    ],
+    [
       {
         title: "Production Hourly",
         subtitle: "Report",
@@ -206,8 +224,6 @@ export class OwnerReportsPage implements OnInit {
         path: "/ceo-hourlyreport",
         imgpath: "../../assets/img/hourlyreport.png",
       },
-    ],
-    [
       {
         title: "Boiler Log",
         subtitle: "Report",
@@ -215,6 +231,8 @@ export class OwnerReportsPage implements OnInit {
         path: "/ceo-boilerlogreport",
         imgpath: "../../assets/img/boilerreport.png",
       },
+    ],
+    [
       {
         title: "VS Information",
         subtitle: "Cycle",
@@ -222,8 +240,6 @@ export class OwnerReportsPage implements OnInit {
         path: "/ceo-vsinformationcycle",
         imgpath: "../../assets/img/verticalsterilizer.png",
       },
-    ],
-    [
       {
         title: "VS Hourly",
         subtitle: "Pressure",

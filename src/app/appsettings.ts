@@ -435,4 +435,53 @@ export class appsettings {
   public static updaterampdata = "update_ramp_ffb";
 
   public static getffbrampreport = "ramp_ffb_history";
+
+  //Boiler
+  public static supplier_quote = "supplier_quote";
+
+  public static supplier_quote_detail = "supplier_quote_detail";
+
+  public static supplier_quote_update = "supplier_quote_update";
+
+  public static boiler_log_insert = "boiler_insert";
+
+  public static boiler_frequency_data = "boiler_frequency_data";
+
+  public static boiler_chemical = "boiler_chemical";
+
+  public static boiler_water = "boiler_water";
+
+  public static boiler_level = "boiler_level";
+
+  public static boilerloghourly_insert = "boiler_fulldata_insert";
+
+  public static turbineperformance_insert = "turbine_insert";
+
+  public static boilerperformance_insert = "boiler_performance_insert";
+
+  public static breakdownorreport_insert = "boiler_breakdown_insert";
+
+  public static boiler_frequency_view = "boiler_frequency_view";
+
+  public static boiler_chemical_view = "boiler_chemical_view";
+
+  public static boiler_water_view = "boiler_water_view";
+
+  public static boiler_level_view = "boiler_level_view";
+
+  public static boilercurrentstatus = "boiler_current_status";
+
+  public static saveboilerstatus = "boiler_status";
+
+  public static boilermachine_detail = "boiler_machine_list";
+
+  public static powerdistributionlist = "powerdistribution_list";
+
+  public static waterstatuslist = "level_list";
+
+  public static levelstatuslist = "tank_level_list";
+
+  public static getproductionstations_boiler = "production_boiler_dashboard";
+
+  public static getabnormalreport = "get_machine_abnormal_report";
 }

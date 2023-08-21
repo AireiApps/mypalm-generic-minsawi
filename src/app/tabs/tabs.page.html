@@ -462,3 +462,31 @@
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
+
+<!-- Boiler -->
+<ion-tabs *ngIf="getTabCheck(3)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tabdashboard">
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label>{{ 'TABSBOILER.dashboard' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabboiler">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>{{ 'TABSBOILER.home' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="tabreports"
+      style="--padding-end: 0px; font-size: 11px"
+    >
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>{{ 'TABSOWNER.reports' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>{{ 'TABSBOILER.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

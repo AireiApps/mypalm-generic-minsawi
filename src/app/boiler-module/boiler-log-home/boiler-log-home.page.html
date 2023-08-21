@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-avatar slot="start">
+      <ion-img
+        class="toolbarimage"
+        src="../../../assets/img/logo.png"
+      ></ion-img>
+    </ion-avatar>
+    <ion-title
+    color="light"
+    mode="ios"
+    [innerHTML]="mill_name"
+  ></ion-title>
+
+    <!--<ion-buttons slot="primary">
+      <ion-button class="bg-light-color" (click)="btn_notification()">
+        <ion-badge *ngIf="count && count != 0" color="accent">{{ count }}</ion-badge>
+        <ion-icon name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons>-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home-box">
+    <div>
+      <ion-row *ngFor="let item of itemsArr">
+        <ion-col size="6" *ngFor="let eachitem of item">
+          <div
+            class="productioncard-background wrapper"
+            (click)="btn_Action(eachitem)"
+          >
+            <ion-card>
+              <img src="{{eachitem.imgpath}}" alt="PROFILE" />
+              <ion-card-content>
+                <ion-card-title>
+                  <b>{{eachitem.title}}</b>
+                </ion-card-title>
+                <ion-card-title>
+                  <div
+                    class="h7 text-white"
+                    [innerHTML]="eachitem.subtitle"
+                  ></div>
+                </ion-card-title>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

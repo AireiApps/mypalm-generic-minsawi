@@ -1,0 +1,429 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button color="whitefav"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light" mode="ios"
+      >{{ 'LEVELS.title' | translate}}</ion-title
+    >
+  </ion-toolbar>
+  <ion-toolbar>
+    <div class="firstsegment">
+      <ion-segment
+        (ionChange)="segmentChanged($event)"
+        [(ngModel)]="tabs_segment"
+      >
+        <ion-segment-button value="water">
+          <ion-label text-wrap class="h7"
+            >{{ 'LEVELS.water' | translate}}</ion-label
+          >
+        </ion-segment-button>
+
+        <ion-segment-button value="chemical">
+          <ion-label text-wrap class="h7"
+            >{{ 'LEVELS.chemical' | translate}}</ion-label
+          >
+        </ion-segment-button>
+
+        <ion-segment-button value="level">
+          <ion-label text-wrap class="h7"
+            >{{ 'LEVELS.level' | translate}}</ion-label
+          >
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="tabs_segment">
+    <div class="date" style="text-align: center; margin-top: 10px">
+      <b>{{ 'LEVELS.date' | translate}}: {{currentdate}}</b>
+    </div>
+    <div *ngSwitchCase="'water'">
+      <form [formGroup]="waterForm">
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ 'LEVELS.waterclarifierdrainout' | translate}}
+            </div>
+          </div>
+          <div class="col">
+            <select
+              formControlName="water_cla_status"
+              class="h7 form-control text-dark"
+            >
+              <option value="" selected disabled hidden>
+                {{ 'LEVELS.select' | translate}}
+              </option>
+              <option *ngFor="let value of statusArr" value="{{value.id}}">
+                {{ value.status }}
+              </option>
+            </select>
+          </div>
+          <div class="col">
+            <ion-datetime
+              class="h7 form-control"
+              formControlName="water_cla_time"
+              display-format="HH:mm"
+              placeholder="{{ 'LEVELS.selecttime' | translate}}"
+            ></ion-datetime>
+          </div>
+        </div>
+        <hr />
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ 'LEVELS.sandfilterbackwash' | translate}}
+            </div>
+          </div>
+          <div class="col">
+            <select
+              formControlName="sand_filter_status"
+              class="h7 form-control text-dark"
+            >
+              <option value="" selected disabled hidden>
+                {{ 'LEVELS.select' | translate}}
+              </option>
+              <option *ngFor="let value of statusArr" value="{{value.id}}">
+                {{ value.status }}
+              </option>
+            </select>
+          </div>
+          <div class="col">
+            <!-- <input type="number" class="form-control" formControlName="sand_filter"> -->
+            <ion-datetime
+              class="h7 form-control"
+              formControlName="sand_filter_time"
+              display-format="HH:mm"
+              placeholder="{{ 'LEVELS.selecttime' | translate}}"
+            ></ion-datetime>
+          </div>
+        </div>
+        <hr />
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ 'LEVELS.softenerregeneration' | translate}}
+            </div>
+          </div>
+          <div class="col">
+            <select
+              formControlName="soft_reg_status"
+              class="h7 form-control text-dark"
+            >
+              <option value="" selected disabled hidden>
+                {{ 'LEVELS.select' | translate}}
+              </option>
+              <option *ngFor="let value of statusArr" value="{{value.id}}">
+                {{ value.status }}
+              </option>
+            </select>
+          </div>
+          <div class="col">
+            <!-- <input type="number" class="form-control" formControlName="soft_reg"> -->
+            <ion-datetime
+              class="h7 form-control"
+              formControlName="soft_reg_time"
+              display-format="HH:mm"
+              placeholder="{{ 'LEVELS.selecttime' | translate}}"
+            ></ion-datetime>
+          </div>
+        </div>
+        <hr />
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ 'LEVELS.sofener' | translate}}<br />{{ 'LEVELS.hardness' |
+              translate}}
+            </div>
+          </div>
+          <div class="col">
+            <select
+              formControlName="softener_hard_status"
+              class="h7 form-control text-dark"
+            >
+              <option value="" selected disabled hidden>
+                {{ 'LEVELS.select' | translate}}
+              </option>
+              <option *ngFor="let value of statusArr" value="{{value.id}}">
+                {{ value.status }}
+              </option>
+            </select>
+          </div>
+          <div class="col">
+            <!-- <input type="number" class="form-control" formControlName="soft_reg"> -->
+            <ion-datetime
+              class="h7 form-control"
+              formControlName="softener_hard_time"
+              display-format="HH:mm"
+              placeholder="{{ 'LEVELS.selecttime' | translate}}"
+            ></ion-datetime>
+          </div>
+        </div>
+        <hr />
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">{{ 'LEVELS.tds' | translate}}</div>
+          </div>
+          <div class="col">
+            <select
+              formControlName="tds_status"
+              class="h7 form-control text-dark"
+            >
+              <option value="" selected disabled hidden>
+                {{ 'LEVELS.select' | translate}}
+              </option>
+              <option *ngFor="let value of statusArr" value="{{value.id}}">
+                {{ value.status }}
+              </option>
+            </select>
+          </div>
+          <div class="col">
+            <!-- <input type="number" class="form-control" formControlName="soft_reg"> -->
+            <ion-datetime
+              class="h7 form-control"
+              formControlName="tds_time"
+              display-format="HH:mm"
+              placeholder="{{ 'LEVELS.selecttime' | translate}}"
+            ></ion-datetime>
+          </div>
+        </div>
+        <ion-row>
+          <ion-col size="2.5"></ion-col>
+          <ion-col style="text-align: center">
+            <button
+              type="submit"
+              class="btn btn-save"
+              (click)="boiler_log_save('water')"
+            >
+              <span class="icontext"> Save </span>
+            </button>
+          </ion-col>
+          <ion-col size="2.5"></ion-col>
+        </ion-row>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'chemical'">
+      <form [formGroup]="chemicalForm">
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ 'LEVELS.corrosioninhibitor' | translate}}<br />(H920BC) [Kg]
+            </div>
+          </div>
+
+          <div class="col">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="corrostion_in"
+            />
+          </div>
+        </div>
+        <hr />
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ 'LEVELS.scaleinhibitor' | translate}}<br />(H932BT) [Kg]
+            </div>
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="scale_in"
+            />
+          </div>
+        </div>
+        <hr />
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ 'LEVELS.sludgeconditioner' | translate}}<br />(H935BT) [Kg]
+            </div>
+          </div>
+
+          <div class="col">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="sludge_con"
+            />
+          </div>
+        </div>
+        <hr />
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ 'LEVELS.onlinecleaning' | translate}}<br />(H951BT) [Kg]
+            </div>
+          </div>
+
+          <div class="col">
+            <input
+              type="number"
+              class="h7 form-control"
+              placeholder="Enter"
+              formControlName="online_clean"
+            />
+          </div>
+        </div>
+        <ion-row>
+          <ion-col size="2.5"></ion-col>
+          <ion-col style="text-align: center">
+            <button
+              type="submit"
+              class="btn btn-save"
+              (click)="boiler_log_save('chemical')"
+            >
+              <span class="icontext"> Save </span>
+            </button>
+          </ion-col>
+          <ion-col size="2.5"></ion-col>
+        </ion-row>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'level'">
+      <form [formGroup]="levelForm">
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ 'LEVELS.overheadtank' | translate}}
+            </div>
+          </div>
+
+          <div class="col">
+            <select
+              formControlName="overhead_tank"
+              class="h7 form-control text-dark"
+            >
+              <option value="" selected disabled hidden>
+                {{ 'LEVELS.select' | translate}}
+              </option>
+              <option *ngFor="let value of levelArr" value="{{value.id}}">
+                {{ value.level }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col">
+            <ion-datetime
+              class="h7 form-control"
+              formControlName="over_head_tank_time"
+              display-format="HH:mm"
+              placeholder="{{ 'LEVELS.selecttime' | translate}}"
+            ></ion-datetime>
+          </div>
+
+          <!-- <div class="col">                            
+              <select class="form-control" formControlName="overhead_tank">
+                <option value="" selected>Select Option</option>
+                <option value="Quarter(1/4)">Quarter(1/4)</option>
+                <option value="Half(1/2)">Half(1/2)</option>   
+                <option value="Full">Full</option>
+              </select>
+            </div> -->
+        </div>
+        <hr />
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ 'LEVELS.boilerfeedwatertank' | translate}}
+            </div>
+          </div>
+
+          <div class="col">
+            <select
+              formControlName="boiler_feed"
+              class="h7 form-control text-dark"
+            >
+              <option value="" selected disabled hidden>
+                {{ 'LEVELS.select' | translate}}
+              </option>
+              <option *ngFor="let value of levelArr" value="{{value.id}}">
+                {{ value.level }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col">
+            <ion-datetime
+              class="h7 form-control"
+              formControlName="boiler_feed_water_tank_time"
+              display-format="HH:mm"
+              placeholder="{{ 'LEVELS.selecttime' | translate}}"
+            ></ion-datetime>
+          </div>
+
+          <!-- <div class="col">              
+              <select class="form-control" formControlName="boiler_feed">
+                <option value="" selected>Select Option</option>
+                <option value="Quarter(1/4)">Quarter(1/4)</option>
+                <option value="Half(1/2)">Half(1/2)</option>   
+                <option value="Full">Full</option>
+              </select>
+            </div> -->
+        </div>
+        <hr />
+        <div class="form-row">
+          <div class="col">
+            <div class="h7 text-white">
+              {{ 'LEVELS.tubineoillevel' | translate}}
+            </div>
+          </div>
+
+          <div class="col">
+            <select
+              formControlName="turbine_oil"
+              class="h7 form-control text-dark"
+            >
+              <option value="" selected disabled hidden>
+                {{ 'LEVELS.select' | translate}}
+              </option>
+              <option *ngFor="let value of levelArr" value="{{value.id}}">
+                {{ value.level }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col">
+            <ion-datetime
+              class="h7 form-control"
+              formControlName="turbine_oil_level_time"
+              display-format="HH:mm"
+              placeholder="{{ 'LEVELS.selecttime' | translate}}"
+            ></ion-datetime>
+          </div>
+
+          <!-- <div class="col">              
+              <select class="form-control" formControlName="turbine_oil">
+                <option value="" selected>Select Option</option>
+                <option value="Quarter(1/4)">Quarter(1/4)</option>
+                <option value="Half(1/2)">Half(1/2)</option>   
+                <option value="Full">Full</option>
+              </select>
+            </div> -->
+        </div>
+        <ion-row>
+          <ion-col size="2.5"></ion-col>
+          <ion-col style="text-align: center">
+            <button
+              type="submit"
+              class="btn btn-save"
+              (click)="boiler_log_save('level')"
+            >
+              <span class="icontext"> Save </span>
+            </button>
+          </ion-col>
+          <ion-col size="2.5"></ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </div>
+</ion-content>

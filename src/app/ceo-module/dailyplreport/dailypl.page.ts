@@ -42,6 +42,8 @@ export class DailyplPage implements OnInit {
       "&language=" +
       this.language;
 
+    //console.log(formatedurl);
+
     this.weburl = formatedurl;
   }
 }

@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar class="bg-brown-color">
+    <ion-buttons slot="start">
+      <!-- <ion-back-button color="whitefav"></ion-back-button> -->
+      <ion-button color="whitefav" (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light" mode="ios"
+      >{{ '2HOURSLOG.title' | translate}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="date" style="text-align: center; margin-top: 10px">
+    <b>Date: {{currentdate}}</b>
+  </div>
+
+  <div>
+    <form [formGroup]="twohoursentryForm">
+      <div class="form-row">
+        <div class="col">
+          <div class="h7 text-white">
+            {{ '2HOURSLOG.frequency' | translate}}
+          </div>
+        </div>
+
+        <div class="col">
+          <ion-datetime
+            class="h7 form-control"
+            formControlName="pickhour"
+            display-format="HH:00"
+            placeholder="{{ '2HOURSLOG.selecthour' | translate}}"
+          ></ion-datetime>
+        </div>
+      </div>
+
+      <ion-row class="form-row">
+        <ion-col size="6">
+          <div class="h7 text-white">
+            {{ '2HOURSLOG.blowtime' | translate}} Time
+          </div>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-datetime
+            class="h7 form-control"
+            formControlName="select_blowdown"
+            display-format="HH:mm"
+            placeholder="{{'2HOURSLOG.selecttime' | translate}}"
+          ></ion-datetime>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="2.5"></ion-col>
+        <ion-col style="text-align: center">
+          <button type="submit" class="btn btn-save" (click)="boilerlog_save()">
+            <span class="icontext"> Save </span>
+          </button>
+        </ion-col>
+        <ion-col size="2.5"></ion-col>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>
